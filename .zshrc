@@ -104,6 +104,10 @@ alias v="nvim"
 alias cd="z"
 alias ..="z .."
 
+# alias air / templ because its broken
+alias air='$(go env GOPATH)/bin/air'
+alias templ='$(go env GOPATH)/bin/templ'
+
 # init Starship
 eval "$(starship init zsh)"
 
