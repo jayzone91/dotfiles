@@ -21,10 +21,13 @@ fi
 # source zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
+# auto update zinit
+zinit self-update
+
 zinit ice depth=1 
 
 # add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
+zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
@@ -39,10 +42,19 @@ autoload -Uz compinit && compinit
 # make all OMZ Plugins available
 zinit cdreplay -q
 
+# enable corrections for common typos
+setopt correct
+
+# update zinit plugins
+zinit update --parallel
+
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+
+# nvm use latest
+nvm use node
 
 # bun completions
 [ -s "/Users/jay/.bun/_bun" ] && source "/Users/jay/.bun/_bun"
@@ -94,3 +106,6 @@ alias ..="z .."
 
 # init Starship
 eval "$(starship init zsh)"
+
+# clear all
+clear
