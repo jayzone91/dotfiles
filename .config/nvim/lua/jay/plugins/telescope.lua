@@ -33,7 +33,7 @@ return {
       { desc = "Telescope Live Grep" },
     },
     {
-      "<leader>fb",
+      "<leader><space>",
       "<cmd>Telescope buffers<CR>",
       { desc = "Telescope Buffers" },
     },
