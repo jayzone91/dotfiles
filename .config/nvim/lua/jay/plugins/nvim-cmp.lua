@@ -49,5 +49,8 @@ return {
         ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
       }),
     })
+    cmp.config.formatting = {
+      format = require("tailwindcss-colorizer-cmp").formatter,
+    }
   end,
 }
