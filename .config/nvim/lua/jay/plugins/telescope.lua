@@ -10,6 +10,8 @@ return {
     "nvim-telescope/telescope-node-modules.nvim",
     -- https://github.com/xiyaowong/telescope-emoji.nvim
     "xiyaowong/telescope-emoji.nvim",
+    -- https://github.com/ziontee113/icon-picker.nvim
+    "ziontee113/icon-picker.nvim",
   },
   opts = {
     extensions = {
@@ -49,6 +51,10 @@ return {
     pcall(require("telescope").load_extension, "node_modules")
     pcall(require("telescope").load_extension, "emoji")
 
+    require("icon-picker").setup({
+      disable_lagacy_commands = true,
+    })
+
     vim.keymap.set(
       "n",
       "<leader>fn",
@@ -60,6 +66,12 @@ return {
       "<leader>fe",
       "<cmd>Telescope emoji<CR>",
       { desc = "Search Emoji" }
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>fi",
+      "<cmd>IconPickerNormal<CR>",
+      { desc = "Find Icons", noremap = true, silent = true }
     )
   end,
 }

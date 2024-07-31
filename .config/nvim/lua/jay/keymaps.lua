@@ -70,3 +70,11 @@ map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
+
+-- delete without yanking
+map({ "n", "v" }, "<leader>d", '[["_d]]', { desc = "Delete without Yanking" })
+
+-- automatically close brackets, w/ comma and semi
+map("i", "{,", "{},<left><left>")
+map("i", "(,", "(),<left><left>")
+map("i", "{;", "{};<left><left>")
