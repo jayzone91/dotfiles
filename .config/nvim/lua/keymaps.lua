@@ -1,10 +1,17 @@
+-- [[
+-- NeoVim Mappings
+-- Plugin Mappings are in Plugin Specs
+-- ]]
+
 ---@param mode string|table
----@param keys string
----@param fun string|function
+---@param key string
+---@param func string|function
 ---@param opts table?
-local map = function(mode, keys, fun, opts)
-  vim.keymap.set(mode, keys, fun, opts)
+local map = function(mode, key, func, opts)
+  vim.keymap.set(mode, key, func, opts)
 end
+
+-- Mappings
 
 -- better up/down
 map(

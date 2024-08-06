@@ -1,8 +1,7 @@
-local linter = require("jay.config.mason").linter
-
 return {
   "mfussenegger/nvim-lint",
   config = function()
+    local linter = require("config.mason.linter")
     require("lint").linters_by_ft = linter
 
     vim.api.nvim_create_autocmd({ "BufWritePost" }, {
