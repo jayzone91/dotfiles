@@ -25,4 +25,4 @@ _darcs
 
 Makefile
 
-\#.ps1 # ignore all windows powershell files
+^/windows.*
