@@ -24,3 +24,5 @@ _darcs
 ^/COPYING
 
 Makefile
+
+\#.ps1 # ignore all windows powershell files
