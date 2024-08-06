@@ -63,6 +63,9 @@ nvm use node
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# go binaries
+export PATH="$(go env GOPATH)/bin:$PATH"
+
 # Custom Keybinds
 bindkey "^f" autosuggest-accept # CTRL + f
 bindkey "^[[A" history-search-backward # Arrow Up
@@ -104,9 +107,6 @@ alias v="nvim"
 alias cd="z"
 alias ..="z .."
 
-# alias air / templ because its broken
-alias air='$(go env GOPATH)/bin/air'
-alias templ='$(go env GOPATH)/bin/templ'
 
 # init Starship
 eval "$(starship init zsh)"
