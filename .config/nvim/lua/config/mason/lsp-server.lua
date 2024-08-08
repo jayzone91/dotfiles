@@ -26,4 +26,11 @@ return {
   templ = {},
   taplo = {},
   tailwindcss = {},
+  powershell_es = {
+    settings = {
+      powershell = {
+        codeFormatting = { Preset = "OTBS" },
+      },
+    },
+  },
 }

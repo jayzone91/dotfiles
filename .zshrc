@@ -21,9 +21,6 @@ fi
 # source zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# auto update zinit
-zinit self-update
-
 zinit ice depth=1 
 
 # add in zsh plugins
@@ -31,6 +28,13 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
+zinit light hlissner/zsh-autopair
+zinit light jedahan/ripz
+zinit light redxtech/zsh-kitty
+
+zinit ice wait lucid atload"zsh-startify"
+zinit load NorthIsMirror/zsh-startify
+zinit load redxtech/zsh-not-vim
 
 # Add snippets
 zinit snippet OMZP::git
@@ -45,8 +49,15 @@ zinit cdreplay -q
 # enable corrections for common typos
 setopt correct
 
-# update zinit plugins
-zinit update --parallel
+# startify config
+zstyle ":plugin:zsh-startify:shellutils" size 5
+zstyle ":plugin:zsh-startify:vim" size 5
+
+# not vim config
+zstyle :plugins:not-vim say cowsay -f vader
+
+# zsh kitty completions
+__kitty_complete
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
@@ -107,9 +118,10 @@ alias v="nvim"
 alias cd="z"
 alias ..="z .."
 
+# Update zinit and plugins
+alias update="zinit self-update && zinit update --parallel"
 
 # init Starship
 eval "$(starship init zsh)"
 
-# clear all
 clear
