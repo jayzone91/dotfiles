@@ -121,6 +121,9 @@ alias ..="z .."
 # Update zinit and plugins
 alias update="zinit self-update && zinit update --parallel"
 
+# Update + Upgrade Brew Apps
+alias brewup="brew update && brew upgrade"
+
 # init Starship
 eval "$(starship init zsh)"
 
