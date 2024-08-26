@@ -17,4 +17,41 @@ function Find-WindowsConfigFolder {
 $ENV:DotFilesRepo = Find-WindowsConfigFolder -ProfilePath $PSScriptRoot
 $ENV:STARSHIP_CONFIG = "$ENV:DotFilesRepo\.config\starship.toml"
 
-# TODO: Rest of Profile.... Check at Work.
+# Starship
+Invoke-Expression (&starship init powershell)
+
+# zoxide
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
+Remove-Alias Alias:cd
+Set-Alias -Name cd -Value z
+
+#
+
+
+# Functions 
+
+function which {
+  param (
+    $command
+  )
+  if ($command) {
+    Invoke-Item $command
+  }
+  else {
+    Invoke-Item .
+  }
+}
+
+function dir { Get-ChildItem -Directory }
+function file { Get-ChildItem File }
+function hidden { Get-ChildItem File }
+
+
+# Alias
+Set-Alias -Name .. -Value Set-Location ..
+Set-Alias -Name c -Value Clear-Host  
+Set-Alias -Name ls -Value dir
+Set-Alias -Name ll -Value file
+Set-Alias -Name lla -Value hidden
+Set-Alias -Name vim -Value nvim
+Set-Alias -Name vi -Value nvim
