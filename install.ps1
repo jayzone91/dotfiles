@@ -3,8 +3,8 @@
 
 # Linked files (Destination => Source)
 $symlinks = @{
-  $PROFILE.CurrentUserAllHosts = ".\Profile.ps1"
-  "$HOME\AppData\Local\nvim" = ".\.config\nvim"
+  $PROFILE.CurrentUserAllHosts                                                                    = ".\Profile.ps1"
+  "$HOME\AppData\Local\nvim"                                                                      = ".\.config\nvim"
   "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" = ".\windowsterminal\settings.json"
 }
 
@@ -28,7 +28,7 @@ $chocoDeps = @(
 # PS Modules
 $psModules = @(
   "CompletionPredictor"
-  "PSSrictAnalyzer"
+  "PSScriptAnalyzer"
 )
 
 # Set Working directory
@@ -39,7 +39,7 @@ Write-Host "Installing missing dependencies..."
 $installedWingetDeps = winget list | Out-String
 foreach ($wingetDep in $wingetDeps) {
   if ($installedWingetDeps -notmatch $wingetDep) {
-    winget install --d $wingetDep
+    winget install -h --no-upgrade $wingetDep
   }
 }
 
@@ -55,7 +55,7 @@ foreach ($chocoDep in $chocoDeps) {
 
 # Install PS Modules
 foreach ($psModule in $psModules) {
-  if(!(Get-Module -ListAvailable -Name $psModule)){
+  if (!(Get-Module -ListAvailable -Name $psModule)) {
     Install-Module -Name $psModule -Force -AcceptLicense -Scope CurrentUser
   }
 }

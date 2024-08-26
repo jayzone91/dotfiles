@@ -22,7 +22,7 @@ Invoke-Expression (&starship init powershell)
 
 # zoxide
 Invoke-Expression (& { (zoxide init powershell | Out-String) })
-Remove-Alias Alias:cd
+Remove-Alias -Name cd
 Set-Alias -Name cd -Value z
 
 #
@@ -30,10 +30,7 @@ Set-Alias -Name cd -Value z
 
 # Functions 
 
-function which {
-  param (
-    $command
-  )
+function which ($command) {
   if ($command) {
     Invoke-Item $command
   }
@@ -45,10 +42,9 @@ function which {
 function dir { Get-ChildItem -Directory }
 function file { Get-ChildItem File }
 function hidden { Get-ChildItem File }
-
+function .. { Set-Location .. }
 
 # Alias
-Set-Alias -Name .. -Value Set-Location ..
 Set-Alias -Name c -Value Clear-Host  
 Set-Alias -Name ls -Value dir
 Set-Alias -Name ll -Value file
