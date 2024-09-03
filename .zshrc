@@ -118,6 +118,8 @@ alias v="nvim"
 alias cd="z"
 alias ..="z .."
 
+alias stayingalive="caffeinate -d"
+
 # Update zinit and plugins
 alias update="zinit self-update && zinit update --parallel"
 
