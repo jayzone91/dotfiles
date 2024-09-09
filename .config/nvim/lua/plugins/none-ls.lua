@@ -23,19 +23,22 @@ return {
 
 		local sources = {
 			diagnostics.checkmake,
-			formatting.prettier.with({
-				filetypes = {
-					"html",
-					"json",
-					"yaml",
-					"markdown",
-					"typescript",
-					"javascript",
-					"typescriptreact",
-					"javascriptreact",
-				},
-			}),
+			formatting.prettierd,
+			formatting.prisma_format,
 			formatting.stylua,
+			formatting.black,
+			formatting.fish_indent,
+			formatting.gofmt,
+			formatting.goimports,
+			formatting.goimports_reviser,
+			formatting.golines,
+			formatting.isort,
+			formatting.rustywind,
+			formatting.sqlfluff.with({
+				extra_args = {"--dialect", "mysql"}
+			}),
+			formatting.phpcbf,
+			formatting.phpcsfixer,
 			formatting.shfmt.with({ args = { "-i", "4" } }),
 			require("none-ls.formatting.ruff").with({ extra_args = { "--extend-select", "I" } }),
 			require("none-ls.formatting.ruff_format"),
