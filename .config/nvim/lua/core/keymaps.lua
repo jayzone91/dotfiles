@@ -1,3 +1,6 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 -- [[
 -- NeoVim Mappings
 -- Plugin Mappings are in Plugin Specs
@@ -8,36 +11,16 @@
 ---@param func string|function
 ---@param opts table?
 local map = function(mode, key, func, opts)
-  vim.keymap.set(mode, key, func, opts)
+	vim.keymap.set(mode, key, func, opts)
 end
 
 -- Mappings
 
 -- better up/down
-map(
-  { "n", "x" },
-  "<down>",
-  "v:count == 0 ? 'gj' : 'j'",
-  { expr = true, silent = true }
-)
-map(
-  { "n", "x" },
-  "j",
-  "v:count == 0 ? 'gj' : 'j'",
-  { expr = true, silent = true }
-)
-map(
-  { "n", "x" },
-  "<up>",
-  "v:count == 0 ? 'gk' : 'k'",
-  { expr = true, silent = true }
-)
-map(
-  { "n", "x" },
-  "k",
-  "v:count == 0 ? 'gk' : 'k'",
-  { expr = true, silent = true }
-)
+map({ "n", "x" }, "<down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+map({ "n", "x" }, "<up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Duplicate Lines
 map("n", "<leader><down>", "Yp", { desc = "Duplicate Line Down" })
