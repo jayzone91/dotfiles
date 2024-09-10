@@ -20,8 +20,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	{ import = "plugins" },
-}, {
+	spec = {
+		{ import = "plugins" },
+	},
 	ui = {
 		icons = vim.g.have_nerd_font and {} or {
 			cmd = "⌘",
@@ -38,30 +39,30 @@ require("lazy").setup({
 			task = "📌",
 			lazy = "💤 ",
 		},
-		install = {
-			missing = true,
-		},
-		checker = {
-			enabled = true,
-			notify = true,
-		},
-		change_detection = {
-			enabled = true,
-			notify = false,
-		},
-		performance = {
-			rtp = {
-				disabled_plugins = {
-					"gzip",
-					-- "matchit",
-					-- "matchparen",
-					-- "netrwPlugin",
-					"tarPlugin",
-					"tohtml",
-					"tutor",
-					"zipPlugin",
-				}
+	},
+	install = {
+		missing = true,
+	},
+	checker = {
+		enabled = true,
+		notify = true,
+	},
+	change_detection = {
+		enabled = true,
+		notify = false,
+	},
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"gzip",
+				-- "matchit",
+				-- "matchparen",
+				-- "netrwPlugin",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
 			}
 		}
-	},
+	}
 })
