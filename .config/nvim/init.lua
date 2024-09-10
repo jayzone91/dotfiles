@@ -38,5 +38,30 @@ require("lazy").setup({
 			task = "📌",
 			lazy = "💤 ",
 		},
+		install = {
+			missing = true,
+		},
+		checker = {
+			enabled = true,
+			notify = true,
+		},
+		change_detection = {
+			enabled = true,
+			notify = false,
+		},
+		performance = {
+			rtp = {
+				disabled_plugins = {
+					"gzip",
+					-- "matchit",
+					-- "matchparen",
+					-- "netrwPlugin",
+					"tarPlugin",
+					"tohtml",
+					"tutor",
+					"zipPlugin",
+				}
+			}
+		}
 	},
 })
