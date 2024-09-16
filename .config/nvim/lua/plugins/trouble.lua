@@ -16,5 +16,10 @@ return {
 			"<cmd>Trouble diagnostics toggle folter.buf=0<CR>",
 			desc = "Buffer Diagnostics (trouble)"
 		},
+		{
+			"<leader>xt",
+			"<cmd>Trouble todo filter = {tag = {TODO,FIX,FIXME}}<CR>",
+			desc = "Todos (trouble)"
+		}
 	}
 }

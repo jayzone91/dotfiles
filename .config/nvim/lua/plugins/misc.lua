@@ -21,6 +21,9 @@ return {
 		event = "VimEnter",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = { signs = false },
+		keys = {
+			{ "<leader>ft", "<cmd>TodoTrouble<CR>", desc = "TodoTrouble" }
+		}
 	},
 	{
 		-- high-performance color highlighter
