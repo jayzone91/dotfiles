@@ -235,6 +235,7 @@ return { -- LSP Configuration & Plugins
 					},
 				},
 			},
+			intelephense = {}
 		}
 
 		-- Ensure the servers and tools above are installed
