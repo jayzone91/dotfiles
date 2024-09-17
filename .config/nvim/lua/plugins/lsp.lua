@@ -163,6 +163,7 @@ return { -- LSP Configuration & Plugins
 						},
 					},
 				},
+				prismals = {}
 			},
 			-- basedpyright = {
 			--   -- Config options: https://github.com/DetachHead/basedpyright/blob/main/docs/settings.md

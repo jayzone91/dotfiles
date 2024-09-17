@@ -15,7 +15,8 @@ return {
 			"eslint_d",
 			"shfmt",
 			"ruff",
-			"phpcsfixer"
+			"phpcsfixer",
+			"prisma_format"
 		}
 		if vim.fn.has("win32") == 0 then
 			table.insert(ensure_installed, "checkmake")
@@ -29,6 +30,7 @@ return {
 
 		local sources = {
 			formatting.phpcsfixer,
+			formatting.prisma_format,
 			formatting.prettierd,
 			formatting.prisma_format,
 			formatting.stylua,
