@@ -48,6 +48,7 @@ return {
 			Event = "",
 			Operator = "󰆕",
 			TypeParameter = "󰊄",
+			Supermaven = "",
 		}
 
 		cmp.setup({
@@ -94,7 +95,8 @@ return {
 				end, { "i", "s" }),
 			}),
 			sources = {
-				{ name = "lazydev", group_index = 0 },
+				{ name = "supermaven" },
+				{ name = "lazydev",   group_index = 0 },
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
 				{ name = "buffer" },
@@ -105,6 +107,7 @@ return {
 				format = function(entry, vim_item)
 					vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
 					vim_item.menu = ({
+						Supermaven = "[SM]",
 						nvim_lsp = "[LSP]",
 						luasnip = "[Snippet]",
 						buffer = "[Buffer]",
