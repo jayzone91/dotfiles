@@ -1,63 +1,89 @@
--- Fuzzy Finder (files, lsp, etc)
 return {
-	"nvim-telescope/telescope.nvim",
-	branch = "0.1.x",
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		-- Fuzzy Finder Algorithm which requires local dependencies to be built.
-		-- Only load if `make` is available. Make sure you have the system
-		-- requirements installed.
-		{
-			"nvim-telescope/telescope-fzf-native.nvim",
-			build = "make",
-			cond = function()
-				return vim.fn.executable("make") == 1
-			end,
-		},
-		"nvim-telescope/telescope-ui-select.nvim",
+  "nvim-telescope/telescope.nvim",
+  cmd = "Telescope",
+  version = false,
+  dependencies = {
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
+      config = function()
+        local ok, err = pcall(require("telescope").load_extension, "fzf")
+        if not ok then
+          print("Failed to load fzf-native: " .. err)
+        end
+      end,
+    },
+    {
+      "stevearc/dressing.nvim",
+      lazy = true,
+      init = function()
+        vim.ui.select = function(...)
+          require("lazy").load({ plugins = { "dressing.nivm" } })
+          return vim.ui.input(...)
+        end
+      end,
+    },
+  },
+  keys = {
+    { "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Find Files" },
+    { "<leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Live Grep" },
+    { "<leader><space>", "<cmd>Telescope buffers<CR>", desc = "Open Buffers" },
+  },
+  opts = function()
+    local actions = require("telescope.actions")
 
-		-- Useful for getting pretty icons, but requires a Nerd Font.
-		"nvim-tree/nvim-web-devicons",
-	},
-	config = function()
-		require("telescope").setup({
-			defaults = {
-				mappings = {
-					i = {
-						["<C-k>"] = require("telescope.actions").move_selection_previous, -- move to prev result
-						["<C-j>"] = require("telescope.actions").move_selection_next, -- move to next result
-						["<C-l>"] = require("telescope.actions").select_default,    -- open file
-					},
-				},
-			},
-			pickers = {
-				find_files = {
-					file_ignore_patterns = { "node_modules", ".git", ".venv" },
-					hidden = true,
-				},
-			},
-			live_grep = {
-				file_ignore_patterns = { "node_modules", ".git", ".venv" },
-				additional_args = function(_)
-					return { "--hidden" }
-				end,
-			},
-			extensions = {
-				["ui-select"] = {
-					require("telescope.themes").get_dropdown(),
-				},
-			},
-		})
+    local open_with_trouble = function(...)
+      return require("trouble.sources.telescope").open(...)
+    end
+    local function find_command()
+      if 1 == vim.fn.executable("rg") then
+        return { "rg", "--files", "--color", "never", "-g", "!.git" }
+      elseif 1 == vim.fn.executable("fd") then
+        return { "fd", "--type", "f", "--color", "never", "-E", ".git" }
+      elseif 1 == vim.fn.executable("fdfind") then
+        return { "fdfind", "--type", "f", "--color", "never", "-E", ".git" }
+      elseif 1 == vim.fn.executable("find") and vim.fn.has("win32") == 0 then
+        return { "find", ".", "-type", "f" }
+      elseif 1 == vim.fn.executable("where") then
+        return { "where", "/r", ".", "*" }
+      end
+    end
 
-		-- Enable telescope fzf native, if installed
-		pcall(require("telescope").load_extension, "fzf")
-		pcall(require("telescope").load_extension, "ui-select")
-
-		-- See `:help telescope.builtin`
-		local builtin = require("telescope.builtin")
-		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find Files" })
-		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live Grep" })
-		vim.keymap.set("n", "<leader><space>", builtin.buffers, { desc = "Show Buffers" })
-		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help Tags" })
-	end,
+    return {
+      defaults = {
+        prompt_prefix = " ",
+        selection_caret = " ",
+        get_selection_window = function()
+          local wins = vim.api.nvim_list_wins()
+          table.insert(wins, 1, vim.api.nvim_get_current_win())
+          for _, win in ipairs(wins) do
+            local buf = vim.api.nvim_win_get_buf(win)
+            if vim.bo[buf].buftype == "" then
+              return win
+            end
+          end
+          return 0
+        end,
+        mappings = {
+          i = {
+            ["<c-t>"] = open_with_trouble,
+            ["<a-t>"] = open_with_trouble,
+            ["<C-Down>"] = actions.cycle_history_next,
+            ["<C-Up>"] = actions.cycle_history_prev,
+            ["<C-f>"] = actions.preview_scrolling_down,
+            ["<C-b>"] = actions.preview_scrolling_up,
+          },
+          n = {
+            ["q"] = actions.close,
+          },
+        },
+        pickers = {
+          find_files = {
+            find_command = find_command,
+            hidden = true,
+          },
+        },
+      },
+    }
+  end,
 }

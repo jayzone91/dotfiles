@@ -133,3 +133,11 @@ alias nvimupdate="cd ~/Documents/GitHub/neovim && git pull && rm -rf .deps/ && r
 eval "$(starship init zsh)"
 
 clear
+
+
+# Herd injected PHP 8.3 configuration.
+export HERD_PHP_83_INI_SCAN_DIR="/Users/jay/Library/Application Support/Herd/config/php/83/"
+
+
+# Herd injected PHP binary.
+export PATH="/Users/jay/Library/Application Support/Herd/bin/":$PATH

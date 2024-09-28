@@ -1,3 +1,8 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+vim.g.autoformat = true
+
 vim.o.hlsearch = false
 vim.o.number = true
 vim.o.mouse = "a"
