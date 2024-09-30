@@ -1,3 +1,5 @@
+# Amazon Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 # Shell integrations
 # init fzf
 eval "$(fzf --zsh)"
@@ -141,3 +143,6 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/jay/Library/Application Support/Herd/con
 
 # Herd injected PHP binary.
 export PATH="/Users/jay/Library/Application Support/Herd/bin/":$PATH
+
+# Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
