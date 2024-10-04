@@ -1,0 +1,12 @@
+asvetliakov.vscode-neovim
+brandonkirbyson.vscode-animations
+catppuccin.catppuccin-vsc
+catppuccin.catppuccin-vsc-icons
+davidbwaters.macos-modern-theme
+drcika.apc-extension
+dsznajder.es7-react-js-snippets
+eamodio.gitlens
+esbenp.prettier-vscode
+prisma.prisma
+rvest.vs-code-prettier-eslint
+sumneko.lua
