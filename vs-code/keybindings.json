@@ -1,0 +1,30 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "space space",
+    "command": "workbench.action.showAllEditors",
+    "when": "!inputFocus"
+  },
+  {
+    "key": "space e",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.toggleSidebarVisibility",
+        "workbench.files.action.focusFilesExplorer"
+      ]
+    },
+    "when": "!inputFocus && !sideBarFocus"
+  },
+  {
+    "key": "space e",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.toggleSidebarVisibility",
+        "workbench.action.focusActiveEditorGroup"
+      ]
+    },
+    "when": "!inputFocus && sideBarFocus"
+  }
+]
