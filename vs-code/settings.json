@@ -1,158 +1,57 @@
 {
+  "workbench.iconTheme": "catppuccin-frappe",
+  "workbench.colorTheme": "Catppuccin Frappé",
+  "workbench.productIconTheme": "macos-modern",
+  "workbench.statusBar.visible": false,
+  "editor.minimap.enabled": false,
+  "workbench.sideBar.location": "left",
   "editor.copyWithSyntaxHighlighting": true,
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.emptySelectionClipboard": false,
   "workbench.editor.enablePreview": false,
   "window.newWindowDimensions": "inherit",
   "editor.multiCursorModifier": "alt",
-  "files.trimTrailingWhitespace": false,
-  "diffEditor.renderSideBySide": false,
+  "files.trimTrailingWhitespace": true,
+  "diffeditor.renderSideBySide": false,
   "editor.snippetSuggestions": "top",
   "editor.detectIndentation": false,
-  "window.nativeFullScreen": false,
-  "files.insertFinalNewline": true,
-  "workbench.tree.renderIndentGuides": "none",
-  "workbench.startupEditor": "none",
-  "workbench.layoutControl.enabled": false,
-  "editor.scrollbar.horizontal": "hidden",
-  "editor.scrollbar.vertical": "hidden",
-  "editor.overviewRulerBorder": false,
-  "editor.cursorBlinking": "phase",
-  "editor.cursorSmoothCaretAnimation": "on",
   "editor.tabSize": 2,
-  "breadcrumbs.enabled": false,
-  "explorer.confirmDragAndDrop": false,
-  "explorer.compactFolders": false,
-  "window.titleBarStyle": "native",
+  "window.nativeFullScreen": true,
+  "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
-  "editor.formatOnSave": true,
-  "workbench.sideBar.location": "left",
-  "workbench.statusBar.visible": false,
   "workbench.editor.showTabs": "single",
   "editor.lineNumbers": "relative",
-  "editor.minimap.enabled": false,
-  "editor.fontLigatures": true,
-  "editor.glyphMargin": false,
+  "editor.guides.indentation": false,
+  "breadcrumbs.enabled": false,
   "scm.diffDecorations": "none",
+  "editor.hover.delay": 1500,
   "editor.hover.enabled": true,
   "editor.matchBrackets": "never",
   "workbench.tips.enabled": false,
   "editor.colorDecorators": false,
   "git.decorations.enabled": false,
-  "extensions.ignoreRecommendations": true,
+  "workbench.startupEditor": "none",
+  "editor.lightbulb.enabled": "off",
+  "editor.selectionHighlight": false,
+  "editor.overviewRulerBorder": false,
+  "editor.renderLineHighlight": "none",
+  "editor.occurrencesHighlight": "off",
+  "problems.decorations.enabled": false,
+  "editor.renderControlCharacters": false,
   "editor.hideCursorInOverviewRuler": true,
-  "editor.gotoLocation.multipleReferences": "goto",
-  "editor.gotoLocation.multipleDefinitions": "goto",
   "editor.gotoLocation.multipleDeclarations": "goto",
-  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "editor.gotoLocation.multipleDefinitions": "goto",
   "editor.gotoLocation.multipleImplementations": "goto",
   "editor.gotoLocation.multipleTypeDefinitions": "goto",
-  // Typography
-  "workbench.colorTheme": "Catppuccin Frappé",
-  "workbench.productIconTheme": "macos-modern",
-  "workbench.iconTheme": "catppuccin-frappe",
-  "editor.fontFamily": "MonaspiceRN Nerd Font Mono",
-  "editor.fontSize": 13,
-  "editor.lineHeight": 0,
-  "chat.editor.fontWeight": "bold",
-  "editor.suggestFontSize": 13,
-  "editor.suggestLineHeight": 28,
-  "terminal.integrated.fontSize": 13,
-  "terminal.integrated.lineHeight": 1.5,
+  "editor.gotoLocation.multipleReferences": "goto",
+  "workbench.editor.enablePreviewFromCodeNavigation": false,
 
-  // Color Customizations
-  "workbench.colorCustomizations": {
-    "editor.background": "#313445",
-    "editorWidget.background": "#1f2738bb",
-    "editorHoverWidget.background": "#2d3750",
-    "sideBar.background": "#313445",
-    "sideBarSectionHeader.background": "#313445",
-    "terminal.background": "#313445",
-    "editorLineNumber.activeForeground": "#586374",
-    "editorLineNumber.dimmedForeground": "#586374",
-    "editorLineNumber.foreground": "#58637466",
-    "scrollbarSlider.activeBackground": "#6b6f87",
-    "scrollbarSlider.background": "#6b6f87",
-    "scrollbarSlider.hoverBackground": "#6b6f87",
-    "sideBar.border": "#63697355"
-  },
-
-  // Find
-  "search.useIgnoreFiles": false,
-  "search.exclude": {
-    "**/vendor/*": true,
-    "**/public/{[^i],?[^n]}*": true,
-    "**/node_modules": true,
-    "**/dist": true,
-    "**/_ide_helper.php": true,
-    "**/composer.lock": true,
-    "**/package-lock.json": true,
-    "storage": true,
-    ".phpunit.result.cache": true,
-    "**/.wasp/out": true,
-    "**/bower_components": true,
-    "**/*.code-search": true
-  },
-  "search.quickOpen.includeHistory": false,
-
-  // Code
-  "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?",
-  "emmet.includeLanguages": {
-    "blade": "html",
-    "vue-html": "html",
-    "vue": "html"
-  },
-  "files.associations": {
-    ".php_cs": "php",
-    ".php_cs.dist": "php"
-  },
-
-  // Prettier
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.addMissingImports.ts": "always",
-      "source.organizeImports": "always",
-      "source.removeUnused.ts": "always",
-      "source.removeUnusedImports": "always"
-    }
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-
-  // Editor Settings
-  "editor.formatOnPaste": false,
-
-  // APC Settings
-  "apc.electron": {
-    "backgroundColor": "#2a2e3d",
-    "frame": true,
-    "transparent": true,
-    "titleBarStyle": "hiddenInset",
-    "vibrancy": "ultra-dark",
-    "trafficLightPosition": {
-      "x": 15,
-      "y": 13
-    }
-  },
-  "apc.stylesheet": {
-    ".editor .title": "background: transparent !important;",
-    ".actions-container.highlight-toggled": "display: none !important",
-    ".editor .title .actions-container .action-item a": "visibility: hidden;",
-    ".editor .title .actions-container": "flex-direction: row-reverse;",
-    ".editor .scrollbar .slider": "visibility: hidden",
-    ".editor .scrollbar:hover .slider": "visibility: initial",
-    ".monaco-editor .cursor": "background: linear-gradient(to bottom, #7f00ff, #e100ff) !important;"
-  },
-  "editor.accessibilitySupport": "off",
-  "editor.guides.indentation": false,
-
-  // Some Plugins
+  "laravel-pint.enable": true,
+  "editor.formatOnSave": true,
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "//": "Last update at 4.10.2024, 11:36:31",
+    "//": "Last update at 4.10.2024, 13:52:44",
     ".clang-tidy": ".clang-format, .clangd, compile_commands.json",
     ".env": "*.env, .env.*, .envrc, env.d.ts",
     ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*",
@@ -241,34 +140,31 @@
     "*.w": "$(capture).*.w, I$(capture).w",
     "*.xaml": "$(capture).xaml.cs"
   },
-  "laravel-pint.enable": true,
-
-  "[blade]": {
-    "editor.defaultFormatter": "open-southeners.laravel-pint"
-  },
-
-  "cSpell.language": "en, de",
-  "[typescript]": {
-    "editor.codeActionsOnSave": {
-      "source.addMissingImports.ts": "always",
-      "source.organizeImports": "always",
-      "source.removeUnused.ts": "always",
-      "source.removeUnusedImports": "always",
-      "source.sortImports": "always"
-    },
+  "update.mode": "none",
+  "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
   },
   "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
       "source.addMissingImports.ts": "always",
       "source.organizeImports": "always",
       "source.removeUnused.ts": "always",
       "source.removeUnusedImports": "always",
       "source.sortImports": "always"
-    },
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.addMissingImports.ts": "always",
+      "source.organizeImports": "always",
+      "source.removeUnused.ts": "always",
+      "source.removeUnusedImports": "always",
+      "source.sortImports": "always"
+    }
   }
 }
