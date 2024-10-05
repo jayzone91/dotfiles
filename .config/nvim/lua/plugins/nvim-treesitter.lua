@@ -1,0 +1,38 @@
+return {
+  "nvim-treesitter/nvim-treesitter",
+  dependencies = {},
+  build = ":TSUpdate",
+  event = { "BufReadPost", "BufNewFile" },
+  cmd = { "TSUpdateSync" },
+  opts = {
+    highlight = { enable = true },
+    indent = { enable = true },
+    ensure_installed = {
+      "bash",
+      "gitignore",
+      "go",
+      "gomod",
+      "gowork",
+      "html",
+      "http",
+      "json",
+      "prisma",
+      "lua",
+      "luadoc",
+      "luap",
+      "markdown",
+      "markdown_inline",
+      "powershell",
+      "regex",
+      "templ",
+      "toml",
+      "vimdoc",
+      "yaml",
+    },
+    sync_install = false,
+    auto_install = true,
+  },
+  config = function(_, opts)
+    require("nvim-treesitter.configs").setup(opts)
+  end,
+}
