@@ -71,3 +71,35 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo[event.buf].buflisted = false
   end,
 })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = augroup("ts_imports"),
+  pattern = { "*.ts", "*.tsx" },
+  callback = function()
+    vim.lsp.buf.code_action({
+      apply = true,
+      ---@diagnostic disable-next-line
+      context = { only = { "source.addMissingImports.ts" }, diagnostics = {} },
+    })
+    vim.lsp.buf.code_action({
+      apply = true,
+      ---@diagnostic disable-next-line
+      context = { only = { "source.organizeImports" }, diagnostics = {} },
+    })
+    vim.lsp.buf.code_action({
+      apply = true,
+      ---@diagnostic disable-next-line
+      context = { only = { "source.removeUnusedImports" }, diagnostics = {} },
+    })
+    vim.lsp.buf.code_action({
+      apply = true,
+      ---@diagnostic disable-next-line
+      context = { only = { "source.removeUnused.ts" }, diagnostics = {} },
+    })
+    vim.lsp.buf.code_action({
+      apply = true,
+      ---@diagnostic disable-next-line
+      context = { only = { "source.sortImports" }, diagnostics = {} },
+    })
+  end,
+})

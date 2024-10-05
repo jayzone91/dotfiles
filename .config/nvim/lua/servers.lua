@@ -24,7 +24,7 @@ M.linter = {
   python = { "black" },
   blade = { "tlint" },
   dockerfile = { "hadolint" },
-  markdown = { "markdownlint-cli2" }
+  markdown = { "markdownlint-cli2" },
 }
 
 M.lsp = {
@@ -113,7 +113,10 @@ M.lsp = {
       {
         "K",
         function()
-          if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
+          if
+            vim.fn.expand("%:t") == "Cargo.toml"
+            and require("crates").popup_available()
+          then
             require("crates").show_popup()
           else
             vim.lsp.buf.hover()

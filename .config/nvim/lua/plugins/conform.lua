@@ -6,13 +6,9 @@ return {
   },
   config = function()
     local formatters_by_ft = require("servers").formatters
-    local formatters = {
-      ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
-    }
-    vim.list_extend(formatters, formatters_by_ft)
 
     require("conform").setup({
-      formatters_by_ft = formatters,
+      formatters_by_ft = formatters_by_ft,
       formatters = {
         ["markdown-tox"] = {
           condition = function(_, ctx)
@@ -23,6 +19,7 @@ return {
                 return true
               end
             end
+            return false
           end,
         },
         ["markdown-cli2"] = {
