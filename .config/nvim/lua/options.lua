@@ -48,3 +48,16 @@ vim.o.title = true --  let Vim set the title of the window
 vim.o.updatetime = 200 -- after this many milliseconds flush swap file
 vim.o.wildmode = "longest:full,full" -- mode for 'wildchar' command-line expansion
 vim.o.wrap = false -- long lines wrap and continue on the next line
+
+-- Custom Filetypes
+vim.filetype.add({
+  pattern = {
+    [".*/%.github/dependabot.yml"] = "dependabot",
+    [".*/%.github/dependabot.yaml"] = "dependabot",
+    [".*/%.github/workflows[%w/]+.*%.yml"] = "gha",
+    [".*/%.github/workflows/[%w/]+.*%.yaml"] = "gha",
+  },
+})
+
+vim.treesitter.language.register("yaml", "gha")
+vim.treesitter.language.register("yaml", "dependabot")

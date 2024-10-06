@@ -19,6 +19,7 @@ return {
         { "<leader>t", group = "Terminal" },
         { "<leader>x", group = "Trouble" },
         { "<leader>m", group = "Markdown" },
+        { "<leader>w", group = "Web" },
       },
     })
   end,

@@ -5,7 +5,16 @@ return {
   opts = {
     events = { "BufWritePre", "BufReadPost", "InsertLeave" },
     linters_by_ft = servers.linter,
-    linters = {},
+    linters = {
+      luacheck = {
+        condition = function(ctx)
+          return vim.fs.find(
+            { ".luacheckrc" },
+            { path = ctx.filename, upward = true }
+          )[1]
+        end,
+      },
+    },
   },
   config = function(_, opts)
     local M = {}

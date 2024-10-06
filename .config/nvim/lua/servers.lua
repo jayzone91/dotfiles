@@ -3,20 +3,29 @@ M.formatters = {
   css = { "prettierd" },
   html = { "prettierd" },
   go = { "goimports", "gofumpt" },
-  javascript = { "prettierd" },
-  javascriptreact = { "prettierd" },
-  typescript = { "prettierd" },
-  typescriptreact = { "prettierd" },
-  json = { "prettierd" },
+  javascript = { "prettierd", "eslint_d" },
+  javascriptreact = { "prettierd", "eslint_d" },
+  typescript = { "prettierd", "eslint_d" },
+  typescriptreact = { "prettierd", "eslint_d" },
+  json = { "biome" },
+  jsonc = { "biome" },
+  json5 = { "biome" },
+  python = { "black" },
   lua = { "stylua" },
   markdown = { "prettierd", "markdownlint-cli2", "markdown-toc" },
   scss = { "prettierd" },
   sh = { "shfmt" },
   templ = { "templ" },
   toml = { "taplo" },
-  yaml = { "prettierd" },
   php = { "php-cs-fixer" },
   blade = { "blade-formatter" },
+  sql = { "sqlfluff" },
+  mysql = { "sqlfluff" },
+  xml = { "prettierd" },
+  plsql = { "sqlfluff" },
+  yaml = { "yamlfmt" },
+  gha = { "yamlfmt" },
+  dependabot = { "yamlfmt" },
 }
 
 M.linter = {
@@ -25,20 +34,48 @@ M.linter = {
   blade = { "tlint" },
   dockerfile = { "hadolint" },
   markdown = { "markdownlint-cli2" },
+  lua = { "luacheck" },
+  sh = { "shellcheck" },
+  sql = { "sqlfluff" },
+  mysql = { "sqlfluff" },
+  plsql = { "sqlfluff" },
+  gha = { "actionlint" },
 }
 
 M.lsp = {
+  lemminx = {},
+  cssls = {},
+  html = {
+    filetype = {
+      "html",
+      "javascript",
+      "javascriptreact",
+      "javascript.jsx",
+      "typescript",
+      "typescriptreact",
+      "typescript.tsx",
+    },
+  },
   eslint = {
     settings = {
       workingDirectories = { mode = "auto" },
     },
   },
-  emmet_ls = {},
-  bashls = true,
+  emmet_ls = {
+    init_options = {
+      html = {
+        options = {
+          ["bem.enabled"] = true,
+        },
+      },
+    },
+  },
+  bashls = {},
   gopls = {
     settings = {
       gopls = {
         gofumpt = true,
+        hoverKind = "SynopsisDocumentation",
         codelenses = {
           gc_details = false,
           generate = true,
@@ -106,8 +143,8 @@ M.lsp = {
       },
     },
   },
-  rust_analyzer = true,
-  templ = true,
+  rust_analyzer = {},
+  templ = {},
   taplo = {
     keys = {
       {
@@ -126,24 +163,23 @@ M.lsp = {
       },
     },
   },
-  intelephense = true,
-  pyright = true,
-  jsonls = {
-    server_capabilities = {
-      documentFormattingsProvider = false,
-    },
-  },
+  intelephense = {},
+  pyright = {},
+  jsonls = {},
   yamlls = {
-    settings = {
-      yaml = {
-        schemastore = {
-          enable = false,
-          url = "",
-        },
-      },
+    filetypes = {
+      "yaml",
+      "gha",
+      "dependabot",
     },
   },
   tailwindcss = {
+    experimental = {
+      classRegex = {
+        { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+        { "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+      },
+    },
     init_options = {
       userLanguages = {
         elixir = "phoenix-heex",

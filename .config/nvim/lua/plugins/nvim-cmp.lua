@@ -28,7 +28,14 @@ return {
     },
     "saadparwaiz1/cmp_luasnip",
     "onsails/lspkind.nvim",
-    { "roobert/tailwindcss-colorizer-cmp.nvim", opts = {} },
+    {
+      "roobert/tailwindcss-colorizer-cmp.nvim",
+      config = function()
+        require("tailwindcss-colorizer-cmp").setup({
+          color_square_width = 2,
+        })
+      end,
+    },
   },
   config = function()
     local lspkind = require("lspkind")
@@ -41,6 +48,16 @@ return {
       snippets = {
         expand = function(args)
           require("luasnip").lsp_expand(args.body)
+        end,
+      },
+      ---@diagnostic disable-next-line:missing-fields
+      formatting = {
+        format = function(entry, item)
+          item = lspkind.cmp_format({
+            maxwidth = 50,
+            ellipsis_char = "...",
+          })(entry, item)
+          return require("tailwindcss-colorizer-cmp").formatter(entry, item)
         end,
       },
       window = {
@@ -80,6 +97,7 @@ return {
         { name = "nvim_lsp" },
         { name = "luasnip" },
       }, {
+        { name = "crates" },
         { name = "buffer" },
         { name = "git" },
       }),
