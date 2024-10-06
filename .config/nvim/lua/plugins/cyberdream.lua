@@ -21,6 +21,10 @@ return {
       mini = true,
       noice = true,
       neogit = true,
+      telescope = true,
+      treesitter = true,
+      trouble = true,
+      whichkey = true,
     }
     return opts
   end,
