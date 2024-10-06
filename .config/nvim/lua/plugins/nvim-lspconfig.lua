@@ -103,6 +103,18 @@ return {
           settings = {}
         end
 
+        if client.name == "tailwindcss" then
+          local ok = pcall(require("telescope").load_extension, "tailiscope")
+          if ok then
+            vim.keymap.set(
+              "n",
+              "<leader>fc",
+              "<cmd>Telescope tailiscope<CR>",
+              { desc = "Search Tailwindcss" }
+            )
+          end
+        end
+
         local builtin = require("telescope.builtin")
         vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
         vim.keymap.set("n", "gd", builtin.lsp_definitions, { buffer = 0 })

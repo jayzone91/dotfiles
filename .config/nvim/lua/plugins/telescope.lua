@@ -1,6 +1,46 @@
 return {
   "nvim-telescope/telescope.nvim",
   dependencies = {
+    "nvim-telescope/telescope-ui-select.nvim",
+    "danielvolchek/tailiscope.nvim",
+    {
+      "ryanmsnyder/toggleterm-manager.nvim",
+      config = function()
+        local toggleterm_manager = require("toggleterm-manager")
+        local actions = toggleterm_manager.actions
+        toggleterm_manager.setup({
+          titles = {
+            prompt = "Pick Term",
+            results = "Terminals",
+          },
+          mappings = {
+            i = {
+              ["<CR>"] = {
+                action = actions.create_and_name_term,
+                exit_on_action = true,
+              },
+              ["<C-d>"] = {
+                action = actions.delete_term,
+                exit_on_action = false,
+              },
+            },
+            n = {
+              ["<CR>"] = {
+                action = actions.create_and_name_term,
+                exit_on_action = true,
+              },
+              ["x"] = { action = actions.delete_term, exit_on_action = false },
+            },
+          },
+        })
+      end,
+    },
+    {
+      "nvim-telescope/telescope-media-files.nvim",
+      dependencies = {
+        "nvim-lua/popup.nvim",
+      },
+    },
     {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = function()
@@ -68,6 +108,30 @@ return {
     end
 
     telescope.setup({
+      extensions = {
+        ["ui-select"] = {
+          require("telescope.themes").get_dropdown(),
+        },
+        media_files = {
+          find_cmd = "rg",
+        },
+        tailiscope = {
+          register = "a",
+          default = "base",
+          doc_icon = " ",
+          no_dot = true,
+          maps = {
+            i = {
+              back = "<C-b>",
+              open_doc = "<C-o>",
+            },
+            n = {
+              back = "b",
+              open_doc = "o",
+            },
+          },
+        },
+      },
       pickers = {
         find_files = {
           find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
@@ -115,6 +179,8 @@ return {
     })
 
     pcall(require("telescope").load_extension, "fzf")
+    pcall(require("telescope").load_extension, "media-files")
+    pcall(require("telescope").load_extension, "ui-select")
 
     -- mappings
     local map = function(modes, lhs, rhs, options)
@@ -130,6 +196,15 @@ return {
       end
     end
 
+    map(
+      "n",
+      "<leader>tm",
+      ":Telescope toggleterm_manager<CR>",
+      { desc = "Manage Terminals" }
+    )
+    map("n", "<leader>fm", function()
+      require("telescope").extensions.media_files.media_files()
+    end, { desc = "Media Files" })
     map(
       "n",
       "<leader>ff",

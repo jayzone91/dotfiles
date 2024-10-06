@@ -20,6 +20,8 @@ return {
         { "<leader>x", group = "Trouble" },
         { "<leader>m", group = "Markdown" },
         { "<leader>w", group = "Web" },
+        { "<leader>b", group = "Bufferline" },
+        { "<leader>c", group = "Code Actions" },
       },
     })
   end,
