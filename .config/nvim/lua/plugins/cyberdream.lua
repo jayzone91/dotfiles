@@ -12,6 +12,16 @@ return {
     opts.theme = {
       variant = "auto",
     }
+    opts.extensions = {
+      cmp = true,
+      gitsigns = true,
+      grugfar = true,
+      lazy = true,
+      markdown = true,
+      mini = true,
+      noice = true,
+      neogit = true,
+    }
     return opts
   end,
   config = function(_, opts)
