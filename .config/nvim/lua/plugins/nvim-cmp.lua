@@ -17,7 +17,12 @@ return {
       {
         "rafamadriz/friendly-snippets",
         config = function()
-          require("luasnip.loaders.from_vscode").lazy_load()
+          require("luasnip.loaders.from_vscode").lazy_load({
+            exclude = vim.g.vscode_snippets_exclude or {},
+          })
+          require("luasnip.loaders.from_vscode").lazy_load({
+            paths = vim.g.vscode_snippet_path or "",
+          })
         end,
       },
     },
@@ -50,8 +55,8 @@ return {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
-          elseif luasnip.locally_jumpable(1) then
-            luasnip.jump(1)
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
           else
             fallback()
           end
@@ -59,27 +64,19 @@ return {
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
-          elseif luasnip.locally_jumpable(-1) then
+          elseif luasnip.jumpable(-1) then
             luasnip.jump(-1)
           else
             fallback()
           end
         end, { "i", "s" }),
-        ["<CR>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            if luasnip.expandable() then
-              luasnip.expand()
-            else
-              cmp.confirm({
-                select = true,
-              })
-            end
-          else
-            fallback()
-          end
-        end),
+        ["<CR>"] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Insert,
+          select = true,
+        }),
       }),
       sources = cmp.config.sources({
+        { name = "lazydev", group_index = 0 },
         { name = "nvim_lsp" },
         { name = "luasnip" },
       }, {
@@ -106,6 +103,17 @@ return {
       matching = {
         disallow_symbol_nonprefix_matching = false,
       },
+    })
+
+    vim.api.nvim_create_autocmd("InsertLeave", {
+      callback = function()
+        if
+          require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
+          and not require("luasnip").session.jump_active
+        then
+          require("luasnip").unlink_current()
+        end
+      end,
     })
   end,
 }

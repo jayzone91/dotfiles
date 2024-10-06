@@ -5,7 +5,7 @@ return {
   event = { "BufReadPost", "BufNewFile" },
   cmd = { "TSUpdateSync" },
   opts = {
-    highlight = { enable = true },
+    highlight = { enable = true, use_languagetree = true },
     indent = { enable = true },
     ensure_installed = {
       "bash",

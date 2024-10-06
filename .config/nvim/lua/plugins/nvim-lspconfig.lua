@@ -37,13 +37,45 @@ return {
     "b0o/SchemaStore.nvim",
   },
   config = function()
-    local capabilities = nil
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem = {
+      documentationFormat = { "markdown", "plaintext" },
+      snippetSupport = true,
+      preselectSupport = true,
+      insertReplaceSupport = true,
+      labelDetailsSupport = true,
+      deprecatedSupport = true,
+      commitCharactersSupport = true,
+      tagSupport = { valueSet = { 1 } },
+      resolveSupport = {
+        properties = {
+          "documentation",
+          "detail",
+          "additionalTextEdits",
+        },
+      },
+    }
     if pcall(require, "cmp_nvim_lsp") then
       capabilities = require("cmp_nvim_lsp").default_capabilities()
     end
 
     local lspconfig = require("lspconfig")
     local servers = require("servers").lsp
+
+    local x = vim.diagnostic.severity
+    vim.diagnostic.config({
+      virtual_text = { prefix = "" },
+      signs = {
+        text = {
+          [x.ERROR] = "󰅙",
+          [x.WARN] = "",
+          [x.INFO] = "󰋼",
+          [x.HINT] = "󰌵",
+        },
+      },
+      underline = true,
+      float = { border = "single" },
+    })
 
     for name, config in pairs(servers) do
       if config == true then

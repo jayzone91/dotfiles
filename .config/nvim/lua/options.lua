@@ -1,6 +1,5 @@
 -- Neovim Options.
 -- ref.: https://neovim.io/doc/user/quickref.html#option-list
-
 vim.o.autoindent = true -- take indent for new line from previous line
 vim.o.autoread = true -- autom. read file when changed outside of Vim
 vim.o.background = "dark" -- "dark" or "light", used for highlight colors
