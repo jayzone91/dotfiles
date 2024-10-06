@@ -6,7 +6,10 @@ vim.o.background = "dark" -- "dark" or "light", used for highlight colors
 vim.o.backspace = "indent,eol,start" -- how backspace works at start of line
 vim.o.backup = false -- keep backup file after overwriting a file
 vim.o.breakindent = false -- wrapped line repeats indent
-vim.o.clipboard = "unnamedplus" -- use the clipboard as the unnamed register
+-- Schedule the settings afer "UIEnter" because it can increase startuptime
+vim.schedule(function()
+  vim.o.clipboard = "unnamedplus" -- use the clipboard as the unnamed register
+end)
 vim.o.cmdheight = 1 -- number of lines to use for the command-line
 vim.o.completeopt = "menu,menuone,noinsert" -- options for Insert mode completion
 vim.o.confirm = true -- ask what to do about unsaved/read-only files

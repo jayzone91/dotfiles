@@ -18,6 +18,7 @@ return {
       local pairs = require("mini.pairs")
       pairs.setup(opts)
       local open = pairs.open
+      ---@diagnostic disable-next-line
       pairs.open = function(pair, neigh_pattern)
         if vim.fn.getcmdline() ~= "" then
           return open(pair, neigh_pattern)
@@ -28,13 +29,13 @@ return {
         local next = line:sub(cursor[2] + 1, cursor[2] + 1)
         local before = line:sub(1, cursor[2])
         if
-            opts.markdown
-            and o == "`"
-            and vim.bo.filetype == "markdown"
-            and before:match("^%s*``")
+          opts.markdown
+          and o == "`"
+          and vim.bo.filetype == "markdown"
+          and before:match("^%s*``")
         then
           return "`\n```"
-              .. vim.api.nvim_replace_termcodes("<up>", true, true, true)
+            .. vim.api.nvim_replace_termcodes("<up>", true, true, true)
         end
         if opts.skip_next and next ~= "" and next:match(opts.skip_next) then
           return o
@@ -91,6 +92,74 @@ return {
         require("mini.icons").mock_nvim_web_devicons()
         return package.loaded["nvim-web-devicons"]
       end
+    end,
+  },
+  {
+    "echasnovski/mini.animate",
+    recommended = true,
+    event = "VeryLazy",
+    opts = function()
+      local mouse_scrolled = false
+      for _, scroll in ipairs({ "Up", "Down" }) do
+        local key = "<ScrollWheel" .. scroll .. ">"
+        vim.keymap.set({ "", "i" }, key, function()
+          mouse_scrolled = true
+          return key
+        end, { expr = true })
+      end
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "grug-far",
+        callback = function()
+          vim.b.minianimate_disable = true
+        end,
+      })
+      local animate = require("mini.animate")
+      return {
+        resize = {
+          timing = animate.gen_timing.linear({ duration = 50, unit = "total" }),
+        },
+        scroll = {
+          timing = animate.gen_timing.linear({ duration = 150, unit = "total" }),
+          subscroll = animate.gen_subscroll.equal({
+            predicate = function(total_scroll)
+              if mouse_scrolled then
+                mouse_scrolled = false
+                return false
+              end
+              return total_scroll > 1
+            end,
+          }),
+        },
+      }
+    end,
+  },
+  {
+    "echasnovski/mini.indentscope",
+    version = false,
+    opts = {
+      symbol = "│",
+      options = { try_as_border = true },
+    },
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "alpha",
+          "dashboard",
+          "fzf",
+          "help",
+          "lazy",
+          "lazyterm",
+          "mason",
+          "neo-tree",
+          "notify",
+          "toggleterm",
+          "Trouble",
+          "trouble",
+        },
+        callback = function()
+          vim.b.miniindentscope_disable = true
+        end,
+      })
     end,
   },
 }
