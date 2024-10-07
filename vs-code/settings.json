@@ -28,6 +28,7 @@
   "editor.hover.enabled": true,
   "editor.matchBrackets": "never",
   "workbench.tips.enabled": false,
+  "extensions.ignoreRecommendations": true,
   "editor.colorDecorators": false,
   "git.decorations.enabled": false,
   "workbench.startupEditor": "none",

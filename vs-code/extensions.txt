@@ -36,4 +36,3 @@ tamasfe.even-better-toml
 usernamehw.errorlens
 wakatime.vscode-wakatime
 wix.vscode-import-cost
-asvetliakov.vscode-neovim
