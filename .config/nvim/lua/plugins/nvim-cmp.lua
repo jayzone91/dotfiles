@@ -7,6 +7,8 @@ return {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-cmdline",
+    { "roobert/tailwindcss-colorizer-cmp.nvim", opts = {} },
+    { "petertriho/cmp-git", opts = {} },
     {
       "L3MON4D3/LuaSnip",
       ---@diagnostic disable-next-line:undefined-field

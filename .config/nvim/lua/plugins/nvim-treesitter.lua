@@ -14,6 +14,7 @@ return {
       "markdown_inline",
       "query",
       "vim",
+      "c_sharp",
       "vimdoc",
     },
     auto_install = true,

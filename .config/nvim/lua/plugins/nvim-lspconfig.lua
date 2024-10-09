@@ -5,6 +5,7 @@ return {
     "williamboman/mason.nvim",
 
     { "j-hui/fidget.nvim", opts = {} },
+    { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true },
     {
       "folke/lazydev.nvim",
       ft = "lua", -- only load on lua files

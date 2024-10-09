@@ -39,6 +39,7 @@ M.lsp_server = {
   dotls = {},
   -- html
   emmet_ls = {},
+  nil_ls = {},
   gopls = {
     settings = {
       gopls = {
@@ -184,11 +185,38 @@ M.lsp_server = {
     },
   },
   prismals = {},
+  omnisharp = {
+    handlers = {
+      ["textDocument/definition"] = function(...)
+        return require("omnisharp_extended").handler(...)
+      end,
+    },
+    keys = {
+      {
+        "gd",
+        function()
+          require("omnisharp_extended").telescope_lsp_definitions()
+        end,
+        desc = "Goto Definition",
+      },
+    },
+    enable_roslyn_analyzers = true,
+    organize_imports_on_format = true,
+    enable_import_completion = true,
+  },
+  volar = {
+    init_options = {
+      vue = {
+        hybridMode = true,
+      },
+    },
+  },
 }
 
 M.linter = {
   markdown = { "markdownlint-cli2" },
   php = { "phpcs" },
+  dockerfile = { "hadolint" },
 }
 
 M.formatter = {
@@ -196,6 +224,8 @@ M.formatter = {
   markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
   php = { "intelephense" },
   lua = { "stylua" },
+  nix = { "nixfmt" },
+  cs = { "csharpier" },
 }
 
 function M.setup()

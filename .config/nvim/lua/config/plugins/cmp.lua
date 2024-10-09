@@ -21,12 +21,20 @@ cmp.setup({
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
+  ---@diagnostic disable-next-line:missing-fields
+  formatting = {
+    format = function(entry, item)
+      return require("tailwind-colorizer-cmp").formatter(entry, item)
+    end,
+  },
   sources = {
     { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "path" },
     { name = "buffer" },
     { name = "lazydev", group_index = 0 },
+    { name = "git" },
+    { name = "crates" },
   },
   mapping = cmp.mapping.preset.insert({
     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
