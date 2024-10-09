@@ -195,24 +195,42 @@ return {
           { pretty_path() },
         },
         lualine_x = {
-        -- stylua: ignore
-        {
-          function() return require("noice").api.status.command.get() end,
-          cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-          color = function() return fg("Statement") end,
-        },
-        -- stylua: ignore
-        {
-          function() return require("noice").api.status.mode.get() end,
-          cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-          color = function() return fg("Constant") end,
-        },
-        -- stylua: ignore
-        {
-          require("lazy.status").updates,
-          cond = require("lazy.status").has_updates,
-          color = function() return fg("Special") end,
-        },
+          {
+            function()
+              ---@diagnostic disable-next-line:undefined-field
+              return require("noice").api.status.command.get()
+            end,
+            cond = function()
+              return package.loaded["noice"]
+                ---@diagnostic disable-next-line:undefined-field
+                and require("noice").api.status.command.has()
+            end,
+            color = function()
+              return fg("Statement")
+            end,
+          },
+          {
+            function()
+              ---@diagnostic disable-next-line:undefined-field
+              return require("noice").api.status.mode.get()
+            end,
+            ---@diagnostic disable-next-line:undefined-field
+            cond = function()
+              return package.loaded["noice"]
+                ---@diagnostic disable-next-line:undefined-field
+                and require("noice").api.status.mode.has()
+            end,
+            color = function()
+              return fg("Constant")
+            end,
+          },
+          {
+            require("lazy.status").updates,
+            cond = require("lazy.status").has_updates,
+            color = function()
+              return fg("Special")
+            end,
+          },
           {
             "diff",
             symbols = {

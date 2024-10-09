@@ -85,7 +85,11 @@ M.lsp_server = {
     },
   },
   html = {},
-  eslint = {},
+  eslint = {
+    settings = {
+      workingDirectories = { mode = "auto" },
+    },
+  },
   -- js / ts
   vtsls = {
     filetypes = {
