@@ -69,3 +69,6 @@ map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
 
 -- delete without yanking
 map({ "n", "v" }, "<leader>d", '[["_d]]', { desc = "Delete without Yanking" })
+
+-- Terminal Mappings
+map("t", "<esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
