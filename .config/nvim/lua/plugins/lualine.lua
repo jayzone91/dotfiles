@@ -161,6 +161,9 @@ end
 
 return {
   "nvim-lualine/lualine.nvim",
+  dependencies = {
+    "pnx/lualine-lsp-status",
+  },
   event = "VeryLazy",
   opts = function()
     local ret = {
@@ -172,6 +175,7 @@ return {
         lualine_a = { "mode" },
         lualine_b = { "branch" },
         lualine_c = {
+          "lsp-status",
           root_dir(),
           {
             "diagnostics",
