@@ -1,15 +1,20 @@
 local lsp_server = require("config.plugins.mason").lsp_server
 
 local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-local capabilities = vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), has_cmp and cmp_nvim_lsp.default_capabilities() or {}, 
-{
-	workspace = {
-		fileOperations = {
-			didRename = true,
-			willRename = true,
-		},
-	}
-})
+local capabilities = vim.tbl_deep_extend(
+  "force",
+  {},
+  vim.lsp.protocol.make_client_capabilities(),
+  has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+  {
+    workspace = {
+      fileOperations = {
+        didRename = true,
+        willRename = true,
+      },
+    },
+  }
+)
 
 local lspconfig = require("lspconfig")
 
@@ -35,7 +40,10 @@ end
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
-    local client = assert(vim.lsp.get_client_by_id(args.data.client_id), "must have valid client")
+    local client = assert(
+      vim.lsp.get_client_by_id(args.data.client_id),
+      "must have valid client"
+    )
 
     local settings = lsp_server[client.name]
     if type(settings) ~= "table" then
@@ -60,7 +68,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
           ---@diagnostic disable-next-line: cast-local-type
           v = nil
         end
-
         client.server_capabilities[k] = v
       end
     end

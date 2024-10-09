@@ -64,15 +64,21 @@ M.lsp_server = {
         },
         analyses = {
           fieldalignment = true,
-          nilness        = true,
-          unusedparams   = true,
-          unusedwrite    = true,
-          useany         = true,
+          nilness = true,
+          unusedparams = true,
+          unusedwrite = true,
+          useany = true,
         },
         usePlaceholders = true,
         completeUnimported = true,
         staticcheck = true,
-        directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+        directoryFilters = {
+          "-.git",
+          "-.vscode",
+          "-.idea",
+          "-.vscode-test",
+          "-node_modules",
+        },
         semanticTokens = true,
       },
     },
@@ -101,7 +107,7 @@ M.lsp_server = {
         },
       },
       typescript = {
-        updateImportOnFileMove = { enabled = "always", },
+        updateImportOnFileMove = { enabled = "always" },
         suggest = {
           completeFunctionCalls = true,
         },
@@ -120,7 +126,10 @@ M.lsp_server = {
   jsonls = {
     on_new_config = function(new_config)
       new_config.settings.json.schemas = new_config.settings.json.schemas or {}
-      vim.lsp_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
+      vim.lsp_extend(
+        new_config.settings.json.schemas,
+        require("schemastore").json.schemas()
+      )
     end,
     settings = {
       json = {
@@ -135,7 +144,7 @@ M.lsp_server = {
   intelephense = {},
   powershell_es = {},
   ruff = {
-    cmd_env = { RUFF_TRACE = "messages", },
+    cmd_env = { RUFF_TRACE = "messages" },
     init_options = {
       settings = {
         logLevel = "error",
@@ -155,18 +164,21 @@ M.lsp_server = {
       },
     },
     on_new_config = function(new_config)
-      new_config.settings.yaml.schemas = vim.tbl_deep_extend("force", new_config.settings.yaml.schemas or {},
-        require("schemastore").yaml.schemas())
+      new_config.settings.yaml.schemas = vim.tbl_deep_extend(
+        "force",
+        new_config.settings.yaml.schemas or {},
+        require("schemastore").yaml.schemas()
+      )
     end,
     settings = {
       redhat = { telemetry = { enabled = false } },
       yaml = {
         keyOrdering = false,
-        format = { enable = true, },
+        format = { enable = true },
         validate = true,
         schemaStore = {
           enable = false,
-          url = ""
+          url = "",
         },
       },
     },
@@ -180,11 +192,11 @@ M.linter = {
 }
 
 M.formatter = {
-  go = { "goimports", "gofump" },
+  go = { "goimports", "gofumpt" },
   markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
-  php = { "php_cs_fixer" },
+  php = { "intelephense" },
+  lua = { "stylua" },
 }
-
 
 function M.setup()
   local lsp_to_install = vim.tbl_filter(function(key)
@@ -201,9 +213,9 @@ function M.setup()
       icons = {
         package_installed = "✓",
         package_pending = "➜",
-        package_uninstalled = "✗"
-      }
-    }
+        package_uninstalled = "✗",
+      },
+    },
   })
 
   require("mason-lspconfig").setup({
@@ -211,7 +223,19 @@ function M.setup()
     automatic_installation = true,
   })
 
-  require("mason-tool-installer").setup({})
+  local tool_installer_ensure_installed = {}
+  for _, key in pairs(M.formatter) do
+    vim.list_extend(tool_installer_ensure_installed, key)
+  end
+
+  for _, key in pairs(M.linter) do
+    vim.list_extend(tool_installer_ensure_installed, key)
+  end
+
+  require("mason-tool-installer").setup({
+    ensure_installed = tool_installer_ensure_installed,
+    auto_update = true,
+  })
 end
 
 return M
