@@ -11,6 +11,7 @@ return {
     },
     { "nvim-telescope/telescope-ui-select.nvim" },
     { "stevearc/dressing.nvim", opts = {} },
+    { "https://git.sr.ht/~havi/telescope-toggleterm.nvim", event = "TermOpen" },
   },
   config = function()
     require("telescope").setup({
@@ -25,6 +26,7 @@ return {
 
     pcall(require("telescope").load_extension, "fzf")
     pcall(require("telescope").load_extension, "ui-select")
+    pcall(require("telescope").load_extension, "toggleterm")
 
     local builtin = require("telescope.builtin")
     vim.keymap.set(
@@ -64,6 +66,12 @@ return {
       "<leader>fh",
       builtin.help_tags,
       { desc = "Telescope help tags" }
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>ft",
+      "<cmd>Telescope toggleterm<CR>",
+      { desc = "Search Terminals" }
     )
   end,
 }
