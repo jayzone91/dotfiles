@@ -10,6 +10,7 @@ return {
       end,
     },
     { "nvim-telescope/telescope-ui-select.nvim" },
+    { "stevearc/dressing.nvim", opts = {} },
   },
   config = function()
     require("telescope").setup({
