@@ -6,7 +6,9 @@ vim.g.maplocalleader = " "
 
 vim.o.number = true
 vim.o.relativenumber = true
-
+vim.schedule(function()
+  vim.o.clipboard = "unnamedplus"
+end)
 vim.o.confirm = true
 vim.o.hlsearch = false
 vim.o.mouse = "a"
