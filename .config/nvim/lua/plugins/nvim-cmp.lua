@@ -7,7 +7,12 @@ return {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-cmdline",
-    { "roobert/tailwindcss-colorizer-cmp.nvim", opts = {} },
+    {
+      "roobert/tailwindcss-colorizer-cmp.nvim",
+      opts = {
+        color_square_width = 2,
+      },
+    },
     { "petertriho/cmp-git", opts = {} },
     {
       "L3MON4D3/LuaSnip",

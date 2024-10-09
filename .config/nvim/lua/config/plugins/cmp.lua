@@ -21,11 +21,8 @@ cmp.setup({
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
-  ---@diagnostic disable-next-line:missing-fields
   formatting = {
-    format = function(entry, item)
-      return require("tailwind-colorizer-cmp").formatter(entry, item)
-    end,
+    format = require("tailwindcss-colorizer-cmp").formatter,
   },
   sources = {
     { name = "nvim_lsp" },

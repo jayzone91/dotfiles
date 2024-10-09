@@ -39,7 +39,6 @@ M.lsp_server = {
   dotls = {},
   -- html
   emmet_ls = {},
-  nil_ls = {},
   gopls = {
     settings = {
       gopls = {
@@ -228,7 +227,6 @@ M.formatter = {
   markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
   php = { "intelephense" },
   lua = { "stylua" },
-  nix = { "nixfmt" },
   cs = { "csharpier" },
 }
 
