@@ -6,18 +6,20 @@ return {
       {
         mode = { "n", "v" },
         { "<leader>f", group = "Find" },
+        { "<leader>g", group = "Git" },
         { "<leader>s", group = "Split / Search" },
         { "<leader>x", group = "Trouble" },
+        { "<leader>q", group = "Quit" },
       },
-      keys = {
-        {
-          "<leader>?",
-          function()
-            require("which-key").show({ global = false })
-          end,
-          desc = "Buffer Keymaps (which-key)",
-        },
-      },
+    },
+  },
+  keys = {
+    {
+      "<leader>?",
+      function()
+        require("which-key").show({ global = false })
+      end,
+      desc = "Buffer Keymaps (which-key)",
     },
   },
   config = function(_, opts)

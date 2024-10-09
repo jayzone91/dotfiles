@@ -7,6 +7,7 @@ local lspkind = require("lspkind")
 lspkind.init({})
 
 local cmp = require("cmp")
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local defaults = require("cmp.config.default")()
 
 cmp.setup({
@@ -49,3 +50,5 @@ cmp.setup.cmdline({ "/", "?" }, {
     { name = "buffer" },
   },
 })
+
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({}))
