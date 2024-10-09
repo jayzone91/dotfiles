@@ -10,6 +10,7 @@ return {
         { "<leader>s", group = "Split / Search" },
         { "<leader>x", group = "Trouble" },
         { "<leader>q", group = "Quit" },
+        { "<leader>t", group = "Toggle" },
       },
     },
   },
