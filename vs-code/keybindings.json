@@ -1,30 +1,16 @@
 // Place your key bindings in this file to override the defaults
 [
   {
-    "key": "space space",
-    "command": "workbench.action.showAllEditors",
-    "when": "!inputFocus"
+    "key": "cmd+e",
+    "command": "-editor.action.toggleScreenReaderAccessibilityMode",
+    "when": "accessibilityHelpIsShown"
   },
   {
-    "key": "space e",
-    "command": "runCommands",
-    "args": {
-      "commands": [
-        "workbench.action.toggleSidebarVisibility",
-        "workbench.files.action.focusFilesExplorer"
-      ]
-    },
-    "when": "!inputFocus && !sideBarFocus"
+    "key": "cmd+e",
+    "command": "-actions.findWithSelection"
   },
   {
-    "key": "space e",
-    "command": "runCommands",
-    "args": {
-      "commands": [
-        "workbench.action.toggleSidebarVisibility",
-        "workbench.action.focusActiveEditorGroup"
-      ]
-    },
-    "when": "!inputFocus && sideBarFocus"
+    "key": "cmd+e",
+    "command": "workbench.action.quickOpenWithModes"
   }
 ]
