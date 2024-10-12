@@ -129,7 +129,12 @@ alias update="zinit self-update && zinit update --parallel"
 alias brewup="brew update && brew upgrade"
 
 # update and build neovim
-alias nvimupdate="cd ~/Documents/GitHub/neovim && git pull && rm -rf .deps/ && rm -rf build && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make install"
+function updatenvim() {
+  pfad= pwd
+  cd ~/Documents/GitHub/neovim/ && git pull & rm -rf .deps/ && rm -rf build && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make install
+  cd $pfad
+}
+alias nvimupdate="updatenvim"
 
 # init Starship
 eval "$(starship init zsh)"
