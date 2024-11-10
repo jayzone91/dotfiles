@@ -1,28 +1,14 @@
 return {
   "NeogitOrg/neogit",
-  dependencies = {
-    "nvim-lua/plenary.nvim", -- required
-    "sindrets/diffview.nvim", -- optional - Diff integration
-  },
+  dependencies = { "sindrets/diffview.nvim" },
   config = function()
-    require("neogit").setup({
-      integrations = {
-        telescope = true,
-        diffview = true,
-      },
-    })
-
-    vim.keymap.set(
-      "n",
-      "<leader>gn",
-      "<cmd>Neogit<CR>",
-      { desc = "Open Neogit" }
-    )
-    vim.keymap.set(
-      "n",
-      "<leader>gc",
-      "<cmd>Neogit commit<CR>",
-      { desc = "Open commit popup" }
-    )
+    local neogit = require("neogit")
+    neogit.setup({})
+    vim.keymap.set("n", "<leader>go", function()
+      neogit.open()
+    end, { desc = "Open Neogit" })
+    vim.keymap.set("n", "<leader>gs", function()
+      neogit.open({ kind = "split" })
+    end, { desc = "Open Neogit in Split" })
   end,
 }
