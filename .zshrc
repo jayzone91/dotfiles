@@ -2,9 +2,9 @@
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 # Shell integrations
 # init fzf
-eval "$(fzf --zsh)"
+source <(fzf --zsh)
 # init zoxide
-eval "$(zoxide init --hook prompt zsh)"
+eval "$(zoxide init zsh)"
 
 if [[ -f "/opt/homebrew/bin/brew" ]] then
   # If you're using macOS, you'll want this enabled
