@@ -1,58 +1,49 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  version = false,
   build = ":TSUpdate",
-  main = "nvim-treesitter.configs",
+  event = "VeryLazy",
+  lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+  init = function(plugin)
+    require("lazy.core.loader").add_to_rtp(plugin)
+    require("nvim-treesitter.query_predicates")
+  end,
+  cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+  opts_extend = { "ensure_installed" },
   opts = {
+    highlight = { enable = true },
+    indent = { enable = true },
     ensure_installed = {
       "bash",
       "c",
       "diff",
       "html",
+      "javascript",
+      "jsdoc",
+      "json",
+      "jsonc",
       "lua",
       "luadoc",
+      "luap",
       "markdown",
       "markdown_inline",
+      "printf",
+      "python",
       "query",
+      "regex",
+      "toml",
+      "tsx",
+      "typescript",
       "vim",
-      "c_sharp",
       "vimdoc",
+      "xml",
+      "yaml",
     },
-    auto_install = true,
-    highlight = {
+    incremental_selection = {
       enable = true,
-      additional_vim_regex_highlighting = { "ruby" },
-    },
-    indent = {
-      enable = true,
-      disable = { "ruby" },
     },
   },
   config = function(_, opts)
-    local function add(lang)
-      if type(opts.ensure_installed) == "table" then
-        table.insert(opts.ensure_installed, lang)
-      end
-    end
-
-    vim.filetype.add({
-      extension = { rasi = "rasi", rofi = "rasi", wofi = "rasi" },
-      filename = {
-        ["vifmrc"] = "vim",
-      },
-      pattern = {
-        [".*/waybar/config"] = "jsonc",
-        [".*/mako/config"] = "dosini",
-        [".*/kitty/.+%.conf"] = "bash",
-        [".*/hypr/.+%.conf"] = "hyprlang",
-        ["%.env%.[%w_.-]+"] = "sh",
-      },
-    })
-
-    add("git_config")
-    add("hyprlang")
-    add("fish")
-    add("rasi")
-
     require("nvim-treesitter.configs").setup(opts)
   end,
 }

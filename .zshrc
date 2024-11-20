@@ -1,10 +1,6 @@
 # Amazon Q pre block. Keep at the top of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 # Shell integrations
-# init fzf
-eval "$(fzf --zsh)"
-# init zoxide
-eval "$(zoxide init --hook prompt zsh)"
 
 if [[ -f "/opt/homebrew/bin/brew" ]] then
   # If you're using macOS, you'll want this enabled
@@ -104,6 +100,10 @@ zstyle ":completion:*" menu no
 zstyle ":fzf-tab:complete:cd:*" fzf-preview "eza -1 --color=always $realpath"
 zstyle ":fzf-tab:complete:__zoxide_z:*" fzf-preview "eza -1 --color=always $realpath"
 
+# init fzf
+source <(fzf --zsh)
+# init zoxide
+eval "$(zoxide init zsh)"
 
 # Aliases
 alias ls="eza --icons=always --color=always"

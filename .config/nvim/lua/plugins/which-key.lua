@@ -1,16 +1,36 @@
 return {
   "folke/which-key.nvim",
   event = "VeryLazy",
+  opts_extend = { "spec" },
   opts = {
+    defaults = {},
     spec = {
       {
-        mode = { "n", "v" },
-        { "<leader>f", group = "Find" },
-        { "<leader>g", group = "Git" },
-        { "<leader>s", group = "Split / Search" },
-        { "<leader>x", group = "Trouble" },
-        { "<leader>q", group = "Quit" },
-        { "<leader>t", group = "Toggle" },
+        { mode = { "n", "v" } },
+        { "<leader>f", group = "file/find" },
+        { "<leader>c", group = "code" },
+        { "<leader>q", group = "quit/session" },
+        { "<leader>s", group = "search" },
+        {
+          "<leader>x",
+          group = "diagnostics/quickfix",
+          icon = { icon = "󱖫 ", color = "green" },
+        },
+        {
+          "<leader>b",
+          group = "buffer",
+          expand = function()
+            return require("which-key.extras").expand.buf()
+          end,
+        },
+        {
+          "<leader>w",
+          group = "windows",
+          proxy = "<c-w>",
+          expand = function()
+            return require("which-key.extras").expand.win()
+          end,
+        },
       },
     },
   },
