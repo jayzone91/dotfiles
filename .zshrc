@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/Users/jay/.zsh/completions:"* ]]; then export FPATH="/Users/jay/.zsh/completions:$FPATH"; fi
 # Amazon Q pre block. Keep at the top of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 # Shell integrations
@@ -75,6 +77,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # go binaries
 export PATH="$(go env GOPATH)/bin:$PATH"
 
+# rust binaries
+export PATH="$HOME/.cargo/bin:$PATH"
+
 # Custom Keybinds
 bindkey "^f" autosuggest-accept # CTRL + f
 bindkey "^[[A" history-search-backward # Arrow Up
@@ -151,3 +156,4 @@ export PATH="/Users/jay/Library/Application Support/Herd/bin/":$PATH
 
 # Amazon Q post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
+. "/Users/jay/.deno/env"
