@@ -1,5 +1,4 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+require("options")
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -25,13 +24,30 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Make sure to setup `mapleader` and `maplocalleader` before
+-- loading lazy.nvim so that mappings are correct.
+-- This is also a good place to setup other settings (vim.opt)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- Setup lazy.nvim
 require("lazy").setup({
-  spec = "lazySetup",
+  spec = {
+    -- import your plugins
+    { import = "plugins" },
+  },
+  chceker = {
+    enabled = true,
+    notify = true,
+  },
+  change_detection = {
+    enabled = true,
+    notify = false,
+  },
   performance = {
     rtp = {
       disabled_plugins = {
         "gzip",
-        "netrwplugin",
         "tarPlugin",
         "tohtml",
         "tutor",
@@ -39,11 +55,6 @@ require("lazy").setup({
       },
     },
   },
-  ui = {
-    border = "single",
-  },
 })
-require("options")
-require("setup.spelling")
-require("mappings")
-require("autocommands")
+
+require("autocmds")

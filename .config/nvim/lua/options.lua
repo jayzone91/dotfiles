@@ -1,95 +1,46 @@
-local indent = 2
-local opt = vim.opt
-opt.backspace = { "indent", "eol", "start" }
-opt.clipboard = "unnamedplus"
-opt.completeopt = "menu,menuone,noselect"
-opt.cursorline = true
-opt.cursorcolumn = true
-opt.encoding = "utf-8"
-opt.hidden = true
-opt.hlsearch = true
-opt.ignorecase = true
-opt.inccommand = "split"
-opt.incsearch = true
-opt.joinspaces = false
-vim.o.lazyredraw = true
-opt.linebreak = true
-opt.number = true
-opt.listchars = { tab = " ", trail = "·", nbsp = "%" }
-opt.list = true
-vim.o.shortmess = vim.o.shortmess .. "S"
-opt.equalalways = true
-opt.cursorlineopt = "both"
+-- Neovim Default Options
+local tab = 2
 
-opt.expandtab = true
-opt.shiftwidth = indent
-opt.softtabstop = indent
-opt.tabstop = indent
+vim.o.autoread = true -- autom. read file when changed outside of Vim
+vim.o.background = "dark" -- "dark" or "light", used for highlight colors
+vim.o.backspace = "indent,eol,start" -- how backspace works at start of line
+vim.o.backup = false -- keep backup file after overwriting a file
+vim.o.clipboard = "unnamedplus" -- use the clipboard as the unnamed register
+vim.o.cmdheight = 1 -- number of lines to use for the command-line
+vim.o.confirm = true -- ask what to do about unsaved/read-only files
+vim.o.cursorline = true -- highlight the screen line of the cursor
+vim.o.expandtab = true -- use spaces when <Tab> is inserted
+vim.o.icon = true -- let Vim set the text of the window icon
+vim.o.ignorecase = true -- ignore case in search patterns
+vim.o.linebreak = false -- wrap long lines at a blank
+vim.o.mouse = "a" -- enable the use of mouse clicks
+vim.o.mousehide = true -- hide mouse pointer while typing
+vim.o.number = true -- print the line number in front of each line
+vim.o.pumheight = 8 -- maximum number of items to show in the popup menu
+vim.o.relativenumber = true -- show relative line number in front of each line
+vim.o.showmode = false -- message on status line to show current mode
+vim.o.signcolumn = "yes" -- when and how to display the sign column
+vim.o.smartcase = true -- no ignore case when pattern has uppercase
+vim.o.softtabstop = tab -- number of spaces that <Tab> uses while editing
+vim.o.splitbelow = true -- new window from split is below the current one
+vim.o.splitright = true -- new window is put right of the current one
+vim.o.smarttab = true -- use 'shiftwidth' when inserting <Tab>
+vim.o.shiftround = true -- round indent to multiple of shiftwidth
+vim.o.shiftwidth = tab -- number of spaces to use for (auto)indent step
+vim.o.swapfile = false -- whether to use a swapfile for a buffer
+vim.o.tabstop = tab -- number of spaces that <Tab> in file uses
+vim.o.termguicolors = true -- enable 24-bit RGB color in the TUI
+vim.o.timeoutlen = 250 -- time out time in milliseconds
+vim.o.title = true -- let Vim set the title of the window
+vim.o.updatetime = 300 -- after this many milliseconds flush swap file
+vim.o.wrap = false -- long lines wrap and continue on the next line
 
-opt.showmode = false
-opt.scrolloff = 8
-opt.sidescrolloff = 8
-opt.signcolumn = "yes:1"
-opt.smartcase = true
-opt.spelllang = { "de_de", "en_us" }
-opt.splitbelow = true
-opt.splitright = true
-opt.termguicolors = true
-opt.title = true
+-- Settings for Snacks
+vim.o.statuscolumn = ""
 
-vim.g.markdown_fenced_languages = { "html", "javascript", "typescript" }
-vim.o.whichwrap = vim.o.whichwrap .. "<,>"
-opt.wrap = false
-
-opt.mouse = "a"
-opt.guicursor =
-  "n-v-c-sm:block-nCursor-blinkwait50-blinkon50-blinkoff50,i-ci-ve:ver25-Cursor-blinkon100-blinkoff100,r-cr-o:hor20"
-opt.undodir = vim.fn.stdpath("config") .. "/undo"
-opt.undofile = true
-vim.notify = require("notify")
-opt.jumpoptions = "view"
-opt.timeoutlen = 300
-opt.cpoptions:append(">")
-opt.nrformats:append("alpha")
-
-opt.ph = 15
-opt.cmdheight = 0
-opt.virtualedit = "block"
-vim.g.editorconfig = false
-
-local api = vim.api
-
-local yankGrp = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-api.nvim_create_autocmd("TextYankPost", {
-  group = yankGrp,
-  pattern = "*",
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  desc = "Highlight yank",
-})
-
-local cursorGrp = api.nvim_create_augroup("CursorColumn", { clear = true })
-api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
-  pattern = "*",
-  command = "set nocursorcolumn",
-  group = cursorGrp,
-})
-
-vim.o.autoread = true
-api.nvim_create_autocmd(
-  { "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" },
-  {
-    command = "if mode() != 'c' | checktime | endif",
-    pattern = { "*" },
-  }
-)
-
-vim.o.updatetime = 250
-vim.diagnostic.config({
-  virtual_text = false,
-  signs = true,
-  underline = true,
-  update_in_insert = false,
-  severity_sort = false,
-})
+-- Recommened Settings for Edgy.nvim
+-- views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 3
+-- Default splitting will cause your main splits to jump when opening an edgebar.
+-- To prevent this, set `splitkeep` to either `screen` or `topline`.
+vim.opt.splitkeep = "screen"
