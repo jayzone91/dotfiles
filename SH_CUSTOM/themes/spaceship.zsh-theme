@@ -1,0 +1,1 @@
+SH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme
