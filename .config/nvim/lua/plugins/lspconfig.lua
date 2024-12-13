@@ -1,19 +1,16 @@
-local Server = require("server")
-
 return {
   "neovim/nvim-lspconfig",
+  event = { "BufEnter", "BufNewFile" },
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
+    "hrsh7th/cmp-nvim-lsp",
     {
-      -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
-      -- used for completion, annotations and signatures of Neovim apis
       "folke/lazydev.nvim",
       ft = "lua",
       opts = {
         library = {
-          -- Load luvit types when the `vim.uv` word is found
-          { path = "luvit-meta/library", words = { "vim%.uv" } },
+          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
           { path = "snacks.nvim", words = { "Snacks" } },
         },
       },
@@ -28,15 +25,16 @@ return {
 
     local lspconfig = require("lspconfig")
 
-    for name, config in pairs(Server.lsp) do
+    local servers = require("config.server").lsp
+
+    for server, config in pairs(servers) do
       if config == true then
         config = {}
       end
       config = vim.tbl_deep_extend("force", {}, {
         capabilities = capabilities,
       }, config)
-
-      lspconfig[name].setup(config)
+      lspconfig[server].setup(config)
     end
 
     vim.api.nvim_create_autocmd("LspAttach", {
@@ -46,7 +44,7 @@ return {
           "must have valid client id"
         )
 
-        local settings = Server.lsp[client.name]
+        local settings = servers[client.name]
         if type(settings) ~= "table" then
           settings = {}
         end

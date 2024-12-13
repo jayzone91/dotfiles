@@ -1,44 +1,30 @@
 return {
   "nvim-telescope/telescope.nvim",
   dependencies = {
-    { "nvim-telescope/telescope-ui-select.nvim" },
+    {
+      "nvim-telescope/telescope-fzf-native.nvim", 
+      build = "make", 
+    },
   },
+  lazy = false,
   config = function()
     require("telescope").setup({
-      defaults = {
-        pickers = {},
-        extensions = {
-          ["ui-select"] = {
-            require("telescope.themes").get_dropdown(),
-          },
+      pickers = {
+        find_files = {
+          theme = "ivy",
         },
+      },
+      extensions = {
+        fzf = {},
       },
     })
 
-    pcall(require("telescope").load_extension, "ui-select")
+    require("telescope").load_extension("fzf")
 
-    local builtin = require("telescope.builtin")
-
-    vim.keymap.set(
-      "n",
-      "<leader>ff",
-      builtin.find_files,
-      { desc = "Find Files" }
-    )
-    vim.keymap.set(
-      "n",
-      "<leader><space>",
-      builtin.buffers,
-      { desc = "Show open Buffers" }
-    )
-    vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live Grep" })
-    vim.keymap.set("n", "<leader>fb", function()
-      builtin.current_buffer_fuzzy_find(
-        require("telescope.themes").get_dropdown({
-          winblend = 10,
-          previewer = false,
-        })
-      )
-    end, { desc = "Live Search in current buffer" })
+    vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, {desc = "Find Files"})
+    vim.keymap.set("n", "<leader>fh", require("telescope.builtin").help_tags, {desc = "Find Helptags"})
+    vim.keymap.set("n", "<leader>fm", require("config.telescope.multigrep"), {desc = "Multi Grep"})
+    vim.keymap.set("n", "<leader>fg", require("telescope.builtin").live_grep, {desc = "Live Grep"})
+    vim.keymap.set("n", "<leader><space>", require("telescope.builtin").buffers, {desc = "Open buffers"})
   end,
 }

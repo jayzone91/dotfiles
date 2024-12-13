@@ -1,4 +1,4 @@
-local Server = require("server")
+local Server = require("config.server")
 
 return {
   "williamboman/mason.nvim",

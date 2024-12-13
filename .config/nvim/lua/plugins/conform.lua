@@ -1,12 +1,11 @@
-local Server = require("server")
-
 return {
   "stevearc/conform.nvim",
+  lazy = false,
   opts = {
-    formatters_by_ft = Server.formatter,
+    formatters_by_ft = require("config.server").formatter,
     format_on_save = {
       timeout_ms = 500,
-      lsp_format = "fallback",
+      lsp_fallback = "fallback",
     },
   },
 }
