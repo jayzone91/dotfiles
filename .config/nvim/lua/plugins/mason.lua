@@ -13,15 +13,21 @@ return {
       automatic_installation = true,
     })
 
-    local formatters_to_install = {}
+    local to_install = {}
     for _, value in pairs(Server.formatter) do
       for i = 1, #value, 1 do
-        table.insert(formatters_to_install, value[i])
+        table.insert(to_install, value[i])
+      end
+    end
+
+    for _, value in pairs(Server.linter) do
+      for i = 1, #value, 1 do
+        table.insert(to_install, value[i])
       end
     end
 
     require("mason-tool-installer").setup({
-      ensure_installed = formatters_to_install,
+      ensure_installed = to_install,
       auto_update = true,
     })
   end,

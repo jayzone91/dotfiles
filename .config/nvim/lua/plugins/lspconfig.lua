@@ -16,6 +16,11 @@ return {
       },
     },
     { "Bilal2453/luvit-meta", lazy = true },
+    {
+      "NvChad/nvim-colorizer.lua",
+      event = "BufReadPre",
+      opts = {},
+    },
   },
   config = function()
     local capabilities = nil

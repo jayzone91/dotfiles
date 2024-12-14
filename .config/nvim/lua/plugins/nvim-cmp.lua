@@ -24,9 +24,19 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
+    "SergioRibera/cmp-dotenv",
     -- For luasnip users.
     { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
     "saadparwaiz1/cmp_luasnip",
+    {
+      "roobert/tailwindcss-colorizer-cmp.nvim",
+      -- optionally, override the default options:
+      config = function()
+        require("tailwindcss-colorizer-cmp").setup({
+          color_square_width = 2,
+        })
+      end,
+    },
   },
   config = function()
     vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
@@ -78,6 +88,12 @@ return {
       sources = cmp.config.sources({
         { name = "lazydev" },
         { name = "nvim_lsp" },
+        {
+          name = "dotenv",
+          option = {
+            load_shell = false,
+          },
+        },
         { name = "luasnip" },
       }, {
         { name = "buffer" },
@@ -102,5 +118,10 @@ return {
       }),
       matching = { disallow_symbol_nonprefix_matching = false },
     })
+
+    -- Tailwind colorizer
+    require("cmp").config.formatting = {
+      format = require("tailwindcss-colorizer-cmp").formatter,
+    }
   end,
 }
