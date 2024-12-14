@@ -121,7 +121,27 @@ return {
 
     -- Tailwind colorizer
     require("cmp").config.formatting = {
-      format = require("tailwindcss-colorizer-cmp").formatter,
+      fields = { "menu", "abbr", "kind" },
+      format = function(entry, item)
+        local entryItem = entry:get_completion_item()
+        local color = entryItem.documentation
+
+        if
+          color
+          and type(color) == "string"
+          and color:match("^#%x%x%x%x%x%x$")
+        then
+          local hl = "hex-" .. color:sub(2)
+
+          if #vim.api.nvim_get_hl(0, { name = hl }) == 0 then
+            vim.api.nvim_set_hl(0, hl, { fg = color })
+          end
+
+          item.menu = " "
+          item.menu_hl_group = hl
+        end
+        return item
+      end,
     }
   end,
 }
