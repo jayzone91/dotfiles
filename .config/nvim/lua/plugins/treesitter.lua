@@ -6,9 +6,18 @@ return {
     require("nvim-treesitter.configs").setup({
       ensure_installed = {
         "c",
+        "prisma",
+        "ninja",
+        "rst",
         "lua",
+        "dockerfile",
         "vim",
         "vimdoc",
+        "go",
+        "json5",
+        "gomod",
+        "gowork",
+        "gosum",
         "query",
         "markdown",
         "markdown_inline",

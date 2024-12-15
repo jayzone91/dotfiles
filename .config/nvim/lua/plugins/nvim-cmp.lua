@@ -5,6 +5,7 @@ local function confirm(opts)
     select = true,
     behaviour = cmp.ConfirmBehavior.Insert,
   }, opts or {})
+
   return function(fallback)
     if cmp.core.view:visible() or vim.fn.pumvisible() == 1 then
       if cmp.confirm(opts) then
@@ -20,48 +21,70 @@ return {
   version = false,
   event = "InsertEnter",
   dependencies = {
+    "hrsh7th/cmp-nvim-lsp-signature-help",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
+    "saadparwaiz1/cmp_luasnip",
+    "hrsh7th/cmp-nvim-lua",
     "hrsh7th/cmp-cmdline",
     "SergioRibera/cmp-dotenv",
-    -- For luasnip users.
-    { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
-    "saadparwaiz1/cmp_luasnip",
+    "onsails/lspkind-nvim",
+    { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
     {
-      "roobert/tailwindcss-colorizer-cmp.nvim",
-      -- optionally, override the default options:
+      "L3MON4D3/LuaSnip",
+      dependencies = {
+        "rafamadriz/friendly-snippets",
+      },
+      event = "InsertEnter",
+      postinstall = "make istall_jsregexp",
       config = function()
-        require("tailwindcss-colorizer-cmp").setup({
-          color_square_width = 2,
+        local luasnip = require("luasnip")
+        luasnip.config.setup({
+          history = true,
+          updateevents = "TextChanged,TextChangedI",
+          enable_autosnippets = true,
         })
+        require("luasnip.loaders.from_vscode").lazy_load()
       end,
     },
   },
   config = function()
-    vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
     local cmp = require("cmp")
     local defaults = require("cmp.config.default")()
+    local lsp_kind = require("lspkind")
     local luasnip = require("luasnip")
+
+    require("tailwindcss-colorizer-cmp").setup({
+      color_square_width = 2,
+    })
+
+    lsp_kind.init()
 
     cmp.setup({
       sorting = defaults.sorting,
-
       completion = {
         completeopt = "menu,menuone,noinsert",
       },
       preselect = cmp.PreselectMode.item,
+      window = {
+        completion = cmp.config.window.bordered({
+          winhighlight = "Normal:Normal,FloatBorder:LspBorderBG,CursorLine:PMenuSel,Search:None",
+        }),
+        documentation = cmp.config.window.bordered({
+          winhighlight = "Normal:Normal,FloatBorder:LspBorderBG,CursorLine:PMenuSel,Search:None",
+        }),
+      },
+      view = {
+        entries = "bordered",
+      },
       snippet = {
         expand = function(args)
-          require("luasnip").lsp_expand(args.body)
+          luasnip.lsp_expand(args.body)
         end,
       },
-      window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-      },
       mapping = cmp.mapping.preset.insert({
-        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+        ["<c-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
@@ -85,21 +108,25 @@ return {
           end
         end, { "i", "s" }),
       }),
-      sources = cmp.config.sources({
-        { name = "lazydev" },
-        { name = "nvim_lsp" },
+      sources = {
+        { name = "lazydev", group_index = 0 },
+        { name = "nvim_lsp_signature_help" },
+        { name = "luasnip", max_item_count = 5 },
+        { name = "nvim_lsp", max_item_count = 20 },
+        { name = "nvim_lua" },
+        { name = "path" },
+        {
+          name = "buffer",
+          max_item_count = 2,
+        },
         {
           name = "dotenv",
           option = {
             load_shell = false,
           },
         },
-        { name = "luasnip" },
-      }, {
-        { name = "buffer" },
-      }),
+      },
     })
-
     -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline({ "/", "?" }, {
       mapping = cmp.mapping.preset.cmdline(),

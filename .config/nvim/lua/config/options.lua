@@ -35,6 +35,11 @@ vim.o.title = true -- let Vim set the title of the window
 vim.o.updatetime = 300 -- after this many milliseconds flush swap file
 vim.o.wrap = false -- long lines wrap and continue on the next line
 
+-- Searching
+vim.o.hlsearch = true
+vim.o.smartcase = true
+vim.o.infercase = true
+
 -- Settings for Snacks
 vim.o.statuscolumn = ""
 
@@ -44,3 +49,5 @@ vim.opt.laststatus = 3
 -- Default splitting will cause your main splits to jump when opening an edgebar.
 -- To prevent this, set `splitkeep` to either `screen` or `topline`.
 vim.opt.splitkeep = "screen"
+
+vim.o.showmatch = true -- show matching brackets / parenthesis
