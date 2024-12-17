@@ -1,7 +1,14 @@
 return {
   "folke/trouble.nvim",
   lazy = false,
-  opts = {},
+  cmd = { "Trouble" },
+  opts = {
+    modes = {
+      lsp = {
+        win = { position = "right" },
+      },
+    },
+  },
   keys = {
     {
       "<leader>xx",

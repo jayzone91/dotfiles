@@ -32,13 +32,13 @@ vim.g.maplocalleader = " "
 require("lazy").setup({
   defaults = {
     lazy = true,
-    version = nil,
+    version = false,
   },
   spec = {
     -- import your plugins
     { import = "plugins" },
   },
-  install = { colorscheme = {"catppuccin"} },
+  install = { colorscheme = { "catppuccin" } },
   -- automatically check for plugin updates
   checker = {
     enabled = true,
@@ -56,7 +56,7 @@ require("lazy").setup({
         "tohtml",
         "tutor",
         "zipPlugin",
-        -- "netrwPlugin",
+        "netrwPlugin",
       },
     },
   },

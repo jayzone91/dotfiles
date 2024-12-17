@@ -34,6 +34,8 @@ vim.o.timeoutlen = 250 -- time out time in milliseconds
 vim.o.title = true -- let Vim set the title of the window
 vim.o.updatetime = 300 -- after this many milliseconds flush swap file
 vim.o.wrap = false -- long lines wrap and continue on the next line
+vim.o.wildmode = "longest:full,full"
+vim.o.winminwidth = 5 -- minimum windows width
 
 -- Searching
 vim.o.hlsearch = true
@@ -41,7 +43,7 @@ vim.o.smartcase = true
 vim.o.infercase = true
 
 -- Settings for Snacks
-vim.o.statuscolumn = ""
+vim.o.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 
 -- Recommened Settings for Edgy.nvim
 -- views can only be fully collapsed with the global statusline
