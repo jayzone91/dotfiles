@@ -8,9 +8,7 @@ return {
   keys = {
     {
       "<leader>e",
-      function()
-        require("neo-tree.command").execute({ toggle = true, dir = vim.cmd() })
-      end,
+      ":Neotree<CR>",
       desc = "Toggle Explorer",
     },
     {
