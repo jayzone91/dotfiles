@@ -4,7 +4,7 @@ return {
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "hrsh7th/cmp-nvim-lsp",
+    "saghen/blink.cmp",
     {
       "folke/lazydev.nvim",
       ft = "lua",
@@ -24,9 +24,7 @@ return {
   },
   config = function()
     local capabilities = nil
-    if pcall(require, "cmp_nvim_lsp") then
-      capabilities = require("cmp_nvim_lsp").default_capabilities()
-    end
+    capabilities = require("blink.cmp").get_lsp_capabilities()
 
     local lspconfig = require("lspconfig")
 

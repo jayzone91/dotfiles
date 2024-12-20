@@ -23,7 +23,6 @@ return {
       no_underline = false,
       integrations = {
         aerial = true,
-        cmp = true,
         gitsigns = true,
         fzf = true,
         treesitter = true,

@@ -1,174 +1,87 @@
----@param opts? {select: boolean, behaviour: cmp.ConfirmBehavior}
-local function confirm(opts)
-  local cmp = require("cmp")
-  opts = vim.tbl_extend("force", {
-    select = true,
-    behaviour = cmp.ConfirmBehavior.Insert,
-  }, opts or {})
-
-  return function(fallback)
-    if cmp.core.view:visible() or vim.fn.pumvisible() == 1 then
-      if cmp.confirm(opts) then
-        return
-      end
-    end
-    return fallback()
-  end
-end
-
 return {
-  "hrsh7th/nvim-cmp",
-  version = false,
-  event = "InsertEnter",
-  dependencies = {
-    "hrsh7th/cmp-nvim-lsp-signature-help",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "saadparwaiz1/cmp_luasnip",
-    "hrsh7th/cmp-nvim-lua",
-    "hrsh7th/cmp-cmdline",
-    "SergioRibera/cmp-dotenv",
-    "onsails/lspkind-nvim",
-    { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
-    {
-      "L3MON4D3/LuaSnip",
-      dependencies = {
-        "rafamadriz/friendly-snippets",
-      },
-      event = "InsertEnter",
-      postinstall = "make istall_jsregexp",
-      config = function()
-        local luasnip = require("luasnip")
-        luasnip.config.setup({
-          history = true,
-          updateevents = "TextChanged,TextChangedI",
-          enable_autosnippets = true,
-        })
-        require("luasnip.loaders.from_vscode").lazy_load()
-      end,
+  {
+    "saghen/blink.cmp",
+    -- optional: provides snippets for the snippet source
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      { "saghen/blink.compat", version = "*", opts = {} },
     },
-  },
-  config = function()
-    local cmp = require("cmp")
-    local defaults = require("cmp.config.default")()
-    local lsp_kind = require("lspkind")
-    local luasnip = require("luasnip")
+    event = "InsertEnter",
+    -- use a release tag to download pre-built binaries
+    version = "v0.*",
+    -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+    -- build = 'cargo build --release',
+    -- If you use nix, you can build from source using latest nightly rust with:
+    -- build = 'nix run .#build-plugin',
 
-    require("tailwindcss-colorizer-cmp").setup({
-      color_square_width = 2,
-    })
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      -- 'default' for mappings similar to built-in completion
+      -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
+      -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
+      -- see the "default configuration" section below for full documentation on how to define
+      -- your own keymap.
+      keymap = { preset = "super-tab" },
 
-    lsp_kind.init()
+      appearance = {
+        -- Sets the fallback highlight groups to nvim-cmp's highlight groups
+        -- Useful for when your theme doesn't support blink.cmp
+        -- will be removed in a future release
+        use_nvim_cmp_as_default = false,
+        -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+        -- Adjusts spacing to ensure icons are aligned
+        nerd_font_variant = "normal",
+      },
 
-    cmp.setup({
-      sorting = defaults.sorting,
       completion = {
-        completeopt = "menu,menuone,noinsert",
-      },
-      preselect = cmp.PreselectMode.item,
-      window = {
-        completion = cmp.config.window.bordered({
-          winhighlight = "Normal:Normal,FloatBorder:LspBorderBG,CursorLine:PMenuSel,Search:None",
-        }),
-        documentation = cmp.config.window.bordered({
-          winhighlight = "Normal:Normal,FloatBorder:LspBorderBG,CursorLine:PMenuSel,Search:None",
-        }),
-      },
-      view = {
-        entries = "bordered",
-      },
-      snippet = {
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
-        end,
-      },
-      mapping = cmp.mapping.preset.insert({
-        ["<c-b>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.abort(),
-        ["<CR>"] = confirm({ select = true }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.locally_jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.locally_jumpable(1) then
-            luasnip.jump(1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-      }),
-      sources = {
-        { name = "lazydev", group_index = 0 },
-        { name = "nvim_lsp_signature_help" },
-        { name = "luasnip", max_item_count = 5 },
-        { name = "nvim_lsp", max_item_count = 20 },
-        { name = "nvim_lua" },
-        { name = "path" },
-        {
-          name = "buffer",
-          max_item_count = 2,
-        },
-        {
-          name = "dotenv",
-          option = {
-            load_shell = false,
+        accept = {
+          auto_brackets = {
+            enabled = true,
           },
         },
+        menu = {
+          draw = {
+            treesitter = { "lsp" },
+          },
+        },
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 200,
+        },
+        ghost_text = {
+          enabled = true,
+        },
       },
-    })
-    -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-    cmp.setup.cmdline({ "/", "?" }, {
-      mapping = cmp.mapping.preset.cmdline(),
+
+      -- default list of enabled providers defined so that you can extend it
+      -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        { name = "buffer" },
+        default = { "lsp", "path", "snippets", "buffer", "lazydev", "digraphs" },
+        providers = {
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            score_offset = 100, -- show at a higher priority than lsp
+          },
+          digraphs = {
+            name = "digraphs",
+            module = "blink.compat.source",
+            score_offset = -3,
+            opts = {
+              cache_digraphs_on_start = true,
+            },
+          },
+        },
+        -- optionally disable cmdline completions
+        -- cmdline = {},
       },
-    })
 
-    -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-    cmp.setup.cmdline(":", {
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = cmp.config.sources({
-        { name = "path" },
-      }, {
-        { name = "cmdline" },
-      }),
-      matching = { disallow_symbol_nonprefix_matching = false },
-    })
-
-    -- Tailwind colorizer
-    require("cmp").config.formatting = {
-      fields = { "menu", "abbr", "kind" },
-      format = function(entry, item)
-        local entryItem = entry:get_completion_item()
-        local color = entryItem.documentation
-
-        if
-          color
-          and type(color) == "string"
-          and color:match("^#%x%x%x%x%x%x$")
-        then
-          local hl = "hex-" .. color:sub(2)
-
-          if #vim.api.nvim_get_hl(0, { name = hl }) == 0 then
-            vim.api.nvim_set_hl(0, hl, { fg = color })
-          end
-
-          item.menu = " "
-          item.menu_hl_group = hl
-        end
-        return item
-      end,
-    }
-  end,
+      -- experimental signature help support
+      -- signature = { enabled = true }
+    },
+    -- allows extending the providers array elsewhere in your config
+    -- without having to redefine it
+    opts_extend = { "sources.default" },
+  },
 }
