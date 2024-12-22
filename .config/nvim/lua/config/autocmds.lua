@@ -120,3 +120,9 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo[event.buf].buflisted = false
   end,
 })
+
+-- Disable Diagnosics on node_modules folder
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*/node_modules/*",
+  command = "lua vim.diagnostics.disable(0)",
+})
