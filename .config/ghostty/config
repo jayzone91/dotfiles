@@ -1,0 +1,37 @@
+# Fonts
+font-family = "MonaspiceAR Nerd Font Mono"
+font-family-bold = "MonaspiceAR Nerd Font Mono"
+font-family-italic = "MonaspiceAR Nerd Font Mono"
+font-family-bold-italic = "MonaspiceAR Nerd Font Mono"
+
+font-size = 14
+
+# Draw fonts with a thicker stroke, Currently only on macos
+font-thicken = true
+
+# Theme
+theme = catppuccin-mocha
+window-theme = ghostty
+
+window-save-state = always
+window-new-tab-position = end
+
+clipboard-read = allow
+clipboard-write = allow
+
+quit-after-last-window-closed = true
+
+shell-integration = zsh
+shell-integration-features = true
+
+macos-titlebar-style = transparent
+macos-titlebar-proxy-icon = visible
+macos-option-as-alt = false
+macos-auto-secure-input = true
+macos-secure-input-indication = true
+macos-icon = custom-style
+macos-icon-frame = aluminum
+
+desktop-notifications = true
+auto-update = download
+auto-update-channel = tip
