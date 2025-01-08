@@ -78,7 +78,9 @@ M.lsp = {
   },
   marksman = {},
   -- nginx_language_server = {}, -- Geht aktuell nicht, installierte Python Version ist zu neu?!
-  prismals = {},
+  prismals = {
+    filetypes = { "prisma" },
+  },
   rust_analyzer = {
     settings = {
       ["rust-analyzer"] = {

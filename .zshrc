@@ -149,7 +149,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
 # nvm use latest
-nvm use node
+nvm use --lts
 
 # bun completions
 [ -s "/Users/jay/.bun/_bun" ] && source "/Users/jay/.bun/_bun"
@@ -184,7 +184,9 @@ alias brewup="brew update && brew upgrade"
 function updatenvim() {
   pfad= pwd
   cd ~/Documents/GitHub/neovim/ && git pull & rm -rf .deps/ && rm -rf build && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make install
+  clear
   cd $pfad
+  echo "NeoVim erfolgreich aktualisiert"
 }
 alias nvimupdate="updatenvim"
 
