@@ -5,12 +5,6 @@ return {
     "williamboman/mason.nvim",
     "folke/lazydev.nvim",
     { "NvChad/nvim-colorizer.lua", event = "BufReadPre", opts = {} },
-    {
-      "j-hui/fidget.nvim",
-      opts = {
-        -- options
-      },
-    },
   },
   opts = {},
   config = function(_, opts)

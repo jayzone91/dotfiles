@@ -74,9 +74,6 @@ map(
   { expr = true, desc = "Prev Search Result" }
 )
 
-map("n", "<leader>fT", function()
-  Snacks.terminal()
-end, { desc = "Terminal (cwd)" })
 map("t", "<esc>", "<C-\\><C-N>", { desc = "Easy Leave Terminal Mode" })
 
 -- Duplicate Lines
