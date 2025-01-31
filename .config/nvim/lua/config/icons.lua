@@ -1,6 +1,4 @@
-local M = {}
-
-M.icons = {
+return {
   misc = {
     dots = "󰇘",
   },
@@ -56,7 +54,7 @@ M.icons = {
     Package = " ",
     Property = " ",
     Reference = " ",
-    Snippet = " ",
+    Snippet = "󱄽 ",
     String = " ",
     Struct = "󰆼 ",
     Supermaven = " ",
@@ -68,5 +66,3 @@ M.icons = {
     Variable = "󰀫 ",
   },
 }
-
-return M

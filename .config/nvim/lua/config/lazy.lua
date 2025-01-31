@@ -30,19 +30,33 @@ vim.g.maplocalleader = " "
 
 -- Setup lazy.nvim
 require("lazy").setup({
-  defaults = {
-    lazy = true,
-    version = false,
-  },
   spec = {
+    {
+      "rose-pine/neovim",
+      priority = 1000,
+      lazy = false,
+      name = "rose-pine",
+      config = function()
+        require("rose-pine").setup({
+          variant = "moon",
+          dark_variant = "moon",
+          dim_inactive_windows = true,
+          extend_background_behind_borders = true,
+        })
+        vim.cmd("colorscheme rose-pine")
+      end,
+    },
     -- import your plugins
     { import = "plugins" },
   },
-  install = { colorscheme = { "catppuccin" } },
+  -- Configure any other settings here. See the documentation for more details.
+  -- colorscheme that will be used when installing plugins.
+  install = { colorscheme = { "rose-pine" } },
   -- automatically check for plugin updates
-  checker = {
-    enabled = true,
-    notify = true,
+  checker = { enabled = true, notify = true },
+  defaults = {
+    lazy = true,
+    version = false,
   },
   change_detection = {
     enabled = true,
@@ -55,8 +69,7 @@ require("lazy").setup({
         "tarPlugin",
         "tohtml",
         "tutor",
-        "zipPlugin",
-        "netrwPlugin",
+        "zipPLugin",
       },
     },
   },

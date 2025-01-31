@@ -1,87 +1,140 @@
+local function is_win()
+  return vim.uv.os_uname().sysname:find("Windows") ~= nil
+end
+
 return {
-  {
-    "saghen/blink.cmp",
-    -- optional: provides snippets for the snippet source
-    dependencies = {
-      "rafamadriz/friendly-snippets",
-      { "saghen/blink.compat", version = "*", opts = {} },
+  "hrsh7th/nvim-cmp",
+  version = false,
+  event = "InsertEnter",
+  dependencies = {
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
+    {
+      "L3MON4D3/LuaSnip",
+      lazy = true,
+      build = (not is_win())
+          and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
+        or nil,
+      dependencies = {
+        {
+          "rafamadriz/friendly-snippets",
+          config = function()
+            require("luasnip.loaders.from_vscode").lazy_load()
+            require("luasnip.loaders.from_vscode").lazy_load({
+              paths = { vim.fn.stdpath("config") .. "/snippets" },
+            })
+          end,
+        },
+      },
+      opts = {
+        history = true,
+        delete_check_events = "TextChanged",
+      },
     },
-    event = "InsertEnter",
-    -- use a release tag to download pre-built binaries
-    version = "v0.*",
-    -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-    -- build = 'cargo build --release',
-    -- If you use nix, you can build from source using latest nightly rust with:
-    -- build = 'nix run .#build-plugin',
-
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
-    opts = {
-      -- 'default' for mappings similar to built-in completion
-      -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-      -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-      -- see the "default configuration" section below for full documentation on how to define
-      -- your own keymap.
-      keymap = { preset = "super-tab" },
-
-      appearance = {
-        -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-        -- Useful for when your theme doesn't support blink.cmp
-        -- will be removed in a future release
-        use_nvim_cmp_as_default = false,
-        -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-        -- Adjusts spacing to ensure icons are aligned
-        nerd_font_variant = "normal",
+    {
+      "garymjr/nvim-snippets",
+      opts = {
+        friendly_snippets = true,
       },
-
-      completion = {
-        accept = {
-          auto_brackets = {
-            enabled = true,
-          },
-        },
-        menu = {
-          draw = {
-            treesitter = { "lsp" },
-          },
-        },
-        documentation = {
-          auto_show = true,
-          auto_show_delay_ms = 200,
-        },
-        ghost_text = {
-          enabled = true,
-        },
-      },
-
-      -- default list of enabled providers defined so that you can extend it
-      -- elsewhere in your config, without redefining it, due to `opts_extend`
-      sources = {
-        default = { "lsp", "path", "snippets", "buffer", "lazydev", "digraphs" },
-        providers = {
-          lazydev = {
-            name = "LazyDev",
-            module = "lazydev.integrations.blink",
-            score_offset = 100, -- show at a higher priority than lsp
-          },
-          digraphs = {
-            name = "digraphs",
-            module = "blink.compat.source",
-            score_offset = -3,
-            opts = {
-              cache_digraphs_on_start = true,
-            },
-          },
-        },
-        -- optionally disable cmdline completions
-        -- cmdline = {},
-      },
-
-      -- experimental signature help support
-      -- signature = { enabled = true }
+      dependencies = { "rafamadriz/friendly-snippets" },
     },
-    -- allows extending the providers array elsewhere in your config
-    -- without having to redefine it
-    opts_extend = { "sources.default" },
+    { "saadparwaiz1/cmp_luasnip" },
   },
+  opts = function()
+    vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+    local cmp = require("cmp")
+    local luasnip = require("luasnip")
+    local defaults = require("cmp.config.default")()
+    local auto_select = true
+    return {
+      auto_brackets = {},
+      snippet = {
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
+      },
+      completion = {
+        completeopt = "menu,menuone,noinsert"
+          .. (auto_select and "" or ",noselect"),
+      },
+      preselect = auto_select and cmp.PreselectMode.Item
+        or cmp.PreselectMode.None,
+      mapping = cmp.mapping.preset.insert({
+        ["<CR>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            if luasnip.expandable() then
+              luasnip.expand()
+            else
+              cmp.confirm({
+                select = true,
+              })
+            end
+          else
+            fallback()
+          end
+        end),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.locally_jumpable(1) then
+            luasnip.jump(1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.locally_jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-CR>"] = function(fallback)
+          cmp.abort()
+          fallback()
+        end,
+      }),
+      sources = cmp.config.sources({
+        { name = "lazydev" },
+        { name = "nvim_lsp" },
+        { name = "path" },
+        { name = "luasnip" },
+      }, {
+        { name = "buffer" },
+      }),
+      formatting = {
+        format = function(entry, item)
+          local icons = require("config.icons").kinds
+          if icons[item.kind] then
+            item.kind = icons[item.kind] .. item.kind
+          end
+
+          local widths = {
+            abbr = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 40,
+            menu = vim.g.cmp_widths and vim.g.cmp_widths.menu or 30,
+          }
+
+          for key, width in pairs(widths) do
+            if item[key] and vim.fn.strdisplaywidth(item[key]) > width then
+              item[key] = vim.fn.strcharpart(item[key], 0, width - 1) .. "…"
+            end
+          end
+
+          return item
+        end,
+      },
+      experimental = {
+        -- only show ghost text when we show ai completions
+        ghost_text = vim.g.ai_cmp and {
+          hl_group = "CmpGhostText",
+        } or false,
+      },
+      sorting = defaults.sorting,
+    }
+  end,
 }

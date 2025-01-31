@@ -1,62 +1,86 @@
--- Keymaps for standard Neovim Functions
+local function map(mode, key, func, opts)
+  vim.keymap.set(mode, key, func, opts)
+end
 
-vim.keymap.set("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Quit Neovim" })
+map("n", "<leader>qq", ":qa<CR>", { desc = "Quit Neovim" })
 
--- Move normally between wrapped lines
-vim.keymap.set(
-  "n",
-  "k",
-  "v:count == 0 ? 'gk' : 'k'",
-  { expr = true, silent = true }
-)
-vim.keymap.set(
-  "n",
+-- better up/down
+map(
+  { "n", "x" },
   "j",
   "v:count == 0 ? 'gj' : 'j'",
-  { expr = true, silent = true }
+  { desc = "Down", expr = true, silent = true }
+)
+map(
+  { "n", "x" },
+  "<Down>",
+  "v:count == 0 ? 'gj' : 'j'",
+  { desc = "Down", expr = true, silent = true }
+)
+map(
+  { "n", "x" },
+  "k",
+  "v:count == 0 ? 'gk' : 'k'",
+  { desc = "Up", expr = true, silent = true }
+)
+map(
+  { "n", "x" },
+  "<Up>",
+  "v:count == 0 ? 'gk' : 'k'",
+  { desc = "Up", expr = true, silent = true }
 )
 
--- Splits
-vim.keymap.set(
+-- Clear search and stop snippet on escape
+map({ "i", "n", "s" }, "<esc>", function()
+  vim.cmd("noh")
+  return "<esc>"
+end, { expr = true, desc = "Escape and Clear hlsearch" })
+
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+map(
   "n",
-  "<leader>ss",
-  "<C-W>s",
-  { desc = "Split Screen Horizontal" }
+  "n",
+  "'Nn'[v:searchforward].'zv'",
+  { expr = true, desc = "Next Search Result" }
 )
-vim.keymap.set("n", "<leader>sv", "<C-W>v", { desc = "Split Screen Vertical" })
-vim.keymap.set("n", "<c-j>", "<C-w>j", { desc = "Jump to lower split" })
-vim.keymap.set("n", "<c-k>", "<C-w>k", { desc = "Jump to upper split" })
-vim.keymap.set("n", "<c-h>", "<C-w>h", { desc = "Jump to left split" })
-vim.keymap.set("n", "<c-l>", "<C-w>l", { desc = "Jump to right split" })
+map(
+  "x",
+  "n",
+  "'Nn'[v:searchforward]",
+  { expr = true, desc = "Next Search Result" }
+)
+map(
+  "o",
+  "n",
+  "'Nn'[v:searchforward]",
+  { expr = true, desc = "Next Search Result" }
+)
+map(
+  "n",
+  "N",
+  "'nN'[v:searchforward].'zv'",
+  { expr = true, desc = "Prev Search Result" }
+)
+map(
+  "x",
+  "N",
+  "'nN'[v:searchforward]",
+  { expr = true, desc = "Prev Search Result" }
+)
+map(
+  "o",
+  "N",
+  "'nN'[v:searchforward]",
+  { expr = true, desc = "Prev Search Result" }
+)
 
--- Clean search highlights
-vim.keymap.set("n", "<esc>", ":noh<CR>", { silent = true })
+map("n", "<leader>fT", function()
+  Snacks.terminal()
+end, { desc = "Terminal (cwd)" })
+map("t", "<esc>", "<C-\\><C-N>", { desc = "Easy Leave Terminal Mode" })
 
 -- Duplicate Lines
-vim.keymap.set("n", "<leader>k", "YP", { desc = "Duplicate Line Up" })
-vim.keymap.set("n", "<leader><up>", "YP", { desc = "Duplicate Line Up" })
-vim.keymap.set("n", "<leader>l", "Yp", { desc = "Duplicate Line down" })
-vim.keymap.set("n", "<leader><down>", "Yp", { desc = "Duplicate Line down" })
-
--- Terminal
-vim.api.nvim_create_autocmd("TermOpen", {
-  group = vim.api.nvim_create_augroup("custom-terminal", { clear = true }),
-  callback = function()
-    vim.opt.number = false -- deactivate line numbers in terminal
-    vim.opt.relativenumber = false -- deactivate relative line numbers in terminal
-  end,
-})
-
-vim.keymap.set("n", "<leader>sf", function()
-  vim.cmd.vnew()
-  vim.cmd.term()
-  vim.cmd.wincmd("J")
-  vim.api.nvim_win_set_height(0, 15)
-end, { desc = "Small Terminal Split" })
-
-vim.keymap.set(
-  "t",
-  "<esc>",
-  "<C-\\><C-N>",
-  { desc = "Easy Leave Terminal Mode" }
-)
+map("n", "<leader>k", "YP", { desc = "Duplicate Line Up" })
+map("n", "<leader><up>", "YP", { desc = "Duplicate Line Up" })
+map("n", "<leader>l", "Yp", { desc = "Duplicate Line down" })
+map("n", "<leader><down>", "Yp", { desc = "Duplicate Line down" })

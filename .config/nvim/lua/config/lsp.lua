@@ -1,6 +1,4 @@
-local M = {}
-
-M.lsp = {
+return {
   bashls = {},
   cssls = {},
   docker_compose_language_service = {},
@@ -132,35 +130,3 @@ M.lsp = {
     },
   },
 }
-
-M.formatter = {
-  lua = { "stylua" },
-  javascript = { "prettierd", "prettier" },
-  typescript = { "prettierd", "prettier" },
-  javascriptreact = { "prettierd", "prettier" },
-  typescriptreact = { "prettierd", "prettier" },
-  json = { "prettierd", "prettier" },
-  markdown = { "prettierd", "prettier", "markdownlint-cli2", "markdown-toc" },
-  ["markdown.mdx"] = {
-    "prettierd",
-    "prettier",
-    "markdownlint-cli2",
-    "markdown-toc",
-  },
-  html = { "prettierd", "prettier" },
-  toml = { "taplo" },
-  css = { "prettierd", "prettier" },
-  scss = { "prettierd", "prettier" },
-  go = { "goimports", "gofumpt" },
-}
-
-M.linter = {
-  javascript = { "eslint_d" },
-  javascriptreact = { "eslint_d" },
-  typescript = { "eslint_d" },
-  typescriptreact = { "eslint_d" },
-  dockerfile = { "hadolint" },
-  markdown = { "markdownlint-cli2" },
-}
-
-return M
