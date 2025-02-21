@@ -1,6 +1,5 @@
 return {
   lua = { "stylua" },
-  python = { "isort", "black" },
   javascript = { "prettierd", "prettier" },
   javascriptreact = { "prettierd", "prettier" },
   typescript = { "prettierd", "prettier" },
@@ -14,8 +13,6 @@ return {
     "markdown-toc",
   },
   html = { "prettierd", "prettier" },
-  toml = { "taplo" },
   css = { "prettierd", "prettier" },
   scss = { "prettierd", "prettier" },
-  go = { "goimports", "gofumpt" },
 }
