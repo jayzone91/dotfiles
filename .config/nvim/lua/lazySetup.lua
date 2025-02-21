@@ -6,6 +6,7 @@ end
 
 return {
   { "nvim-lua/plenary.nvim", lazy = true },
+  { "wakatime/vim-wakatime", lazy = false },
   {
     "nvim-tree/nvim-tree.lua",
     config = get_setup("nvim-tree"),
