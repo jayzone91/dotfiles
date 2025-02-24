@@ -1,4 +1,3 @@
-local capabilities = require("blink.cmp").get_lsp_capabilities()
 local lsp_table = require("setup.server.lsp-server")
 
 local lsp = {}
@@ -19,6 +18,14 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 end
 
 local lspconfig = require("lspconfig")
+
+local blink = require("blink.cmp")
+local capabilities = vim.tbl_deep_extend(
+  "force",
+  {},
+  vim.lsp.protocol.make_client_capabilities(),
+  blink.get_lsp_capabilities()
+)
 
 -- LSP Server Config
 
@@ -58,3 +65,28 @@ for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })
 end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = assert(
+      vim.lsp.get_client_by_id(args.data.client_id),
+      "must have valid client id"
+    )
+    local settings = servers[client.name]
+    if type(settings) ~= "table" then
+      settings = {}
+    end
+
+    vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = 0 })
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
+    vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { buffer = 0 })
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = 0 })
+    vim.keymap.set("n", "gd", function()
+      Snacks.picker.lsp_definitions()
+    end, { desc = "GoTo Definition" })
+    vim.keymap.set("n", "gr", function()
+      Snacks.picker.lsp_references()
+    end, { desc = "References" })
+  end,
+})
