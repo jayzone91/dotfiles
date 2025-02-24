@@ -15,41 +15,53 @@ end
 
 local fzf = require("fzf-lua")
 
-fzf.setup({
-  "border-fused",
-  fzf_opts = { ["--wrap"] = true },
-  previewers = {
-    builtin = {
-      syntax_limit_b = -102400,
+local getSetup = function()
+  local opts = {}
+  if vim.fn.has("win32") then
+    opts = {}
+  else
+    opts = {
+      ["--wrap"] = true,
+    }
+  end
+  return {
+    "border-fused",
+    fzf_opts = opts,
+    previewers = {
+      builtin = {
+        syntax_limit_b = -102400,
+      },
     },
-  },
-  winopts = {
-    preview = {
-      wrap = true,
+    winopts = {
+      preview = {
+        wrap = true,
+      },
     },
-  },
-  grep = {
-    rg_glob = true,
-    ---@return string, string?
-    rg_glob_fn = function(query, opts)
-      local regex, flags = query:match("^(.-)%s%-%-(.*)$")
-      -- if no separator is detected will return the original query
-      return (regex or query), flags
-    end,
-  },
-  defaults = {
-    git_icons = false,
-    file_icons = false,
-    color_icons = false,
-    formatter = "path.filename_first",
-  },
-  actions = {
-    files = {
-      true,
-      ["ctrl-y"] = { fn = get_line_and_path, exec_silent = true },
+    grep = {
+      rg_glob = true,
+      ---@return string, string?
+      rg_glob_fn = function(query, opts)
+        local regex, flags = query:match("^(.-)%s%-%-(.*)$")
+        -- if no separator is detected will return the original query
+        return (regex or query), flags
+      end,
     },
-  },
-})
+    defaults = {
+      git_icons = false,
+      file_icons = false,
+      color_icons = false,
+      formatter = "path.filename_first",
+    },
+    actions = {
+      files = {
+        true,
+        ["ctrl-y"] = { fn = get_line_and_path, exec_silent = true },
+      },
+    },
+  }
+end
+
+fzf.setup(getSetup())
 
 -- Mappings
 
