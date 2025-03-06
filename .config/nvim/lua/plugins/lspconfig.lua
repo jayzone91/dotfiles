@@ -12,6 +12,7 @@ return {
 						-- See the configuration section for more details
 						-- Load luvit types when the `vim.uv` word is found
 						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+						{ path = "snacks.nvim",        words = { "Snacks" } },
 					},
 				},
 			},
@@ -51,7 +52,7 @@ return {
 					vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { buffer = 0 })
 					vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = 0 })
 					vim.keymap.set("n", "gd", function()
-						Snacks.picker.lsp_definition()
+						Snacks.picker.lsp_definitions()
 					end, { desc = "GoTo Definition" })
 					vim.keymap.set("n", "gr", function()
 						Snacks.picker.lsp_references()

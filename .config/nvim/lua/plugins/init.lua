@@ -1,8 +1,8 @@
 return {
-	{ "folke/lazy.nvim",             version = "*" },
-	{ "wakatime/vim-wakatime",       lazy = false },
+	{ "folke/lazy.nvim", version = "*" },
+	{ "wakatime/vim-wakatime", lazy = false },
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
-	{ "nvim-lua/plenary.nvim",       lazy = true },
+	{ "nvim-lua/plenary.nvim", lazy = true },
 	{
 		"HiPhish/rainbow-delimiters.nvim",
 		event = "VeryLazy",
@@ -23,4 +23,5 @@ return {
 		"tpope/vim-sleuth",
 		event = "VeryLazy",
 	},
+	{ "lewis6991/gitsigns.nvim", opts = {} },
 }
