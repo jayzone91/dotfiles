@@ -1,12 +1,12 @@
 vim.cmd("au BufRead,BufNewFile *.templ setfiletype templ")
 local autocmd = vim.api.nvim_create_autocmd
 
-autocmd({ "BufEnter", "BufNewFile"}, {
-	pattern = {"*.templ" },
-	callback = function()
-		local buf = vim.api.nvim_get_current_buf()
-		vim.api.nvim_buf_set_option(buf, "filetype", "templ")
-	end,
+autocmd({ "BufEnter", "BufNewFile" }, {
+  pattern = { "*.templ" },
+  callback = function()
+    local buf = vim.api.nvim_get_current_buf()
+    vim.api.nvim_buf_set_option(buf, "filetype", "templ")
+  end,
 })
 
 local api = vim.api
@@ -50,13 +50,10 @@ api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
 
 -- auto reload files when modified externally
 vim.o.autoread = true
-vim.api.nvim_create_autocmd(
-  { "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" },
-  {
-    command = "if mode() != 'c' | checktime | endif",
-    pattern = { "*" },
-  }
-)
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+  command = "if mode() != 'c' | checktime | endif",
+  pattern = { "*" },
+})
 
 local function augroup(name)
   return vim.api.nvim_create_augroup("jay_" .. name, { clear = true })
