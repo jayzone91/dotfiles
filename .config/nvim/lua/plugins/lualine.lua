@@ -1,12 +1,11 @@
 return {
-	"nvim-lualine/lualine.nvim",
-	event = "VeryLazy",
-	opts = {
-		options = {
-			icons_enabled = true,
-			theme = "auto",
-			component_separators = "|",
-			section_separators = { left = "", right = "" },
-		},
-	},
+  "nvim-lualine/lualine.nvim",
+  config = function()
+    require("lualine").setup({
+      options = {
+        theme = "auto",
+      },
+    })
+  end,
+  lazy = false,
 }

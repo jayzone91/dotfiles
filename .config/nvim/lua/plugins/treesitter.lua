@@ -1,16 +1,26 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  event = { "BufReadPost", "BufNewFile" },
-  cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
+  version = false,
   build = ":TSUpdate",
-  dependencies = {
-    "apple/pkl-neovim",
-    "windwp/nvim-ts-autotag",
-  },
-  opts = function()
-    return require("plugins.configs.treesitter")
-  end,
-  config = function(_, opts)
-    require("nvim-treesitter.configs").setup(opts)
+  event = { "VeryLazy" },
+  config = function()
+    require("nvim-treesitter.configs").setup({
+      ensure_installed = {
+        "c",
+        "regex",
+        "lua",
+        "vim",
+        "vimdoc",
+        "query",
+        "markdown",
+        "markdown_inline",
+      },
+      sync_install = false,
+      auto_install = true,
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+      },
+    })
   end,
 }
