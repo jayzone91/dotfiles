@@ -8,4 +8,7 @@ return {
   html = { "prettierd", "prettier" },
   css = { "prettierd", "prettier" },
   scss = { "prettierd", "prettier" },
+  go = { "goimports", "gofumpt" },
+  markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
+  ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
 }

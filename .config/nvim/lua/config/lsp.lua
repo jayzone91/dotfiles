@@ -1,4 +1,5 @@
 return {
+  marksman = {},
   tailwindcss = {},
   html = {},
   lua_ls = {

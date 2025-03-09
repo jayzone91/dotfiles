@@ -61,6 +61,7 @@ return {
     picker = {},
     statuscolumn = {},
     terminal = {},
+    words = { enabled = true },
   },
   keys = {
     {
