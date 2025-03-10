@@ -99,8 +99,6 @@ if has_win() then
   map("n", "<C-Up>", ":wincmd k<CR>")
   map("n", "<C-Down>", ":wincmd j<CR>")
 else
-  map("n", "<M-Left>", ":wincmd h<CR>")
-  map("n", "<M-Right>", ":wincmd l<CR>")
-  map("n", "<M-Up>", ":wincmd k<CR>")
-  map("n", "<M-Down>", ":wincmd j<CR>")
+  map("n", "<leader><left>", ":wincmd h<CR>")
+  map("n", "<leader><right>", ":wincmd l<CR>")
 end
