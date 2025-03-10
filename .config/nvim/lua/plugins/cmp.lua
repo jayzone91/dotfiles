@@ -23,8 +23,10 @@ return {
       -- Icons
       "onsails/lspkind.nvim",
       "js-everts/cmp-tailwind-colors",
+      { "brenoprata10/nvim-highlight-colors", opts = {} },
     },
     config = function()
+      vim.opt.termguicolors = true
       local cmp = require("cmp")
       local lspkind = require("lspkind")
       local cmp_tailwind = require("cmp-tailwind-colors")
@@ -32,15 +34,26 @@ return {
       cmp.setup({
         ---@diagnostic disable-next-line:missing-fields
         formatting = {
-          format = lspkind.cmp_format({
-            mode = "symbol_text",
-            ellipsis_char = "...",
-            before = function(entry, item)
-              cmp_tailwind.format(entry, item)
-              return item
-            end,
-            menu = source_mapping,
-          }),
+          format = function(entry, item)
+            local color_item = require("nvim-highlight-colors").format(
+              entry,
+              { kind = item.kind }
+            )
+            item = lspkind.cmp_format({
+              mode = "symbol_text",
+              ellipsis_char = "...",
+              before = function(entry_before, item_before)
+                cmp_tailwind.format(entry_before, item_before)
+                return item_before
+              end,
+              menu = source_mapping,
+            })(entry, item)
+            if color_item.abbr_hl_group then
+              item.kind_hl_group = color_item.abbr_hl_group
+              item.kind = color_item.abbr
+            end
+            return item
+          end,
         },
         preselect = cmp.PreselectMode.Item,
         snippet = {
