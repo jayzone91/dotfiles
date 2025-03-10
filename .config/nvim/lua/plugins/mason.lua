@@ -1,3 +1,40 @@
+local lsp_server = {
+  "cssls", -- CSS
+  "tailwindcss", -- TailwindCSS
+  "dockerls", -- Docker
+  "gopls", -- Go
+  "html", -- HTML
+  "htmx", -- HTMX
+  "vtsls", -- Javascript / Typescript
+  "jsonls", -- JSON
+  "lua_ls", -- Lua
+  "marksman", -- Markdown
+  "intelephense", -- PHP
+  "powershell_es", -- Powershell
+  "prismals", -- Prisma
+  "pyright", -- Python
+  "rust_analyzer", -- Rust
+  "taplo", -- TOML
+  "templ", -- Go Templ
+  "yamlls", -- YAML
+}
+
+local formatter = {
+  "stylua", -- Lua
+  "prettier", -- Javascript / Typescript / json / html / css / markdown
+  "prettierd",
+  "goimports", -- Go
+  "gofumpt", -- Go
+  "markdownlint-cli2", -- Markdown
+  "markdown-toc", -- Markdown
+  "templ", -- Go Templ
+}
+
+local linter = {
+  "phpcs", -- PHP
+  "hadolint", -- Docker
+}
+
 return {
   {
     "williamboman/mason.nvim",
@@ -5,31 +42,24 @@ return {
     config = function()
       require("mason").setup({
         ui = {
-          border = "rounded",
           icons = {
             package_installed = "✓",
             package_pending = "➜",
             package_uninstalled = "✗",
           },
+          border = "rounded",
         },
       })
     end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    dependencies = "williamboman/mason.nvim",
     lazy = false,
+    dependencies = "williamboman/mason.nvim",
     opts = function()
-      local server = require("config.lsp")
-      local ensure_installed = {}
-
-      for key, _ in pairs(server) do
-        table.insert(ensure_installed, key)
-      end
-
       return {
-        ensure_installed = ensure_installed,
         automatic_installation = true,
+        ensure_installed = lsp_server,
       }
     end,
     config = function(_, opts)
@@ -42,12 +72,13 @@ return {
     dependencies = "williamboman/mason.nvim",
     opts = function()
       local ensure_installed = {}
-      local formatter = require("config.formatter")
 
-      for _, value in pairs(formatter) do
-        for i = 1, #value, 1 do
-          table.insert(ensure_installed, value[i])
-        end
+      for _, f in pairs(formatter) do
+        table.insert(ensure_installed, f)
+      end
+
+      for _, l in pairs(linter) do
+        table.insert(ensure_installed, l)
       end
 
       return {

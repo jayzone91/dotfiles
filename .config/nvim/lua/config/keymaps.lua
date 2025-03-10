@@ -6,6 +6,7 @@ map("n", "<leader>qq", ":qa<CR>", { desc = "Quit Neovim" })
 
 -- Save with CTRL+S
 map("n", "<C-S>", ":w<CR>", { desc = "Save current buffer" })
+map("i", "<C-S>", "<esc>:w<CR>", { desc = "Save current buffer" })
 
 -- better up/down
 map(
@@ -84,3 +85,22 @@ map("n", "<leader>k", "YP", { desc = "Duplicate Line Up" })
 map("n", "<leader><up>", "YP", { desc = "Duplicate Line Up" })
 map("n", "<leader>l", "Yp", { desc = "Duplicate Line down" })
 map("n", "<leader><down>", "Yp", { desc = "Duplicate Line down" })
+
+-- Split screen
+map("n", "<leader>ss", ":vsplit<CR>", { desc = "Split Screen" })
+
+local function has_win()
+  return vim.uv.os_uname().sysname:find("Windows") ~= nil
+end
+-- Change active window
+if has_win() then
+  map("n", "<C-Left>", ":wincmd h<CR>")
+  map("n", "<C-Right>", ":wincmd l<CR>")
+  map("n", "<C-Up>", ":wincmd k<CR>")
+  map("n", "<C-Down>", ":wincmd j<CR>")
+else
+  map("n", "<M-Left>", ":wincmd h<CR>")
+  map("n", "<M-Right>", ":wincmd l<CR>")
+  map("n", "<M-Up>", ":wincmd k<CR>")
+  map("n", "<M-Down>", ":wincmd j<CR>")
+end
