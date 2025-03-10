@@ -11,4 +11,5 @@ return {
   go = { "goimports", "gofumpt" },
   markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
   ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+  templ = { "gofumpt", "templ" },
 }

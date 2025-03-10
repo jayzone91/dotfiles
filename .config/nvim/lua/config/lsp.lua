@@ -12,6 +12,7 @@ return {
       },
     },
   },
+  templ = {},
   prismals = {},
   gopls = {},
   vtsls = {

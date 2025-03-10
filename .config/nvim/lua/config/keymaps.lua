@@ -4,6 +4,9 @@ end
 
 map("n", "<leader>qq", ":qa<CR>", { desc = "Quit Neovim" })
 
+-- Save with CTRL+S
+map("n", "<C-S>", ":w<CR>", { desc = "Save current buffer" })
+
 -- better up/down
 map(
   { "n", "x" },
