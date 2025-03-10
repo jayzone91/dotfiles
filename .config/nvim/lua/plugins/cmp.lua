@@ -34,6 +34,7 @@ return {
       cmp.setup({
         ---@diagnostic disable-next-line:missing-fields
         formatting = {
+          fiels = { "abbr", "kind", "menu" },
           format = function(entry, item)
             local color_item = require("nvim-highlight-colors").format(
               entry,
@@ -73,9 +74,14 @@ return {
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({
+          {
+            name = "lazydev",
+            group_index = 0,
+          },
           { name = "nvim_lsp" },
           { name = "luasnip" },
         }, {
+          { name = "path" },
           { name = "buffer" },
         }),
       })
