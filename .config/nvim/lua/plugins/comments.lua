@@ -6,6 +6,7 @@ return {
     {
       "<leader>ft",
       function()
+        ---@diagnostic disable-next-line:undefined-field
         Snacks.picker.todo_comments()
       end,
       desc = "Todo",
@@ -13,6 +14,7 @@ return {
     {
       "<leader>fT",
       function()
+        ---@diagnostic disable-next-line:undefined-field
         Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } })
       end,
       desc = "Todo/Fix/Fixme",

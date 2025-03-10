@@ -45,6 +45,7 @@ return {
       vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
         pattern = "*",
         callback = function()
+          ---@diagnostic disable-next-line:undefined-global
           MiniMap.open()
         end,
       })
@@ -52,6 +53,7 @@ return {
       vim.api.nvim_create_autocmd("InsertLeave", {
         pattern = "*",
         callback = function()
+          ---@diagnostic disable-next-line:undefined-global
           MiniMap.refresh()
         end,
       })

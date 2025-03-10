@@ -1,3 +1,10 @@
+local source_mapping = {
+  nvim_lsp = "[LSP]",
+  luasnip = "[SNIP]",
+  buffer = "[BUF]",
+  path = "[PATH]",
+}
+
 return {
   {
     "hrsh7th/nvim-cmp",
@@ -15,23 +22,27 @@ return {
 
       -- Icons
       "onsails/lspkind.nvim",
+      "js-everts/cmp-tailwind-colors",
     },
     config = function()
       local cmp = require("cmp")
       local lspkind = require("lspkind")
+      local cmp_tailwind = require("cmp-tailwind-colors")
 
       cmp.setup({
+        ---@diagnostic disable-next-line:missing-fields
         formatting = {
           format = lspkind.cmp_format({
-            mode = "symbol",
-            maxwidth = {
-              menu = 50,
-              abbr = 50,
-            },
+            mode = "symbol_text",
             ellipsis_char = "...",
-            show_labelDetails = true,
+            before = function(entry, item)
+              cmp_tailwind.format(entry, item)
+              return item
+            end,
+            menu = source_mapping,
           }),
         },
+        preselect = cmp.PreselectMode.Item,
         snippet = {
           expand = function(args)
             require("luasnip").lsp_expand(args.body)
@@ -72,6 +83,7 @@ return {
         }, {
           { name = "cmdline" },
         }),
+        ---@diagnostic disable-next-line:missing-fields
         matching = { disallow_symbol_nonprefix_matching = false },
       })
     end,

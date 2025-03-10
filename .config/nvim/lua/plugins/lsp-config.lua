@@ -8,10 +8,17 @@ return {
       ft = "lua",
       opts = {
         library = {
-          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+          { path = "luvit-meta/library", words = { "vim%.uv" } },
           { path = "snacks.nvim", words = { "Snacks" } },
         },
       },
+    },
+    { "Bilal2453/luvit-meta", lazy = true },
+    "b0o/SchemaStore.nvim",
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    {
+      "nvimdev/lspsaga.nvim",
+      opts = {},
     },
   },
   event = { "BufReadPre", "BufNewFile" },
@@ -34,7 +41,15 @@ return {
     lspconfig.prismals.setup({ capabilities = capabilities })
     lspconfig.gopls.setup({ capabilities = capabilities })
     lspconfig.htmx.setup({ capabilities = capabilities })
-    lspconfig.jsonls.setup({ capabilities = capabilities })
+    lspconfig.jsonls.setup({
+      capabilities = capabilities,
+      settings = {
+        json = {
+          schemas = require("schemastore").json.schemas(),
+          validate = { enable = true },
+        },
+      },
+    })
     lspconfig.intelephense.setup({ capabilities = capabilities })
     lspconfig.powershell_es.setup({ capabilities = capabilities })
     lspconfig.pyright.setup({ capabilities = capabilities })
@@ -48,9 +63,6 @@ return {
     lspconfig.tailwindcss.setup({
       filetypes = { "html", "templ", "javascriptreact", "typescriptreact" },
       capabilities = capabilities,
-      on_attach = function(_, bufnr)
-        require("tailwindcss-colors").buf_attach(bufnr)
-      end,
     })
     lspconfig.lua_ls.setup({
       capabilities = capabilities,
@@ -119,5 +131,26 @@ return {
         )
       end,
     })
+
+    require("lsp_lines").setup()
+    vim.diagnostic.config({
+      virtual_text = true,
+      virtual_lines = false,
+    })
+
+    vim.keymap.set("n", "<leader>tl", function()
+      local config = vim.diagnostic.config() or {}
+      if config.virtual_text then
+        vim.diagnostic.config({
+          virtual_lines = true,
+          virtual_text = false,
+        })
+      else
+        vim.diagnostic.config({
+          virtual_text = true,
+          virtual_lines = false,
+        })
+      end
+    end, { desc = "Toggle lsp_lines" })
   end,
 }
