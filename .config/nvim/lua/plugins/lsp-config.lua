@@ -37,10 +37,16 @@ return {
     lspconfig.dockerls.setup({ capabilities = capabilities })
     lspconfig.marksman.setup({ capabilities = capabilities })
     lspconfig.templ.setup({ capabilities = capabilities })
-    lspconfig.html.setup({ capabilities = capabilities })
+    lspconfig.html.setup({
+      capabilities = capabilities,
+      filetypes = { "html", "templ" },
+    })
     lspconfig.prismals.setup({ capabilities = capabilities })
     lspconfig.gopls.setup({ capabilities = capabilities })
-    lspconfig.htmx.setup({ capabilities = capabilities })
+    lspconfig.htmx.setup({
+      capabilities = capabilities,
+      filetypes = { "html", "templ" },
+    })
     lspconfig.jsonls.setup({
       capabilities = capabilities,
       settings = {
@@ -55,14 +61,17 @@ return {
     lspconfig.pyright.setup({ capabilities = capabilities })
     lspconfig.rust_analyzer.setup({ capabilities = capabilities })
     lspconfig.taplo.setup({ capabilities = capabilities })
-    lspconfig.templ.setup({
-      capabilities = capabilities,
-      filetypes = { "html", "templ" },
-    })
     lspconfig.yamlls.setup({ capabilities = capabilities })
     lspconfig.tailwindcss.setup({
       filetypes = { "html", "templ", "javascriptreact", "typescriptreact" },
       capabilities = capabilities,
+      settings = {
+        tailwindCSS = {
+          includeLanguages = {
+            templ = "html",
+          },
+        },
+      },
     })
     lspconfig.lua_ls.setup({
       capabilities = capabilities,

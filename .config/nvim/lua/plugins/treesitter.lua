@@ -11,6 +11,7 @@ return {
   opts = {
     highlight = { enabled = true },
     indent = { enabled = true },
+    additional_vim_regex_highlighting = false,
     ensure_insalled = {
       "bash",
       "c",
@@ -30,6 +31,7 @@ return {
       "query",
       "regex",
       "toml",
+      "templ",
       "tsx",
       "typescript",
       "vim",
@@ -40,6 +42,7 @@ return {
     incremental_selection = {
       enable = true,
     },
+    auto_install = true,
   },
   config = function(_, opts)
     require("nvim-treesitter.configs").setup(opts)

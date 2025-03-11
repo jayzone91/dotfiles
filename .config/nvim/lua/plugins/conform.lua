@@ -5,7 +5,7 @@ return {
     formatters_by_ft = {
       lua = { "stylua" },
       go = { "goimports", "gofumpt" },
-      temp = { "gofumpt", "templ" },
+      templ = { "gofumpt", "templ" },
       markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
       ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
       javascript = { "prettierd", "prettier" },
