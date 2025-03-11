@@ -22,12 +22,23 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.cmd("au BufRead,BufNewFile *.templ setfiletype templ")
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
+  pattern = { "*.templ" },
+  callback = function()
+    local buf = vim.api.nvim_get_current_buf()
+    vim.api.nvim_buf_set_option(buf, "filetype", "templ")
+  end,
+})
+
 -- Setup lazy.nvim
 require("lazy").setup({
   defaults = {
     lazy = true,
   },
   spec = {
+    { "folke/lazy.nvim", version = "*" },
     -- import your plugins
     { import = "plugins" },
   },
