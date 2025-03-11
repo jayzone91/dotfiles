@@ -1,5 +1,15 @@
 local api = vim.api
 
+vim.cmd("au BufRead,BufNewFile *.templ setfiletype templ")
+vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
+  pattern = { "*.templ" },
+  callback = function()
+    local buf = vim.api.nvim_get_current_buf()
+    ---@diagnostic disable-next-line:deprecated
+    vim.api.nvim_buf_set_option(buf, "filetype", "templ")
+  end,
+})
+
 local function augroup(name)
   api.nvim_create_augroup("custom_" .. name, { clear = true })
 end

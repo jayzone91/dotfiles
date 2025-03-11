@@ -2,14 +2,13 @@ return {
   "nvim-treesitter/nvim-treesitter",
   version = false,
   build = ":TSUpdate",
-  event = "VeryLazy",
-  init = function(plugin)
-    require("lazy.core.loader").add_to_rtp(plugin)
-    require("nvim-treesitter.query_predicates")
-  end,
+  event = { "BufReadPre", "BufNewFile" },
+  dependencies = {
+    "apple/pkl-neovim",
+  },
   cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
   opts = {
-    highlight = { enabled = true },
+    highlight = { enabled = true, use_languagetree = true },
     indent = { enabled = true },
     additional_vim_regex_highlighting = false,
     ensure_insalled = {
@@ -24,6 +23,7 @@ return {
       "lua",
       "laudoc",
       "luap",
+      "pkl",
       "markdown",
       "markdown_inline",
       "printf",
@@ -46,5 +46,18 @@ return {
   },
   config = function(_, opts)
     require("nvim-treesitter.configs").setup(opts)
+
+    local treesitter_parser_config =
+      require("nvim-treesitter.parsers").get_parser_configs()
+    treesitter_parser_config.templ = treesitter_parser_config.templ
+      or {
+        install_info = {
+          url = "https://github.com/vrischmann/tree-sitter-templ.git",
+          files = { "src/parser.c", "src/scanner.c" },
+          branch = "master",
+        },
+      }
+
+    vim.treesitter.language.register("templ", "templ")
   end,
 }

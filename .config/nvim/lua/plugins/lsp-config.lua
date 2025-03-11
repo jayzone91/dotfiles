@@ -36,7 +36,13 @@ return {
     lspconfig.cssls.setup({ capabilities = capabilities })
     lspconfig.dockerls.setup({ capabilities = capabilities })
     lspconfig.marksman.setup({ capabilities = capabilities })
-    lspconfig.templ.setup({ capabilities = capabilities })
+    lspconfig.templ.setup({
+      capabilities = capabilities,
+      cmd = { "templ", "lsp" },
+      filetypes = { "templ" },
+      root_dir = require("lspconfig.util").root_pattern("go.mod", ".git"),
+      settings = {},
+    })
     lspconfig.html.setup({
       capabilities = capabilities,
       filetypes = { "html", "templ" },
