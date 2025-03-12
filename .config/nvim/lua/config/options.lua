@@ -4,3 +4,6 @@
 
 -- disable animations
 vim.g.snacks_animate = false
+
+-- Disable Shada Error on Windows
+vim.o.shadafile = "NONE"
