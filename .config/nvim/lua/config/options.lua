@@ -5,5 +5,8 @@
 -- disable animations
 vim.g.snacks_animate = false
 
+-- sert blink to true
+vim.g.lazyvim_blink_main = true
+
 -- Disable Shada Error on Windows
 vim.o.shadafile = "NONE"
