@@ -1,5 +1,6 @@
 return {
   "saghen/blink.cmp",
+  enabled = false,
   dependencies = {
     "rafamadriz/friendly-snippets",
     {
@@ -11,7 +12,7 @@ return {
   version = "*",
   event = "InsertEnter",
   opts_extend = {
-"sources.completion.enabled_providers",
+    "sources.completion.enabled_providers",
     "sources.compat",
     "sources.default",
   },
@@ -37,7 +38,7 @@ return {
         auto_show_delay_ms = 200,
       },
       ghost_text = {
-        enabled = true,
+        enabled = false,
       },
     },
     sources = {
@@ -45,11 +46,11 @@ return {
       default = { "lazydev", "lsp", "path", "snippets", "buffer" },
       providers = {
         lazydev = {
-        name = "LazyDev",
-        module = "lazydev.integrations.blink",
-        score_offset = 100,
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          score_offset = 100,
+        },
       },
-    },
     },
     cmdline = { enabled = true },
   },

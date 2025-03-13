@@ -4,16 +4,17 @@ return {
   dependencies = {
     "williamboman/mason.nvim",
     {
-    "folke/lazydev.nvim",
-    ft = "lua", -- only load on lua files
-    opts = {
-      library = {
-        -- See the configuration section for more details
-        -- Load luvit types when the `vim.uv` word is found
-        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      "folke/lazydev.nvim",
+      ft = "lua", -- only load on lua files
+      opts = {
+        library = {
+          -- See the configuration section for more details
+          -- Load luvit types when the `vim.uv` word is found
+          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+          { path = "snacks.nvim", words = { "Snacks" } },
+        },
       },
     },
-  },
   },
   config = function()
     local Server = require("config.mason").LSP
@@ -25,7 +26,7 @@ return {
       has_cmp and cmp.default_capabilities() or {},
     })
 
-    for lsp, config in ipairs(Server) do
+    for lsp, config in pairs(Server) do
       if type(config) ~= "table" then
         config = {}
       end
