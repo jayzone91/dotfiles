@@ -89,6 +89,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
+    "lukas-reineke/cmp-under-comparator",
   },
   opts = function()
     local cmp = require("cmp")
@@ -208,6 +209,18 @@ return {
         { name = "path" },
         { name = "luasnip" },
         { name = "nvim_lua" },
+      },
+      sorting = {
+        comparators = {
+          cmp.config.compare.offset,
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+          require("cmp-under-comparator").under,
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          cmp.config.compare.length,
+          cmp.config.compare.order,
+        },
       },
     }
 

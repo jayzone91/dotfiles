@@ -153,6 +153,13 @@ return {
       desc = "Find Files",
     },
     {
+      "<leader>fk",
+      function()
+        Snacks.picker.keymaps()
+      end,
+      desc = "Find Keymaps",
+    },
+    {
       "<leader>fg",
       function()
         Snacks.picker.grep()
