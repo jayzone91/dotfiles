@@ -1,3 +1,48 @@
+local icons = {
+  kinds = {
+    Array = " ",
+    Boolean = "󰨙 ",
+    Class = " ",
+    Codeium = "󰘦 ",
+    Color = " ",
+    Control = " ",
+    Collapsed = " ",
+    Constant = "󰏿 ",
+    Constructor = " ",
+    Copilot = " ",
+    Enum = " ",
+    EnumMember = " ",
+    Event = " ",
+    Field = " ",
+    File = " ",
+    Folder = " ",
+    Function = "󰊕 ",
+    Interface = " ",
+    Key = " ",
+    Keyword = " ",
+    Method = "󰊕 ",
+    Module = " ",
+    Namespace = "󰦮 ",
+    Null = " ",
+    Number = "󰎠 ",
+    Object = " ",
+    Operator = " ",
+    Package = " ",
+    Property = " ",
+    Reference = " ",
+    Snippet = "󱄽 ",
+    String = " ",
+    Struct = "󰆼 ",
+    Supermaven = " ",
+    TabNine = "󰏚 ",
+    Text = " ",
+    TypeParameter = " ",
+    Unit = " ",
+    Value = " ",
+    Variable = "󰀫 ",
+  },
+}
+
 return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
@@ -57,36 +102,6 @@ return {
     }
     local cmp_style = cmp_ui.style
 
-    local field_arrangement = {
-      atom = { "kind", "abbr", "menu" },
-      atom_colored = { "kind", "abbr", "menu" },
-    }
-
-    local formatting_style = {
-      -- default fields order i.e completion word + item.kind + item.kind icons
-      fields = field_arrangement[cmp_style] or { "abbr", "kind", "menu" },
-
-      format = function(_, item)
-        --jlocal icons = require "nvchad.icons.lspkind"
-        local icon = "" --(cmp_ui.icons and icons[item.kind]) or ""
-
-        if cmp_style == "atom" or cmp_style == "atom_colored" then
-          icon = " " .. icon .. " "
-          item.menu = cmp_ui.lspkind_text and "   (" .. item.kind .. ")" or ""
-          item.kind = icon
-        else
-          icon = cmp_ui.lspkind_text and (" " .. icon .. " ") or icon
-          item.kind = string.format(
-            "%s %s",
-            icon,
-            cmp_ui.lspkind_text and item.kind or ""
-          )
-        end
-
-        return item
-      end,
-    }
-
     local function border(hl_name)
       return {
         { "╭", hl_name },
@@ -100,11 +115,31 @@ return {
       }
     end
 
+    local formatting = {
+      format = function(_, item)
+        if icons.kinds[item.kind] then
+          item.kind = icons.kinds[item.kind] .. item.kind
+        end
+
+        local widths = {
+          abbr = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 40,
+          menu = vim.g.cmp_widths and vim.g.cmp_widths.menu or 30,
+        }
+
+        for key, width in pairs(widths) do
+          if item[key] and vim.fn.strdisplaywidth(item[key]) > width then
+            item[key] = vim.fn.strcharpart(item[key], 0, width - 1) .. "…"
+          end
+        end
+
+        return item
+      end,
+    }
+
     local options = {
       completion = {
         completeopt = "menu,menuone",
       },
-
       window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
@@ -114,9 +149,7 @@ return {
           require("luasnip").lsp_expand(args.body)
         end,
       },
-
-      --formatting = formatting_style,
-
+      formatting = formatting,
       mapping = {
         ["<C-p>"] = cmp.mapping.select_prev_item(),
         ["<C-n>"] = cmp.mapping.select_next_item(),
