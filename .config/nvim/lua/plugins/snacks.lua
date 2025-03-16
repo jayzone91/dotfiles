@@ -126,6 +126,26 @@ return {
     explorer = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
+    image = {
+      formats = {
+        "png",
+        "jpg",
+        "jpeg",
+        "gif",
+        "bmp",
+        "webp",
+        "tiff",
+        "heic",
+        "avif",
+        "mp4",
+        "mov",
+        "avi",
+        "mkv",
+        "webm",
+        "pdf",
+      },
+      force = false,
+    },
     notifier = { enabled = true },
     notify = { enabled = true },
     picker = { enabled = true },
@@ -215,6 +235,14 @@ return {
         Snacks.picker.lsp_type_definitions()
       end,
       desc = "Goto T[y]pe Definition",
+    },
+    -- image
+    {
+      "<leader>si",
+      function()
+        Snacks.image.hover()
+      end,
+      desc = "Show the image at the cursor in a floating window",
     },
   },
 }
