@@ -10,7 +10,7 @@ font-size = 14
 font-thicken = true
 
 # Theme
-theme = catppuccin-mocha
+theme = cyberdream
 window-theme = ghostty
 
 window-save-state = always
