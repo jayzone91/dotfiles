@@ -17,14 +17,44 @@ M.LSP = {
     },
   },
   gopls = {
-    filetypes = { "go", "gomod", "gowork", "gotempl" },
     settings = {
-      env = {
-        GOEXPERIMENT = "rangefunc",
+      gofumpt = true,
+      codelenses = {
+        gc_details = false,
+        generate = true,
+        regenerate_cgo = true,
+        run_govulncheck = true,
+        test = true,
+        tidy = true,
+        upgrade_dependency = true,
+        vendor = true,
       },
-      formatting = {
-        gofumpt = true,
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
       },
+      analyses = {
+        nilness = true,
+        unusedparams = true,
+        unusedwrite = true,
+        useany = true,
+      },
+      usePlaceholders = true,
+      completeUnimported = true,
+      staticcheck = true,
+      directoryFilters = {
+        "-.git",
+        "-.vscode",
+        "-.idea",
+        "-.vscode-test",
+        "-node_modules",
+      },
+      semanticTokens = true,
     },
   },
   templ = {},
@@ -85,6 +115,7 @@ M.LSP = {
 
 M.Formatter = {
   lua = { "stylua" },
+<<<<<<< Updated upstream
   go = { "gofumpt", "goimports-reviser", "golines" },
   markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
   ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
@@ -92,6 +123,9 @@ M.Formatter = {
   javascript = { "prettier" },
   typescriptreact = { "prettier" },
   javascriptreact = { "prettier" },
+=======
+  go = { "goimports", "gofumpt" },
+>>>>>>> Stashed changes
 }
 
 M.Linter = {
