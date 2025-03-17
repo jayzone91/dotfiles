@@ -7,7 +7,7 @@ return {
     require("conform").setup({
       formatters_by_ft = Server.Formatter,
       format_on_save = {
-        timeout_ms = 500,
+        timeout_ms = 2500,
         lsp_format = "fallback",
       },
     })
