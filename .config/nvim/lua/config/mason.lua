@@ -115,17 +115,13 @@ M.LSP = {
 
 M.Formatter = {
   lua = { "stylua" },
-<<<<<<< Updated upstream
   go = { "gofumpt", "goimports-reviser", "golines" },
-  markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
   ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
   typescript = { "prettier" },
   javascript = { "prettier" },
   typescriptreact = { "prettier" },
   javascriptreact = { "prettier" },
-=======
   go = { "goimports", "gofumpt" },
->>>>>>> Stashed changes
 }
 
 M.Linter = {
