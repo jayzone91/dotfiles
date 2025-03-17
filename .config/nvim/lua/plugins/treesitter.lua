@@ -40,6 +40,10 @@ return {
       "php",
       "blade",
       "templ",
+      "go",
+      "gomod",
+      "gowork",
+      "gosum",
     },
     highlight = {
       enable = true,
