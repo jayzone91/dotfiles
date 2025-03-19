@@ -115,13 +115,13 @@ M.LSP = {
 
 M.Formatter = {
   lua = { "stylua" },
-  go = { "gofumpt", "goimports-reviser", "golines" },
   ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
   typescript = { "prettier" },
   javascript = { "prettier" },
   typescriptreact = { "prettier" },
   javascriptreact = { "prettier" },
   go = { "goimports", "gofumpt" },
+  json = { "prettier" },
 }
 
 M.Linter = {
