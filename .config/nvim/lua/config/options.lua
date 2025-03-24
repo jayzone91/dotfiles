@@ -1,5 +1,6 @@
 local indent = 2
 
+vim.o.numberwidth = 3
 vim.o.autoindent = true
 vim.o.autoread = true
 vim.o.background = "dark"
@@ -24,7 +25,8 @@ vim.o.sidescrolloff = 8
 vim.o.shiftround = true
 vim.o.shiftwidth = indent
 vim.o.showmode = false
-vim.o.signcolumn = "yes"
+vim.o.signcolumn = "yes:1"
+vim.o.statuscolumn = "%l%s"
 vim.o.smartcase = true
 vim.o.smartindent = true
 vim.o.smarttab = true

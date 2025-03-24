@@ -27,6 +27,11 @@ return {
     },
   },
   config = function()
+    require("lsp_hover").setup({
+      ["^lua_ls"] = {
+        border_hl = "Special",
+      },
+    })
     local Server = require("config.mason").LSP
     local has_blink, blink = pcall(require, "blink.cmp")
     local has_cmp, cmp = pcall(require, "cmp_nvim_lsp")
@@ -40,6 +45,7 @@ return {
       if type(config) ~= "table" then
         config = {}
       end
+
       vim.tbl_deep_extend("force", {
         capabilities = capabilities,
       }, config)
@@ -51,6 +57,31 @@ return {
       callback = function(_)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
       end,
+    })
+
+    vim.diagnostic.config({
+      underline = true,
+      update_in_insert = false,
+      virtual_text = {
+        spacing = 4,
+        source = "if_many",
+        prefix = "●",
+      },
+      severity_sort = true,
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = " ",
+          [vim.diagnostic.severity.WARN] = " ",
+          [vim.diagnostic.severity.HINT] = " ",
+          [vim.diagnostic.severity.INFO] = " ",
+        },
+        numhl = {
+          [vim.diagnostic.severity.WARN] = "WarningMsg",
+          [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+          [vim.diagnostic.severity.INFO] = "DiagnosticInfo",
+          [vim.diagnostic.severity.HINT] = "DiagnosticHint",
+        },
+      },
     })
   end,
 }
