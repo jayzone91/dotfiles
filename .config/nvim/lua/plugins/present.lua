@@ -4,7 +4,7 @@ return {
   config = function()
     vim.keymap.set(
       "n",
-      "<leader>sp",
+      "<leader>ms",
       ":PresentStart<CR>",
       { desc = "Start Presentation" }
     )

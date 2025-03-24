@@ -46,6 +46,26 @@ vim.api.nvim_create_autocmd("LspProgress", {
 
 return {
   "folke/snacks.nvim",
+  dependencies = {
+    {
+      "s1n7ax/nvim-window-picker",
+      name = "window-picker",
+      opts = {
+        hint = "floating-big-letter",
+        show_prompt = false,
+        filter_rules = {
+          autoselect_one = true,
+          include_current_win = false,
+          include_unfocusable_windows = false,
+            -- stylua: ignore
+            bo = {
+              filetype = { "snacks_picker_input", "snacks_picker_list", "NvimTree", "neo-tree", "notify", "snacks_notif", },
+              buftype = { "terminal", "nofile", "quickfix", "help", "prompt", "notify", "float" },
+            },
+        },
+      },
+    },
+  },
   lazy = false,
   priority = 1000,
   opts = {
@@ -148,7 +168,38 @@ return {
     },
     notifier = { enabled = true },
     notify = { enabled = true },
-    picker = { enabled = true },
+    picker = {
+      enabled = true,
+      ui_select = true,
+      sources = {
+        explorer = {
+          actions = {
+            window_picker = function(_, item)
+              if item.dir then
+                return
+              end
+
+              local window_id = require("window-picker").pick_window()
+
+              if not window_id then
+                return
+              end
+
+              vim.api.nvim_set_current_win(window_id)
+              vim.cmd("edit " .. item._path)
+              Snacks.explorer()
+            end,
+          },
+          win = {
+            list = {
+              keys = {
+                ["w"] = "window_picker",
+              },
+            },
+          },
+        },
+      },
+    },
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
     terminal = { enabled = true },
@@ -158,7 +209,9 @@ return {
     {
       "<leader>e",
       function()
-        Snacks.picker.explorer({
+        Snacks.explorer.open({
+          hidden = true,
+          ignored = true,
           auto_close = true,
         })
       end,
