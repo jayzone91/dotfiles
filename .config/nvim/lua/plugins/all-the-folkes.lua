@@ -1,5 +1,13 @@
 return {
   {
+    "folke/drop.nvim",
+    event = "VimEnter",
+    opts = {
+      screensaver = false,
+      filetypes = { "dashboard", "alpha", "ministarter", "snacks_dashboard" },
+    },
+  },
+  {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {},
