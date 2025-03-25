@@ -34,7 +34,7 @@ vim.api.nvim_create_autocmd("FileType", {
   desc = "Close some filetypes with <q>",
   group = augroup("close_with_q"),
   pattern = {
-    "PlenarySnacksPopup",
+    "PlenaryTestPopup",
     "checkhealth",
     "dbout",
     "gitsigns-blame",
@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "lspinfo",
     "neotest-output",
     "neotest-output-panel",
-    "neitest-summary",
+    "neotest-summary",
     "notify",
     "qf",
     "spectre_panel",
@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.schedule(function()
       vim.keymap.set("n", "q", function()
         vim.cmd("close")
-        pcall(vim.api.nvim_buf_delete, event.buf({ force = true }))
+        pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
       end, {
         buffer = event.buf,
         silent = true,

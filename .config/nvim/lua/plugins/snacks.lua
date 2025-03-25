@@ -203,7 +203,31 @@ return {
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
     terminal = { enabled = true },
-    zen = { enabled = false },
+    zen = {
+      enabled = true,
+      toggles = {
+        dim = true,
+        git_signs = false,
+      },
+      show = {
+        statusline = false,
+        tabline = false,
+      },
+      win = {
+        style = "zen",
+      },
+      zoom = {
+        toggles = {},
+        show = {
+          statusline = false,
+          tabline = false,
+        },
+        win = {
+          backdrop = true,
+          width = 0,
+        },
+      },
+    },
   },
   keys = {
     {
@@ -216,6 +240,20 @@ return {
         })
       end,
       desc = "Open Explorer",
+    },
+    {
+      "<leader>zz",
+      function()
+        Snacks.zen.zoom()
+      end,
+      desc = "Zen Mode",
+    },
+    {
+      "<leader>zm",
+      function()
+        Snacks.zen()
+      end,
+      desc = "Zen Mode",
     },
     {
       "<leader><space>",
