@@ -6,7 +6,13 @@ return {
     require("mini.ai").setup()
     require("mini.cursorword").setup()
     require("mini.icons").setup()
-    require("mini.statusline").setup()
+    local statusline = require("mini.statusline")
+    statusline.setup({
+      use_icons = true,
+    })
+    statusline.section_location = function()
+      return "%2l:%-2v"
+    end
 
     -- mini pairs setup
 

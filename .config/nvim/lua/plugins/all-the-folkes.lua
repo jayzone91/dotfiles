@@ -10,7 +10,11 @@ return {
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    opts = {},
+    opts = {
+      icons = {
+        mappings = true,
+      },
+    },
     keys = {
       {
         "<leader>?",

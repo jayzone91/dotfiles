@@ -6,7 +6,13 @@ vim.o.autoread = true
 vim.o.background = "dark"
 vim.o.backspace = "indent,eol,start"
 vim.o.backup = false
-vim.o.clipboard = "unnamedplus"
+
+-- sync Clipboard between OS and Neovim.
+-- Schedule the settings after "UIEnter" because it can increase start-up time.
+vim.schedule(function()
+  vim.o.clipboard = "unnamedplus"
+end)
+
 vim.o.cmdheight = 1
 vim.o.completeopt = "menu,menuone,noselect"
 vim.o.confirm = true
