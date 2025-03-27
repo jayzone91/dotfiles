@@ -28,6 +28,7 @@ return {
   },
   config = function()
     require("lsp_hover").setup({
+      ---@diagnostic disable-next-line:missing-fields
       ["^lua_ls"] = {
         border_hl = "Special",
       },
@@ -67,6 +68,7 @@ return {
         source = "if_many",
         prefix = "●",
       },
+      virtual_lines = true,
       severity_sort = true,
       signs = {
         text = {
