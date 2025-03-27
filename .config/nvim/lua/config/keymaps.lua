@@ -107,3 +107,11 @@ else
   map("n", "<leader><left>", ":wincmd h<CR>")
   map("n", "<leader><right>", ":wincmd l<CR>")
 end
+
+-- Floating Terminal
+vim.keymap.set(
+  "n",
+  "<leader>t",
+  "<cmd>Floaterminal<CR>",
+  { desc = "Toggle Floating Terminal" }
+)
