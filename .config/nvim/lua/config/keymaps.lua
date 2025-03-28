@@ -115,3 +115,11 @@ vim.keymap.set(
   "<cmd>Floaterminal<CR>",
   { desc = "Toggle Floating Terminal" }
 )
+
+-- Weather Forecast
+vim.keymap.set(
+  "n",
+  "<leader>w",
+  "<cmd>WeatherForecast<CR>",
+  { desc = "Weather Forecast" }
+)
