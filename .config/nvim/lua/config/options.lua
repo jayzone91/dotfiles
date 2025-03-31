@@ -1,5 +1,8 @@
 local indent = 2
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 vim.o.numberwidth = 3
 vim.o.autoindent = true
 vim.o.autoread = true

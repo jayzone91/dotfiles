@@ -1,15 +1,14 @@
 return {
-  "stevearc/conform.nvim",
-  lazy = false,
-  config = function()
-    local Server = require("config.mason")
+	"stevearc/conform.nvim",
+	config = function()
+		local mason_config = require("config.mason-config")
 
-    require("conform").setup({
-      formatters_by_ft = Server.Formatter,
-      format_on_save = {
-        timeout_ms = 2500,
-        lsp_format = "fallback",
-      },
-    })
-  end,
+		require("conform").setup({
+			formatters_by_ft = mason_config.formatter,
+			format_on_save = {
+				timeout_ms = 2500,
+				lsp_format = "fallback",
+			},
+		})
+	end,
 }
