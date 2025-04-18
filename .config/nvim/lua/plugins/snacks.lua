@@ -32,6 +32,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 		end, p)
 
 		local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+		---@diagnostic disable-next-line
 		vim.notify(table.concat(msg, "\n"), "info", {
 			id = "lsp_progress",
 			title = client.name,
@@ -43,220 +44,48 @@ vim.api.nvim_create_autocmd("LspProgress", {
 	end,
 })
 
+local picker_config = {
+	enabled = true,
+	ui_select = true,
+}
+
 return {
-	"folke/snacks.nvim",
+	"folke/Snacks.nvim",
 	dependencies = {
-		{
-			"folke/flash.nvim",
-			event = "VeryLazy",
-			opts = {},
-		},
-		{
-			"s1n7ax/nvim-window-picker",
-			name = "window-picker",
-			opts = {
-				hint = "floating-big-letter",
-				show_prompt = false,
-				filter_rules = {
-					autoselect_one = true,
-					include_current_win = false,
-					include_unfocusable_windows = false,
-            -- stylua: ignore
-            bo = {
-              filetype = { "snacks_picker_input", "snacks_picker_list", "NvimTree", "neo-tree", "notify", "snacks_notif", },
-              buftype = { "terminal", "nofile", "quickfix", "help", "prompt", "notify", "float" },
-            },
-				},
-			},
-		},
+		{ "echasnovski/mini.icons", version = false },
+		{ "nvim-tree/nvim-web-devicons", opts = {} },
 	},
-	lazy = false,
 	priority = 1000,
+	lazy = false,
 	opts = {
 		animate = { enabled = false },
 		bigfile = { enabled = true },
 		bufdelete = { enabled = true },
-		dashboard = {
-			enabled = true,
-			preset = {
-				keys = {
-					{
-						icon = " ",
-						key = "f",
-						desc = "Find File",
-						action = ":lua Snacks.dashboard.pick('files')",
-					},
-					{
-						icon = " ",
-						key = "n",
-						desc = "New File",
-						action = ":ene | startinsert",
-					},
-					{
-						icon = " ",
-						key = "g",
-						desc = "Find Text",
-						action = ":lua Snacks.dashboard.pick('live_grep')",
-					},
-					{
-						icon = " ",
-						key = "c",
-						desc = "Config",
-						action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
-					},
-					{
-						icon = "󰒲 ",
-						key = "l",
-						desc = "Lazy",
-						action = ":Lazy",
-						enabled = package.loaded.lazy ~= nil,
-					},
-					{
-						icon = "",
-						key = "m",
-						desc = "Mason",
-						action = ":Mason",
-					},
-					{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
-				},
-			},
-			sections = {
-				{ section = "header" },
-				{
-					icon = " ",
-					title = "Keymaps",
-					section = "keys",
-					gap = 1,
-					padding = 1,
-					indent = 2,
-				},
-				{
-					icon = " ",
-					title = "Git Status",
-					section = "terminal",
-					enabled = function()
-						return Snacks.git.get_root() ~= nil
-					end,
-					cmd = "git status --short --branch --renames",
-					height = 5,
-					padding = 1,
-					indent = 2,
-					ttl = 5 * 60,
-					gap = 1,
-				},
-				{ section = "startup" },
-			},
-		},
+		dashboard = { enabled = false },
+		debug = { enabled = false },
+		dim = { enabled = false },
 		explorer = { enabled = true },
+		git = { enabled = true },
+		gitbrowse = { enabled = false },
+		image = { enabled = false },
 		indent = { enabled = true },
-		input = { enabled = true },
-		image = {
-			formats = {
-				"png",
-				"jpg",
-				"jpeg",
-				"gif",
-				"bmp",
-				"webp",
-				"tiff",
-				"heic",
-				"avif",
-				"mp4",
-				"mov",
-				"avi",
-				"mkv",
-				"webm",
-				"pdf",
-			},
-			force = false,
-		},
+		inout = { enabled = true },
+		layout = { enabled = false },
+		lazygit = { enabled = false },
 		notifier = { enabled = true },
 		notify = { enabled = true },
-		picker = {
-			enabled = true,
-			ui_select = true,
-			sources = {
-				explorer = {
-					actions = {
-						flash = function(picker)
-							require("flash").jump({
-								pattern = "^",
-								label = { after = { 0, 0 } },
-								search = {
-									mode = "search",
-									exclude = {
-										function(win)
-											return vim.bo[vim.api.nvim_win_get_buf(win)].filetype
-												~= "snacks_picker_list"
-										end,
-									},
-								},
-								action = function(match)
-									local idx = picker.list:row2idx(match.pos[1])
-									picker.list:_move(idx, true, true)
-								end,
-							})
-						end,
-						window_picker = function(_, item)
-							if item.dir then
-								return
-							end
-
-							local window_id = require("window-picker").pick_window()
-
-							if not window_id then
-								return
-							end
-
-							vim.api.nvim_set_current_win(window_id)
-							vim.cmd("edit " .. item._path)
-							Snacks.explorer()
-						end,
-					},
-					win = {
-						input = {
-							keys = {
-								["<a-s>"] = { "flash", mode = { "n", "i" } },
-								["s"] = { "flash" },
-							},
-						},
-						list = {
-							keys = {
-								["w"] = "window_picker",
-							},
-						},
-					},
-				},
-			},
-		},
+		picker = picker_config,
+		profiler = { enabled = false },
 		quickfile = { enabled = true },
+		rename = { enanbled = true },
+		scope = { enabled = false },
+		scratch = { enabled = false },
+		scroll = { enabled = false },
 		statuscolumn = { enabled = true },
-		terminal = { enabled = true },
-		zen = {
-			enabled = true,
-			toggles = {
-				dim = true,
-				git_signs = false,
-			},
-			show = {
-				statusline = false,
-				tabline = false,
-			},
-			win = {
-				style = "zen",
-			},
-			zoom = {
-				toggles = {},
-				show = {
-					statusline = false,
-					tabline = false,
-				},
-				win = {
-					backdrop = true,
-					width = 0,
-				},
-			},
-		},
+		toggle = { enabled = false },
+		win = { enabled = false },
+		words = { enabled = true },
+		zen = { enabled = false },
 	},
 	keys = {
 		{
@@ -271,20 +100,6 @@ return {
 			desc = "Open Explorer",
 		},
 		{
-			"<leader>zz",
-			function()
-				Snacks.zen.zoom()
-			end,
-			desc = "Zen Mode",
-		},
-		{
-			"<leader>zm",
-			function()
-				Snacks.zen()
-			end,
-			desc = "Zen Mode",
-		},
-		{
 			"<leader><space>",
 			function()
 				Snacks.picker.buffers()
@@ -296,21 +111,14 @@ return {
 			function()
 				Snacks.picker.files()
 			end,
-			desc = "Find Files",
+			desc = "Search Files",
 		},
 		{
 			"<leader>fk",
 			function()
 				Snacks.picker.keymaps()
 			end,
-			desc = "Find Keymaps",
-		},
-		{
-			"<leader>fg",
-			function()
-				Snacks.picker.grep()
-			end,
-			desc = "Live Grep",
+			desc = "Search Keymaps",
 		},
 		{
 			"<leader>fh",
@@ -319,7 +127,13 @@ return {
 			end,
 			desc = "Find Help",
 		},
-		-- LSP
+		{
+			"<leader>fg",
+			function()
+				Snacks.picker.grep()
+			end,
+			desc = "Live Grep",
+		},
 		{
 			"gd",
 			function()
@@ -330,7 +144,7 @@ return {
 		{
 			"gD",
 			function()
-				Snacks.picker.lsp_declarations()
+				Snacks.picker.lsp_declaration()
 			end,
 			desc = "Goto Declaration",
 		},
@@ -339,7 +153,6 @@ return {
 			function()
 				Snacks.picker.lsp_references()
 			end,
-			nowait = true,
 			desc = "References",
 		},
 		{
@@ -347,22 +160,14 @@ return {
 			function()
 				Snacks.picker.lsp_implementations()
 			end,
-			desc = "Goto Implementation",
+			desc = "Goto Implementations",
 		},
 		{
 			"gy",
 			function()
 				Snacks.picker.lsp_type_definitions()
 			end,
-			desc = "Goto T[y]pe Definition",
-		},
-		-- image
-		{
-			"<leader>si",
-			function()
-				Snacks.image.hover()
-			end,
-			desc = "Show the image at the cursor in a floating window",
+			desc = "Goto Type Definition",
 		},
 	},
 }

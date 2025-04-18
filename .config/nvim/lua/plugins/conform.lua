@@ -1,14 +1,13 @@
-return {
-  "stevearc/conform.nvim",
-  config = function()
-    local mason_config = require("config.mason-config")
+local formatter = require("config.software").formatter
 
-    require("conform").setup({
-      formatters_by_ft = mason_config.formatter,
-      format_on_save = {
-        timeout_ms = 2500,
-        lsp_format = "fallback",
-      },
-    })
-  end,
+return {
+	"stevearc/conform.nvim",
+	event = require("config.utils").lazyFile,
+	opts = {
+		formatters_by_ft = formatter,
+		format_on_save = {
+			timeout_ms = 2500,
+			lsp_format = "fallback",
+		},
+	},
 }
