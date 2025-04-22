@@ -6,7 +6,7 @@ NYI
 
 ## Brew Install
 
-Install (Homebrew)[https://brew.sh/] as package Manager for MacOS:
+Install [Homebrew](https://brew.sh/) as package Manager for MacOS:
 ```bash
 # paste in terminal an follow the instructions
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -15,7 +15,7 @@ Update everything in Homebrew to recent Version
 ```bash
 brew update
 ```
-Install GUI Applications (Read more about these in (GUI Applications)[#GUIApplication])
+Install GUI Applications (Read more about these in [GUI Applications](#GUI))
 
 ```bash
 brew install --cask \
