@@ -15,7 +15,7 @@ Update everything in Homebrew to recent Version
 ```bash
 brew update
 ```
-Install GUI Applications (Read more about these in [GUI Applications](#GUI))
+Install GUI Applications (Read more about these in [GUI Applications](#gui-applications))
 
 ```bash
 brew install --cask \
@@ -26,7 +26,7 @@ brew install --cask \
     tunnelblick
 ```
 
-Install terminal applications (read more about these in (Terminal Applications)[#TerminalApplications])
+Install terminal applications (read more about these in [Terminal Applications](#terminal-applications))
 
 ```bash
 brew install --formulae \
@@ -65,27 +65,27 @@ sudo make install
 
 ## Gui Applications
 
-- Alfred (Spotlight replacement)
-- Ghostty (Terminal replacement)
-- Github (Github Client)
-- SetApp (Alternative Marketplace for Premium Apps)
-- Tunnelblick (VPN Client)
+- [Alfred](https://www.alfredapp.com) (Spotlight replacement)
+- [Ghostty](https://ghostty.org) (Terminal replacement)
+- [Github](https://github.com/apps/desktop) (Github Client)
+- [SetApp](https://setapp.com/de) (Alternative Marketplace for Premium Apps)
+- [Tunnelblick](https://tunnelblick.net) (VPN Client)
 
 
 ## Terminal Applications
 
-- asdf
-- cmake
-- eza
-- gh
-- go
-- nvm
-- pnpm
-- ripgrep
-- spaceship
-- stow
-- gettext
-- curl
+- [asdf](https://asdf-vm.com)
+- [cmake](https://cmake.org)
+- [eza](https://eza.rocks)
+- [gh](https://cli.github.com)
+- [go](https://go.dev)
+- [nvm](https://github.com/nvm-sh/nvm)
+- [pnpm](https://pnpm.io)
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+- [spaceship](https://starship.rs)
+- [stow](https://www.gnu.org/software/stow/)
+- [gettext](https://www.gnu.org/software/gettext/)
+- [curl](https://curl.se)
 
 ## Oh My Zsh
 
