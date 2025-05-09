@@ -9,6 +9,9 @@ font-size = 14
 # Draw fonts with a thicker stroke, Currently only on macos
 font-thicken = true
 
+# Background opacity
+background-opacity = 0.9
+
 # Theme
 theme = cyberdream
 window-theme = ghostty

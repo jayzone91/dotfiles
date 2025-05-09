@@ -1,11 +1,10 @@
--- Advanced LSP Progress
----@type table<number, {token:lsp.ProgressToken, msg: string, done:boolean}[]>
+---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
 local progress = vim.defaulttable()
 vim.api.nvim_create_autocmd("LspProgress", {
   ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin"|"report"|"end"}]]
+    local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
     if not client or type(value) ~= "table" then
       return
     end
@@ -48,221 +47,181 @@ return {
   "folke/snacks.nvim",
   dependencies = {
     {
-      "folke/flash.nvim",
-      event = "VeryLazy",
+      "echasnovski/mini.icons",
+      version = false,
+      lazy = true,
       opts = {},
     },
     {
-      "s1n7ax/nvim-window-picker",
-      name = "window-picker",
-      opts = {
-        hint = "floating-big-letter",
-        show_prompt = false,
-        filter_rules = {
-          autoselect_one = true,
-          include_current_win = false,
-          include_unfocusable_windows = false,
-            -- stylua: ignore
-            bo = {
-              filetype = { "snacks_picker_input", "snacks_picker_list", "NvimTree", "neo-tree", "notify", "snacks_notif", },
-              buftype = { "terminal", "nofile", "quickfix", "help", "prompt", "notify", "float" },
-            },
-        },
-      },
+      "nvim-tree/nvim-web-devicons",
+      opts = {},
+      lazy = true,
     },
   },
-  lazy = false,
   priority = 1000,
+  lazy = false,
+  ---@type snacks.Config
   opts = {
     animate = { enabled = false },
     bigfile = { enabled = true },
     bufdelete = { enabled = true },
-    dashboard = {
-      enabled = true,
-      preset = {
-        keys = {
-          {
-            icon = " ",
-            key = "f",
-            desc = "Find File",
-            action = ":lua Snacks.dashboard.pick('files')",
-          },
-          {
-            icon = " ",
-            key = "n",
-            desc = "New File",
-            action = ":ene | startinsert",
-          },
-          {
-            icon = " ",
-            key = "g",
-            desc = "Find Text",
-            action = ":lua Snacks.dashboard.pick('live_grep')",
-          },
-          {
-            icon = " ",
-            key = "c",
-            desc = "Config",
-            action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
-          },
-          {
-            icon = "󰒲 ",
-            key = "l",
-            desc = "Lazy",
-            action = ":Lazy",
-            enabled = package.loaded.lazy ~= nil,
-          },
-          {
-            icon = "",
-            key = "m",
-            desc = "Mason",
-            action = ":Mason",
-          },
-          {
-            icon = "",
-            key = "t",
-            desc = "Change Theme",
-            action = ":lua require('nvchad.themes').open()",
-          },
-          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
-        },
-      },
-      sections = {
-        { section = "header" },
-        {
-          icon = " ",
-          title = "Keymaps",
-          section = "keys",
-          gap = 1,
-          padding = 1,
-          indent = 2,
-        },
-        {
-          icon = " ",
-          title = "Git Status",
-          section = "terminal",
-          enabled = function()
-            return Snacks.git.get_root() ~= nil
-          end,
-          cmd = "git status --short --branch --renames",
-          height = 5,
-          padding = 1,
-          indent = 2,
-          ttl = 5 * 60,
-          gap = 1,
-        },
-        { section = "startup" },
-      },
-    },
-    explorer = { enabled = true },
+    dashboard = { enabled = true },
+    debug = { enabled = false },
+    dim = { enabled = false },
+    explorer = { enabled = true, replace_netrw = true },
+    git = { enabled = true },
+    gitbrowse = { enabled = false },
+    image = { enabled = false },
     indent = { enabled = true },
     input = { enabled = true },
-    image = {
-      formats = {
-        "png",
-        "jpg",
-        "jpeg",
-        "gif",
-        "bmp",
-        "webp",
-        "tiff",
-        "heic",
-        "avif",
-        "mp4",
-        "mov",
-        "avi",
-        "mkv",
-        "webm",
-        "pdf",
-      },
-      force = false,
-    },
+    layout = { enabled = false },
+    lazygit = { enabled = false },
     notifier = { enabled = true },
     notify = { enabled = true },
-    picker = {
-      enabled = true,
-      ui_select = true,
-      sources = {
-        explorer = {
-          actions = {
-            flash = function(picker)
-              require("flash").jump({
-                pattern = "^",
-                label = { after = { 0, 0 } },
-                search = {
-                  mode = "search",
-                  exclude = {
-                    function(win)
-                      return vim.bo[vim.api.nvim_win_get_buf(win)].filetype
-                        ~= "snacks_picker_list"
-                    end,
-                  },
-                },
-                action = function(match)
-                  local idx = picker.list:row2idx(match.pos[1])
-                  picker.list:_move(idx, true, true)
-                end,
-              })
-            end,
-            window_picker = function(_, item)
-              if item.dir then
-                return
-              end
-
-              local window_id = require("window-picker").pick_window()
-
-              if not window_id then
-                return
-              end
-
-              vim.api.nvim_set_current_win(window_id)
-              vim.cmd("edit " .. item._path)
-              Snacks.explorer()
-            end,
-          },
-          win = {
-            input = {
-              keys = {
-                ["<a-s>"] = { "flash", mode = { "n", "i" } },
-                ["s"] = { "flash" },
-              },
-            },
-            list = {
-              keys = {
-                ["w"] = "window_picker",
-              },
-            },
-          },
-        },
-      },
-    },
+    picker = { enabled = true },
+    profiler = { enabled = false },
     quickfile = { enabled = true },
+    rename = { enabled = true },
+    scope = { enabled = true },
+    scratch = { enabled = false },
+    scroll = { enabled = false },
     statuscolumn = { enabled = true },
     terminal = { enabled = true },
-    zen = {
-      enabled = true,
-      toggles = {
-        dim = true,
-        git_signs = false,
+    toggle = { enabled = true },
+    util = { enabled = true },
+    win = { enabled = false },
+    words = { enabled = true },
+    zen = { enabled = false },
+    styles = {
+      notifications = {
+        wo = { wrap = true },
       },
-      show = {
-        statusline = false,
-        tabline = false,
-      },
-      win = {
-        style = "zen",
-      },
-      zoom = {
-        toggles = {},
-        show = {
-          statusline = false,
-          tabline = false,
-        },
-        win = {
-          backdrop = true,
-          width = 0,
-        },
-      },
+    },
+  },
+  keys = {
+    {
+      "<leader>ff",
+      function()
+        Snacks.picker.smart()
+      end,
+      desc = "Smart find files",
+    },
+    {
+      "<leader><space>",
+      function()
+        Snacks.picker.buffers()
+      end,
+      desc = "Buffers",
+    },
+    {
+      "<leader>fg",
+      function()
+        Snacks.picker.grep()
+      end,
+      desc = "Grep",
+    },
+    {
+      "<leader>e",
+      function()
+        Snacks.explorer.open({
+          hidden = true,
+          ignored = true,
+          auto_close = true,
+        })
+      end,
+      desc = "File Explorer",
+    },
+    {
+      "<leader>fr",
+      function()
+        Snacks.picker.recent()
+      end,
+      desc = "Recent",
+    },
+    {
+      "<leader>sa",
+      function()
+        Snacks.picker.autocmds()
+      end,
+      desc = "Autocmds",
+    },
+    {
+      "<leader>sd",
+      function()
+        Snacks.picker.diagnostics()
+      end,
+      desc = "Diagnostics",
+    },
+    {
+      "<leader>sk",
+      function()
+        Snacks.picker.keymaps()
+      end,
+      desc = "Keymaps",
+    },
+    {
+      "<leader>sm",
+      function()
+        Snacks.picker.man()
+      end,
+      desc = "Man Pages",
+    },
+    {
+      "gd",
+      function()
+        Snacks.picker.lsp_definitions()
+      end,
+      desc = "Goto Definition",
+    },
+    {
+      "gD",
+      function()
+        Snacks.picker.lsp_declarations()
+      end,
+      desc = "Goto Declaration",
+    },
+    {
+      "gr",
+      function()
+        Snacks.picker.lsp_references()
+      end,
+      nowait = true,
+      desc = "References",
+    },
+    {
+      "gI",
+      function()
+        Snacks.picker.lsp_implementations()
+      end,
+      desc = "Goto Implementation",
+    },
+    {
+      "gy",
+      function()
+        Snacks.picker.lsp_type_definitions()
+      end,
+      desc = "Goto T[y]pe Definition",
+    },
+    {
+      "<leader>bd",
+      function()
+        Snacks.bufdelete()
+      end,
+      desc = "Delete Buffer",
+    },
+    {
+      "<leader>cR",
+      function()
+        Snacks.rename.rename_file()
+      end,
+      desc = "Rename File",
+    },
+    {
+      "<leader>t",
+      function()
+        Snacks.terminal()
+      end,
+      desc = "Toggle Terminal",
     },
   },
 }
