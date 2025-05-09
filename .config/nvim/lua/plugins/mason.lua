@@ -14,7 +14,10 @@ return {
   },
   {
     "mason-org/mason-lspconfig.nvim",
-    dependencies = { "neovim/nvim-lspconfig" },
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "dart-lang/dart-vim-plugin",
+    },
     opts = {
       automatic_enable = true,
       ensure_installed = {
@@ -25,7 +28,7 @@ return {
     },
     config = function(_, opts)
       require("mason-lspconfig").setup(opts)
-
+      vim.lsp.enable("dartls")
       vim.lsp.config("lua_ls", {
         settings = {
           Lua = {
