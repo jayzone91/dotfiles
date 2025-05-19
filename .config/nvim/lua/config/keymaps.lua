@@ -1,6 +1,16 @@
-local map = vim.keymap.set
+local function map(mode, key, func, opts)
+  vim.keymap.set(mode, key, func, opts)
+end
 
 map("n", "<leader>qq", ":qa<CR>", { desc = "Quit Neovim" })
+
+-- Save with CTRL+S
+map(
+  { "i", "x", "n", "s" },
+  "<C-S>",
+  "<cmd>w<CR><esc>",
+  { desc = "Save current buffer" }
+)
 
 -- better up/down
 map(

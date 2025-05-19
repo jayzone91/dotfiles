@@ -45,22 +45,8 @@ vim.api.nvim_create_autocmd("LspProgress", {
 
 return {
   "folke/snacks.nvim",
-  dependencies = {
-    {
-      "echasnovski/mini.icons",
-      version = false,
-      lazy = true,
-      opts = {},
-    },
-    {
-      "nvim-tree/nvim-web-devicons",
-      opts = {},
-      lazy = true,
-    },
-  },
   priority = 1000,
   lazy = false,
-  ---@type snacks.Config
   opts = {
     animate = { enabled = false },
     bigfile = { enabled = true },
@@ -68,7 +54,10 @@ return {
     dashboard = { enabled = true },
     debug = { enabled = false },
     dim = { enabled = false },
-    explorer = { enabled = true, replace_netrw = true },
+    explorer = {
+      enabled = true,
+      replace_netrw = true,
+    },
     git = { enabled = true },
     gitbrowse = { enabled = false },
     image = { enabled = false },
@@ -76,96 +65,80 @@ return {
     input = { enabled = true },
     layout = { enabled = false },
     lazygit = { enabled = false },
-    notifier = { enabled = true },
+    notifier = {
+      enabled = true,
+      timeout = 3000,
+    },
     notify = { enabled = true },
-    picker = { enabled = true },
     profiler = { enabled = false },
     quickfile = { enabled = true },
     rename = { enabled = true },
     scope = { enabled = true },
-    scratch = { enabled = false },
     scroll = { enabled = false },
     statuscolumn = { enabled = true },
     terminal = { enabled = true },
     toggle = { enabled = true },
     util = { enabled = true },
-    win = { enabled = false },
+    win = { enabled = true },
     words = { enabled = true },
     zen = { enabled = false },
-    styles = {
-      notifications = {
-        wo = { wrap = true },
-      },
-    },
   },
   keys = {
-    {
-      "<leader>ff",
-      function()
-        Snacks.picker.smart()
-      end,
-      desc = "Smart find files",
-    },
+    -- Top Pickers & Explorer
     {
       "<leader><space>",
       function()
         Snacks.picker.buffers()
       end,
-      desc = "Buffers",
+      desc = "Search open Buffers",
     },
+    {
+      "<leader>ff",
+      function()
+        Snacks.picker.smart()
+      end,
+      desc = "Smart Find Files",
+    },
+    {
+      "<leader>e",
+      function()
+        Snacks.explorer({
+          auto_close = true,
+        })
+      end,
+      desc = "Open Explorer",
+    },
+    -- Grep
     {
       "<leader>fg",
       function()
         Snacks.picker.grep()
       end,
-      desc = "Grep",
+      desc = "Grep Search",
     },
+    -- Search
     {
-      "<leader>e",
-      function()
-        Snacks.explorer.open({
-          hidden = true,
-          ignored = true,
-          auto_close = true,
-        })
-      end,
-      desc = "File Explorer",
-    },
-    {
-      "<leader>fr",
-      function()
-        Snacks.picker.recent()
-      end,
-      desc = "Recent",
-    },
-    {
-      "<leader>sa",
+      "<leader>fa",
       function()
         Snacks.picker.autocmds()
       end,
-      desc = "Autocmds",
+      desc = "Search Autocommands",
     },
     {
-      "<leader>sd",
+      "<leader>fh",
       function()
-        Snacks.picker.diagnostics()
+        Snacks.picker.help()
       end,
-      desc = "Diagnostics",
+      desc = "Search Help",
     },
     {
-      "<leader>sk",
+      "<leader>fk",
       function()
         Snacks.picker.keymaps()
       end,
-      desc = "Keymaps",
+      desc = "Search Keymaps",
     },
-    {
-      "<leader>sm",
-      function()
-        Snacks.picker.man()
-      end,
-      desc = "Man Pages",
-    },
+    -- LSP
     {
       "gd",
       function()
@@ -202,26 +175,38 @@ return {
       end,
       desc = "Goto T[y]pe Definition",
     },
+    -- Others
     {
-      "<leader>bd",
-      function()
-        Snacks.bufdelete()
-      end,
-      desc = "Delete Buffer",
-    },
-    {
-      "<leader>cR",
+      "<leader>rf",
       function()
         Snacks.rename.rename_file()
       end,
       desc = "Rename File",
     },
     {
-      "<leader>t",
+      "<leader>tt",
       function()
         Snacks.terminal()
       end,
       desc = "Toggle Terminal",
     },
   },
+  init = function()
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "VeryLazy",
+      callback = function()
+        _G.dd = function(...)
+          Snacks.debug.inspect(...)
+        end
+        _G.bt = function()
+          Snacks.debug.backtrace()
+        end
+        vim.print = _G.dd
+
+        -- Create some toggle mappings
+        Snacks.toggle.diagnostics():map("<leader>td")
+        Snacks.toggle.inlay_hints():map("<leader>ti")
+      end,
+    })
+  end,
 }

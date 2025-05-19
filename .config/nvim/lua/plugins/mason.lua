@@ -1,7 +1,6 @@
 return {
   {
     "mason-org/mason.nvim",
-    lazy = true,
     opts = {
       ui = {
         icons = {
@@ -14,46 +13,37 @@ return {
   },
   {
     "mason-org/mason-lspconfig.nvim",
+    dependencies = { "mason-org/mason.nvim" },
+    config = function()
+      require("mason-lspconfig").setup({
+        automatic_enable = false,
+      })
+    end,
+  },
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
     dependencies = {
-      "neovim/nvim-lspconfig",
-      "dart-lang/dart-vim-plugin",
+      "mason-org/mason.nvim",
+      "mason-org/mason-lspconfig.nvim",
     },
-    opts = {
-      automatic_enable = true,
-      ensure_installed = {
-        "lua_ls",
-        "gopls",
-        "yamlls",
-      },
-    },
-    config = function(_, opts)
-      require("mason-lspconfig").setup(opts)
-      vim.lsp.enable("dartls")
-      vim.lsp.config("lua_ls", {
-        settings = {
-          Lua = {
-            workspace = {
-              checkThirdParty = false,
-            },
-            codeLens = {
-              enabled = true,
-            },
-            completion = {
-              callSnippet = "Replace",
-            },
-            doc = {
-              privateName = { "^_" },
-            },
-            hint = {
-              enable = true,
-              setType = false,
-              paramType = true,
-              paramName = "Disable",
-              semicolon = "Disable",
-              arrayIndex = "Disable",
-            },
-          },
-        },
+    config = function()
+      local ensure_installed = {}
+      local lsp = require("config.lsp")
+      local formatter = require("config.formatter")
+
+      for server, _ in pairs(lsp) do
+        table.insert(ensure_installed, server)
+      end
+
+      for _filetype, formatters in pairs(formatter) do
+        for _idx, software in pairs(formatters) do
+          table.insert(ensure_installed, software)
+        end
+      end
+
+      require("mason-tool-installer").setup({
+        auto_update = true,
+        ensure_installed = ensure_installed,
       })
     end,
   },
