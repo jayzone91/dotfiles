@@ -18,7 +18,6 @@ vim.o.expandtab = true
 vim.o.icon = true
 vim.o.iconstring = ""
 vim.o.ignorecase = true
-vim.o.laststatus = 1
 vim.o.mouse = "a"
 vim.o.number = true
 vim.o.pumblend = 12
