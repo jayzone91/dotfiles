@@ -7,7 +7,12 @@ return {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
     -- Snippets
-    "L3MON4D3/LuaSnip",
+    {
+      "L3MON4D3/LuaSnip",
+      dependencies = {
+        "rafamadriz/friendly-snippets",
+      },
+    },
     "saadparwaiz1/cmp_luasnip",
 
     -- Tailwind
@@ -78,6 +83,8 @@ return {
   },
   config = function(_, opts)
     local cmp = require("cmp")
+
+    require("luasnip.loaders.from_vscode").lazy_load()
 
     cmp.setup({
       formatting = {

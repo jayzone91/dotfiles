@@ -25,18 +25,36 @@ return {
     dependencies = {
       "mason-org/mason.nvim",
       "mason-org/mason-lspconfig.nvim",
+      "jay-babu/mason-nvim-dap.nvim",
     },
     config = function()
+      require("mason-nvim-dap").setup({
+        automatic_installation = true,
+        handlers = {},
+        ensure_installed = {},
+      })
       local ensure_installed = {}
       local lsp = require("config.lsp")
       local formatter = require("config.formatter")
+      local linter = require("config.linter")
+      local debugger = require("config.debugger")
 
       for server, _ in pairs(lsp) do
         table.insert(ensure_installed, server)
       end
 
-      for _filetype, formatters in pairs(formatter) do
-        for _idx, software in pairs(formatters) do
+      for _, dap in pairs(debugger) do
+        table.insert(ensure_installed, dap)
+      end
+
+      for _, formatters in pairs(formatter) do
+        for _, software in pairs(formatters) do
+          table.insert(ensure_installed, software)
+        end
+      end
+
+      for _, lint in pairs(linter) do
+        for _, software in pairs(lint) do
           table.insert(ensure_installed, software)
         end
       end
