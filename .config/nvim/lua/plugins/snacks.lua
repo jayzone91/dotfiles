@@ -138,6 +138,13 @@ return {
       end,
       desc = "Search Keymaps",
     },
+    {
+      "<leader>fc",
+      function()
+        Snacks.picker.colorschemes()
+      end,
+      desc = "Search Colorschemes",
+    },
     -- LSP
     {
       "gd",
