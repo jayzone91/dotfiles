@@ -154,6 +154,12 @@ return {
       desc = "Goto Definition",
     },
     {
+      "ca",
+      vim.lsp.buf.code_action,
+      desc = "Code Actions",
+      has = "codeAction",
+    },
+    {
       "gD",
       function()
         Snacks.picker.lsp_declarations()
