@@ -7,14 +7,18 @@ NYI
 ## Brew Install
 
 Install [Homebrew](https://brew.sh/) as package Manager for MacOS:
+
 ```bash
 # paste in terminal an follow the instructions
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
+
 Update everything in Homebrew to recent Version
+
 ```bash
 brew update
 ```
+
 Install GUI Applications (Read more about these in [GUI Applications](#gui-applications))
 
 ```bash
@@ -48,17 +52,21 @@ brew install --formulae \
 ## Install Neovim
 
 Clone Neovim Repository
+
 ```bash
 git clone https://github.com/neovim/neovim
 ```
 
 If you want the _stable release_, also run `git checkout stable`.
+
 ```bash
 cd neovim
 ```
+
 ```bash
 make CMAKE_BUILD_TYPE=RelWithDebInfo
 ```
+
 ```bash
 sudo make install
 ```
@@ -70,7 +78,6 @@ sudo make install
 - [Github](https://github.com/apps/desktop) (Github Client)
 - [SetApp](https://setapp.com/de) (Alternative Marketplace for Premium Apps)
 - [Tunnelblick](https://tunnelblick.net) (VPN Client)
-
 
 ## Terminal Applications
 
@@ -94,6 +101,7 @@ NYI
 ## Stow
 
 Clone Dotfiles repo
+
 ```bash
 git clone https://github.com/jayzone91/dotfiles
 ```
