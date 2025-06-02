@@ -55,7 +55,11 @@ return {
 
       for _, lint in pairs(linter) do
         for _, software in pairs(lint) do
-          table.insert(ensure_installed, software)
+          if software == "golangcilint" then
+            table.insert(ensure_installed, "golangci-lint")
+          else
+            table.insert(ensure_installed, software)
+          end
         end
       end
 
