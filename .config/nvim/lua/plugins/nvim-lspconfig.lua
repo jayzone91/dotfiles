@@ -14,6 +14,7 @@ return {
       },
     },
   },
+  { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
   },
   opts = {
     capabilities = {
@@ -39,13 +40,27 @@ return {
       opts.capabilities or {}
     )
 
+
     for server, config in pairs(lsp_server) do
       if type(config) ~= "table" then
         config = {}
       end
-      config.capabilities = capabilities
+      config = vim.tbl_deep_extend("force", {}, {
+        capabilities = capabilities,
+      }, config)
+
       vim.lsp.enable(server)
       vim.lsp.config(server,config)
     end
+
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function()
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer = 0})
+      end,
+    })
+
+
+    require("lsp_lines").setup()
+    vim.diagnostic.config({virtual_text = false, virtual_lines = true})
   end,
 }
