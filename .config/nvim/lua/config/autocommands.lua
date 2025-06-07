@@ -96,3 +96,22 @@ vim.api.nvim_create_autocmd("TermOpen", {
     vim.bo.filetype = "terminal"
   end,
 })
+
+-- Lint when file is written to
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function()
+    local has_lint, lint = pcall(require, "lint")
+    if not has_lint then
+      return
+    end
+    lint.try_lint()
+  end
+})
+
+-- Disable automic comment on newline
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove({"c", "r", "o"})
+  end,
+})

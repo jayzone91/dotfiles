@@ -1,6 +1,9 @@
 -- Neovim Options
 -- Link: https://neovim.io/doc/user/options.html#options
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 local indent = 2
 
 vim.o.autoindent = true

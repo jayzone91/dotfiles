@@ -1,72 +1,73 @@
 return {
+  "mason-org/mason-lspconfig.nvim",
+  dependencies = {
   {
-    "mason-org/mason.nvim",
-    opts = {
-      ui = {
-        icons = {
-          package_installed = "✓",
-          package_pending = "➜",
-          package_uninstalled = "✗",
-        },
-      },
-    },
-  },
-  {
-    "mason-org/mason-lspconfig.nvim",
-    dependencies = { "mason-org/mason.nvim" },
-    config = function()
-      require("mason-lspconfig").setup({
-        automatic_enable = false,
-      })
-    end,
-  },
-  {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    dependencies = {
-      "mason-org/mason.nvim",
-      "mason-org/mason-lspconfig.nvim",
-      "jay-babu/mason-nvim-dap.nvim",
-    },
-    config = function()
-      require("mason-nvim-dap").setup({
-        automatic_installation = true,
-        handlers = {},
-        ensure_installed = {},
-      })
-      local ensure_installed = {}
-      local lsp = require("config.lsp")
-      local formatter = require("config.formatter")
-      local linter = require("config.linter")
-      local debugger = require("config.debugger")
+  "mason-org/mason.nvim",
+  opts = {
+    ui = {
+      icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+        }
+    }
+  }
+},
+"neovim/nvim-lspconfig",
+{
+  "WhoIsSethDaniel/mason-tool-installer.nvim",
+  opts = function()
+    local formatters = require("config.formatter")
+    local linters = require("config.linter")
+    local possibly_installed = {}
+    local ensure_installed = {}
 
-      for server, _ in pairs(lsp) do
-        table.insert(ensure_installed, server)
+    for _,formatter_table in pairs(formatters) do
+      for _, formatter in pairs(formatter_table) do
+        table.insert(possibly_installed, formatter)
       end
+    end
 
-      for _, dap in pairs(debugger) do
-        table.insert(ensure_installed, dap)
+    for _, linter_table in pairs(linters) do
+      for _, linter in pairs(linter_table) do
+        if linter == "golangcilint" then
+          table.insert(possibly_installed, "golangci-lint")
+        else
+        table.insert(possibly_installed, linter)
       end
-
-      for _, formatters in pairs(formatter) do
-        for _, software in pairs(formatters) do
-          table.insert(ensure_installed, software)
-        end
       end
+    end
 
-      for _, lint in pairs(linter) do
-        for _, software in pairs(lint) do
-          if software == "golangcilint" then
-            table.insert(ensure_installed, "golangci-lint")
-          else
-            table.insert(ensure_installed, software)
-          end
-        end
+    -- sort out duplicates
+    local hash = {}
+    for _, v in ipairs(possibly_installed) do
+      if (not hash[v]) then
+        table.insert(ensure_installed, v)
+        hash[v] = true
       end
+    end
 
-      require("mason-tool-installer").setup({
-        auto_update = true,
-        ensure_installed = ensure_installed,
-      })
-    end,
-  },
+    local opts = {
+      ensure_installed = ensure_installed,
+      auto_update = true,
+    }
+
+    return opts
+  end,
+}
+},
+opts = function()
+  local lsps = require("config.lsp")
+  local ensure_installed = {}
+
+  for lsp, _ in pairs(lsps) do
+    table.insert(ensure_installed, lsp)
+  end
+    
+  local opts = {
+    automatic_enable = false,
+    ensure_installed = ensure_installed,
+  }
+  return opts
+end,
 }

@@ -30,8 +30,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
       return table.insert(msg, v.msg) or not v.done
     end, p)
 
-    local spinner =
-      { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+    local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
     vim.notify(table.concat(msg, "\n"), "info", {
       id = "lsp_progress",
       title = client.name,
@@ -47,179 +46,59 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
+  ---@type snacks.Config
   opts = {
-    animate = { enabled = false },
-    bigfile = { enabled = true },
-    bufdelete = { enabled = true },
-    dashboard = { enabled = true },
-    debug = { enabled = false },
-    dim = { enabled = false },
-    explorer = {
-      enabled = true,
-      replace_netrw = true,
-    },
-    git = { enabled = true },
-    gitbrowse = { enabled = false },
-    image = { enabled = false },
-    indent = { enabled = true },
-    input = { enabled = true },
-    layout = { enabled = false },
-    lazygit = { enabled = false },
-    notifier = {
-      enabled = true,
-      timeout = 3000,
-    },
-    notify = { enabled = true },
-    profiler = { enabled = false },
-    quickfile = { enabled = true },
-    rename = { enabled = true },
-    scope = { enabled = true },
-    scroll = { enabled = false },
-    statuscolumn = { enabled = true },
-    terminal = { enabled = true },
-    toggle = { enabled = true },
-    util = { enabled = true },
-    win = { enabled = true },
-    words = { enabled = true },
-    zen = { enabled = false },
+    animate = {enabled = false},
+    bigfile = {enabled = true},
+    bufdelete = {enabled = true},
+    dashboard = {example = "doom"},
+    debug = {enabled = false},
+    dim = {enabled = false},
+    explorer = {enabled = true},
+    git = {enabled = true},
+    gitbrowse = {enabled = false},
+    image = {enabled = false},
+    indent = {enabled = true},
+    input = {enabled = true},
+    layout = {enabled = false},
+    lazygit = {enabled = false},
+    notifier = {enabled = true},
+    notify = {enabled = true},
+    picker = {enabled = true},
+    profiler = {enabled = true},
+    quickfile = {enabled = true},
+    rename = {enabled = true},
+    scope = {enabled = true},
+    scratch = {enabled = false},
+    scroll = {enabled = false},
+    statuscolumn = {enabled = true},
+    terminal = {enabled = true},
+    toggle = {enabled = true},
+    util = {enabled = true},
+    win = {enabled = false},
+    words = {enabled = true},
+    zen = {enabled = false}
   },
   keys = {
-    -- Top Pickers & Explorer
-    {
-      "<leader><space>",
-      function()
-        Snacks.picker.buffers()
-      end,
-      desc = "Search open Buffers",
-    },
-    {
-      "<leader>ff",
-      function()
-        Snacks.picker.smart()
-      end,
-      desc = "Smart Find Files",
-    },
-    {
-      "<leader>e",
-      function()
-        Snacks.explorer({
-          auto_close = true,
-        })
-      end,
-      desc = "Open Explorer",
-    },
-    -- Grep
-    {
-      "<leader>fg",
-      function()
-        Snacks.picker.grep()
-      end,
-      desc = "Grep Search",
-    },
-    -- Search
-    {
-      "<leader>fa",
-      function()
-        Snacks.picker.autocmds()
-      end,
-      desc = "Search Autocommands",
-    },
-    {
-      "<leader>fh",
-      function()
-        Snacks.picker.help()
-      end,
-      desc = "Search Help",
-    },
-    {
-      "<leader>fk",
-      function()
-        Snacks.picker.keymaps()
-      end,
-      desc = "Search Keymaps",
-    },
-    {
-      "<leader>fc",
-      function()
-        Snacks.picker.colorschemes()
-      end,
-      desc = "Search Colorschemes",
-    },
-    -- LSP
-    {
-      "gd",
-      function()
-        Snacks.picker.lsp_definitions()
-      end,
-      desc = "Goto Definition",
-    },
-    {
-      "ca",
-      vim.lsp.buf.code_action,
-      desc = "Code Actions",
-      has = "codeAction",
-    },
-    {
-      "gD",
-      function()
-        Snacks.picker.lsp_declarations()
-      end,
-      desc = "Goto Declaration",
-    },
-    {
-      "gr",
-      function()
-        Snacks.picker.lsp_references()
-      end,
-      nowait = true,
-      desc = "References",
-    },
-    {
-      "gI",
-      function()
-        Snacks.picker.lsp_implementations()
-      end,
-      desc = "Goto Implementation",
-    },
-    {
-      "gy",
-      function()
-        Snacks.picker.lsp_type_definitions()
-      end,
-      desc = "Goto T[y]pe Definition",
-    },
-    -- Others
-    {
-      "<leader>rf",
-      function()
-        Snacks.rename.rename_file()
-      end,
-      desc = "Rename File",
-    },
-    {
-      "<leader>tt",
-      function()
-        Snacks.terminal()
-      end,
-      desc = "Toggle Terminal",
-    },
-  },
-  init = function()
-    vim.api.nvim_create_autocmd("User", {
-      pattern = "VeryLazy",
-      callback = function()
-        _G.dd = function(...)
-          Snacks.debug.inspect(...)
-        end
-        _G.bt = function()
-          Snacks.debug.backtrace()
-        end
-        vim.print = _G.dd
+        { "<leader>ff", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+    { "<leader><space>", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
+        { "<leader>e", function() Snacks.explorer({auto_close = true,}) end, desc = "File Explorer" },
+    { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
+    { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
+    { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
+    { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
+    { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+    { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
+    { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+    { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+    { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+    { "<leader>sl", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+    { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+    { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
+    { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
+    { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+    { "<leader>tt",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
 
-        -- Create some toggle mappings
-        Snacks.toggle.diagnostics():map("<leader>td")
-        Snacks.toggle.inlay_hints():map("<leader>ti")
-      end,
-    })
-  end,
+  }
 }
