@@ -110,3 +110,4 @@ alias brewup="brew update && brew upgrade"
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"

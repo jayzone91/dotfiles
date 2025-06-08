@@ -30,7 +30,8 @@ vim.api.nvim_create_autocmd("LspProgress", {
       return table.insert(msg, v.msg) or not v.done
     end, p)
 
-    local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+    local spinner =
+      { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
     vim.notify(table.concat(msg, "\n"), "info", {
       id = "lsp_progress",
       title = client.name,
@@ -48,57 +49,171 @@ return {
   lazy = false,
   ---@type snacks.Config
   opts = {
-    animate = {enabled = false},
-    bigfile = {enabled = true},
-    bufdelete = {enabled = true},
-    dashboard = {example = "doom"},
-    debug = {enabled = false},
-    dim = {enabled = false},
-    explorer = {enabled = true},
-    git = {enabled = true},
-    gitbrowse = {enabled = false},
-    image = {enabled = false},
-    indent = {enabled = true},
-    input = {enabled = true},
-    layout = {enabled = false},
-    lazygit = {enabled = false},
-    notifier = {enabled = true},
-    notify = {enabled = true},
-    picker = {enabled = true},
-    profiler = {enabled = true},
-    quickfile = {enabled = true},
-    rename = {enabled = true},
-    scope = {enabled = true},
-    scratch = {enabled = false},
-    scroll = {enabled = false},
-    statuscolumn = {enabled = true},
-    terminal = {enabled = true},
-    toggle = {enabled = true},
-    util = {enabled = true},
-    win = {enabled = false},
-    words = {enabled = true},
-    zen = {enabled = false}
+    animate = { enabled = false },
+    bigfile = { enabled = true },
+    bufdelete = { enabled = true },
+    dashboard = { example = "doom" },
+    debug = { enabled = false },
+    dim = { enabled = false },
+    explorer = { enabled = true },
+    git = { enabled = true },
+    gitbrowse = { enabled = false },
+    image = { enabled = false },
+    indent = { enabled = true },
+    input = { enabled = true },
+    layout = { enabled = false },
+    lazygit = { enabled = false },
+    notifier = { enabled = true },
+    notify = { enabled = true },
+    picker = { enabled = true },
+    profiler = { enabled = true },
+    quickfile = { enabled = true },
+    rename = { enabled = true },
+    scope = { enabled = true },
+    scratch = { enabled = false },
+    scroll = { enabled = false },
+    statuscolumn = { enabled = true },
+    terminal = { enabled = true },
+    toggle = { enabled = true },
+    util = { enabled = true },
+    win = { enabled = false },
+    words = { enabled = true },
+    zen = { enabled = false },
   },
   keys = {
-        { "<leader>ff", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-    { "<leader><space>", function() Snacks.picker.buffers() end, desc = "Buffers" },
-    { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
-        { "<leader>e", function() Snacks.explorer({auto_close = true,}) end, desc = "File Explorer" },
-    { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
-    { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
-    { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
-    { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
-    { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
-    { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
-    { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
-    { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
-    { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-    { "<leader>sl", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
-    { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
-    { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
-    { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
-    { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
-    { "<leader>tt",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
-
-  }
+    {
+      "<leader>ff",
+      function()
+        Snacks.picker.smart()
+      end,
+      desc = "Smart Find Files",
+    },
+    {
+      "<leader><space>",
+      function()
+        Snacks.picker.buffers()
+      end,
+      desc = "Buffers",
+    },
+    {
+      "<leader>fg",
+      function()
+        Snacks.picker.grep()
+      end,
+      desc = "Grep",
+    },
+    {
+      "<leader>e",
+      function()
+        Snacks.explorer({ auto_close = true })
+      end,
+      desc = "File Explorer",
+    },
+    {
+      "<leader>sa",
+      function()
+        Snacks.picker.autocmds()
+      end,
+      desc = "Autocmds",
+    },
+    {
+      "<leader>sM",
+      function()
+        Snacks.picker.man()
+      end,
+      desc = "Man Pages",
+    },
+    {
+      "<leader>si",
+      function()
+        Snacks.picker.icons()
+      end,
+      desc = "Icons",
+    },
+    {
+      "<leader>sh",
+      function()
+        Snacks.picker.help()
+      end,
+      desc = "Help Pages",
+    },
+    {
+      "gd",
+      function()
+        Snacks.picker.lsp_definitions()
+      end,
+      desc = "Goto Definition",
+    },
+    {
+      "gD",
+      function()
+        Snacks.picker.lsp_declarations()
+      end,
+      desc = "Goto Declaration",
+    },
+    {
+      "gr",
+      function()
+        Snacks.picker.lsp_references()
+      end,
+      nowait = true,
+      desc = "References",
+    },
+    {
+      "gI",
+      function()
+        Snacks.picker.lsp_implementations()
+      end,
+      desc = "Goto Implementation",
+    },
+    {
+      "gy",
+      function()
+        Snacks.picker.lsp_type_definitions()
+      end,
+      desc = "Goto T[y]pe Definition",
+    },
+    {
+      "<leader>sl",
+      function()
+        Snacks.picker.lsp_symbols()
+      end,
+      desc = "LSP Symbols",
+    },
+    {
+      "<leader>sS",
+      function()
+        Snacks.picker.lsp_workspace_symbols()
+      end,
+      desc = "LSP Workspace Symbols",
+    },
+    {
+      "<leader>n",
+      function()
+        Snacks.notifier.show_history()
+      end,
+      desc = "Notification History",
+    },
+    {
+      "<leader>cR",
+      function()
+        Snacks.rename.rename_file()
+      end,
+      desc = "Rename File",
+    },
+    {
+      "<leader>un",
+      function()
+        Snacks.notifier.hide()
+      end,
+      desc = "Dismiss All Notifications",
+    },
+    {
+      "<leader>tt",
+      function()
+        Snacks.terminal()
+      end,
+      desc = "Toggle Terminal",
+    },
+  },
 }

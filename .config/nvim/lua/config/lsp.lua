@@ -113,4 +113,6 @@ M.vtsls = {
 
 M.tailwindcss = {}
 
+M.pyright = {}
+
 return M

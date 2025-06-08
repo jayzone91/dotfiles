@@ -105,13 +105,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
       return
     end
     lint.try_lint()
-  end
+  end,
 })
 
 -- Disable automic comment on newline
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "*",
   callback = function()
-    vim.opt_local.formatoptions:remove({"c", "r", "o"})
+    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
   end,
 })

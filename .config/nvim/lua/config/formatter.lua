@@ -8,5 +8,6 @@ M.typescriptreact = { "prettierd" }
 M.css = { "prettierd" }
 M.json = { "prettierd" }
 M.go = { "goimports", "gofumpt" }
+M.python = { "black" }
 
 return M
