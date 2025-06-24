@@ -1,3 +1,6 @@
+---@module "snacks"
+
+-- LSP Progress
 ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
 local progress = vim.defaulttable()
 vim.api.nvim_create_autocmd("LspProgress", {
@@ -51,8 +54,8 @@ return {
   opts = {
     animate = { enabled = false },
     bigfile = { enabled = true },
-    bufdelete = { enabled = true },
-    dashboard = { example = "doom" },
+    bufdelete = { enabled = false },
+    dashboard = { enabled = true, example = "compact_files" },
     debug = { enabled = false },
     dim = { enabled = false },
     explorer = { enabled = true },
@@ -63,22 +66,26 @@ return {
     input = { enabled = true },
     layout = { enabled = false },
     lazygit = { enabled = false },
-    notifier = { enabled = true },
+    notifier = { enabled = true, timeout = 3000 },
     notify = { enabled = true },
     picker = { enabled = true },
-    profiler = { enabled = true },
+    profiler = { enabled = false },
     quickfile = { enabled = true },
     rename = { enabled = true },
     scope = { enabled = true },
     scratch = { enabled = false },
-    scroll = { enabled = false },
+    scoll = { enabled = false },
     statuscolumn = { enabled = true },
     terminal = { enabled = true },
-    toggle = { enabled = true },
     util = { enabled = true },
-    win = { enabled = false },
+    win = { enabled = true },
     words = { enabled = true },
     zen = { enabled = false },
+    styles = {
+      notification = {
+        wo = { wrap = true }, -- Wrap notifications
+      },
+    },
   },
   keys = {
     {
@@ -96,18 +103,18 @@ return {
       desc = "Buffers",
     },
     {
-      "<leader>fg",
-      function()
-        Snacks.picker.grep()
-      end,
-      desc = "Grep",
-    },
-    {
       "<leader>e",
       function()
         Snacks.explorer({ auto_close = true })
       end,
       desc = "File Explorer",
+    },
+    {
+      "<leader>fg",
+      function()
+        Snacks.picker.grep()
+      end,
+      desc = "Grep",
     },
     {
       "<leader>sa",
@@ -117,11 +124,25 @@ return {
       desc = "Autocmds",
     },
     {
-      "<leader>sM",
+      "<leader>sb",
       function()
-        Snacks.picker.man()
+        Snacks.picker.lines()
       end,
-      desc = "Man Pages",
+      desc = "Buffer Lines",
+    },
+    {
+      "<leader>sd",
+      function()
+        Snacks.picker.diagnostics()
+      end,
+      desc = "Diagnostics",
+    },
+    {
+      "<leader>sh",
+      function()
+        Snacks.picker.help()
+      end,
+      desc = "Help Pages",
     },
     {
       "<leader>si",
@@ -131,12 +152,20 @@ return {
       desc = "Icons",
     },
     {
-      "<leader>sh",
+      "<leader>sk",
       function()
-        Snacks.picker.help()
+        Snacks.picker.keymaps()
       end,
-      desc = "Help Pages",
+      desc = "Keymaps",
     },
+    {
+      "<leader>sM",
+      function()
+        Snacks.picker.man()
+      end,
+      desc = "Man Pages",
+    },
+    -- LSP
     {
       "gd",
       function()
@@ -172,41 +201,6 @@ return {
         Snacks.picker.lsp_type_definitions()
       end,
       desc = "Goto T[y]pe Definition",
-    },
-    {
-      "<leader>sl",
-      function()
-        Snacks.picker.lsp_symbols()
-      end,
-      desc = "LSP Symbols",
-    },
-    {
-      "<leader>sS",
-      function()
-        Snacks.picker.lsp_workspace_symbols()
-      end,
-      desc = "LSP Workspace Symbols",
-    },
-    {
-      "<leader>n",
-      function()
-        Snacks.notifier.show_history()
-      end,
-      desc = "Notification History",
-    },
-    {
-      "<leader>cR",
-      function()
-        Snacks.rename.rename_file()
-      end,
-      desc = "Rename File",
-    },
-    {
-      "<leader>un",
-      function()
-        Snacks.notifier.hide()
-      end,
-      desc = "Dismiss All Notifications",
     },
     {
       "<leader>tt",
