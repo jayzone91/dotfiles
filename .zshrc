@@ -111,3 +111,6 @@ alias brewup="brew update && brew upgrade"
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
+
+# Added by Windsurf
+export PATH="/Users/jay/.codeium/windsurf/bin:$PATH"
