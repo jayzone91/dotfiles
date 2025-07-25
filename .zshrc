@@ -38,7 +38,7 @@ zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
 
-# Load completions
+# Load brew completions
 autoload -Uz compinit && compinit
 
 zinit cdreplay -q
