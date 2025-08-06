@@ -1,6 +1,7 @@
 return {
 	"hrsh7th/nvim-cmp",
 	dependencies = {
+		"onsails/lspkind.nvim",
 		"neovim/nvim-lspconfig",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
@@ -8,6 +9,7 @@ return {
 		"hrsh7th/cmp-cmdline",
 		"hrsh7th/cmp-vsnip",
 		"hrsh7th/vim-vsnip",
+		"roobert/tailwindcss-colorizer-cmp.nvim",
 		{
 			"folke/lazydev.nvim",
 			ft = "lua",
@@ -18,8 +20,38 @@ return {
 			},
 		},
 	},
-	config = function(_, opts)
+	config = function()
 		local cmp = require("cmp")
+
+		vim.opt.completeopt = { "menu", "menuone", "noselect" }
+		vim.opt.shortmess:append("c")
+
+		local lspkind = require("lspkind")
+		lspkind.init({
+			symbol_map = {
+				Copilot = "",
+			},
+		})
+
+		vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+
+		local kind_formatter = lspkind.cmp_format({
+			mode = "symbol_text",
+			menu = {
+				buffer = "[buf]",
+				nvim_lsp = "[LSP]",
+				nvim_lua = "[api]",
+				path = "[path]",
+				luasnip = "[snip]",
+				gh_issues = "[issues]",
+				tn = "[TabNine]",
+				eruby = "[erb]",
+			},
+		})
+
+		require("tailwindcss-colorizer-cmp").setup({
+			color_square_width = 2,
+		})
 
 		cmp.setup({
 			snippet = {
@@ -45,6 +77,30 @@ return {
 			}, {
 				{ name = "buffer" },
 			}),
+			formatting = {
+				fields = { "abbr", "kind", "menu" },
+				expandable_indicator = true,
+				format = function(entry, vim_item)
+					vim_item = kind_formatter(entry, vim_item)
+					vim_item = require("tailwindcss-colorizer-cmp").formatter(entry, vim_item)
+
+					return vim_item
+				end,
+			},
+			sorting = {
+				priority_weight = 2,
+				comparators = {
+					cmp.config.compare.offset,
+					cmp.config.compare.exact,
+					cmp.config.compare.score,
+					cmp.config.compare.recently_used,
+					cmp.config.compare.locality,
+					cmp.config.compare.kind,
+					cmp.config.compare.sort_text,
+					cmp.config.compare.length,
+					cmp.config.compare.order,
+				},
+			},
 		})
 
 		cmp.setup.cmdline({ "/", "?" }, {
