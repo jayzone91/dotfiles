@@ -28,3 +28,8 @@ vim.g.neovide_cursor_antialiasing = true
 vim.g.neovide_cursor_animate_in_insert_mode = false
 vim.g.neovide_cursor_animate_command_line = false
 vim.g.neovide_cursor_vfx_mode = "pixiedust"
+
+vim.keymap.set({ "n", "v" }, "<C-c>", '"+y', { desc = "Copy in System Clipboard" })
+vim.keymap.set({ "n", "v" }, "<C-v>", '"+p', { desc = "Paste from System Clipboard" })
+vim.keymap.set("i", "<C-c>", '<Esc>"+ya', { desc = "Copy in System Clipboard" })
+vim.keymap.set("i", "<C-v>", '<Esc>"+pa', { desc = "Paste from System Clipboard" })
