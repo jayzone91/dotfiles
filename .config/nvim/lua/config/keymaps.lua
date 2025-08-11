@@ -4,3 +4,4 @@ end
 
 map("n", "<leader>qq", ":qa<CR>", "Neovim beenden")
 map("n", "<c-s>", ":w<CR>", "Save Buffer")
+map({ "n", "i" }, "<C-s>", "<Esc>:w<CR>", "Buffer speichern")
