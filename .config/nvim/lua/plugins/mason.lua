@@ -1,7 +1,27 @@
 local lspserver = {
 	lua_ls = {},
+	dockerls = {},
+	prismals = {},
+	docker_compose_language_service = {},
 	tailwindcss = {
 		filetypes_exclude = { "markdown" },
+	},
+	pyright = {},
+	ruff = {
+		cmd_env = { RUFF_TRACE = "messages" },
+		init_options = {
+			settings = {
+				logLevel = "error",
+			},
+		},
+	},
+	marksman = {},
+	svelte = {
+		capabilities = {
+			workspace = {
+				didChangeWatchedFiles = vim.fn.has("nvim-0.10") == 0 and { dynamicRegistration = true },
+			},
+		},
 	},
 	gopls = {
 		settings = {
@@ -91,6 +111,37 @@ local lspserver = {
 			},
 		},
 	},
+	yamlls = {
+		capabilities = {
+			textDocument = {
+				foldingRange = {
+					dynamicRegistration = false,
+					lineFoldingOnly = true,
+				},
+			},
+		},
+		on_new_config = function(new_config)
+			new_config.settings.yaml.schemas = vim.tbl_deep_extend(
+				"force",
+				new_config.settings.yaml.schemas or {},
+				require("schemastore").yaml.schemas()
+			)
+		end,
+		settings = {
+			redhat = { telemetry = { enabled = true } },
+			yaml = {
+				keyOrdering = false,
+				format = {
+					enable = true,
+				},
+				validate = true,
+				schemastore = {
+					enable = false,
+					url = "",
+				},
+			},
+		},
+	},
 }
 
 local formatter = {
@@ -98,6 +149,9 @@ local formatter = {
 	"goimports",
 	"gofumpt",
 	"prettier",
+	"hadolint",
+	"markdownlint-cli2",
+	"markdown-toc",
 }
 
 return {
@@ -133,6 +187,16 @@ return {
 				vim.tbl_extend("force", { capabilities = capabilities }, config)
 				vim.lsp.config(server, config)
 			end
+
+			local config = { capabilities = capabilities }
+
+			vim.lsp.enable("nushell")
+			vim.lsp.enable("autohotkey_lsp")
+			vim.lsp.enable("ruby_lsp")
+
+			vim.lsp.config("nushell", config)
+			vim.lsp.config("autohotkey_lsp", config)
+			vim.lsp.config("ruby_lsp", config)
 		end,
 	},
 	{
