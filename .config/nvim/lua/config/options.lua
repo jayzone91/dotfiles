@@ -27,4 +27,3 @@ vim.o.timeoutlen = 250
 vim.o.title = true
 vim.o.updatetime = 350
 vim.o.wrap = false
-
