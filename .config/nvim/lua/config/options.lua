@@ -3,7 +3,13 @@
 local indent = 2
 
 vim.o.background = "dark"
-vim.o.clipboard = "unnamedplus"
+-- Sync Clipboard between OS and NeoVim.
+-- Schedule the settings after "UIEnter" to increase startup time
+vim.schedule(function()
+  vim.o.clipboard = "unnamedplus"
+end)
+vim.o.breakindent = true
+vim.o.signcolumn = "yes"
 vim.o.completeopt = "menu,menuone,noinsert"
 vim.o.confirm = true
 vim.o.expandtab = true
@@ -23,7 +29,9 @@ vim.o.splitright = true
 vim.o.swapfile = false
 vim.o.tabstop = indent
 vim.o.termguicolors = true
-vim.o.timeoutlen = 250
+vim.o.timeoutlen = 200
 vim.o.title = true
-vim.o.updatetime = 350
+vim.o.updatetime = 250
 vim.o.wrap = false
+vim.o.cursorline = true
+vim.o.inccommand = "split"

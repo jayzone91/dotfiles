@@ -27,9 +27,9 @@ return {
     auto_install = true,
     highlight = {
       enable = true,
-      disable = { "c", "rust" },
-      additional_vim_regex_highlighting = false,
+      additional_vim_regex_highlighting = { "ruby" },
     },
+    indent = { enable = true, disable = { "ruby" } },
   },
   config = function(_, opts)
     require("nvim-treesitter.configs").setup(opts)
