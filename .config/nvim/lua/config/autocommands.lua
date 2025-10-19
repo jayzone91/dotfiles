@@ -30,6 +30,14 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
+-- disable commenting next line
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "r", "o" })
+  end,
+})
+
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),

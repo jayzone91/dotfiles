@@ -1,6 +1,7 @@
 return {
   "akinsho/bufferline.nvim",
   version = "*",
+  event = "VeryLazy",
   dependencies = "nvim-tree/nvim-web-devicons",
   keys = {
     { "<s-tab>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
@@ -16,11 +17,7 @@ return {
       end,
       diagnostics = "nvim_lsp",
       always_show_bufferline = false,
-      numbers = "ordinal",
-      color_icons = true,
-      show_buffer_icons = true,
-      auto_toggle_bufferline = true,
-      offsets = {
+      offset = {
         {
           filetype = "neo-tree",
           text = "Neo-tree",
@@ -34,9 +31,8 @@ return {
     },
   },
   config = function(_, opts)
-    vim.opt.termguicolors = true
     require("bufferline").setup(opts)
-
+    -- Fix Bufferline when restoring a sesion
     vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
       callback = function()
         vim.schedule(function()

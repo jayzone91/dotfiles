@@ -6,6 +6,12 @@ return {
     spec = {
       {
         mode = { "n", "v" },
+        { "<leader>f", group = "Find" },
+        { "<leader>s", group = "Search" },
+        { "<leader>t", group = "Toggle" },
+        { "<leader>x", group = "diagnostics/quickfix" },
+        { "<leader>q", group = "quit" },
+        { "<leader>c", group = "code" },
       },
     },
   },

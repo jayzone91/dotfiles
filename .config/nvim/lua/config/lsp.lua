@@ -9,6 +9,7 @@ local lsp_server = {
     },
   },
   html = {},
+  emmet_language_server = {},
   lua_ls = {},
   dockerls = {},
   prismals = {},
@@ -218,9 +219,18 @@ M.mason = function()
     )
   end
 
+  local navic = require("nvim-navic")
+
+  local on_attach = function(client, bufnr)
+    if client.server_capabilities.documentSymbolProvider then
+      navic.attach(client, bufnr)
+    end
+  end
+
   for server, config in pairs(lsp_server) do
     config = config or {}
     vim.tbl_extend("force", { capabilities = capabilities }, config)
+    vim.tbl_extend("force", { on_attach = on_attach }, config)
     vim.lsp.config(server, config)
   end
 end

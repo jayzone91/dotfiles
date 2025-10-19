@@ -1,6 +1,7 @@
 return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
+  version = false, -- last release is way too old
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
@@ -8,6 +9,17 @@ return {
     "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-vsnip",
     "hrsh7th/vim-vsnip",
+    -- Better Sorting
+    "lukas-reineke/cmp-under-comparator",
+    -- Tailwind CSS Colors
+    {
+      "roobert/tailwindcss-colorizer-cmp.nvim",
+      config = function()
+        require("tailwindcss-colorizer-cmp").setup({
+          color_square_width = 2,
+        })
+      end,
+    },
     "onsails/lspkind.nvim",
     {
       "windwp/nvim-autopairs",
@@ -50,16 +62,41 @@ return {
       }, {
         { name = "buffer" },
       }),
+      sorting = {
+        comparators = {
+          cmp.config.compare.offset,
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+          require("cmp-under-comparator").under,
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          cmp.config.compare.length,
+          cmp.config.compare.order,
+        },
+      },
       formatting = {
+        fields = { "kind", "abbr", "menu" },
         format = lspkind.cmp_format({
-          mode = "symbol",
-          maxwidth = {
-            menu = 50,
-            abbr = 50,
+          mode = "symbol_text",
+          maxWidth = 120,
+          menu = {
+            nvim_lsp = "[LSP]",
+            path = "[Path]",
+            buffer = "[Buffer]",
+            luasnip = "[LuaSnip]",
           },
-          ellipsis_char = "...",
-          show_labelDetails = true,
           before = function(entry, vim_item)
+            if
+              vim_item.kind == "Color" and entry.completion_item.documentation
+            then
+              return require("tailwindcss-colorizer-cmp").formatter(
+                entry,
+                vim_item
+              )
+            end
+            vim_item.kind = lspkind.symbolic(vim_item.kind)
+                and lspkind.symbolic(vim_item.kind)
+              or vim_item.kind
             return vim_item
           end,
         }),

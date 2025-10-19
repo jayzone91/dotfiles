@@ -3,14 +3,18 @@ return {
   config = function()
     local l = require("config.lsp").linter
 
-    l.javascript = { "biomejs" }
-    l.javascriptreact = { "biomejs" }
-    l.javascript.jsx = { "biomejs" }
-    l.typescript = { "biomejs" }
-    l.typescriptreact = { "biomejs" }
-    l.typescript.tsx = { "biomejs" }
+    local linters = {}
 
-    require("lint").linters_by_ft = l
+    table.insert(linters, l)
+
+    linters.javascript = { "biomejs" }
+    linters.javascriptreact = { "biomejs" }
+    linters.javascript.jsx = { "biomejs" }
+    linters.typescript = { "biomejs" }
+    linters.typescriptreact = { "biomejs" }
+    linters.typescript.tsx = { "biomejs" }
+
+    require("lint").linters_by_ft = linters
 
     vim.api.nvim_create_autocmd({ "BufWritePost" }, {
       callback = function()
