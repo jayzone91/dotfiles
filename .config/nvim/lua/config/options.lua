@@ -35,3 +35,18 @@ vim.o.updatetime = 250
 vim.o.wrap = false
 vim.o.cursorline = true
 vim.o.inccommand = "split"
+
+-- Windows specific settings
+if vim.uv.os_uname().sysname:find("Windows") ~= nil then
+  vim.o.shell = "pwsh"
+  vim.opt.shellcmdflaf = "-NoLogo -ExecutionPolicy RemoteSigned "
+    .. "-Command [Console]::InputEncoding=[Console]::OutputEncoding"
+    .. "=[System.Text.Encoding]::UTF8;$PSStyle.Formatting.Error = '';"
+    .. "$PSStyle.Formatting.ErrorAccent = '';"
+    .. "$PSStyle.Formatting.Warning = '';$PSStyle.OutputRendering = 'PlainText';"
+  vim.opt.shellredir = "2>&1 | Out-File -Encoding utf8 %s; exit $LastExitCode"
+  vim.opt.shellpipe = "2>&1 | Out-File -Encoding utf8 %s; exot $LastExitCode"
+  vim.opt.shellquote = ""
+  vim.opt.shellxquote = ""
+  vim.opt.shadafile = "NONE"
+end
