@@ -1,6 +1,7 @@
 local M = {}
 
 local lsp_server = {
+  biome = {},
   cssls = {},
   eslint = {
     settings = {
@@ -158,9 +159,12 @@ local lsp_server = {
 M.formatter = {
   lua = { "stylua" },
   go = { "goimports", "gofumpt" },
-  javascript = { "prettier" },
-  javascriptreact = { "prettier" },
-  ["javascript.jsx"] = { "prettier" },
+  javascript = { "biome" },
+  javascriptreact = { "biome" },
+  ["javascript.jsx"] = { "biome" },
+  typescript = { "biome" },
+  typescriptreact = { "biome" },
+  ["typescript.tsx"] = { "biome" },
   css = { "prettier" },
   scss = { "prettier" },
   html = { "prettier" },

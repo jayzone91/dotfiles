@@ -1,7 +1,15 @@
 return {
   "stevearc/conform.nvim",
+  event = { "BufWritePre" },
+  cmd = { "ConformInfo" },
   opts = function()
     local f = require("config.lsp").formatter
+    f.javascript = { "biome", "biome-organize-imports" }
+    f.javascriptreact = { "biome", "biome-organize-imports" }
+    f.javascript.jsx = { "biome", "biome-organize-imports" }
+    f.typescript = { "biome", "biome-organize-imports" }
+    f.typescriptreact = { "biome", "biome-organize-imports" }
+    f.typescript.tsx = { "biome", "biome-organize-imports" }
     return {
       formatters_by_ft = f,
       format_on_save = {
