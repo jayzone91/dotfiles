@@ -39,7 +39,7 @@ vim.o.inccommand = "split"
 -- Windows specific settings
 if vim.uv.os_uname().sysname:find("Windows") ~= nil then
   vim.o.shell = "pwsh"
-  vim.opt.shellcmdflaf = "-NoLogo -ExecutionPolicy RemoteSigned "
+  vim.opt.shellcmdflag = "-NoLogo -ExecutionPolicy RemoteSigned "
     .. "-Command [Console]::InputEncoding=[Console]::OutputEncoding"
     .. "=[System.Text.Encoding]::UTF8;$PSStyle.Formatting.Error = '';"
     .. "$PSStyle.Formatting.ErrorAccent = '';"
