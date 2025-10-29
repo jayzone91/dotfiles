@@ -67,4 +67,39 @@ return {
       },
     },
   },
+  {
+    "hat0uma/csvview.nvim",
+    opts = {
+      parser = { comments = { "#", "//" } },
+      jump_next_field_end = { "<Tab>", mode = { "n", "v" } },
+      jump_prev_field_end = { "<S-Tab>", mode = { "n", "v" } },
+      jump_next_row = { "<Enter>", mode = { "n", "v" } },
+      jump_prev_row = { "<S-Enter>", mode = { "n", "v" } },
+    },
+    cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
+    keys = {
+      { "<leader>tc", ":CsvViewToggle<CR>", desc = "Toggle CSV View" },
+    },
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = function()
+      require("lazy").load({ plugins = { "markdown-preview.nvim" } })
+      vim.fn["mkdp#util#install"]()
+    end,
+    ft = "markdown",
+    keys = {
+      {
+        "<leader>mp",
+        ft = "markdown",
+        "<cmd>MarkdownPreviewToggle<CR>",
+        desc = "Markdown Preview",
+      },
+    },
+    config = function()
+      vim.cmd([[do FileType]])
+    end,
+  },
+  "wakatime/vim-wakatime",
 }

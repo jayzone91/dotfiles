@@ -20,6 +20,13 @@ M.nvdash = {
     { txt = "  Find File", keys = "f", cmd = "Telescope find_files" },
     { txt = "  Recent Files", keys = "o", cmd = "Telescope oldfiles" },
     { txt = "󰈭  Find Word", keys = "g", cmd = "Telescope live_grep" },
+    {
+      txt = "󰚰  Install Mason Packages",
+      keys = "m",
+      cmd = "MasonInstallAll",
+    },
+    { txt = "󰉁  Lazy", keys = "l", cmd = "Lazy" },
+    { txt = "  Quit NeoVim", keys = "q", cmd = "qa" },
 
     { txt = "─", hl = "NvDashFooter", no_gap = true, rep = true },
 
