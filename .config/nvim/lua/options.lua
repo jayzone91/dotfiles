@@ -6,3 +6,4 @@ require("nvchad.options")
 -- o.cursorlineopt ='both' -- to enable cursorline!
 
 vim.o.wrap = false
+vim.o.scrolloff = 8

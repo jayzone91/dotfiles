@@ -102,4 +102,5 @@ return {
     end,
   },
   "wakatime/vim-wakatime",
+  "ColaMint/pokemon.nvim",
 }

@@ -16,38 +16,16 @@ M.base46 = {
 
 M.nvdash = {
   load_on_startup = true,
-  buttons = {
-    { txt = "  Find File", keys = "f", cmd = "Telescope find_files" },
-    { txt = "  Recent Files", keys = "o", cmd = "Telescope oldfiles" },
-    { txt = "󰈭  Find Word", keys = "g", cmd = "Telescope live_grep" },
-    {
-      txt = "󰚰  Install Mason Packages",
-      keys = "m",
-      cmd = "MasonInstallAll",
-    },
-    { txt = "󰉁  Lazy", keys = "l", cmd = "Lazy" },
-    { txt = "  Quit NeoVim", keys = "q", cmd = "qa" },
+  buttons = require("nvdash"),
+  header = function()
+    local pokemon = require("pokemon")
+    pokemon.setup({
+      number = "random",
+      size = "auto",
+    })
 
-    { txt = "─", hl = "NvDashFooter", no_gap = true, rep = true },
-
-    {
-      txt = function()
-        local stats = require("lazy").stats()
-        local ms = math.floor(stats.startuptime) .. " ms"
-        return "  Loaded "
-          .. stats.loaded
-          .. "/"
-          .. stats.count
-          .. " plugins in "
-          .. ms
-      end,
-      hl = "NvDashFooter",
-      no_gap = true,
-      content = "fit",
-    },
-
-    { txt = "─", hl = "NvDashFooter", no_gap = true, rep = true },
-  },
+    return pokemon.header()
+  end,
 }
 
 return M
