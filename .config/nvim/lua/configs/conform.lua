@@ -1,5 +1,6 @@
 local options = {
   formatters_by_ft = {
+    php = { "php_cs_fixer" },
     lua = { "stylua" },
     javascript = { "biome" },
     javascriptreact = { "biome" },

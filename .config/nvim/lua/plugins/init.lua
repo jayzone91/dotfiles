@@ -24,8 +24,10 @@ return {
         "vimdoc",
         "html",
         "css",
+        "php",
       },
     },
+    auto_install = true,
   },
 
   {
@@ -103,4 +105,9 @@ return {
   },
   "wakatime/vim-wakatime",
   "ColaMint/pokemon.nvim",
+  {
+    "kawre/neotab.nvim",
+    event = "InsertEnter",
+    opts = {},
+  },
 }
