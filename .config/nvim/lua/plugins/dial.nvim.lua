@@ -13,12 +13,43 @@ end
 
 return {
   "monaqa/dial.nvim",
-  -- stylua: ignore
   keys = {
-    { "+", function() return M.dial(true) end, expr = true, desc = "Increment", mode = {"n", "v"} },
-    { "-", function() return M.dial(false) end, expr = true, desc = "Decrement", mode = {"n", "v"} },
-    { "g+", function() return M.dial(true, true) end, expr = true, desc = "Increment", mode = {"n", "v"} },
-    { "g-", function() return M.dial(false, true) end, expr = true, desc = "Decrement", mode = {"n", "v"} },
+    {
+      "+",
+      function()
+        return M.dial(true)
+      end,
+      expr = true,
+      desc = "Increment",
+      mode = { "n", "v" },
+    },
+    {
+      "-",
+      function()
+        return M.dial(false)
+      end,
+      expr = true,
+      desc = "Decrement",
+      mode = { "n", "v" },
+    },
+    {
+      "g+",
+      function()
+        return M.dial(true, true)
+      end,
+      expr = true,
+      desc = "Increment",
+      mode = { "n", "v" },
+    },
+    {
+      "g-",
+      function()
+        return M.dial(false, true)
+      end,
+      expr = true,
+      desc = "Decrement",
+      mode = { "n", "v" },
+    },
   },
   opts = function()
     local augend = require("dial.augend")
@@ -30,8 +61,6 @@ return {
     })
 
     local ordinal_numbers = augend.constant.new({
-      -- elements through which we cycle. When we increment, we go down
-      -- On decrement we go up
       elements = {
         "first",
         "second",
@@ -44,10 +73,7 @@ return {
         "ninth",
         "tenth",
       },
-      -- if true, it only matches strings with word boundary. firstDate wouldn't work for example
       word = false,
-      -- do we cycle back and forth (tenth to first on increment, first to tenth on decrement).
-      -- Otherwise nothing will happen when there are no further values
       cyclic = true,
     })
 
@@ -164,7 +190,6 @@ return {
     }
   end,
   config = function(_, opts)
-    -- copy defaults to each group
     for name, group in pairs(opts.groups) do
       if name ~= "default" then
         vim.list_extend(group, opts.groups.default)

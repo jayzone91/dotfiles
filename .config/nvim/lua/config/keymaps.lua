@@ -1,29 +1,16 @@
-require("nvchad.mappings")
-
--- add yours here
-
-local map = function(mode, key, func, desc, silent)
-  vim.keymap.set(
-    mode,
-    key,
-    func,
-    { desc = desc or "", silent = silent or false }
-  )
+local map = function(mode, key, func, desc)
+  vim.keymap.set(mode, key, func, { desc = desc })
 end
-
-map("n", ";", ":", "CMD enter command mode")
-
-map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
-
-map("n", "<leader>e", ":NvimTreeToggle<CR>", "Toggle NvimTree", true)
-
-map("n", "<leader>qq", ":qa<CR>", "Quit NeoVim")
 
 -- Clear Highlights
 map("n", "<Esc>", "cmd>nohlsearch<CR>")
 
 -- Exit Terminal Mode
 map("t", "<Esc><Esc>", "<C-\\><C-n>", "Exit terminal Mode")
+
+map("n", "<leader>qq", ":qa<cr>", "Exit NeoVim")
+map("n", "<c-s>", ":w<CR>", "Save Buffer")
+map({ "n", "i" }, "<C-s>", "<Esc>:w<CR>", "Buffer speichern")
 
 map("n", "<leader>ss", ":vsplit<CR>", "Split Vertical")
 map("n", "<leader>sv", ":split<CR>", "Split Horziontal")
