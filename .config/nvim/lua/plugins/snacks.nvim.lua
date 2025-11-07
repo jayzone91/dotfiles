@@ -74,6 +74,7 @@ return {
       end,
       desc = "File Explorer",
     },
+    { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
     {
       "<leader>sa",
       function()

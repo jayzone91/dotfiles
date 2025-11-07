@@ -73,3 +73,66 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo[event.buf].buflisted = false
   end,
 })
+
+-- open help in vertical split
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "help",
+  command = "wincmd L",
+})
+
+-- syntax highlighting for dotenv files
+vim.api.nvim_create_autocmd("BufReadPre", {
+  group = augroup("dotenv"),
+  pattern = { ".env", ".env.*" },
+  callback = function()
+    vim.bo.filetype = "dosini"
+  end
+})
+
+local cursorline_group = augroup("active_cursorline")
+-- show cursorline only in active window enable
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+  group = cursorline_group,
+  callback = function()
+    vim.opt_local.cursorline = true
+  end
+})
+
+-- show cursorline only in active window diable
+vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
+  group = cursorline_group,
+  callback = function()
+    vim.opt_local.cursorline = false
+  end
+})
+
+local highlight_group = augroup("highlight_lsp_ref")
+-- highlight when stopping cursor
+vim.api.nvim_create_autocmd("CursorMoved", {
+  group = highlight_group,
+  callback = function()
+    if vim.fn.mode() ~= "i" then
+      local clients = vim.lsp.get_clients({ bufnr = 0 })
+      local supports_highlight = false
+      for _, client in ipairs(clients) do
+        if client.server_capabilities.documentHighlightProvider then
+          supports_highlight = true
+          break
+        end
+      end
+
+      if supports_highlight then
+        vim.lsp.buf.clear_references()
+        vim.lsp.buf.document_highlight()
+      end
+    end
+  end
+})
+
+-- clear highlights
+vim.api.nvim_create_autocmd("CursorMovedI", {
+  group = highlight_group,
+  callback = function()
+    vim.lsp.buf.clear_references()
+  end
+})
