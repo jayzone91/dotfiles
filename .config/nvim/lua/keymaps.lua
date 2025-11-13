@@ -1,5 +1,5 @@
 local map = function(mode, key, func, desc)
-  vim.keymap.set(mode, key, func, { desc = desc })
+  return vim.keymap.set(mode, key, func, { desc = desc })
 end
 
 -- Clear Highlights

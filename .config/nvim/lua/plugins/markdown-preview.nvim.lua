@@ -5,12 +5,11 @@ return {
     require("lazy").load({ plugins = { "markdown-preview.nvim" } })
     vim.fn["mkdp#util#install"]()
   end,
-  ft = "markdown",
   keys = {
     {
-      "<leader>mp",
+      "<leader>tm",
       ft = "markdown",
-      "<cmd>MarkdownPreviewToggle<CR>",
+      "<cmd>MarkdownPreviewToggle<cr>",
       desc = "Markdown Preview",
     },
   },

@@ -1,36 +1,7 @@
 return {
   "saghen/blink.cmp",
-  event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
-    {
-      "L3MON4D3/LuaSnip",
-      dependencies = "rafamadriz/friendly-snippets",
-      opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-      config = function(_, opts)
-        require("luasnip").config.set_config(opts)
-
-        require("luasnip.loaders.from_vscode").lazy_load()
-        require("luasnip.loaders.from_snipmate").load()
-        require("luasnip.loaders.from_lua").load()
-
-        vim.api.nvim_create_autocmd("InsertLeave", {
-          callback = function()
-            if
-              require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
-              and not require("luasnip").session.jump_active
-            then
-              require("luasnip").unlink_current()
-            end
-          end,
-        })
-      end,
-    },
-    {
-      "saghen/blink.compat",
-      optional = true,
-      opts = {},
-      version = "*",
-    },
+    "rafamadriz/friendly-snippets",
     "onsails/lspkind.nvim",
     { "nvim-mini/mini.icons", version = false, opts = {} },
   },
@@ -38,51 +9,13 @@ return {
   ---@module "blink.cmp"
   ---@type blink.cmp.Config
   opts = {
-    snippets = {
-      preset = "luasnip",
-    },
-    cmdline = { enabled = true },
-    appearance = { nerd_font_variant = "normal" },
-    fuzzy = { implementation = "prefer_rust" },
-    sources = {
-      default = function(ctx)
-        local success, node = pcall(vim.treesitter.get_node)
-        if
-          success
-          and node
-          and vim.tbl_contains(
-            { "comment", "line_comment", "block_comment" },
-            node:type()
-          )
-        then
-          return { "buffer" }
-        elseif vim.bo.filetype == "lua" then
-          return { "lsp", "path" }
-        else
-          return { "lsp", "path", "snippets", "buffer" }
-        end
-      end,
-    },
-    keymap = {
-      preset = "default",
-      ["<Up>"] = { "select_prev", "fallback" },
-      ["<Down>"] = { "select_next", "fallback" },
-      ["<CR>"] = { "accept", "fallback" },
-    },
+    keymap = { preset = "enter" },
+    appearance = { nerd_font_variant = "mono" },
     completion = {
-      documentation = {
-        auto_show = true,
-        auto_show_delay_ms = 200,
-        window = {
-          border = "single",
-        },
-      },
+      documentation = { auto_show = true },
+      accept = { auto_brackets = { enabled = true } },
       menu = {
-        scrollbar = false,
-        border = "single",
         draw = {
-          padding = { 1, 1 },
-          columns = { { "kind_icon" }, { "label" }, { "kind" } },
           components = {
             kind_icon = {
               text = function(ctx)
@@ -122,13 +55,25 @@ return {
                   if mini_icon then
                     return mini_hl
                   end
+                  return ctx.kind_hl
                 end
-                return ctx.kind_hl
               end,
             },
           },
         },
       },
     },
+    sources = {
+      default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+      providers = {
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          score_offset = 100,
+        },
+      },
+    },
+    fuzzy = { implementation = "prefer_rust_with_warning" },
   },
+  opts_extend = { "sources.default" },
 }

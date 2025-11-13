@@ -8,7 +8,7 @@ return {
       function()
         require("which-key").show({ global = false })
       end,
-      desc = "Buffer Local Keymaps",
+      desc = "Buffer local keymaps",
     },
   },
 }

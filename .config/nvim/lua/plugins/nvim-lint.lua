@@ -1,14 +1,16 @@
 return {
   "mfussenegger/nvim-lint",
+  event = { "BufReadPost", "InsertLeave" },
   config = function()
-    local l = require("config.lint").linter
+    require("lint").linters_by_ft = require("config.mason").linter
 
-    require("lint").linters_by_ft = l
-
-    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-      callback = function()
-        require("lint").try_lint()
-      end,
-    })
+    vim.api.nvim_create_autocmd(
+      { "BufWritePost", "BufReadPost", "InsertLeave" },
+      {
+        callback = function()
+          require("lint").try_lint()
+        end,
+      }
+    )
   end,
 }

@@ -2,8 +2,10 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("jay_" .. name, { clear = true })
 end
 
--- Check if we need to reload the file when it changed
-vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+local autocmd = vim.api.nvim_create_autocmd
+
+autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  desc = "Check if we need to reload the file when it changed",
   group = augroup("checktime"),
   callback = function()
     if vim.o.buftype ~= "nofile" then
@@ -12,9 +14,9 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   end,
 })
 
--- resize splits if window got resized
-vim.api.nvim_create_autocmd({ "VimResized" }, {
-  group = augroup("resize_splits"),
+autocmd({ "VimResized" }, {
+  desc = "resize splits if window got resized",
+  group = augroup("resize_split"),
   callback = function()
     local current_tab = vim.fn.tabpagenr()
     vim.cmd("tabdo wincmd =")
@@ -22,16 +24,16 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
--- disable commenting next line
-vim.api.nvim_create_autocmd("FileType", {
+augroup("FileType", {
+  desc = "disable commenting next line",
   pattern = "*",
   callback = function()
     vim.opt_local.formatoptions:remove({ "r", "o" })
   end,
 })
 
--- close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
+  desc = "close some filetypes with <q>",
   group = augroup("close_with_q"),
   pattern = {
     "PlenaryTestPopup",
@@ -65,8 +67,8 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- make it easier to close man-files when opened inline
 vim.api.nvim_create_autocmd("FileType", {
+  desc = "make it easier to close man-files when opened inline",
   group = augroup("man_unlisted"),
   pattern = { "man" },
   callback = function(event)
@@ -74,41 +76,41 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- open help in vertical split
 vim.api.nvim_create_autocmd("FileType", {
+  desc = "open help in vertical split",
   pattern = "help",
   command = "wincmd L",
 })
 
--- syntax highlighting for dotenv files
 vim.api.nvim_create_autocmd("BufReadPre", {
+  desc = "syntax highlighting for dotenv files",
   group = augroup("dotenv"),
   pattern = { ".env", ".env.*" },
   callback = function()
     vim.bo.filetype = "dosini"
-  end
+  end,
 })
 
 local cursorline_group = augroup("active_cursorline")
--- show cursorline only in active window enable
 vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+  desc = "show cursorline only in active window enable",
   group = cursorline_group,
   callback = function()
     vim.opt_local.cursorline = true
-  end
+  end,
 })
 
--- show cursorline only in active window diable
 vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
+  desc = " show cursorline only in active window diable",
   group = cursorline_group,
   callback = function()
     vim.opt_local.cursorline = false
-  end
+  end,
 })
 
 local highlight_group = augroup("highlight_lsp_ref")
--- highlight when stopping cursor
 vim.api.nvim_create_autocmd("CursorMoved", {
+  desc = "highlight when stopping cursor",
   group = highlight_group,
   callback = function()
     if vim.fn.mode() ~= "i" then
@@ -126,13 +128,13 @@ vim.api.nvim_create_autocmd("CursorMoved", {
         vim.lsp.buf.document_highlight()
       end
     end
-  end
+  end,
 })
 
--- clear highlights
 vim.api.nvim_create_autocmd("CursorMovedI", {
+  desc = "clear highlights",
   group = highlight_group,
   callback = function()
     vim.lsp.buf.clear_references()
-  end
+  end,
 })
