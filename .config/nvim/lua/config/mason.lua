@@ -188,6 +188,41 @@ M.lsp = {
       },
     },
   },
+  emmet_language_server = {
+    filetypes = {
+      "css",
+      "eruby",
+      "html",
+      "javascript",
+      "javascriptreact",
+      "less",
+      "sass",
+      "scss",
+      "pug",
+      "typescript",
+      "typescriptreact",
+    },
+    init_options = {
+      ---@type table<string, string>
+      includeLanguages = {},
+      ---@type string[]
+      excludeLanguages = {},
+      ---@type string[]
+      extensionsPath = {},
+      ---@type table<string, any>
+      preferences = {},
+      ---@type boolean Defaults to "true"
+      showAbbreviationsSuggeestions = true,
+      ---@type "always" | "never" Defaults to "always"
+      showExpandedAbbreviation = "always",
+      ---@type boolean Defaults to "false"
+      showSuggestionsAsSnippets = false,
+      ---@type table<string, any>
+      syntaxProfiles = {},
+      ---@type table<string, string>
+      variables = {},
+    },
+  },
 }
 
 M.linter = {
@@ -203,7 +238,7 @@ M.formatter = {
   go = { "goimports", "gofumpt" },
   markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
   ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
-  php = { "php-cs-fixer" },
+  php = { "prettier" },
 }
 
 return M

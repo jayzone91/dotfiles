@@ -109,7 +109,9 @@ return {
         return vim.g.snacks_words ~= false and vim.b[buf].snacks_words ~= false
       end,
     },
-    zen = { enabled = true },
+    zen = {
+      enabled = true,
+    },
   },
   keys = {
     {

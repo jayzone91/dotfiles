@@ -1,5 +1,6 @@
 return {
   "akinsho/bufferline.nvim",
+  lazy = false,
   version = "*",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   ---@module "bufferline"
@@ -13,7 +14,7 @@ return {
         Snacks.bufdelete(n)
       end,
       diagnostics = "nvim_lsp",
-      always_show_bufferline = false,
+      always_show_bufferline = true,
       offsets = {
         {
           filetype = "snacks_layout_box",
