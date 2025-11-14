@@ -24,7 +24,7 @@ autocmd({ "VimResized" }, {
   end,
 })
 
-augroup("FileType", {
+autocmd("FileType", {
   desc = "disable commenting next line",
   pattern = "*",
   callback = function()

@@ -11,11 +11,35 @@ return {
   opts = {
     keymap = { preset = "enter" },
     appearance = { nerd_font_variant = "mono" },
+    signature = { enabled = true },
+    cmdline = {
+      keymap = { preset = "inherit" },
+      completion = {
+        list = { selection = { preselect = false } },
+        menu = {
+          auto_show = function(_)
+            return vim.fn.getcmdtype() == ":"
+          end,
+        },
+        ghost_text = { enabled = true },
+      },
+    },
+    fuzzy = {
+      sorts = {
+        "exact",
+        "score",
+        "sort_text",
+        "label",
+      },
+    },
     completion = {
-      documentation = { auto_show = true },
+      documentation = { auto_show = true, auto_show_delay_ms = 200 },
       accept = { auto_brackets = { enabled = true } },
+      ghost_text = { enabled = false },
+      list = { selection = { preselect = true, auto_insert = false } },
       menu = {
         draw = {
+          treesitter = { "lsp" },
           components = {
             kind_icon = {
               text = function(ctx)
@@ -64,7 +88,27 @@ return {
       },
     },
     sources = {
-      default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+      default = function()
+        local sources = { "lazydev", "lsp", "path", "snippets", "buffer" }
+
+        local ok, node = pcall(vim.treesitter.get_node)
+
+        if ok and node then
+          if
+            not vim.tbl_contains(
+              { "comment", "line_comment", "block_comment" },
+              node:type()
+            )
+          then
+            table.insert(sources, "path")
+          end
+          if node:type() ~= "string" then
+            table.insert(sources, "snippets")
+          end
+        end
+
+        return sources
+      end,
       providers = {
         lazydev = {
           name = "LazyDev",
@@ -73,7 +117,6 @@ return {
         },
       },
     },
-    fuzzy = { implementation = "prefer_rust_with_warning" },
   },
   opts_extend = { "sources.default" },
 }

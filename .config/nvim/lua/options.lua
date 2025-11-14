@@ -34,3 +34,4 @@ o.wrap = false
 o.cursorline = true
 o.inccommand = "split"
 o.laststatus = 3
+o.cursorline = true
