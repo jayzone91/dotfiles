@@ -59,7 +59,7 @@ return {
     explorer = {
       enabled = true,
     },
-    gh = { enabled = false },
+    gh = { enabled = true },
     git = { enabled = true },
     gitbrowse = { enabled = false },
     image = { enabled = false },

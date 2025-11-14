@@ -18,6 +18,7 @@ return {
     integration = {
       lualine = {
         enabled = true,
+        mode_section = "c",
         highlight = "fg",
       },
     },
