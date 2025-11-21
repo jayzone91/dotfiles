@@ -6,10 +6,6 @@
         "language": "all",
         "path": "./all.json"
       },
-      {
-        "language": "php",
-        "path": "./php.json",
-      }
     ]
   }
 }

@@ -252,6 +252,13 @@ return {
       desc = "Goto Declaration",
     },
     {
+      "<leader>ca",
+      function()
+        vim.lsp.buf.code_action()
+      end,
+      desc = "Code Actions",
+    },
+    {
       "gr",
       function()
         Snacks.picker.lsp_references()

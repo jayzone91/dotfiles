@@ -20,7 +20,7 @@ map("n", "<leader><Down>", "yyp", { desc = "Duplicate Line Down" })
 map("n", "<c-a>", "ggVG", { desc = "Select all" })
 
 -- Clear Highlights
-map("n", "<Esc>", "cmd>nohlsearch<CR>")
+map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Exit Terminal Mode
 map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal Mode" })

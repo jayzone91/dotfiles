@@ -8,6 +8,11 @@ return {
     local servers = require("config.mason").lsp
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
+    local on_attach = function()
+      vim.keymap.set("n", "H", function()
+        vim.lsp.buf.hover()
+      end)
+    end
 
     if pcall(require, "cmp_nvim_lsp") then
       vim.tbl_extend(
@@ -29,7 +34,11 @@ return {
       vim.lsp.enable(server)
       config = config or {}
 
-      vim.tbl_extend("force", { capabilities = capabilities }, config)
+      vim.tbl_extend(
+        "force",
+        { capabilities = capabilities, on_attach = on_attach },
+        config
+      )
 
       vim.lsp.config(server, config)
     end

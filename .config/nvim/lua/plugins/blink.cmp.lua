@@ -4,6 +4,7 @@ return {
     "rafamadriz/friendly-snippets",
     "onsails/lspkind.nvim",
     "ribru17/blink-cmp-spell",
+    "bydlw98/blink-cmp-env",
     { "nvim-mini/mini.icons", version = false, opts = {} },
   },
   version = "1.*",
@@ -99,7 +100,7 @@ return {
     sources = {
       default = function()
         local sources =
-          { "lazydev", "lsp", "path", "snippets", "buffer", "spell" }
+          { "lazydev", "lsp", "path", "snippets", "buffer", "spell", "env" }
         return sources
       end,
       providers = {
@@ -107,6 +108,10 @@ return {
           name = "LazyDev",
           module = "lazydev.integrations.blink",
           score_offset = 100,
+        },
+        env = {
+          name = "Env",
+          module = "blink-cmp-env",
         },
         spell = {
           name = "Spell",
