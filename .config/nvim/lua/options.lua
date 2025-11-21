@@ -2,10 +2,37 @@ local indent = 2
 
 local o = vim.o
 
+if vim.fn.has("wsl") == 1 then
+  vim.g.clipboard = {
+    name = "win32yank",
+    copy = {
+      ["+"] = { "win32yank", "-i", "--ctrlf" },
+      ["*"] = { "win32yank", "-i", "--ctrlf" },
+    },
+    paste = {
+      ["+"] = { "win32yank", "-i", "--lf" },
+      ["*"] = { "win32yank", "-i", "--lf" },
+    },
+    cache_enabled = 0,
+  }
+  vim.schedule(function()
+    vim.o.clipboard = "unnamedplus"
+  end)
+elseif vim.fn.has("unix") == 1 then
+  vim.schedule(function()
+    vim.o.clipboard = "unnamedplus"
+  end)
+elseif vim.fn.has("mac") == 1 then
+  vim.schedule(function()
+    vim.o.clipboard = "unnamed"
+  end)
+elseif vim.fn.has("win23") then
+  vim.schedule(function()
+    vim.o.clipboard = "unnamedplus"
+  end)
+end
+
 o.background = "dark"
-vim.schedule(function()
-  vim.o.clipboard = "unnamedplus"
-end)
 o.breakindent = true
 o.signcolumn = "yes"
 o.completeopt = "menu,menuone,noinsert"
