@@ -3,11 +3,21 @@ return {
   dependencies = "MunifTanjim/nui.nvim",
   ft = "json",
   config = function()
+    local colors = require("cyberdream.colors").default
     require("package-info").setup({
-      colors = {
-        up_to_date = require("cyberdream.colors").default.green,
-        outdated = require("cyberdream.colors").default.orange,
-        invalid = require("cyberdream.colors").default.red,
+      highlights = {
+        up_to_date = {
+          fg = colors.green,
+          bg = colors.bg,
+        },
+        outdated = {
+          fg = colors.orange,
+          bg = colors.bg,
+        },
+        invalid = {
+          fg = colors.red,
+          bg = colors.bg,
+        },
       },
     })
   end,
