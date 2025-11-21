@@ -154,40 +154,6 @@ M.lsp = {
     },
   },
   bashls = {},
-  harper_ls = {
-    settings = {
-      ["harper-ls"] = {
-        userDictPath = "",
-        workspaceDictPath = "",
-        fileDictPath = "",
-        linters = {
-          SpellCheck = true,
-          SpelledNumbers = false,
-          AnA = true,
-          SentenceCapitalization = true,
-          UnclosedQuotes = true,
-          WrongQuotes = false,
-          LongSentences = true,
-          RepeatedWords = true,
-          Spaces = true,
-          Matcher = true,
-          CorrectNumberSuffix = true,
-        },
-        codeActions = {
-          IgnoreLinkTitle = false,
-        },
-        markdown = {
-          IgnoreLinkTitle = false,
-        },
-        diagnosticSeverity = "hint",
-        isolateEnglish = false,
-        dialect = "American",
-        maxFileLength = 120000,
-        ignoreLintsPath = "",
-        excludePatterns = {},
-      },
-    },
-  },
   emmet_language_server = {
     filetypes = {
       "css",
@@ -230,15 +196,25 @@ M.linter = {
   dockerfile = { "hadolint" },
   go = { "golangci-lint" },
   markdown = { "markdownlint-cli2" },
-  php = { "phpcs" },
+  php = { "phpstan" },
+  javascript = { "eslint_d" },
+  typescript = { "eslint_d" },
+  javascriptreact = { "eslint_d" },
+  typescriptreact = { "eslint_d" },
 }
 
 M.formatter = {
   lua = { "stylua" },
   go = { "goimports", "gofumpt" },
-  markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
-  ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
-  php = { "prettier" },
+  markdown = { "prettierd", "markdownlint-cli2", "markdown-toc" },
+  ["markdown.mdx"] = { "prettierd", "markdownlint-cli2", "markdown-toc" },
+  php = { "prettierd" },
+  javascript = { "prettierd" },
+  typescript = { "prettierd" },
+  typescriptreact = { "prettierd" },
+  javascriptreact = { "prettierd" },
+  ["typescript.tsx"] = { "prettierd" },
+  ["javascript.jsx"] = { "prettierd" },
 }
 
 return M

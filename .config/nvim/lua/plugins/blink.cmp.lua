@@ -3,6 +3,7 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
     "onsails/lspkind.nvim",
+    "ribru17/blink-cmp-spell",
     { "nvim-mini/mini.icons", version = false, opts = {} },
   },
   version = "1.*",
@@ -26,6 +27,12 @@ return {
     },
     fuzzy = {
       sorts = {
+        function(a, b)
+          local sort = require("blink.cmp.fuzzy.sort")
+          if a.source_id == "spell" and b.source_id == "spell" then
+            return sort.label(a, b)
+          end
+        end,
         "exact",
         "score",
         "sort_text",
@@ -39,7 +46,6 @@ return {
       list = { selection = { preselect = true, auto_insert = false } },
       menu = {
         draw = {
-          treesitter = { "lsp" },
           components = {
             label = {
               text = function(ctx)
@@ -52,24 +58,21 @@ return {
             kind_icon = {
               text = function(ctx)
                 if vim.tbl_contains({ "Path" }, ctx.source_name) then
-                  local mini_icon, _ = require("mini.icons").get_icon(
-                    ctx.item.data.type,
-                    ctx.label
-                  )
+                  local mini_icon, _ =
+                    require("mini.icons").get(ctx.item.data.type, ctx.label)
                   if mini_icon then
                     return mini_icon .. ctx.icon_gap
                   end
                 end
+
                 local icon =
                   require("lspkind").symbolic(ctx.kind, { mode = "symbol" })
                 return icon .. ctx.icon_gap
               end,
               highlight = function(ctx)
                 if vim.tbl_contains({ "Path" }, ctx.source_name) then
-                  local mini_icon, mini_hl = require("mini.icons").get_icon(
-                    ctx.item.data.type,
-                    ctx.label
-                  )
+                  local mini_icon, mini_hl =
+                    require("mini.icons").get(ctx.item.data.type, ctx.label)
                   if mini_icon then
                     return mini_hl
                   end
@@ -80,15 +83,13 @@ return {
             kind = {
               highlight = function(ctx)
                 if vim.tbl_contains({ "Path" }, ctx.source_name) then
-                  local mini_icon, mini_hl = require("mini.icons").get_icon(
-                    ctx.item.data.type,
-                    ctx.label
-                  )
+                  local mini_icon, mini_hl =
+                    require("mini.icons").get(ctx.item.data.type, ctx.label)
                   if mini_icon then
                     return mini_hl
                   end
-                  return ctx.kind_hl
                 end
+                return ctx.kind_hl
               end,
             },
           },
@@ -97,24 +98,8 @@ return {
     },
     sources = {
       default = function()
-        local sources = { "lazydev", "lsp", "path", "snippets", "buffer" }
-
-        local ok, node = pcall(vim.treesitter.get_node)
-
-        if ok and node then
-          if
-            not vim.tbl_contains(
-              { "comment", "line_comment", "block_comment" },
-              node:type()
-            )
-          then
-            table.insert(sources, "path")
-          end
-          if node:type() ~= "string" then
-            table.insert(sources, "snippets")
-          end
-        end
-
+        local sources =
+          { "lazydev", "lsp", "path", "snippets", "buffer", "spell" }
         return sources
       end,
       providers = {
@@ -122,6 +107,29 @@ return {
           name = "LazyDev",
           module = "lazydev.integrations.blink",
           score_offset = 100,
+        },
+        spell = {
+          name = "Spell",
+          module = "blink-cmp-spell",
+          opts = {
+            enable_in_context = function()
+              local curpos = vim.api.nvim_win_get_cursor(0)
+              local captures = vim.treesitter.get_captures_at_pos(
+                0,
+                curpos[1] - 1,
+                curpos[2] - 1
+              )
+              local in_spell_capture = false
+              for _, cap in ipairs(captures) do
+                if cap.capture == "spell" then
+                  in_spell_capture = true
+                elseif cap.capture == "nospell" then
+                  return false
+                end
+              end
+              return in_spell_capture
+            end,
+          },
         },
       },
     },

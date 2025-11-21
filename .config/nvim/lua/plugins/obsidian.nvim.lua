@@ -1,4 +1,4 @@
--- TODO: Workspaces einbauen, muss an der arbeit schauen, wo der kram ist.
+-- TODO: Workspaces einbauen, muss an der Arbeit schauen, wo der Kram ist.
 
 return {
   "obsidian-nvim/obsidian.nvim",

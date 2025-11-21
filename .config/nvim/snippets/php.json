@@ -1,0 +1,32 @@
+{
+  "publicMethod": {
+    "prefix": "pubf",
+    "body": [
+      "public function ${1}(${2}): §{3}",
+      "{",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Create a Public Method"
+  },
+  "protectedMethod": {
+    "prefix": "prof",
+    "body": [
+      "protected function ${1}(${2}): ${3}",
+      "{",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Create a Protected Method"
+  },
+  "privateMethod": {
+    "prefix": "prif",
+    "body": [
+      "protected function ${1}(${2}): ${3}",
+      "{",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Create a Protected Method"
+  }
+}
