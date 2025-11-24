@@ -1,7 +1,16 @@
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
+
 local map = function(mode, key, func, opts)
   opts = opts or {}
-  vim.tbl_deep_extend("force", { silent = true, noremap = true }, opts)
-  return vim.keymap.set(mode, key, func, opts)
+  opts.silent = true
+  opts.noremap = true
+
+  -- Delete Keymap if one exists
+  pcall(vim.keymap.del, mode, key)
+
+  vim.keymap.set(mode, key, func, opts)
 end
 
 -- Better Up and Down
@@ -18,9 +27,6 @@ map("n", "<leader><Down>", "yyp", { desc = "Duplicate Line Down" })
 
 -- Select all
 map("n", "<c-a>", "ggVG", { desc = "Select all" })
-
--- Clear Highlights
-map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Exit Terminal Mode
 map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal Mode" })
