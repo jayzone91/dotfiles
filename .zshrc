@@ -114,3 +114,4 @@ export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 
 # Added by Windsurf
 export PATH="/Users/jay/.codeium/windsurf/bin:$PATH"
+eval "$(/Users/jay/.local/bin/mise activate zsh)"
