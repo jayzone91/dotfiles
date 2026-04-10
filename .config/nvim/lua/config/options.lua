@@ -42,4 +42,3 @@ vim.o.updatetime = 200
 vim.o.virtualedit = "block"
 vim.o.wildmode = "longest:full,full"
 vim.o.winminwidth = 5
-
