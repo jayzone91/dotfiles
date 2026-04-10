@@ -28,7 +28,6 @@ local lsp = {
   "tailwindcss",
   "vtsls",
   "yamlls",
-  "eslint",
 }
 
 local formatter = {
@@ -39,7 +38,6 @@ local formatter = {
 }
 
 local linter = {
-  "eslint",
   "golangci-lint",
 }
 
@@ -106,13 +104,6 @@ end
 local lint_ok, lint = pcall(require, "lint")
 if lint_ok then
   lint.linters_by_ft = {
-    javascript = { "eslint" },
-    javascriptreact = { "eslint" },
-    ["javascript.jsx"] = { "eslint" },
-    typescript = { "eslint" },
-    typescriptreact = { "eslint" },
-    ["typescript.tsx"] = { "eslint" },
-    html = { "eslint" },
     go = { "golangcilint" },
   }
 
@@ -248,12 +239,5 @@ vim.lsp.config("vtsls", {
         variableTypes = { enabled = false },
       },
     },
-  },
-})
-
-vim.lsp.config("eslint", {
-  settings = {
-    -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
-    workingDirectories = { mode = "auto" },
   },
 })
