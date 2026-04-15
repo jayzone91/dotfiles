@@ -44,3 +44,5 @@ map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal Mode" })
 
 map("n", "<leader>ss", ":vsplit<CR>", { desc = "Split Vertical" })
 map("n", "<leader>sv", ":split<CR>", { desc = "Split Horziontal" })
+
+map("n", "<leader>R", ":restart<CR>", { desc = "Restart NeoVim" })
