@@ -24,8 +24,6 @@ map({ "i", "x", "n", "s" }, "<C-s>", "<esc><cmd>w<cr><esc>", { desc = "Save File
 
 map({ "i", "n" }, "<leader>qq", "<Esc>:qa<cr>", { desc = "Quit NeoVim" })
 
-map("n", "h", vim.diagnostic.open_float, { desc = "Show diagnostic" })
-
 map("n", "<leader>pu", "<cmd>lua vim.pack.update()<CR>", { desc = "Search for Updates" })
 
 -- VS Code Shortcuts

@@ -1,6 +1,8 @@
+local lsp_server = require("installs.lsp")
+
 return {
   "neovim/nvim-lspconfig",
-  lazy = false,
+  event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     {
       "folke/lazydev.nvim",
@@ -9,59 +11,21 @@ return {
         library = {
           { path = "${3rd}/luv/library", words = { "vim%.uv" } },
           { path = "snacks.nvim", words = { "Snacks" } },
+          { path = "nvim-lspconfig", words = { "lspconfig.settings" } },
         },
       },
     },
     {
       "mason-org/mason.nvim",
-      opts = {
-        ui = {
-          icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗",
-          },
-        },
-      },
     },
     { "mason-org/mason-lspconfig.nvim", opts = {} },
-    {
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
-      opts = function()
-        -- install tools
-        local ensure_installed = {}
-
-        local lsp_server = require("installs/lsp")
-        local linter = require("installs/linter")
-        local formatter = require("installs/formatter")
-
-        for x, _ in pairs(lsp_server) do
-          table.insert(ensure_installed, x)
-        end
-
-        for _, x in pairs(linter) do
-          vim.list_extend(ensure_installed, x)
-        end
-
-        for _, x in pairs(formatter) do
-          vim.list_extend(ensure_installed, x)
-        end
-
-        return {
-          ensure_installed = ensure_installed,
-          auto_update = true,
-        }
-      end,
-    },
   },
   config = function()
-    local lsp_server = require("installs/lsp")
-
     -- Get Capabilites
     local capabilities = vim.lsp.protocol.make_client_capabilities()
 
     if pcall(require, "cmp_nvim_lsp") then
-      vim.tbl_extend("force", capabilites, require("cmp_nvim_lsp").default_capabilities())
+      vim.tbl_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
     end
 
     if pcall(require, "blink.cmp") then
@@ -83,5 +47,19 @@ return {
 
       vim.lsp.config(server, config)
     end
+
+    -- Inlay hints
+    -- Snacks.util.lsp.on({ method = "textDocument/inlayHint" }, function(buffer)
+    --   if vim.api.nvim_buf_is_valid(buffer) and vim.bo[buffer].buftype == "" then
+    --     vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
+    --   end
+    -- end)
+    --
+    -- -- code lens
+    -- if vim.lsp.codelens then
+    --   Snacks.util.lsp.on({ method = "textDocument/codeLens" }, function()
+    --     vim.lsp.codelens.enable(true)
+    --   end)
+    -- end
   end,
 }

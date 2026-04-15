@@ -3,19 +3,31 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
   },
-  version = "1.*",
+  event = { "InsertEnter", "CmdlineEnter" },
+  version = "*",
   ---@module "blink.cmp"
   ---type blink.cmp.Config
   opts = {
     keymap = {
-      preset = "super-tab",
+      preset = "enter",
+      ["<Up>"] = { "select_prev", "fallback" },
+      ["<Down>"] = { "select_next", "fallback" },
     },
     appearance = {
       nerd_font_variant = "mono",
     },
     completion = {
+      menu = {
+        draw = {
+          treesitter = { "lsp" },
+        },
+      },
       documentation = {
         auto_show = true,
+        auto_show_delay_ms = 200,
+      },
+      ghost_text = {
+        enabled = true,
       },
     },
     sources = {
