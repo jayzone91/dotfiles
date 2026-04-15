@@ -33,11 +33,7 @@ return {
     end
 
     -- Set Hover
-    local on_attach = function()
-      vim.keymap.set("n", "H", function()
-        vim.lsp.buf.hover()
-      end)
-    end
+    local on_attach = function() end
     --
     -- Config LSP Servers
     for server, config in pairs(lsp_server) do
@@ -47,19 +43,5 @@ return {
 
       vim.lsp.config(server, config)
     end
-
-    -- Inlay hints
-    -- Snacks.util.lsp.on({ method = "textDocument/inlayHint" }, function(buffer)
-    --   if vim.api.nvim_buf_is_valid(buffer) and vim.bo[buffer].buftype == "" then
-    --     vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
-    --   end
-    -- end)
-    --
-    -- -- code lens
-    -- if vim.lsp.codelens then
-    --   Snacks.util.lsp.on({ method = "textDocument/codeLens" }, function()
-    --     vim.lsp.codelens.enable(true)
-    --   end)
-    -- end
   end,
 }
