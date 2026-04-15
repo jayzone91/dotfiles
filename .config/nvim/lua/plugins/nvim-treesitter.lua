@@ -4,8 +4,10 @@ return {
   build = ":TSUpdate",
   opts = {
     ensure_installed = {
+      "astro",
       "bash",
       "c",
+      "css",
       "diff",
       "html",
       "javascript",
@@ -18,6 +20,9 @@ return {
       "markdown_inline",
       "printf",
       "python",
+      "prisma",
+      "ninja",
+      "rst",
       "query",
       "regex",
       "toml",

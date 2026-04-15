@@ -1,3 +1,16 @@
 return {
   lua = { "stylua" },
+  javascript = { "prettier" },
+  typescript = { "prettier" },
+  javascriptreact = { "prettier" },
+  typescriptreact = { "prettier" },
+  ["javascript.jsx"] = { "prettier" },
+  ["typescript.tsx"] = { "prettier" },
+  html = { "prettier" },
+  css = { "prettier" },
+  scss = { "prettier" },
+  astro = { "prettier" },
+  go = { "goimports", "gofumpt" },
+  markdown = { "prettier" },
+  ["markdown.mdx"] = { "prettier" },
 }
