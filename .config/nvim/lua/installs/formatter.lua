@@ -11,6 +11,6 @@ return {
   scss = { "prettier" },
   astro = { "prettier" },
   go = { "goimports", "gofumpt" },
-  markdown = { "prettier" },
-  ["markdown.mdx"] = { "prettier" },
+  markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
+  ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
 }

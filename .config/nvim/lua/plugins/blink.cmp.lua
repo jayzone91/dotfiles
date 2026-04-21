@@ -3,7 +3,6 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
     "onsails/lspkind.nvim",
-    "ribru17/blink-cmp-spell",
     "nvim-mini/mini.icons",
     {
       "xzbdmw/colorful-menu.nvim",
@@ -34,20 +33,6 @@ return {
           end,
         },
         ghost_text = { enabled = true },
-      },
-    },
-    fuzzy = {
-      sorts = {
-        function(a, b)
-          local sort = require("blink.cmp.fuzzy.sort")
-          if a.source_id == "spell" and b.source_id == "spell" then
-            return sort.label(a, b)
-          end
-        end,
-        "exact",
-        "score",
-        "sort_text",
-        "label",
       },
     },
     completion = {
@@ -104,7 +89,7 @@ return {
       },
     },
     sources = {
-      default = { "lazydev", "lsp", "path", "snippets", "buffer", "spell" },
+      default = { "lazydev", "lsp", "path", "snippets", "buffer" },
       providers = {
         lazydev = {
           name = "LazyDev",
