@@ -4,7 +4,7 @@ return {
     require("tsc").setup({})
   end,
   keys = {
-    { "<leader>tt", ":TSC<CR>", desc = "Run TSC" },
+    { "<leader>tr", ":TSC<CR>", desc = "Run TSC" },
     { "<leader>to", ":TSCOpen<CR>", desc = "Open TSC" },
     { "<leader>tc", ":TSCClose<CR>", desc = "Close TSC" },
   },

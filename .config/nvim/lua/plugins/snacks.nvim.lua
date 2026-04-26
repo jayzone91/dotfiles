@@ -55,6 +55,13 @@ return {
       desc = "File Explorer",
     },
     {
+      "<leader>tt",
+      function()
+        Snacks.picker.colorschemes()
+      end,
+      desc = "Toggle Themes",
+    },
+    {
       "<leader><space>",
       function()
         Snacks.picker.buffers()
@@ -168,6 +175,14 @@ return {
         Snacks.toggle.diagnostics():map("<leader>ud")
         Snacks.toggle.line_number():map("<leader>ul")
         Snacks.toggle.inlay_hints():map("<leader>uh")
+      end,
+    })
+
+    vim.api.nvim_create_autocmd("ColorScheme", {
+      pattern = "*",
+      callback = function()
+        vim.api.nvim_set_hl(0, "SnacksPicker", { bg = "none", nocombine = true })
+        vim.api.nvim_set_hl(0, "SnacksPickerBorder", { fg = "#316c71", bg = "none", nocombine = true })
       end,
     })
   end,

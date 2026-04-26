@@ -1,5 +1,7 @@
 return {
   "stevearc/conform.nvim",
+  event = { "BufWritePre" },
+  cmd = { "ConformInfo" },
   opts = function()
     local formatter = require("installs.formatter")
 
