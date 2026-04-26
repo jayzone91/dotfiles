@@ -24,6 +24,7 @@ vim.o.laststatus = 3
 vim.o.wrap = false
 vim.o.mouse = "a"
 vim.o.number = true
+vim.o.relativenumber = true
 vim.o.pumblend = 10
 vim.o.pumheight = 10
 vim.o.shiftround = true

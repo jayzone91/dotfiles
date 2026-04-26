@@ -2,6 +2,22 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("jay_" .. name, { clear = true })
 end
 
+vim.api.nvim_create_autocmd("InsertEnter", {
+  desc = "Hide relative linenumbers",
+  group = augroup("hide_relative_linenumbers"),
+  callback = function()
+    vim.o.relativenumber = false
+  end,
+})
+
+vim.api.nvim_create_autocmd("InsertLeave", {
+  desc = "Show relative linenumbers",
+  group = augroup("show_relative_linenumbers"),
+  callback = function()
+    vim.o.relativenumber = true
+  end,
+})
+
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   desc = "Check if we need to reload the file when it changed",
   group = augroup("checktime"),
@@ -137,7 +153,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
     end, p)
 
     local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-    vim.notify(table.concat(msg, "\n"), "info", {
+    vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO, {
       id = "lsp_progress",
       title = client.name,
       opts = function(notif)
