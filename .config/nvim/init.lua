@@ -17,12 +17,14 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Setup lazy.nvim
+require("config.options")
+require("config.keymaps")
+
 require("lazy").setup({
   spec = {
     { import = "plugins" },
   },
-  install = { colorscheme = { "habamax" } },
+  install = { colorscheme = { "vscode" } },
   checker = { enabled = true },
   rocks = { enabled = false },
   change_detection = {
@@ -30,3 +32,5 @@ require("lazy").setup({
     notify = false,
   },
 })
+
+require("config.autocmds")
