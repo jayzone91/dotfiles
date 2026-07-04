@@ -1,16 +1,16 @@
 return {
-	"Mofiqul/vscode.nvim",
-	config = function()
-		vim.o.background = "dark"
+  "Mofiqul/vscode.nvim",
+  config = function()
+    vim.o.background = "dark"
 
-		require("vscode").setup({
-			transparent = false,
-			italic_comments = true,
-			italic_inlayhints = true,
-			underline_links = true,
-			terminal_colors = true,
-		})
+    require("vscode").setup({
+      transparent = false,
+      italic_comments = true,
+      italic_inlayhints = true,
+      underline_links = true,
+      terminal_colors = true,
+    })
 
-		vim.cmd.colorscheme("vscode")
-	end,
+    vim.cmd.colorscheme("vscode")
+  end,
 }

@@ -8,8 +8,8 @@ return {
       opts = {
         library = {
           { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-          { path = "nvim-lspconfig",     words = { "lspconfig.settings" } },
-          { path = "snacks.nvim",        words = { "Snacks" } },
+          { path = "nvim-lspconfig", words = { "lspconfig.settings" } },
+          { path = "snacks.nvim", words = { "Snacks" } },
         },
       },
     },
@@ -24,11 +24,7 @@ return {
     end
 
     if pcall(require, "blink.cmp") then
-      capabilities = vim.tbl_deep_extend(
-        "force",
-        capabilities,
-        require("blink.cmp").get_lsp_capabilities({}, false)
-      )
+      capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities({}, false))
     end
 
     local on_attach = function() end
@@ -87,9 +83,7 @@ return {
           end, "Toggle Inlay Hints")
         end
 
-        if
-            client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, event.buf)
-        then
+        if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, event.buf) then
           local function inline_completion(method)
             return function()
               vim.lsp.inline_completion.enable(true, { bufnr = event.buf })
