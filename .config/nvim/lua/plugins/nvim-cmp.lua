@@ -60,6 +60,7 @@ return {
   },
   config = function()
     local cmp = require("cmp")
+    local cmp_types = require("cmp.types")
     local luasnip = require("luasnip")
     require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -78,9 +79,14 @@ return {
         documentation = cmp.config.window.bordered(),
       },
       performance = {
-        debounce = 0,
-        throttle = 0,
-        fetching_timeout = 200,
+        debounce = 75,
+        throttle = 30,
+        fetching_timeout = 120,
+      },
+      completion = {
+        autocomplete = {
+          cmp_types.cmp.TriggerEvent.TextChanged,
+        },
       },
       formatting = {
         fields = { "icon", "abbr", "menu", "kind" },
@@ -130,10 +136,10 @@ return {
         ["<C-e>"] = cmp.mapping.abort(),
       }),
       sources = cmp.config.sources({
-        { name = "nvim_lsp" },
+        { name = "nvim_lsp", keyword_length = 2 },
         { name = "luasnip" },
       }, {
-        { name = "buffer", keyword_length = 4, max_item_cound = 10 },
+        { name = "buffer", keyword_length = 5, max_item_count = 10 },
       }),
     })
 

@@ -78,10 +78,15 @@ return {
         if
             client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, event.buf)
         then
-          vim.lsp.inline_completion.enable(true, { bufnr = event.buf })
+          local function inline_completion(method)
+            return function()
+              vim.lsp.inline_completion.enable(true, { bufnr = event.buf })
+              return vim.lsp.inline_completion[method]()
+            end
+          end
 
-          map("<C-F>", vim.lsp.inline_completion.get, "accept inline completion", "i")
-          map("<C-G>", vim.lsp.inline_completion.select, "switch inline completion", "i")
+          map("<C-F>", inline_completion("get"), "accept inline completion", "i")
+          map("<C-G>", inline_completion("select"), "switch inline completion", "i")
         end
       end,
     })

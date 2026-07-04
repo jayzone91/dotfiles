@@ -8,7 +8,7 @@ return {
     animate = { enabled = false },
     bigfile = { enabled = true },
     bufdelete = { enabled = true },
-    dashboard = { enabled = false },
+    dashboard = { enabled = true },
     debug = { enabled = false },
     dim = { enabled = false },
     explorer = { enabled = true, replace_netrw = true, trash = false },
