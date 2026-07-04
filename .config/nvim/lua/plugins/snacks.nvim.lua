@@ -1,14 +1,43 @@
+local function dashboard_updates()
+  local updates = #require("lazy.manage.checker").updated
+
+  return {
+    align = "center",
+    padding = 1,
+    text = updates > 0 and {
+      { "󰒲 ", hl = "icon" },
+      { tostring(updates), hl = "special" },
+      { " plugin update" .. (updates == 1 and "" or "s") .. " available", hl = "footer" },
+    } or {
+      { "󰒲 ", hl = "icon" },
+      { "Plugins are up to date", hl = "footer" },
+    },
+  }
+end
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
-  dependencies = { "nvim-mini/mini.icons", opts = {} },
+  dependencies = {
+    { "nvim-mini/mini.icons", opts = {} },
+    { "ColaMint/pokemon.nvim" },
+  },
   ---@type snacks.Config
   opts = {
     animate = { enabled = false },
     bigfile = { enabled = true },
     bufdelete = { enabled = true },
-    dashboard = { enabled = true },
+    dashboard = {
+      enabled = true,
+      preset = {},
+      sections = {
+        { section = "header" },
+        { section = "keys",  gap = 1, padding = 1 },
+        dashboard_updates,
+        { section = "startup" },
+      },
+    },
     debug = { enabled = false },
     dim = { enabled = false },
     explorer = { enabled = true, replace_netrw = true, trash = false },
@@ -39,6 +68,18 @@ return {
     zen = { enabled = false },
     styles = { notification = { wo = { wrap = true } } },
   },
+  config = function(_, opts)
+    local pokemon = require("pokemon")
+
+    pokemon.setup({
+      number = "random",
+      size = "auto",
+    })
+
+    local header = pokemon.header()
+    opts.dashboard.preset.header = type(header) == "table" and table.concat(header, "\n") or header
+    require("snacks").setup(opts)
+  end,
   keys = {
     {
       "<leader><space>",
