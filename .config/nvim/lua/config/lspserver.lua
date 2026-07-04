@@ -15,7 +15,7 @@ M.lsp = {
         codelenses = {
           gc_details = false,
           generate = true,
-          regerenerate_cgp = true,
+          regenerate_cgo = true,
           run_govulncheck = true,
           test = true,
           tidy = true,
@@ -56,7 +56,7 @@ M.lsp = {
         classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
         includeLanguages = {
           elixir = "html-eex",
-          eelixier = "html-eex",
+          eelixir = "html-eex",
           heex = "html-eex",
         },
         lint = {

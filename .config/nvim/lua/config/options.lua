@@ -6,7 +6,6 @@ vim.o.breakindent = true
 vim.o.clipboard = "unnamedplus"
 vim.o.signcolumn = "yes"
 vim.o.confirm = true
-vim.o.relativenumber = false
 vim.o.scrolloff = 8
 vim.o.shiftwidth = 2
 vim.o.softtabstop = 2
@@ -31,7 +30,6 @@ vim.o.shiftround = true
 vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
 vim.o.showmode = false
 vim.o.sidescrolloff = 8
-vim.o.signcolumn = "yes"
 vim.o.smartcase = true
 vim.o.smartindent = true
 vim.o.splitbelow = true
