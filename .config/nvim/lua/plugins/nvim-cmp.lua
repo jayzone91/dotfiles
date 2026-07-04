@@ -77,6 +77,11 @@ return {
         },
         documentation = cmp.config.window.bordered(),
       },
+      performance = {
+        debounce = 0,
+        throttle = 0,
+        fetching_timeout = 200,
+      },
       formatting = {
         fields = { "icon", "abbr", "menu", "kind" },
         format = function(entry, vim_item)
@@ -128,7 +133,7 @@ return {
         { name = "nvim_lsp" },
         { name = "luasnip" },
       }, {
-        { name = "buffer" },
+        { name = "buffer", keyword_length = 4, max_item_cound = 10 },
       }),
     })
 
