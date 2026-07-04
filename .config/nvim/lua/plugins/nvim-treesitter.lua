@@ -210,7 +210,9 @@ return {
 		folds = { enable = true },
 		ensure_installed = {
 			"bash",
+			"astro",
 			"c",
+			"css",
 			"diff",
 			"html",
 			"javascript",
@@ -226,7 +228,7 @@ return {
 			"regex",
 			"toml",
 			"tsx",
-			"typesript",
+			"typescript",
 			"vim",
 			"vimdoc",
 			"xml",
