@@ -21,11 +21,15 @@ return {
     local capabilities = vim.lsp.protocol.make_client_capabilities()
 
     if pcall(require, "cmp_nvim_lsp") then
-      vim.tbl_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+      capabilities = vim.tbl_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
     end
 
     if pcall(require, "blink.cmp") then
-      vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities({}, false))
+      capabilities = vim.tbl_deep_extend(
+        "force",
+        capabilities,
+        require("blink.cmp").get_lsp_capabilities({}, false)
+      )
     end
 
     local on_attach = function() end
@@ -33,7 +37,10 @@ return {
     for server, config in pairs(require("config.lspserver").lsp) do
       config = config or {}
 
-      vim.tbl_extend("force", { capabilities = capabilities, on_attach = on_attach }, config)
+      config = vim.tbl_deep_extend("force", {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }, config)
 
       vim.lsp.config(server, config)
       vim.lsp.enable(server)
@@ -55,6 +62,12 @@ return {
         if client and client:supports_method("textDocument/documentHighlight", event.buf) then
           local highlight_group = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
           vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+            buffer = event.buf,
+            group = highlight_group,
+            callback = vim.lsp.buf.document_highlight,
+          })
+
+          vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
             buffer = event.buf,
             group = highlight_group,
             callback = vim.lsp.buf.clear_references,

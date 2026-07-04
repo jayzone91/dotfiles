@@ -53,10 +53,32 @@ M.lsp = {
     filetype_include = {},
     settings = {
       tailwindCSS = {
+        classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
         includeLanguages = {
           elixir = "html-eex",
           eelixier = "html-eex",
           heex = "html-eex",
+        },
+        lint = {
+          cssConflict = "warning",
+          invalidApply = "error",
+          invalidConfigPath = "error",
+          invalidScreen = "error",
+          invalidTailwindDirective = "error",
+          invalidVariant = "error",
+          recommendedVariantOrder = "warning",
+        },
+        validate = true,
+        experimental = {
+          classRegex = {
+            { [[clsx\(([^)]*)\)]], [[["'`]([^"'`]*)["'`]]] },
+            { [[cn\(([^)]*)\)]], [[["'`]([^"'`]*)["'`]]] },
+            { [[cva\(([^)]*)\)]], [[["'`]([^"'`]*)["'`]]] },
+            { [[cx\(([^)]*)\)]], [[["'`]([^"'`]*)["'`]]] },
+            { [[twMerge\(([^)]*)\)]], [[["'`]([^"'`]*)["'`]]] },
+            { [[twJoin\(([^)]*)\)]], [[["'`]([^"'`]*)["'`]]] },
+            [[tw`([^`]*)]],
+          },
         },
       },
     },

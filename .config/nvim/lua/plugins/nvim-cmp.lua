@@ -57,12 +57,18 @@ return {
     -- icons
     "nvim-tree/nvim-web-devicons",
     "onsails/lspkind.nvim",
+    "roobert/tailwindcss-colorizer-cmp.nvim",
   },
   config = function()
     local cmp = require("cmp")
     local cmp_types = require("cmp.types")
     local luasnip = require("luasnip")
+    local tailwindcss_colorizer_cmp = require("tailwindcss-colorizer-cmp")
+
     require("luasnip.loaders.from_vscode").lazy_load()
+    tailwindcss_colorizer_cmp.setup({
+      color_square_width = 2,
+    })
 
     cmp.setup({
       snippet = {
@@ -93,6 +99,7 @@ return {
         format = function(entry, vim_item)
           local lspkind = require("lspkind")
           local kind = lspkind.cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+          kind = tailwindcss_colorizer_cmp.formatter(entry, kind)
           kind.icon = " " .. (kind.icon or "") .. "  "
           kind.kind = "   (" .. (kind.kind or "") .. ")"
           return kind
