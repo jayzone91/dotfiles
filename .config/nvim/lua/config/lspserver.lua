@@ -1,6 +1,8 @@
 local M = {}
 
 M.lsp = {
+  -- Copilot
+  copilot = {},
   lua_ls = {
     Lua = {
       runtime = { version = "LuaJIT" },

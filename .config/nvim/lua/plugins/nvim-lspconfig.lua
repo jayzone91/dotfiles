@@ -74,6 +74,15 @@ return {
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ buffer = event.buf }))
           end, "Toggle Inlay Hints")
         end
+
+        if
+            client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, event.buf)
+        then
+          vim.lsp.inline_completion.enable(true, { bufnr = event.buf })
+
+          map("<C-F>", vim.lsp.inline_completion.get, "accept inline completion", "i")
+          map("<C-G>", vim.lsp.inline_completion.select, "switch inline completion", "i")
+        end
       end,
     })
   end,
