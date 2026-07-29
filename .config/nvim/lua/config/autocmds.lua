@@ -113,11 +113,68 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  desc = "Enable spell checking only for prose",
+  group = augroup("spell_prose"),
+  pattern = { "gitcommit", "markdown", "mdx", "text" },
+  callback = function()
+    vim.opt_local.spell = true
+  end,
+})
+
 vim.api.nvim_create_autocmd("BufReadPre", {
   desc = "Syntaxhighlighting for dotenv files",
   group = augroup("dotenv"),
   pattern = { ".env", ".env.*" },
   callback = function()
     vim.bo.filetype = "disini"
+  end,
+})
+
+---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
+local lsp_progress = vim.defaulttable()
+
+vim.api.nvim_create_autocmd("LspProgress", {
+  desc = "Show LSP progress with Snacks",
+  group = augroup("lsp_progress"),
+  ---@param event {data: {client_id: integer, params: lsp.ProgressParams}}
+  callback = function(event)
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    local value = event.data.params.value
+    --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
+    if not client or type(value) ~= "table" then
+      return
+    end
+
+    local progress = lsp_progress[client.id]
+    for index = 1, #progress + 1 do
+      if index == #progress + 1 or progress[index].token == event.data.params.token then
+        progress[index] = {
+          token = event.data.params.token,
+          msg = ("[%3d%%] %s%s"):format(
+            value.kind == "end" and 100 or value.percentage or 100,
+            value.title or "",
+            value.message and (" **%s**"):format(value.message) or ""
+          ),
+          done = value.kind == "end",
+        }
+        break
+      end
+    end
+
+    local messages = {} ---@type string[]
+    lsp_progress[client.id] = vim.tbl_filter(function(item)
+      return table.insert(messages, item.msg) or not item.done
+    end, progress)
+
+    local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+    vim.notify(table.concat(messages, "\n"), "info", {
+      id = "lsp_progress",
+      title = client.name,
+      opts = function(notification)
+        notification.icon = #lsp_progress[client.id] == 0 and " "
+          or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+      end,
+    })
   end,
 })
