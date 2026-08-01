@@ -41,10 +41,10 @@ local colors = load_css_colors(home .. "/.config/theme/catppuccin-mocha.css")
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 hl.monitor({
-  output   = "",
-  mode     = "preferred",
-  position = "auto",
-  scale    = "auto",
+  output   = "DP-1",
+  mode     = "5120x1440@240",
+  position = "0x0",
+  scale    = 1,
 })
 
 
@@ -212,6 +212,8 @@ hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" 
 --     rounding    = 0,
 -- })
 
+-- Floating windows
+
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
   dwindle = {
@@ -251,17 +253,19 @@ hl.config({
 
 hl.config({
   input = {
-    kb_layout    = "de",
-    kb_variant   = "",
-    kb_model     = "",
-    kb_options   = "",
-    kb_rules     = "",
+    kb_layout          = "de",
+    kb_variant         = "",
+    kb_model           = "",
+    kb_options         = "",
+    kb_rules           = "",
 
-    follow_mouse = 1,
+    numlock_by_default = true,
 
-    sensitivity  = 0, -- -1.0 - 1.0, 0 means no modification.
+    follow_mouse       = 1,
 
-    touchpad     = {
+    sensitivity        = 0, -- -1.0 - 1.0, 0 means no modification.
+
+    touchpad           = {
       natural_scroll = false,
     },
   },
@@ -305,6 +309,9 @@ hl.bind(mainMod .. " + M",
   hl.dsp.exec_cmd(
     "wlogout --buttons-per-row 5 --column-spacing 20 --margin-left 1250 --margin-right 1250 --margin-top 390 --margin-bottom 390"))
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
+
+-- Window Switch
+hl.bind("ALT + TAB", hl.dsp.exec_cmd("walker --provider windows --nosearch"))
 
 -- Screenshots
 -- Bereich auswählen

@@ -104,4 +104,7 @@ if status is-interactive
 
     # History
     set -g fish_history main
+
+    # init nvm and use default
+    nvm use default
 end
