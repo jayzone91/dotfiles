@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+workspace="$1"
+
+print_state() {
+    active="$(hyprctl activeworkspace -j | jq -r '.id')"
+
+    if [[ "$active" == "$workspace" ]]; then
+        printf '{"text":"●","class":"active","tooltip":"Workspace %s"}\n' "$workspace"
+    else
+        printf '{"text":"○","class":"inactive","tooltip":"Workspace %s"}\n' "$workspace"
+    fi
+}
+
+print_state
+
+socket="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+
+socat -U - UNIX-CONNECT:"$socket" |
+while IFS= read -r event; do
+    case "$event" in
+        workspace\>\>*|workspacev2\>\>*|focusedmon\>\>*)
+            print_state
+            ;;
+    esac
+done

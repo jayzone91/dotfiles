@@ -1,0 +1,983 @@
+@import "/home/jay/.config/theme/catppuccin-mocha.css";
+
+/* =========================================================
+   GLOBAL VARIABLES
+   ========================================================= */
+
+:root {
+  --notification-icon-size: 64px;
+  --notification-app-icon-size: calc(var(--notification-icon-size) / 3);
+  --notification-group-icon-size: 32px;
+
+  --border-radius: 12px;
+
+  --font-size-body: 14px;
+  --font-size-summary: 15px;
+
+  --hover-transition:
+    background 150ms ease-in-out,
+    color 150ms ease-in-out,
+    border-color 150ms ease-in-out;
+
+  --group-collapse-transition:
+    opacity 300ms ease-in-out;
+
+  --mpris-album-art-icon-size: 96px;
+  --widget-volume-row-icon-size: 24px;
+}
+
+
+/* =========================================================
+   GLOBALS
+   ========================================================= */
+
+* {
+  font-family:
+    "JetBrainsMono Nerd Font",
+    "Symbols Nerd Font Mono",
+    sans-serif;
+
+  color: @text;
+}
+
+notificationwindow,
+blankwindow,
+.blank-window,
+.floating-notifications {
+  background: transparent;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+.close-button {
+  min-width: 26px;
+  min-height: 26px;
+
+  margin-top: 8px;
+  margin-right: 8px;
+  padding: 0;
+
+  background: alpha(@overlay0, 0.22);
+  color: @text;
+
+  border: 1px solid transparent;
+  border-radius: 100%;
+
+  box-shadow: none;
+  text-shadow: none;
+
+  transition: var(--hover-transition);
+}
+
+.close-button:hover {
+  background: alpha(@red, 0.24);
+  color: @red;
+
+  border-color: alpha(@red, 0.45);
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   NOTIFICATION ROW
+   ========================================================= */
+
+.notification-row {
+  background: transparent;
+  outline: none;
+}
+
+.notification-row:focus {
+  background: transparent;
+}
+
+.notification-row .notification-background {
+  padding: 6px 12px;
+}
+
+.notification-row .notification-background .notification {
+  padding: 0;
+
+  background: alpha(@surface0, 0.94);
+
+  border: 1px solid alpha(@blue, 0.28);
+  border-radius: var(--border-radius);
+
+  box-shadow:
+    0 0 0 1px alpha(@crust, 0.40),
+    0 8px 24px alpha(@crust, 0.50);
+
+  transition: var(--hover-transition);
+}
+
+
+/* =========================================================
+   PRIORITY STATES
+   ========================================================= */
+
+.notification-row .notification-background .notification.low {
+  border-color: alpha(@overlay0, 0.28);
+}
+
+.notification-row .notification-background .notification.normal {
+  border-color: alpha(@blue, 0.28);
+}
+
+.notification-row .notification-background .notification.critical {
+  border-color: alpha(@red, 0.72);
+
+  box-shadow:
+    0 0 0 1px alpha(@red, 0.18),
+    0 8px 24px alpha(@crust, 0.55);
+}
+
+
+/* =========================================================
+   DEFAULT NOTIFICATION ACTION
+   ========================================================= */
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action {
+  margin: 0;
+  padding: 6px;
+
+  background: transparent;
+  color: @text;
+
+  border: none;
+  border-radius: var(--border-radius);
+
+  box-shadow: none;
+
+  transition: var(--hover-transition);
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action:hover {
+  background: @surface1;
+
+  -gtk-icon-filter: none;
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action:not(:only-child) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+
+/* =========================================================
+   NOTIFICATION CONTENT
+   ========================================================= */
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action
+.notification-content {
+  padding: 2px;
+
+  background: transparent;
+
+  border-radius: var(--border-radius);
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action
+.notification-content
+.image {
+  margin: 6px;
+
+  border-radius: 10px;
+
+  -gtk-icon-filter: none;
+  -gtk-icon-size: var(--notification-icon-size);
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action
+.notification-content
+.app-icon {
+  margin: 6px;
+
+  -gtk-icon-filter: none;
+  -gtk-icon-size: var(--notification-app-icon-size);
+  -gtk-icon-shadow: 0 2px 6px alpha(@crust, 0.80);
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action
+.notification-content
+.text-box
+label {
+  filter: none;
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action
+.notification-content
+.text-box
+.summary {
+  background: transparent;
+  color: @text;
+
+  font-size: var(--font-size-summary);
+  font-weight: 700;
+
+  text-shadow: none;
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action
+.notification-content
+.text-box
+.time {
+  margin-right: 30px;
+
+  background: transparent;
+  color: @subtext0;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  text-shadow: none;
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action
+.notification-content
+.text-box
+.body {
+  background: transparent;
+  color: @subtext0;
+
+  font-size: var(--font-size-body);
+  font-weight: 400;
+
+  text-shadow: none;
+}
+
+
+/* =========================================================
+   PROGRESS BAR
+   ========================================================= */
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action
+.notification-content
+progressbar {
+  margin-top: 6px;
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action
+.notification-content
+progressbar trough {
+  min-height: 6px;
+
+  background: @surface1;
+
+  border-radius: 6px;
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action
+.notification-content
+progressbar progress {
+  min-height: 6px;
+
+  background: @blue;
+
+  border-radius: 6px;
+}
+
+
+/* =========================================================
+   BODY IMAGE
+   ========================================================= */
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action
+.notification-content
+.body-image {
+  margin-top: 6px;
+
+  background: @mantle;
+
+  border-radius: 8px;
+
+  -gtk-icon-filter: none;
+}
+
+
+/* =========================================================
+   INLINE REPLY
+   ========================================================= */
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action
+.notification-content
+.inline-reply {
+  margin-top: 8px;
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action
+.notification-content
+.inline-reply
+.inline-reply-entry {
+  padding: 8px;
+
+  background: @mantle;
+  color: @text;
+  caret-color: @blue;
+
+  border: 1px solid @surface1;
+  border-radius: 8px;
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action
+.notification-content
+.inline-reply
+.inline-reply-entry:focus {
+  border-color: @blue;
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action
+.notification-content
+.inline-reply
+.inline-reply-button {
+  margin-left: 6px;
+  padding: 8px 12px;
+
+  background: @surface0;
+  color: @text;
+
+  border: 1px solid @surface1;
+  border-radius: 8px;
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action
+.notification-content
+.inline-reply
+.inline-reply-button:hover {
+  background: @surface1;
+  border-color: @blue;
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-default-action
+.notification-content
+.inline-reply
+.inline-reply-button:disabled {
+  background: transparent;
+  color: @overlay0;
+
+  border-color: transparent;
+}
+
+
+/* =========================================================
+   ALTERNATIVE ACTIONS
+   ========================================================= */
+
+.notification-row
+.notification-background
+.notification
+.notification-alt-actions {
+  padding: 4px;
+
+  background: transparent;
+
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-action {
+  margin: 4px;
+  padding: 0;
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-action
+> button {
+  padding: 6px 10px;
+
+  background: @surface0;
+  color: @text;
+
+  border: 1px solid @surface1;
+  border-radius: 8px;
+}
+
+.notification-row
+.notification-background
+.notification
+.notification-action
+> button:hover {
+  background: @surface1;
+  border-color: @blue;
+}
+
+
+/* =========================================================
+   GROUPED NOTIFICATIONS
+   ========================================================= */
+
+.notification-group {
+  transition: var(--group-collapse-transition);
+}
+
+.notification-group:focus {
+  background: transparent;
+}
+
+.notification-group
+.notification-group-close-button
+.close-button {
+  margin: 12px 20px;
+}
+
+.notification-group
+.notification-group-buttons,
+.notification-group
+.notification-group-headers {
+  margin: 0 16px;
+  color: @text;
+}
+
+.notification-group
+.notification-group-headers
+.notification-group-icon {
+  color: @mauve;
+
+  -gtk-icon-size: var(--notification-group-icon-size);
+}
+
+.notification-group
+.notification-group-headers
+.notification-group-header {
+  color: @text;
+  font-weight: 700;
+}
+
+.notification-group.collapsed.not-expanded {
+  opacity: 0.42;
+}
+
+.notification-group.collapsed
+.notification-row
+.notification {
+  background: @surface0;
+}
+
+.notification-group.collapsed
+.notification-row:not(:last-child)
+.notification-action,
+.notification-group.collapsed
+.notification-row:not(:last-child)
+.notification-default-action {
+  opacity: 0;
+}
+
+.notification-group.collapsed:hover
+.notification-row:not(:only-child)
+.notification {
+  background: @surface1;
+}
+
+
+/* =========================================================
+   CONTROL CENTER
+   ========================================================= */
+
+.control-center {
+  margin: 10px;
+  padding: 10px;
+
+  background: alpha(@base, 0.94);
+  color: @text;
+
+  border: 1px solid alpha(@blue, 0.28);
+  border-radius: var(--border-radius);
+
+  box-shadow:
+    0 18px 42px alpha(@crust, 0.62);
+}
+
+.control-center
+.control-center-list-placeholder {
+  color: @subtext0;
+  opacity: 1;
+}
+
+.control-center
+.control-center-list {
+  background: transparent;
+}
+
+.control-center
+.control-center-list
+.notification {
+  box-shadow:
+    0 0 0 1px alpha(@crust, 0.40),
+    0 8px 24px alpha(@crust, 0.50);
+}
+
+.control-center
+.control-center-list
+.notification
+.notification-default-action,
+.control-center
+.control-center-list
+.notification
+.notification-action {
+  transition:
+    var(--group-collapse-transition),
+    var(--hover-transition);
+}
+
+.control-center
+.control-center-list
+.notification
+.notification-default-action:hover,
+.control-center
+.control-center-list
+.notification
+.notification-action:hover {
+  background: @surface1;
+}
+
+
+/* =========================================================
+   WIDGET BASE
+   ========================================================= */
+
+.widget {
+  margin: 8px;
+  padding: 10px;
+
+  background: alpha(@surface0, 0.82);
+
+  border: 1px solid alpha(@surface1, 0.75);
+  border-radius: var(--border-radius);
+}
+
+
+/* =========================================================
+   TITLE WIDGET
+   ========================================================= */
+
+.widget-title > label {
+  margin-right: 8px;
+
+  color: @text;
+
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.widget-title > button {
+  margin-left: 8px;
+  padding: 6px 10px;
+
+  background: @surface1;
+  color: @text;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+
+.widget-title > button:hover {
+  background: alpha(@red, 0.20);
+  color: @red;
+
+  border-color: alpha(@red, 0.45);
+}
+
+
+/* =========================================================
+   DO NOT DISTURB
+   ========================================================= */
+
+.widget-dnd label {
+  margin-right: 8px;
+
+  color: @text;
+
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.widget-dnd switch {
+  min-width: 44px;
+  min-height: 24px;
+
+  margin-left: 8px;
+
+  background: @surface1;
+
+  border-radius: 12px;
+}
+
+.widget-dnd switch:checked {
+  background: @mauve;
+}
+
+.widget-dnd switch slider {
+  min-width: 18px;
+  min-height: 18px;
+
+  margin: 3px;
+
+  background: @text;
+
+  border-radius: 50%;
+}
+
+
+/* =========================================================
+   LABEL WIDGET
+   ========================================================= */
+
+.widget-label > label {
+  color: @text;
+  font-size: 1rem;
+}
+
+
+/* =========================================================
+   MPRIS
+   ========================================================= */
+
+.widget-mpris {
+  padding: 0;
+
+  background: transparent;
+
+  border: none;
+}
+
+.widget-mpris
+.widget-mpris-player {
+  margin: 12px;
+
+  border-radius: var(--border-radius);
+
+  box-shadow:
+    0 8px 24px alpha(@crust, 0.65);
+
+  overflow: hidden;
+}
+
+.widget-mpris
+.widget-mpris-player
+.mpris-background {
+  filter: blur(10px);
+}
+
+.widget-mpris
+.widget-mpris-player
+.mpris-overlay {
+  padding: 16px;
+
+  background: alpha(@crust, 0.62);
+}
+
+.widget-mpris
+.widget-mpris-player
+.mpris-overlay
+button {
+  color: @text;
+
+  border-radius: 8px;
+}
+
+.widget-mpris
+.widget-mpris-player
+.mpris-overlay
+button:hover {
+  background: alpha(@surface1, 0.80);
+}
+
+.widget-mpris
+.widget-mpris-player
+.mpris-overlay
+.widget-mpris-album-art {
+  border-radius: 10px;
+
+  box-shadow:
+    0 8px 24px alpha(@crust, 0.65);
+
+  -gtk-icon-size: var(--mpris-album-art-icon-size);
+}
+
+.widget-mpris
+.widget-mpris-player
+.mpris-overlay
+.widget-mpris-title {
+  color: @text;
+
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.widget-mpris
+.widget-mpris-player
+.mpris-overlay
+.widget-mpris-subtitle {
+  color: @subtext0;
+
+  font-size: 0.95rem;
+}
+
+.widget-mpris
+.widget-mpris-player
+.mpris-overlay
+> box
+> button:hover {
+  background: alpha(@surface1, 0.80);
+}
+
+.widget-mpris > box > button {
+  color: @text;
+}
+
+.widget-mpris > box > button:disabled {
+  color: @overlay0;
+}
+
+
+/* =========================================================
+   BUTTON GRID
+   ========================================================= */
+
+.widget-buttons-grid
+flowboxchild
+> button {
+  min-height: 38px;
+
+  background: @surface0;
+  color: @text;
+
+  border: 1px solid @surface1;
+  border-radius: 8px;
+}
+
+.widget-buttons-grid
+flowboxchild
+> button:hover {
+  background: @surface1;
+  border-color: @blue;
+}
+
+.widget-buttons-grid
+flowboxchild
+> button.toggle:checked {
+  background: alpha(@blue, 0.22);
+  color: @blue;
+
+  border-color: @blue;
+}
+
+
+/* =========================================================
+   MENUBAR
+   ========================================================= */
+
+.widget-menubar
+> .menu-button-bar
+> .start {
+  margin-left: 8px;
+}
+
+.widget-menubar
+> .menu-button-bar
+> .end {
+  margin-right: 8px;
+}
+
+.widget-menubar
+> .menu-button-bar
+> .widget-menubar-container
+button {
+  margin: 0 4px;
+
+  background: transparent;
+  color: @text;
+
+  border-radius: 8px;
+}
+
+.widget-menubar
+> .menu-button-bar
+> .widget-menubar-container
+button:hover {
+  background: @surface1;
+}
+
+.widget-menubar > revealer * {
+  margin-top: 8px;
+}
+
+.widget-menubar
+> revealer
+*
+button {
+  margin: 8px;
+  margin-top: 0;
+
+  background: @surface0;
+  color: @text;
+
+  border-radius: 8px;
+}
+
+.widget-menubar
+> revealer
+*
+button:hover {
+  background: @surface1;
+}
+
+.widget-menubar
+> revealer
+*
+button:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================================================
+   VOLUME
+   ========================================================= */
+
+.widget-volume row image {
+  color: @mauve;
+
+  -gtk-icon-size: var(--widget-volume-row-icon-size);
+}
+
+.per-app-volume {
+  margin: 8px;
+  margin-bottom: 0;
+  padding: 8px;
+
+  background: @mantle;
+
+  border: 1px solid @surface1;
+  border-radius: 10px;
+}
+
+
+/* =========================================================
+   SLIDERS
+   ========================================================= */
+
+.widget-slider label {
+  color: @text;
+  font-size: inherit;
+}
+
+scale trough {
+  min-height: 7px;
+
+  background: @surface1;
+
+  border-radius: 7px;
+}
+
+scale highlight {
+  min-height: 7px;
+
+  background: @blue;
+
+  border-radius: 7px;
+}
+
+scale slider {
+  min-width: 15px;
+  min-height: 15px;
+
+  background: @text;
+
+  border-radius: 50%;
+}
+
+
+/* =========================================================
+   INHIBITORS
+   ========================================================= */
+
+.widget-inhibitors > label {
+  margin-right: 8px;
+
+  color: @text;
+
+  font-size: 1.25rem;
+}
+
+.widget-inhibitors > button {
+  margin-left: 8px;
+  padding: 6px 10px;
+
+  background: @surface1;
+  color: @text;
+
+  border-radius: 8px;
+}
+
+.widget-inhibitors > button:hover {
+  background: alpha(@yellow, 0.20);
+  color: @yellow;
+}

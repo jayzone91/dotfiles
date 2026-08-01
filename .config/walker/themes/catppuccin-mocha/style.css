@@ -1,0 +1,347 @@
+@import "/home/jay/.config/theme/catppuccin-mocha.css";
+
+/* =========================================================
+   RESET & GLOBALS
+   ========================================================= */
+
+* {
+  all: unset;
+
+  font-family:
+    "JetBrainsMono Nerd Font",
+    "Symbols Nerd Font Mono",
+    sans-serif;
+
+  font-size: 14px;
+  color: @text;
+}
+
+scrollbar {
+  opacity: 0;
+}
+
+
+/* =========================================================
+   POPOVERS
+   ========================================================= */
+
+popover {
+  background: @mantle;
+
+  border: 1px solid @surface1;
+  border-radius: 12px;
+
+  padding: 10px;
+
+  color: @text;
+}
+
+
+/* =========================================================
+   ICON SIZES
+   ========================================================= */
+
+.normal-icons {
+  -gtk-icon-size: 18px;
+}
+
+.large-icons {
+  -gtk-icon-size: 32px;
+}
+
+.preview .large-icons {
+  -gtk-icon-size: 64px;
+}
+
+
+/* =========================================================
+   MAIN WINDOW
+   ========================================================= */
+
+.box-wrapper {
+  background: alpha(@base, 0.96);
+
+  border: 1px solid alpha(@blue, 0.35);
+  border-radius: 12px;
+
+  padding: 16px;
+
+  box-shadow:
+    0 18px 38px alpha(@crust, 0.50),
+    0 10px 18px alpha(@crust, 0.35);
+}
+
+.box {
+}
+
+.content-container {
+}
+
+
+/* =========================================================
+   SEARCH FIELD
+   ========================================================= */
+
+.search-container {
+  background: @mantle;
+
+  border: 1px solid @surface0;
+  border-radius: 10px;
+
+  margin-bottom: 10px;
+}
+
+.input {
+  background: transparent;
+  color: @text;
+
+  caret-color: @blue;
+
+  padding: 12px 14px;
+}
+
+.input placeholder {
+  color: @overlay0;
+  opacity: 1;
+}
+
+.input selection {
+  background: alpha(@blue, 0.35);
+  color: @text;
+}
+
+.input:focus,
+.input:active {
+}
+
+
+/* =========================================================
+   RESULT LIST
+   ========================================================= */
+
+.scroll {
+}
+
+.list {
+  color: @text;
+}
+
+child {
+}
+
+.item-box {
+  background: transparent;
+
+  border: 1px solid transparent;
+  border-radius: 9px;
+
+  padding: 9px 10px;
+  margin: 2px 0;
+}
+
+child:hover .item-box {
+  background: alpha(@surface0, 0.75);
+}
+
+child:selected .item-box,
+row:selected .item-box {
+  background: @surface1;
+
+  border-left: 3px solid @blue;
+
+  color: @text;
+}
+
+
+/* =========================================================
+   RESULT CONTENT
+   ========================================================= */
+
+.item-text-box {
+  color: @text;
+}
+
+.item-text {
+  color: @text;
+  font-weight: 600;
+}
+
+.item-subtext {
+  color: @subtext0;
+
+  font-size: 12px;
+  opacity: 1;
+}
+
+.item-image {
+  color: @mauve;
+}
+
+.item-image-text {
+  color: @mauve;
+  font-size: 28px;
+}
+
+.item-quick-activation {
+  background: alpha(@mauve, 0.18);
+  color: @mauve;
+
+  border: 1px solid alpha(@mauve, 0.30);
+  border-radius: 6px;
+
+  padding: 6px 9px;
+}
+
+
+/* =========================================================
+   PLACEHOLDERS & HINTS
+   ========================================================= */
+
+.preview-box,
+.elephant-hint,
+.placeholder {
+  color: @subtext0;
+}
+
+
+/* =========================================================
+   PROVIDER LIST
+   ========================================================= */
+
+.providerlist .item-subtext {
+  color: @subtext1;
+
+  font-size: unset;
+  opacity: 1;
+}
+
+
+/* =========================================================
+   PREVIEW PANEL
+   ========================================================= */
+
+.preview {
+  background: alpha(@mantle, 0.90);
+  color: @text;
+
+  border: 1px solid @surface1;
+  border-radius: 10px;
+
+  padding: 10px;
+}
+
+
+/* =========================================================
+   KEYBINDS
+   ========================================================= */
+
+.keybinds {
+  color: @subtext0;
+
+  border-top: 1px solid @surface0;
+
+  padding-top: 10px;
+  margin-top: 8px;
+
+  font-size: 12px;
+}
+
+.global-keybinds {
+}
+
+.item-keybinds {
+}
+
+.keybind {
+}
+
+.keybind-button {
+  color: @subtext0;
+  opacity: 0.75;
+}
+
+.keybind-button:hover {
+  color: @text;
+  opacity: 1;
+}
+
+.keybind-bind {
+  color: @overlay0;
+
+  text-transform: lowercase;
+  opacity: 1;
+}
+
+.keybind-label {
+  color: @subtext0;
+
+  border: 1px solid @surface2;
+  border-radius: 5px;
+
+  padding: 3px 6px;
+}
+
+
+/* =========================================================
+   ERROR MESSAGES
+   ========================================================= */
+
+.error {
+  background: alpha(@red, 0.20);
+  color: @red;
+
+  border: 1px solid alpha(@red, 0.45);
+  border-radius: 8px;
+
+  padding: 10px;
+}
+
+
+/* =========================================================
+   PROVIDER-SPECIFIC STYLES
+   ========================================================= */
+
+.calc .item-text {
+  color: @blue;
+  font-size: 24px;
+}
+
+.calc .item-subtext {
+  color: @subtext0;
+}
+
+.symbols .item-image {
+  color: @mauve;
+  font-size: 24px;
+}
+
+.todo.done .item-text-box {
+  color: @overlay0;
+  opacity: 0.45;
+}
+
+.todo.urgent {
+  color: @red;
+  font-size: 24px;
+}
+
+.todo.active {
+  color: @green;
+  font-weight: bold;
+}
+
+.bluetooth.disconnected {
+  color: @overlay0;
+  opacity: 0.55;
+}
+
+:not(.calc).current {
+  color: @mauve;
+  font-style: italic;
+}
+
+.preview-content.archlinuxpkgs,
+.preview-content.dnfpackages,
+.preview-content.aptpackages {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+}
