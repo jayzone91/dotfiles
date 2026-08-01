@@ -27,5 +27,3 @@ user-dirs.dirs
 user-dirs.locale
 .config/gh/
 .config/go/
-.config/gh/config.yml
-.config/gh/hosts.yml
