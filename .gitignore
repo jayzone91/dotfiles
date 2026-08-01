@@ -25,3 +25,5 @@ pavucontrol.ini
 trashrc
 user-dirs.dirs
 user-dirs.locale
+.config/gh/
+.config/go/
