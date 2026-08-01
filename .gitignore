@@ -4,12 +4,10 @@
 .config/nvim/lazy-lock.json
 .DS_Store
 
-Code/
 dconf/
 gh/
 gtk-3.0/
 ibus/
-lazygit/
 mozilla/
 nautilus/
 pulse/
@@ -27,3 +25,14 @@ user-dirs.dirs
 user-dirs.locale
 .config/gh/
 .config/go/
+
+.config/Code/*
+!.config/Code/User/
+
+.config/Code/User/*
+!.config/Code/User/settings.json
+!.config/Code/User/keybindings.json
+
+!.config/Code/User/snippets/
+.config/Code/User/snippets/*
+!.config/Code/User/snippets/**
