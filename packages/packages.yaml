@@ -128,6 +128,18 @@ packages:
       required: true
 
   desktop:
+    - package: swayosd
+      source: pacman
+      reason: On-screen display for Hyprland
+      required: true
+    - package: python-gobject
+      source: pacman
+      reason: Python GTK bindings for custom keybinding overlay
+      required: true
+    - package: gtk4
+      source: pacman
+      reason: GTK4 runtime for custom keybinding overlay
+      required: true
     - package: ghostty
       source: pacman
       reason: Terminal emulator
@@ -218,6 +230,18 @@ packages:
       required: true
 
   development:
+    - package: just
+      source: pacman
+      reason: Command runner for HyprHUD development tasks
+      required: true
+    - pacakge: rust
+      source: pacman
+      reason: Rust compiler and Cargo toolchain
+      required: true
+    - package: rust-analyzer
+      source: pacman
+      reason: Rust LSP for editor integration
+      required: true
     - package: bun
       source: pacman
       reason: JavaScript runtime and package manager

@@ -1,0 +1,76 @@
+@define-color base      #1e1e2e;
+@define-color mantle    #181825;
+@define-color crust     #11111b;
+@define-color surface0  #313244;
+@define-color surface1  #45475a;
+@define-color text      #ffffff;
+@define-color subtext1  #e6e9ff;
+@define-color mauve     #cba6f7;
+
+/* Das eigentliche SwayOSD-Fenster */
+window#osd {
+  background: alpha(@base, 0.99);
+  border: 2px solid alpha(@mauve, 0.65);
+  border-radius: 20px;
+  box-shadow: 0 14px 40px alpha(@crust, 0.75);
+}
+
+/* Innerer Container */
+window#osd #container {
+  margin: 20px;
+}
+
+/* Wichtig: echte SwayOSD-Widgets direkt ansprechen */
+window#osd label {
+  color: @text;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 18px;
+  font-weight: 800;
+  text-shadow: 0 2px 3px alpha(@crust, 0.95);
+}
+
+window#osd image {
+  color: @mauve;
+  -gtk-icon-size: 42px;
+}
+
+/* Gedimmte Zustände weiterhin gut lesbar */
+window#osd label:disabled,
+window#osd image:disabled,
+window#osd progressbar:disabled {
+  color: @subtext1;
+  opacity: 0.85;
+}
+
+/* Fortschrittsbalken */
+window#osd progressbar,
+window#osd segmentedprogress {
+  min-height: 10px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+}
+
+window#osd progressbar trough,
+window#osd segmentedprogress segment {
+  min-height: 10px;
+  border: none;
+  border-radius: 999px;
+  background: @surface1;
+}
+
+window#osd progressbar progress,
+window#osd segmentedprogress segment.active {
+  min-height: 10px;
+  border: none;
+  border-radius: 999px;
+  background: @mauve;
+}
+
+window#osd segmentedprogress segment {
+  margin-left: 8px;
+}
+
+window#osd segmentedprogress segment:first-child {
+  margin-left: 0;
+}

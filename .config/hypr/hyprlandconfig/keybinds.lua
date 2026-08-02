@@ -44,7 +44,6 @@ bind(mainMod .. " + V", "Switch floating mode for the active window", hl.dsp.win
 
 -- Open Applikation Selector
 bind(mainMod .. " + SPACE", "Open Application Selector", hl.dsp.exec_cmd(programs.menu))
-bind(mainMod, "Open Application Selector", hl.dsp.exec_cmd(programs.menu))
 
 bind(mainMod .. " + P", "Toggle pseudo fullscreen", hl.dsp.window.pseudo())
 
@@ -118,51 +117,124 @@ bind(mainMod .. " + mouse:273", "Resize window with mouse", hl.dsp.window.resize
 })
 
 -- Laptop multimedia keys for volume and LCD brightness
-bind("XF86AudioRaiseVolume", "Increase volume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), {
-    locked = true,
-    repeating = true
-})
-bind("XF86AudioLowerVolume", "Decrease volume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), {
-    locked = true,
-    repeating = true
-})
-bind("XF86AudioMute", "Mute/unmute volume", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), {
-    locked = true,
-    repeating = true
-})
-bind("XF86AudioMicMute", "Mute/unmute microphone", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), {
-    locked = true,
-    repeating = true
-})
-bind("XF86MonBrightnessUp", "Increase brightness", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), {
-    locked = true,
-    repeating = true
-})
-bind("XF86MonBrightnessDown", "Decrease brightness", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), {
-    locked = true,
-    repeating = true
-})
+-- bind("XF86AudioRaiseVolume", "Increase volume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), {
+--   locked = true,
+--   repeating = true
+-- })
+-- bind("XF86AudioLowerVolume", "Decrease volume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), {
+--   locked = true,
+--   repeating = true
+-- })
+-- bind("XF86AudioMute", "Mute/unmute volume", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), {
+--   locked = true,
+--   repeating = true
+-- })
+-- bind("XF86AudioMicMute", "Mute/unmute microphone", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), {
+--   locked = true,
+--   repeating = true
+-- })
+-- bind("XF86MonBrightnessUp", "Increase brightness", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), {
+--   locked = true,
+--   repeating = true
+-- })
+-- bind("XF86MonBrightnessDown", "Decrease brightness", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), {
+--   locked = true,
+--   repeating = true
+-- })
 
 -- Requires playerctl
-bind("XF86AudioNext", "Next track", hl.dsp.exec_cmd("playerctl next"), {
-    locked = true
-})
-bind("XF86AudioPause", "Pause track", hl.dsp.exec_cmd("playerctl play-pause"), {
-    locked = true
-})
-bind("XF86AudioPlay", "Play track", hl.dsp.exec_cmd("playerctl play-pause"), {
-    locked = true
-})
-bind("XF86AudioPrev", "Previous track", hl.dsp.exec_cmd("playerctl previous"), {
-    locked = true
-})
+-- bind("XF86AudioNext", "Next track", hl.dsp.exec_cmd("playerctl next"), {
+--   locked = true
+-- })
+-- bind("XF86AudioPause", "Pause track", hl.dsp.exec_cmd("playerctl play-pause"), {
+--   locked = true
+-- })
+-- bind("XF86AudioPlay", "Play track", hl.dsp.exec_cmd("playerctl play-pause"), {
+--   locked = true
+-- })
+-- bind("XF86AudioPrev", "Previous track", hl.dsp.exec_cmd("playerctl previous"), {
+--   locked = true
+-- })
 
 -- Cheatsheet
 
 local home = os.getenv("HOME")
 local cheatsheet = home .. "/.cache/hyprland-keybinds.txt"
+local cheatsheet_json = home .. "/.cache/hypr-keybinds.json"
 
 bind(mainMod .. " + F1", "Show keybinding cheatsheet",
     hl.dsp.exec_cmd("sh -c 'walker --dmenu --placeholder=\"Keybindings\" < \"$HOME/.cache/hyprland-keybinds.txt\"'"))
 
+-- ============================================================
+-- SwayOSD
+-- ============================================================
+bind("XF86AudioRaiseVolume", "Increase volume", hl.dsp.exec_cmd("swayosd-client --output-volume raise"), {
+    locked = true,
+    repeating = true
+})
+bind("XF86AudioLowerVolume", "Decrease volume", hl.dsp.exec_cmd("swayosd-client --output-volume lower"), {
+    locked = true,
+    repeating = true
+})
+bind("XF86AudioMute", "Mute/unmute volume", hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"), {
+    locked = true,
+    repeating = true
+})
+bind("XF86AudioMicMute", "Mute/unmute microphone", hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle"), {
+    locked = true,
+    repeating = true
+})
+bind("XF86MonBrightnessUp", "Increase brightness", hl.dsp.exec_cmd("swayosd-client --brightness raise"), {
+    locked = true,
+    repeating = true
+})
+bind("XF86MonBrightnessDown", "Decrease brightness", hl.dsp.exec_cmd("swayosd-client --brightness lower"), {
+    locked = true,
+    repeating = true
+})
+bind("XF86AudioNext", "Next track", hl.dsp.exec_cmd("swayosd-client --playerctl next"), {
+    locked = true
+})
+bind("XF86AudioPause", "Pause track", hl.dsp.exec_cmd("swayosd-client --playerctl play-pause"), {
+    locked = true
+})
+bind("XF86AudioPlay", "Play track", hl.dsp.exec_cmd("swayosd-client --playerctl play-pause"), {
+    locked = true
+})
+bind("XF86AudioPrev", "Previous track", hl.dsp.exec_cmd("swayosd-client --playerctl previous"), {
+    locked = true
+})
+
+-- ============================================================
+-- HyprHUD
+-- ============================================================
+-- bind("SUPER + CTRL + Escape", "Emerhency stop HyprHUD", hl.dsp.exec_cmd("pkill -x hyprhud"))
+
+-- bind(
+--   mainMod .. " + SUPER_L",
+--   "Show SUPER keybinds",
+--   hl.dsp.exec_cmd("hyprhud show super"),
+--   { long_press = true, non_consuming = true }
+-- )
+-- bind(
+--   mainMod .. " + SUPER_L",
+--   "Hide keybinding HUD",
+--   hl.dsp.exec_cmd("hyperhud hide"),
+--   { release = true, non_consuming = true }
+-- )
+--
+-- bind(
+--   "ALT + ALT_L",
+--   "Show ALT keybinds",
+--   hl.dsp.exec_cmd("hyperhud show alt"),
+--   { long_press = true, non_consuming = true }
+-- )
+-- bind(
+--   "ALT + ALT_L",
+--   "Hide keybinging HUD",
+--   hl.dsp.exec_cmd("hyperhud hide"),
+--   { release = true, non_consuming = true }
+-- )
+
 bind_module.export_cheatsheet(cheatsheet)
+bind_module.export_cheatsheet_json(cheatsheet_json)

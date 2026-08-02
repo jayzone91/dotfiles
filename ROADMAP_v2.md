@@ -100,7 +100,7 @@ Ziel:
 - ⏳ Windows ähnliches ALT+TAB
 - ⏳ Fenstervorschau
 - ⏳ Animationen
-- ⏳ Einheitliches OSD
+- ✅ Einheitliches OSD
 
 ### Terminal
 
