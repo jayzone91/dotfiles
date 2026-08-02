@@ -19,4 +19,5 @@
   },
   "todo-tree.ripgrep.ripgrep": "/usr/bin/rg",
   "python.analysis.typeCheckingMode": "standard",
+  "git.confirmSync": false,
 }
