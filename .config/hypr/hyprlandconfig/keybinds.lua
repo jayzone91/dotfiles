@@ -1,5 +1,7 @@
-local bind = require("hyprlandconfig.functions.bind").bind
+local bind_module = require("hyprlandconfig.functions.bind")
 local programs = require("hyprlandconfig.functions.programs")
+
+local bind = bind_module.bind
 
 ---------------------
 ---- KEYBINDINGS ----
@@ -141,3 +143,13 @@ bind("XF86AudioPlay", "Play track", hl.dsp.exec_cmd("playerctl play-pause"), {
 bind("XF86AudioPrev", "Previous track", hl.dsp.exec_cmd("playerctl previous"), {
     locked = true
 })
+
+-- Cheatsheet
+
+local home = os.getenv("HOME")
+local cheatsheet = home .. "/.cache/hyprland-keybinds.txt"
+
+bind(mainMod .. " + F1", "Show keybinding cheatsheet",
+    hl.dsp.exec_cmd("sh -c 'walker --dmenu --placeholder=\"Keybindings\" < \"$HOME/.cache/hyprland-keybinds.txt\"'"))
+
+bind_module.export_cheatsheet(cheatsheet)
