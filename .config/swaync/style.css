@@ -15,27 +15,21 @@
   --font-size-summary: 15px;
 
   --hover-transition:
-    background 150ms ease-in-out,
-    color 150ms ease-in-out,
+    background 150ms ease-in-out, color 150ms ease-in-out,
     border-color 150ms ease-in-out;
 
-  --group-collapse-transition:
-    opacity 300ms ease-in-out;
+  --group-collapse-transition: opacity 300ms ease-in-out;
 
   --mpris-album-art-icon-size: 96px;
   --widget-volume-row-icon-size: 24px;
 }
-
 
 /* =========================================================
    GLOBALS
    ========================================================= */
 
 * {
-  font-family:
-    "JetBrainsMono Nerd Font",
-    "Symbols Nerd Font Mono",
-    sans-serif;
+  font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font Mono", sans-serif;
 
   color: @text;
 }
@@ -46,7 +40,6 @@ blankwindow,
 .floating-notifications {
   background: transparent;
 }
-
 
 /* =========================================================
    CLOSE BUTTON
@@ -81,7 +74,6 @@ blankwindow,
   box-shadow: none;
 }
 
-
 /* =========================================================
    NOTIFICATION ROW
    ========================================================= */
@@ -108,12 +100,11 @@ blankwindow,
   border-radius: var(--border-radius);
 
   box-shadow:
-    0 0 0 1px alpha(@crust, 0.40),
-    0 8px 24px alpha(@crust, 0.50);
+    0 0 0 1px alpha(@crust, 0.4),
+    0 8px 24px alpha(@crust, 0.5);
 
   transition: var(--hover-transition);
 }
-
 
 /* =========================================================
    PRIORITY STATES
@@ -135,15 +126,14 @@ blankwindow,
     0 8px 24px alpha(@crust, 0.55);
 }
 
-
 /* =========================================================
    DEFAULT NOTIFICATION ACTION
    ========================================================= */
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action {
+  .notification-background
+  .notification
+  .notification-default-action {
   margin: 0;
   padding: 6px;
 
@@ -159,32 +149,31 @@ blankwindow,
 }
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action:hover {
+  .notification-background
+  .notification
+  .notification-default-action:hover {
   background: @surface1;
 
   -gtk-icon-filter: none;
 }
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action:not(:only-child) {
+  .notification-background
+  .notification
+  .notification-default-action:not(:only-child) {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-
 
 /* =========================================================
    NOTIFICATION CONTENT
    ========================================================= */
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action
-.notification-content {
+  .notification-background
+  .notification
+  .notification-default-action
+  .notification-content {
   padding: 2px;
 
   background: transparent;
@@ -193,11 +182,11 @@ blankwindow,
 }
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action
-.notification-content
-.image {
+  .notification-background
+  .notification
+  .notification-default-action
+  .notification-content
+  .image {
   margin: 6px;
 
   border-radius: 10px;
@@ -207,35 +196,35 @@ blankwindow,
 }
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action
-.notification-content
-.app-icon {
+  .notification-background
+  .notification
+  .notification-default-action
+  .notification-content
+  .app-icon {
   margin: 6px;
 
   -gtk-icon-filter: none;
   -gtk-icon-size: var(--notification-app-icon-size);
-  -gtk-icon-shadow: 0 2px 6px alpha(@crust, 0.80);
+  -gtk-icon-shadow: 0 2px 6px alpha(@crust, 0.8);
 }
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action
-.notification-content
-.text-box
-label {
+  .notification-background
+  .notification
+  .notification-default-action
+  .notification-content
+  .text-box
+  label {
   filter: none;
 }
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action
-.notification-content
-.text-box
-.summary {
+  .notification-background
+  .notification
+  .notification-default-action
+  .notification-content
+  .text-box
+  .summary {
   background: transparent;
   color: @text;
 
@@ -246,12 +235,12 @@ label {
 }
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action
-.notification-content
-.text-box
-.time {
+  .notification-background
+  .notification
+  .notification-default-action
+  .notification-content
+  .text-box
+  .time {
   margin-right: 30px;
 
   background: transparent;
@@ -264,12 +253,12 @@ label {
 }
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action
-.notification-content
-.text-box
-.body {
+  .notification-background
+  .notification
+  .notification-default-action
+  .notification-content
+  .text-box
+  .body {
   background: transparent;
   color: @subtext0;
 
@@ -279,26 +268,26 @@ label {
   text-shadow: none;
 }
 
-
 /* =========================================================
    PROGRESS BAR
    ========================================================= */
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action
-.notification-content
-progressbar {
+  .notification-background
+  .notification
+  .notification-default-action
+  .notification-content
+  progressbar {
   margin-top: 6px;
 }
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action
-.notification-content
-progressbar trough {
+  .notification-background
+  .notification
+  .notification-default-action
+  .notification-content
+  progressbar
+  trough {
   min-height: 6px;
 
   background: @surface1;
@@ -307,11 +296,12 @@ progressbar trough {
 }
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action
-.notification-content
-progressbar progress {
+  .notification-background
+  .notification
+  .notification-default-action
+  .notification-content
+  progressbar
+  progress {
   min-height: 6px;
 
   background: @blue;
@@ -319,17 +309,16 @@ progressbar progress {
   border-radius: 6px;
 }
 
-
 /* =========================================================
    BODY IMAGE
    ========================================================= */
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action
-.notification-content
-.body-image {
+  .notification-background
+  .notification
+  .notification-default-action
+  .notification-content
+  .body-image {
   margin-top: 6px;
 
   background: @mantle;
@@ -339,27 +328,26 @@ progressbar progress {
   -gtk-icon-filter: none;
 }
 
-
 /* =========================================================
    INLINE REPLY
    ========================================================= */
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action
-.notification-content
-.inline-reply {
+  .notification-background
+  .notification
+  .notification-default-action
+  .notification-content
+  .inline-reply {
   margin-top: 8px;
 }
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action
-.notification-content
-.inline-reply
-.inline-reply-entry {
+  .notification-background
+  .notification
+  .notification-default-action
+  .notification-content
+  .inline-reply
+  .inline-reply-entry {
   padding: 8px;
 
   background: @mantle;
@@ -371,22 +359,22 @@ progressbar progress {
 }
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action
-.notification-content
-.inline-reply
-.inline-reply-entry:focus {
+  .notification-background
+  .notification
+  .notification-default-action
+  .notification-content
+  .inline-reply
+  .inline-reply-entry:focus {
   border-color: @blue;
 }
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action
-.notification-content
-.inline-reply
-.inline-reply-button {
+  .notification-background
+  .notification
+  .notification-default-action
+  .notification-content
+  .inline-reply
+  .inline-reply-button {
   margin-left: 6px;
   padding: 8px 12px;
 
@@ -398,38 +386,37 @@ progressbar progress {
 }
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action
-.notification-content
-.inline-reply
-.inline-reply-button:hover {
+  .notification-background
+  .notification
+  .notification-default-action
+  .notification-content
+  .inline-reply
+  .inline-reply-button:hover {
   background: @surface1;
   border-color: @blue;
 }
 
 .notification-row
-.notification-background
-.notification
-.notification-default-action
-.notification-content
-.inline-reply
-.inline-reply-button:disabled {
+  .notification-background
+  .notification
+  .notification-default-action
+  .notification-content
+  .inline-reply
+  .inline-reply-button:disabled {
   background: transparent;
   color: @overlay0;
 
   border-color: transparent;
 }
 
-
 /* =========================================================
    ALTERNATIVE ACTIONS
    ========================================================= */
 
 .notification-row
-.notification-background
-.notification
-.notification-alt-actions {
+  .notification-background
+  .notification
+  .notification-alt-actions {
   padding: 4px;
 
   background: transparent;
@@ -438,19 +425,16 @@ progressbar progress {
   border-bottom-right-radius: var(--border-radius);
 }
 
-.notification-row
-.notification-background
-.notification
-.notification-action {
+.notification-row .notification-background .notification .notification-action {
   margin: 4px;
   padding: 0;
 }
 
 .notification-row
-.notification-background
-.notification
-.notification-action
-> button {
+  .notification-background
+  .notification
+  .notification-action
+  > button {
   padding: 6px 10px;
 
   background: @surface0;
@@ -461,14 +445,13 @@ progressbar progress {
 }
 
 .notification-row
-.notification-background
-.notification
-.notification-action
-> button:hover {
+  .notification-background
+  .notification
+  .notification-action
+  > button:hover {
   background: @surface1;
   border-color: @blue;
 }
-
 
 /* =========================================================
    GROUPED NOTIFICATIONS
@@ -482,31 +465,23 @@ progressbar progress {
   background: transparent;
 }
 
-.notification-group
-.notification-group-close-button
-.close-button {
+.notification-group .notification-group-close-button .close-button {
   margin: 12px 20px;
 }
 
-.notification-group
-.notification-group-buttons,
-.notification-group
-.notification-group-headers {
+.notification-group .notification-group-buttons,
+.notification-group .notification-group-headers {
   margin: 0 16px;
   color: @text;
 }
 
-.notification-group
-.notification-group-headers
-.notification-group-icon {
+.notification-group .notification-group-headers .notification-group-icon {
   color: @mauve;
 
   -gtk-icon-size: var(--notification-group-icon-size);
 }
 
-.notification-group
-.notification-group-headers
-.notification-group-header {
+.notification-group .notification-group-headers .notification-group-header {
   color: @text;
   font-weight: 700;
 }
@@ -515,27 +490,24 @@ progressbar progress {
   opacity: 0.42;
 }
 
-.notification-group.collapsed
-.notification-row
-.notification {
+.notification-group.collapsed .notification-row .notification {
   background: @surface0;
 }
 
 .notification-group.collapsed
-.notification-row:not(:last-child)
-.notification-action,
+  .notification-row:not(:last-child)
+  .notification-action,
 .notification-group.collapsed
-.notification-row:not(:last-child)
-.notification-default-action {
+  .notification-row:not(:last-child)
+  .notification-default-action {
   opacity: 0;
 }
 
 .notification-group.collapsed:hover
-.notification-row:not(:only-child)
-.notification {
+  .notification-row:not(:only-child)
+  .notification {
   background: @surface1;
 }
-
 
 /* =========================================================
    CONTROL CENTER
@@ -551,53 +523,36 @@ progressbar progress {
   border: 1px solid alpha(@blue, 0.28);
   border-radius: var(--border-radius);
 
-  box-shadow:
-    0 18px 42px alpha(@crust, 0.62);
+  box-shadow: 0 18px 42px alpha(@crust, 0.62);
 }
 
-.control-center
-.control-center-list-placeholder {
+.control-center .control-center-list-placeholder {
   color: @subtext0;
   opacity: 1;
 }
 
-.control-center
-.control-center-list {
+.control-center .control-center-list {
   background: transparent;
 }
 
-.control-center
-.control-center-list
-.notification {
+.control-center .control-center-list .notification {
   box-shadow:
-    0 0 0 1px alpha(@crust, 0.40),
-    0 8px 24px alpha(@crust, 0.50);
+    0 0 0 1px alpha(@crust, 0.4),
+    0 8px 24px alpha(@crust, 0.5);
+}
+
+.control-center .control-center-list .notification .notification-default-action,
+.control-center .control-center-list .notification .notification-action {
+  transition: var(--group-collapse-transition), var(--hover-transition);
 }
 
 .control-center
-.control-center-list
-.notification
-.notification-default-action,
-.control-center
-.control-center-list
-.notification
-.notification-action {
-  transition:
-    var(--group-collapse-transition),
-    var(--hover-transition);
-}
-
-.control-center
-.control-center-list
-.notification
-.notification-default-action:hover,
-.control-center
-.control-center-list
-.notification
-.notification-action:hover {
+  .control-center-list
+  .notification
+  .notification-default-action:hover,
+.control-center .control-center-list .notification .notification-action:hover {
   background: @surface1;
 }
-
 
 /* =========================================================
    WIDGET BASE
@@ -612,7 +567,6 @@ progressbar progress {
   border: 1px solid alpha(@surface1, 0.75);
   border-radius: var(--border-radius);
 }
-
 
 /* =========================================================
    TITLE WIDGET
@@ -639,12 +593,11 @@ progressbar progress {
 }
 
 .widget-title > button:hover {
-  background: alpha(@red, 0.20);
+  background: alpha(@red, 0.2);
   color: @red;
 
   border-color: alpha(@red, 0.45);
 }
-
 
 /* =========================================================
    DO NOT DISTURB
@@ -685,7 +638,6 @@ progressbar progress {
   border-radius: 50%;
 }
 
-
 /* =========================================================
    LABEL WIDGET
    ========================================================= */
@@ -694,7 +646,6 @@ progressbar progress {
   color: @text;
   font-size: 1rem;
 }
-
 
 /* =========================================================
    MPRIS
@@ -708,85 +659,59 @@ progressbar progress {
   border: none;
 }
 
-.widget-mpris
-.widget-mpris-player {
+.widget-mpris .widget-mpris-player {
   margin: 12px;
 
   border-radius: var(--border-radius);
 
-  box-shadow:
-    0 8px 24px alpha(@crust, 0.65);
+  box-shadow: 0 8px 24px alpha(@crust, 0.65);
 
   overflow: hidden;
 }
 
-.widget-mpris
-.widget-mpris-player
-.mpris-background {
+.widget-mpris .widget-mpris-player .mpris-background {
   filter: blur(10px);
 }
 
-.widget-mpris
-.widget-mpris-player
-.mpris-overlay {
+.widget-mpris .widget-mpris-player .mpris-overlay {
   padding: 16px;
 
   background: alpha(@crust, 0.62);
 }
 
-.widget-mpris
-.widget-mpris-player
-.mpris-overlay
-button {
+.widget-mpris .widget-mpris-player .mpris-overlay button {
   color: @text;
 
   border-radius: 8px;
 }
 
-.widget-mpris
-.widget-mpris-player
-.mpris-overlay
-button:hover {
-  background: alpha(@surface1, 0.80);
+.widget-mpris .widget-mpris-player .mpris-overlay button:hover {
+  background: alpha(@surface1, 0.8);
 }
 
-.widget-mpris
-.widget-mpris-player
-.mpris-overlay
-.widget-mpris-album-art {
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-album-art {
   border-radius: 10px;
 
-  box-shadow:
-    0 8px 24px alpha(@crust, 0.65);
+  box-shadow: 0 8px 24px alpha(@crust, 0.65);
 
   -gtk-icon-size: var(--mpris-album-art-icon-size);
 }
 
-.widget-mpris
-.widget-mpris-player
-.mpris-overlay
-.widget-mpris-title {
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-title {
   color: @text;
 
   font-size: 1.15rem;
   font-weight: 700;
 }
 
-.widget-mpris
-.widget-mpris-player
-.mpris-overlay
-.widget-mpris-subtitle {
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-subtitle {
   color: @subtext0;
 
   font-size: 0.95rem;
 }
 
-.widget-mpris
-.widget-mpris-player
-.mpris-overlay
-> box
-> button:hover {
-  background: alpha(@surface1, 0.80);
+.widget-mpris .widget-mpris-player .mpris-overlay > box > button:hover {
+  background: alpha(@surface1, 0.8);
 }
 
 .widget-mpris > box > button {
@@ -797,14 +722,11 @@ button:hover {
   color: @overlay0;
 }
 
-
 /* =========================================================
    BUTTON GRID
    ========================================================= */
 
-.widget-buttons-grid
-flowboxchild
-> button {
+.widget-buttons-grid flowboxchild > button {
   min-height: 38px;
 
   background: @surface0;
@@ -814,43 +736,31 @@ flowboxchild
   border-radius: 8px;
 }
 
-.widget-buttons-grid
-flowboxchild
-> button:hover {
+.widget-buttons-grid flowboxchild > button:hover {
   background: @surface1;
   border-color: @blue;
 }
 
-.widget-buttons-grid
-flowboxchild
-> button.toggle:checked {
+.widget-buttons-grid flowboxchild > button.toggle:checked {
   background: alpha(@blue, 0.22);
   color: @blue;
 
   border-color: @blue;
 }
 
-
 /* =========================================================
    MENUBAR
    ========================================================= */
 
-.widget-menubar
-> .menu-button-bar
-> .start {
+.widget-menubar > .menu-button-bar > .start {
   margin-left: 8px;
 }
 
-.widget-menubar
-> .menu-button-bar
-> .end {
+.widget-menubar > .menu-button-bar > .end {
   margin-right: 8px;
 }
 
-.widget-menubar
-> .menu-button-bar
-> .widget-menubar-container
-button {
+.widget-menubar > .menu-button-bar > .widget-menubar-container button {
   margin: 0 4px;
 
   background: transparent;
@@ -859,10 +769,7 @@ button {
   border-radius: 8px;
 }
 
-.widget-menubar
-> .menu-button-bar
-> .widget-menubar-container
-button:hover {
+.widget-menubar > .menu-button-bar > .widget-menubar-container button:hover {
   background: @surface1;
 }
 
@@ -870,10 +777,7 @@ button:hover {
   margin-top: 8px;
 }
 
-.widget-menubar
-> revealer
-*
-button {
+.widget-menubar > revealer * button {
   margin: 8px;
   margin-top: 0;
 
@@ -883,20 +787,13 @@ button {
   border-radius: 8px;
 }
 
-.widget-menubar
-> revealer
-*
-button:hover {
+.widget-menubar > revealer * button:hover {
   background: @surface1;
 }
 
-.widget-menubar
-> revealer
-*
-button:last-child {
+.widget-menubar > revealer * button:last-child {
   margin-bottom: 0;
 }
-
 
 /* =========================================================
    VOLUME
@@ -918,7 +815,6 @@ button:last-child {
   border: 1px solid @surface1;
   border-radius: 10px;
 }
-
 
 /* =========================================================
    SLIDERS
@@ -954,7 +850,6 @@ scale slider {
   border-radius: 50%;
 }
 
-
 /* =========================================================
    INHIBITORS
    ========================================================= */
@@ -978,6 +873,6 @@ scale slider {
 }
 
 .widget-inhibitors > button:hover {
-  background: alpha(@yellow, 0.20);
+  background: alpha(@yellow, 0.2);
   color: @yellow;
 }

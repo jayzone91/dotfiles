@@ -1,18 +1,18 @@
 @import "../theme/catppuccin-mocha.css";
 
 * {
-    border: none;
-    border-radius: 0;
-    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font Mono", sans-serif;
-    font-size: 14px;
-    min-height: 0;
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font Mono", sans-serif;
+  font-size: 14px;
+  min-height: 0;
 }
 
 window#waybar {
-    background: alpha(@base, 0.92);
-    color: @text;
-    border: 1px solid alpha(@blue, 0.22);
-    border-radius: 10px;
+  background: alpha(@base, 0.92);
+  color: @text;
+  border: 1px solid alpha(@blue, 0.22);
+  border-radius: 10px;
 }
 
 #custom-launcher,
@@ -27,17 +27,17 @@ window#waybar {
 #pulseaudio,
 #custom-notifications,
 #custom-power {
-    background: @surface0;
-    color: @text;
-    margin: 5px 3px;
-    padding: 0 12px;
-    border-radius: 8px;
+  background: @surface0;
+  color: @text;
+  margin: 5px 3px;
+  padding: 0 12px;
+  border-radius: 8px;
 }
 
 #custom-launcher {
-    color: @blue;
-    font-size: 18px;
-    padding: 0 14px;
+  color: @blue;
+  font-size: 18px;
+  padding: 0 14px;
 }
 
 /* Workspaces */
@@ -46,11 +46,11 @@ window#waybar {
 #custom-ws3,
 #custom-ws4,
 #custom-ws5 {
-    background: transparent;
-    color: @overlay0;
-    padding: 0 6px;
-    margin: 0 1px;
-    font-size: 13px;
+  background: transparent;
+  color: @overlay0;
+  padding: 0 6px;
+  margin: 0 1px;
+  font-size: 13px;
 }
 
 #custom-ws1.active,
@@ -58,8 +58,8 @@ window#waybar {
 #custom-ws3.active,
 #custom-ws4.active,
 #custom-ws5.active {
-    color: @blue;
-    font-size: 15px;
+  color: @blue;
+  font-size: 15px;
 }
 
 #custom-ws1:hover,
@@ -67,60 +67,60 @@ window#waybar {
 #custom-ws3:hover,
 #custom-ws4:hover,
 #custom-ws5:hover {
-    color: @text;
-    background: @surface1;
-    border-radius: 8px;
+  color: @text;
+  background: @surface1;
+  border-radius: 8px;
 }
 
 #window {
-    color: @subtext0;
-    min-width: 180px;
+  color: @subtext0;
+  min-width: 180px;
 }
 
 #clock {
-    color: @mauve;
-    font-weight: 700;
+  color: @mauve;
+  font-weight: 700;
 }
 
 #cpu {
-    color: @blue;
+  color: @blue;
 }
 
 #memory {
-    color: @mauve;
+  color: @mauve;
 }
 
 #temperature {
-    color: @yellow;
+  color: @yellow;
 }
 
 #temperature.critical {
-    color: @red;
+  color: @red;
 }
 
 #network {
-    color: @teal;
+  color: @teal;
 }
 
 #bluetooth {
-    color: @sky;
+  color: @sky;
 }
 
 #pulseaudio {
-    color: @green;
+  color: @green;
 }
 
 #custom-notifications {
-    color: @peach;
+  color: @peach;
 }
 
 #custom-power {
-    color: @red;
-    padding: 0 14px;
+  color: @red;
+  padding: 0 14px;
 }
 #custom-power:hover {
-	color: @red;
-	background: @surface1;
+  color: @red;
+  background: @surface1;
 }
 
 #custom-launcher:hover,
@@ -132,17 +132,17 @@ window#waybar {
 #bluetooth:hover,
 #pulseaudio:hover,
 #custom-notifications:hover {
-    background: @surface1;
-    color: @text;
+  background: @surface1;
+  color: @text;
 }
 
 tooltip {
-    background: @mantle;
-    color: @text;
-    border: 1px solid @surface1;
-    border-radius: 8px;
+  background: @mantle;
+  color: @text;
+  border: 1px solid @surface1;
+  border-radius: 8px;
 }
 
 tooltip label {
-    color: @text;
+  color: @text;
 }

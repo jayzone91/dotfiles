@@ -5,64 +5,54 @@
    ========================================================= */
 
 * {
-    background-image: none;
-    box-shadow: none;
-    text-shadow: none;
+  background-image: none;
+  box-shadow: none;
+  text-shadow: none;
 
-    font-family:
-        "JetBrainsMono Nerd Font",
-        "Symbols Nerd Font Mono",
-        sans-serif;
+  font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font Mono", sans-serif;
 
-    font-size: 18px;
-    color: @text;
+  font-size: 18px;
+  color: @text;
 }
-
 
 /* =========================================================
    OVERLAY
    ========================================================= */
 
 window {
-    background-color: alpha(@crust, 0.82);
+  background-color: alpha(@crust, 0.82);
 }
-
 
 /* =========================================================
    BUTTONS
    ========================================================= */
 
 button {
-    min-width: 170px;
-    min-height: 170px;
+  min-width: 170px;
+  min-height: 170px;
 
-    margin: 18px;
-    padding: 18px;
+  margin: 18px;
+  padding: 18px;
 
-    background-color: alpha(@surface0, 0.96);
-    color: @text;
+  background-color: alpha(@surface0, 0.96);
+  color: @text;
 
-    border: 2px solid alpha(@overlay0, 0.35);
-    border-radius: 12px;
+  border: 2px solid alpha(@overlay0, 0.35);
+  border-radius: 12px;
 }
-
 
 /* =========================================================
    ICONS
    ========================================================= */
 
 button label {
-    margin: 0;
+  margin: 0;
 
-    font-family:
-        "Symbols Nerd Font Mono",
-        "Symbols Nerd Font",
-        sans-serif;
+  font-family: "Symbols Nerd Font Mono", "Symbols Nerd Font", sans-serif;
 
-    font-size: 72px;
-    color: @text;
+  font-size: 72px;
+  color: @text;
 }
-
 
 /* =========================================================
    GENERIC HOVER & FOCUS
@@ -70,15 +60,14 @@ button label {
 
 button:hover,
 button:focus {
-    background-color: @surface1;
-    border-color: @blue;
+  background-color: @surface1;
+  border-color: @blue;
 }
 
 button:hover label,
 button:focus label {
-    color: @text;
+  color: @text;
 }
-
 
 /* =========================================================
    LOCK
@@ -86,15 +75,14 @@ button:focus label {
 
 #lock:hover,
 #lock:focus {
-    background-color: alpha(@blue, 0.18);
-    border-color: @blue;
+  background-color: alpha(@blue, 0.18);
+  border-color: @blue;
 }
 
 #lock:hover label,
 #lock:focus label {
-    color: @blue;
+  color: @blue;
 }
-
 
 /* =========================================================
    SUSPEND
@@ -102,15 +90,14 @@ button:focus label {
 
 #suspend:hover,
 #suspend:focus {
-    background-color: alpha(@mauve, 0.18);
-    border-color: @mauve;
+  background-color: alpha(@mauve, 0.18);
+  border-color: @mauve;
 }
 
 #suspend:hover label,
 #suspend:focus label {
-    color: @mauve;
+  color: @mauve;
 }
-
 
 /* =========================================================
    LOGOUT
@@ -118,15 +105,14 @@ button:focus label {
 
 #logout:hover,
 #logout:focus {
-    background-color: alpha(@peach, 0.18);
-    border-color: @peach;
+  background-color: alpha(@peach, 0.18);
+  border-color: @peach;
 }
 
 #logout:hover label,
 #logout:focus label {
-    color: @peach;
+  color: @peach;
 }
-
 
 /* =========================================================
    REBOOT
@@ -134,15 +120,14 @@ button:focus label {
 
 #reboot:hover,
 #reboot:focus {
-    background-color: alpha(@yellow, 0.18);
-    border-color: @yellow;
+  background-color: alpha(@yellow, 0.18);
+  border-color: @yellow;
 }
 
 #reboot:hover label,
 #reboot:focus label {
-    color: @yellow;
+  color: @yellow;
 }
-
 
 /* =========================================================
    SHUTDOWN
@@ -150,11 +135,11 @@ button:focus label {
 
 #shutdown:hover,
 #shutdown:focus {
-    background-color: alpha(@red, 0.18);
-    border-color: @red;
+  background-color: alpha(@red, 0.18);
+  border-color: @red;
 }
 
 #shutdown:hover label,
 #shutdown:focus label {
-    color: @red;
+  color: @red;
 }
