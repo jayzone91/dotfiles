@@ -46,6 +46,10 @@ packages:
       required: true
 
   core:
+    - package: keepassxc
+      source: pacman
+      reason: Password manager
+      required: true
     - package: 7zip
       source: pacman
       reason: Archive utility
