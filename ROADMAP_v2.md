@@ -250,3 +250,11 @@ Eine Linux-Workstation, die:
 - 🏢 den kompletten Homeoffice-Alltag übernimmt.
 - 🍎 sich sinnvoll in das Apple-Ökosystem integriert.
 - 🔄 jederzeit vollständig reproduzierbar ist.
+
+
+
+# Wenn ich abends was machen will:
+
+- Clipboard History
+- Emoji Picker mit auto insert
+- maus config
