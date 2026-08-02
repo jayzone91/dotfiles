@@ -1,124 +1,143 @@
+local bind = require("hyprlandconfig.functions.bind").bind
 local programs = require("hyprlandconfig.functions.programs")
 
 ---------------------
 ---- KEYBINDINGS ----
 ---------------------
+-- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
+
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
--- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(programs.terminal))
-hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(programs.terminal))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(programs.browser))
-local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
--- hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(programs.fileManager))
-hl.bind(mainMod .. " + V", hl.dsp.window.float({
+-- Open Terminal
+bind(mainMod .. " + T", "Open Terminal", hl.dsp.exec_cmd(programs.terminal))
+bind(mainMod .. " + C", "Open Terminal", hl.dsp.exec_cmd(programs.terminal))
+
+-- Open Browser
+bind(mainMod .. " + B", "Open Browser", hl.dsp.exec_cmd(programs.browser))
+
+-- Open File Manager
+bind(mainMod .. " + E", "Open File Manager", hl.dsp.exec_cmd(programs.fileManager))
+
+-- Close Window (graceful close)
+local closeWindowBind = bind(mainMod .. " + Q", "Close Window (graceful close)", hl.dsp.window.close())
+-- Kill window (force close)
+bind("ALT + F4", "Kill window (force close)", hl.dsp.window.kill())
+
+-- Switch floating mode for the active window
+bind(mainMod .. " + V", "Switch floating mode for the active window", hl.dsp.window.float({
     action = "toggle"
 }))
-hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(programs.menu))
-hl.bind(mainMod, hl.dsp.exec_cmd(programs.menu))
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
-hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(
+
+-- Open Applikation Selector
+bind(mainMod .. " + SPACE", "Open Application Selector", hl.dsp.exec_cmd(programs.menu))
+bind(mainMod, "Open Application Selector", hl.dsp.exec_cmd(programs.menu))
+
+bind(mainMod .. " + P", "Toggle pseudo fullscreen", hl.dsp.window.pseudo())
+
+bind(mainMod .. " + J", "Toggle split layout", hl.dsp.layout("togglesplit")) -- dwindle only
+
+-- Open Logout Menu
+bind(mainMod .. " + SHIFT + E", "Open Logout Menu", hl.dsp.exec_cmd(
     "wlogout --buttons-per-row 5 --column-spacing 20 --margin-left 1250 --margin-right 1250 --margin-top 390 --margin-bottom 390"))
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd(
+bind(mainMod .. " + M", "Open Logout Menu", hl.dsp.exec_cmd(
     "wlogout --buttons-per-row 5 --column-spacing 20 --margin-left 1250 --margin-right 1250 --margin-top 390 --margin-bottom 390"))
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
+
+-- Lock Screen
+bind(mainMod .. " + L", "Lock Screen", hl.dsp.exec_cmd("hyprlock"))
 
 -- Window Switch
-hl.bind("ALT + TAB", hl.dsp.exec_cmd("walker --provider windows --nosearch"))
+bind("ALT + TAB", "Window Switch", hl.dsp.exec_cmd("walker --provider windows --nosearch"))
 
 -- Screenshots
--- Bereich auswählen
-hl.bind("Print", hl.dsp.exec_cmd([[sh -c 'grim -g "$(slurp)" - | satty --filename -']]))
--- Gesamter Monitor
-hl.bind("SHIFT + Print", hl.dsp.exec_cmd([[grim - | satty --filename -]]))
+-- Screenshot of selected area
+bind("Print", "Screenshot of selected area", hl.dsp.exec_cmd([[sh -c 'grim -g "$(slurp)" - | satty --filename -']]))
+-- Screenshot of entire screen
+bind("SHIFT + Print", "Screenshot of entire screen", hl.dsp.exec_cmd([[grim - | satty --filename -]]))
 
 -- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + left", hl.dsp.focus({
+bind(mainMod .. " + left", "Move focus left", hl.dsp.focus({
     direction = "left"
 }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({
+bind(mainMod .. " + right", "Move focus right", hl.dsp.focus({
     direction = "right"
 }))
-hl.bind(mainMod .. " + up", hl.dsp.focus({
+bind(mainMod .. " + up", "Move focus up", hl.dsp.focus({
     direction = "up"
 }))
-hl.bind(mainMod .. " + down", hl.dsp.focus({
+bind(mainMod .. " + down", "Move focus down", hl.dsp.focus({
     direction = "down"
 }))
 
--- Switch workspaces with mainMod + [0-9]
--- Move active window to a workspace with mainMod + SHIFT + [0-9]
-for i = 1, 10 do
+-- Switch workspaces with mainMod + [0-5]
+-- Move active window to a workspace with mainMod + SHIFT + [0-5]
+for i = 1, 5 do
     local key = i % 10 -- 10 maps to key 0
-    hl.bind(mainMod .. " + " .. key, hl.dsp.focus({
+    bind(mainMod .. " + " .. key, "Switch to workspace " .. i, hl.dsp.focus({
         workspace = i
     }))
-    hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({
+    bind(mainMod .. " + SHIFT + " .. key, "Move active window to workspace " .. i, hl.dsp.window.move({
         workspace = i
     }))
 end
 
 -- Example special workspace (scratchpad)
-hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({
+bind(mainMod .. " + S", "Toggle special workspace 'magic'", hl.dsp.workspace.toggle_special("magic"))
+bind(mainMod .. " + SHIFT + S", "Move active window to special workspace 'magic'", hl.dsp.window.move({
     workspace = "special:magic"
 }))
 
 -- Scroll through existing workspaces with mainMod + scroll
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({
+bind(mainMod .. " + mouse_down", "Switch to next workspace", hl.dsp.focus({
     workspace = "e+1"
 }))
-hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({
+bind(mainMod .. " + mouse_up", "Switch to previous workspace", hl.dsp.focus({
     workspace = "e-1"
 }))
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
-hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), {
+bind(mainMod .. " + mouse:272", "Move window with mouse", hl.dsp.window.drag(), {
     mouse = true
 })
-hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), {
+bind(mainMod .. " + mouse:273", "Resize window with mouse", hl.dsp.window.resize(), {
     mouse = true
 })
 
 -- Laptop multimedia keys for volume and LCD brightness
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), {
+bind("XF86AudioRaiseVolume", "Increase volume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), {
     locked = true,
     repeating = true
 })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), {
+bind("XF86AudioLowerVolume", "Decrease volume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), {
     locked = true,
     repeating = true
 })
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), {
+bind("XF86AudioMute", "Mute/unmute volume", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), {
     locked = true,
     repeating = true
 })
-hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), {
+bind("XF86AudioMicMute", "Mute/unmute microphone", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), {
     locked = true,
     repeating = true
 })
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), {
+bind("XF86MonBrightnessUp", "Increase brightness", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), {
     locked = true,
     repeating = true
 })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), {
+bind("XF86MonBrightnessDown", "Decrease brightness", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), {
     locked = true,
     repeating = true
 })
 
 -- Requires playerctl
-hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), {
+bind("XF86AudioNext", "Next track", hl.dsp.exec_cmd("playerctl next"), {
     locked = true
 })
-hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), {
+bind("XF86AudioPause", "Pause track", hl.dsp.exec_cmd("playerctl play-pause"), {
     locked = true
 })
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), {
+bind("XF86AudioPlay", "Play track", hl.dsp.exec_cmd("playerctl play-pause"), {
     locked = true
 })
-hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), {
+bind("XF86AudioPrev", "Previous track", hl.dsp.exec_cmd("playerctl previous"), {
     locked = true
 })
