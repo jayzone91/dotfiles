@@ -27,7 +27,7 @@ if status is-interactive
     set -gx PAGER less
     set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
-    set -gx BAT_THEME = "Catppuccin Mocha"
+    set -gx BAT_THEME "Catppuccin Mocha"
 
     # abbr
     abbr -a cd "z"
@@ -63,7 +63,7 @@ if status is-interactive
     abbr -a update "paru -Syu"
     abbr -a cleanup "pary -Sc"
 
-    abbr -a reloadfish "source ~/.config/fish/conig.fish"
+    abbr -a reloadfish "exec fish"
 
     # FZF
     set -gx FZF_DEFAULT_COMMAND "fd --type f --hidden --follow --exclude .git"

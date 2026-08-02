@@ -1,3 +1,5 @@
+# Erster Tag:
+
 Das war gut, dass du den ursprünglichen Plan noch einmal hervorgeholt hast. Tatsächlich fehlen darin einige Dinge, die wir unterwegs aus den Augen verloren haben.
 
 Ich würde den Plan inzwischen etwas anders strukturieren. Nicht nach "Installiere X", sondern nach **Lebensbereichen**. So vergisst man später nichts.
@@ -364,7 +366,7 @@ Ich würde die restlichen Arbeiten jetzt so angehen:
 
 Dann hätten wir am Ende wirklich ein System, das nicht nur gut aussieht und performant ist, sondern sich auch vollständig reproduzieren lässt – inklusive Linux, Dotfiles und der kompletten Firmenumgebung in einer austauschbaren Windows-VM. Das ist aus meiner Sicht ein sehr rundes Endziel.
 
---- Zweiter Teil:
+# Zweiter Tag:
 
 Sehr gerne. Ich habe die Liste noch einmal aufgeräumt, priorisiert und um die neuen Erkenntnisse ergänzt. Das wird ab jetzt unser Masterplan.
 
@@ -630,7 +632,7 @@ Ich würde den Gesamtstand inzwischen ungefähr so einschätzen:
 
 Ich finde, wir sind inzwischen an einem schönen Punkt angekommen: Das Fundament ist stabil. Ab jetzt geht es vor allem darum, die einzelnen Bereiche (Gaming, Homeoffice, Apple und Komfort) sauber auszubauen und das Ganze zu einem wirklich hochwertigen, reproduzierbaren System zu machen.
 
---- Teil 3
+# Dritter Tag:
 
 Sehr gerne. Ich glaube inzwischen, dass wir uns von einer "To-do-Liste" zu einer **Roadmap für dein gesamtes System** entwickelt haben. 😄
 
@@ -939,7 +941,8 @@ Ich würde die Roadmap leicht umpriorisieren und zuerst die Punkte angehen, die 
 
 Ich glaube, damit haben wir inzwischen einen richtig guten Masterplan. Er ist nicht mehr nur eine Migrationsliste, sondern ein Konzept für dein persönliches Linux-System.
 
---- Teil 4
+# Vierter Tag:
+
 Sehr gut. Ich glaube, wir sollten die Agenda inzwischen als **lebendes Projekt** betrachten und nicht mehr nur als Checkliste. Das entwickelt sich langsam zu deiner persönlichen Linux-Distribution. 😄
 
 Ich würde sie inzwischen so strukturieren:
@@ -1197,6 +1200,9 @@ Das Ziel ist eine **reproduzierbare High-End-Workstation**, die:
 
 Ich habe noch eine Idee für dieses Projekt: Sobald wir etwas mehr geschafft haben, könnten wir die Roadmap in ein GitHub-Repository als `ROADMAP.md` übernehmen und daneben ein `CHANGELOG.md` führen. So dokumentieren wir nicht nur den Zielzustand, sondern auch jede größere Verbesserung. Das passt hervorragend zu deinem reproduzierbaren Ansatz und gibt dir jederzeit einen Überblick über den Entwicklungsstand.
 
---- NEU:
+# Fünter Tag:
 
 - ich brauche einen Manager für Passwörter und Passkeys, der sich direkt ins Betriebssystem und in die installierte Software einklinken lässt. Ähnliuch wie Apple Passwords, jedoch nur Lokal im OS.
+- NAS als Mount Einbinden
+- HUD für Lautstärke unten mittig (Windows ähnlich)
+- Auf allen workspaces ein anderes Wallpaper, damit nicht alles gleich aussieht. (Immer noch zufällig alle 30 minuten ein anderes)

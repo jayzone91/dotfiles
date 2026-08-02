@@ -25,6 +25,18 @@ local closeWindowBind = bind(mainMod .. " + Q", "Close Window (graceful close)",
 -- Kill window (force close)
 bind("ALT + F4", "Kill window (force close)", hl.dsp.window.kill())
 
+bind(mainMod .. " + Escape", "Release Application from forced fullscreen", hl.dsp.window.fullscreen_state({
+    internal = 0,
+    client = 2,
+    action = "set",
+    layout_aware = false
+}))
+bind(mainMod .. " + F", "Toggle fullscreen", hl.dsp.window.fullscreen({
+    mode = "fullscreen",
+    action = "toggle",
+    layout_aware = false
+}))
+
 -- Switch floating mode for the active window
 bind(mainMod .. " + V", "Switch floating mode for the active window", hl.dsp.window.float({
     action = "toggle"
@@ -48,7 +60,8 @@ bind(mainMod .. " + M", "Open Logout Menu", hl.dsp.exec_cmd(
 bind(mainMod .. " + L", "Lock Screen", hl.dsp.exec_cmd("hyprlock"))
 
 -- Window Switch
-bind("ALT + TAB", "Window Switch", hl.dsp.exec_cmd("walker --provider windows --nosearch"))
+bind("ALT + TAB", "Window Switch",
+    hl.dsp.exec_cmd([[sh -c 'hyprctl dispatch fullscreenstate 0 2; walker --provider windows --nosearch']]))
 
 -- Screenshots
 -- Screenshot of selected area
