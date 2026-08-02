@@ -1,222 +1,252 @@
 # 🚀 Linux Workstation Roadmap
 
-> Ziel: Eine reproduzierbare High-End-Workstation, die Gaming, Entwicklung und Homeoffice vereint und sich jederzeit vollständig wiederherstellen lässt.
+> Ziel: Eine reproduzierbare High-End-Workstation für Gaming, Entwicklung und Homeoffice, die sich jederzeit vollständig aus Git + Bootstrap + Nix wiederherstellen lässt.
 
 ---
 
-# 📊 Projektstatus
+# 🏁 Projekt-Meilensteine
 
-| Bereich           |    Status    |
-| ----------------- | :----------: |
-| Fundament         |   ✅ 100 %   |
-| Desktop           |   🟢 95 %    |
-| Entwicklung       |   🟢 90 %    |
-| Gaming            | 🟡 In Arbeit |
-| Homeoffice        |  🟡 Geplant  |
-| Apple-Integration |  🟡 Geplant  |
-| Komfort           |  🟡 Laufend  |
-| Backup            |   🔴 Offen   |
-| Dokumentation     | 🟡 Begonnen  |
+## ✅ M1 – Fundament (Abgeschlossen)
 
----
+Eine stabile Linux-Basis.
 
-# 🔥 Aktuell in Arbeit (Priorität)
+### Betriebssystem
 
-## 🎮 Gaming
-
-- ⏳ Battle.net
-- ⏳ Heroic
-- ⏳ Ubisoft Connect
-- ⏳ EA App
-- ⏳ GOG
-- ⏳ MangoHud
-- ⏳ GameMode
-- ⏳ HDR
-- ⏳ VRR
-- ⏳ DLSS
-- ⏳ Shader Cache optimieren
-- ⏳ Witcher 3 testen
-- ⏳ Diablo 3
-- ⏳ Horizon Zero Dawn Remastered
-- ⏳ Horizon Forbidden West
-- ⏳ Skyrim
-- ⏳ Satisfactory
-- ⏳ Palworld
-- ⏳ FF7 Remake
-- ⏳ FF7 Rebirth
-
----
-
-# 🖥️ Desktop Experience
-
-## Fenster & Workflow
-
+- ✅ Arch Linux
 - ✅ Hyprland
-- ✅ Walker
 - ✅ Waybar
 - ✅ Hyprlock
 - ✅ Hyprpaper
-- ✅ Steam als Floating
-- ⏳ echtes MRU Alt+Tab
-- ⏳ Fenstervorschau
-- ⏳ Animationen verbessern
+- ✅ Ghostty
 
-## Wallpaper
+### Audio
 
-- ✅ Hyprpaper
-- ⏳ Git-Repository
-- ⏳ Zufällige Wallpaper je Workspace
-- ⏳ Wechsel alle 30 Minuten
-- ⏳ Tageszeitabhängige Wallpaper
-- ⏳ automatisches git pull
-- ⏳ systemd-Timer
+- ✅ PipeWire
+- ✅ WirePlumber
+- ✅ PulseAudio Compatibility
 
-## Benachrichtigungen & OSD
-
-- ⏳ Windows-ähnliches Lautstärke-HUD
-- ⏳ CapsLock OSD
-- ⏳ NumLock OSD
-- ⏳ Helligkeits-OSD
-- ⏳ DND-Modus
-- ⏳ Benachrichtigungen vereinheitlichen
-
----
-
-# 💻 Entwicklung
-
-## Bereits eingerichtet
+### Entwicklung
 
 - ✅ Git
 - ✅ GitHub CLI
 - ✅ Cursor
 - ✅ VS Code
 - ✅ JetBrains
-- ✅ LazyGit
-- ✅ Nix
 - ✅ Bun
 - ✅ Node
 - ✅ NVM
+- ✅ Nix
 
-## Offen
+### Desktop
 
-- ⏳ DataGrip
-- ⏳ Docker oder Podman
-- ⏳ Flakes ausbauen
-- ⏳ Home Manager
-- ⏳ Bootstrap-Skript
+- ✅ Walker
+- ✅ ALT+F4
+- ✅ Fullscreen Rescue
+- ✅ Steam Floating
 
 ---
 
-# 🏢 Homeoffice
+## 🟢 M2 – Gaming (Aktuell)
 
-## Linux
+Ziel:
+
+> Windows vollständig ersetzen.
+
+### Plattformen
+
+- ✅ Steam
+- ✅ Battle.net
+- ⏳ Heroic
+- ⏳ Ubisoft Connect
+- ⏳ EA App
+- ⏳ GOG
+
+---
+
+### Gaming Stack
+
+- ✅ Proton GE
+- ✅ MangoHud
+- ✅ GameMode
+- ⏳ HDR
+- ⏳ VRR
+- ⏳ DLSS
+- ⏳ Shader Cache
+
+---
+
+### Spiele
+
+- ✅ Witcher 3
+- 🟡 Diablo III
+- ⏳ Horizon Zero Dawn Remastered
+- ⏳ Horizon Forbidden West
+- ⏳ Skyrim
+- ⏳ Palworld
+- ⏳ Satisfactory
+- ⏳ FF7 Remake
+- ⏳ FF7 Rebirth
+
+---
+
+## 🟡 M3 – Produktivität
+
+Ziel:
+
+> Linux wird Hauptarbeitsplatz.
+
+### Desktop
+
+- ⏳ Windows ähnliches ALT+TAB
+- ⏳ Fenstervorschau
+- ⏳ Animationen
+- ⏳ Einheitliches OSD
+
+### Terminal
+
+- ✅ Ghostty
+- ✅ Copy on Select
+- ✅ Ctrl+V
+- ⏳ Shell Integration
+- ⏳ Quick Terminal
+
+### Komfort
+
+- ⏳ Passwortmanager
+- ⏳ Clipboard History
+- ⏳ Emoji Picker
+- ⏳ OCR
+- ⏳ QR Scanner
+- ⏳ Screen Recording
+- ⏳ Logitech G502 X Plus
+- ⏳ Controller Auto Sleep
+- ⏳ Keybind Cheatsheet
+
+---
+
+### Homeoffice
 
 - ✅ OpenVPN
 
-## Windows VM
+#### Windows VM
 
 - ⏳ libvirt
-- ⏳ qemu
 - ⏳ virt-manager
+- ⏳ Windows 11
 - ⏳ VirtIO
 - ⏳ TPM
 - ⏳ Secure Boot
-- ⏳ Windows 11
-- ⏳ Debloat
+- ⏳ Snapshot
 - ⏳ Windows Hello
-- ⏳ RDM
+- ⏳ Remote Desktop Manager
 - ⏳ FileZilla
 - ⏳ iCloud Drive
-- ⏳ Walker startet/beendet VM
-- ⏳ Snapshot nach Grundinstallation
 
 ---
 
-# 🍎 Apple
+### Apple
 
 - ⏳ iCloud
 - ⏳ Fotos
 - ⏳ Kalender
 - ⏳ Kontakte
 - ⏳ AirPods
-- ⏳ Handoff-Ersatz
-- ⏳ AirDrop-Alternative
+- ⏳ AirDrop Alternative
+- ⏳ Handoff Alternative
 
 ---
 
-# ⚙️ Komfort
+## 🔴 M4 – Reproduzierbarkeit
 
-- ⏳ Passwortmanager mit Passkey-Unterstützung (lokal, systemweit)
-- ⏳ NAS dauerhaft einbinden
-- ⏳ Clipboard History
-- ⏳ Emoji Picker
-- ⏳ OCR
-- ⏳ QR Scanner
-- ⏳ Screen Recording
-- ⏳ Logitech G502 X Plus konfigurieren
+Ziel:
+
+> Neuinstallation in unter einer Stunde.
+
+### Bootstrap
+
+- ⏳ bootstrap.sh
+- ⏳ Paketlisten
+- ⏳ Home Manager
+- ⏳ Flakes
 
 ---
 
-# 🔄 Backup & Wartung
+### Backup
 
 - ⏳ Timeshift
-- ⏳ Snapshot-Strategie
+- ⏳ Restore Test
+- ⏳ Snapshot Strategie
 - ⏳ Dotfile Sync
-- ⏳ VM-Backups
-- ⏳ Restore testen
-- ⏳ Monitoring
+- ⏳ VM Backup
 - ⏳ Health Check
-- ⏳ Update-Strategie
+- ⏳ Monitoring
+- ⏳ Update Strategie
 
 ---
 
-# 📚 Dokumentation
+### Dokumentation
 
-- ⏳ ROADMAP.md
+- ⏳ INSTALL.md
 - ⏳ CHANGELOG.md
-- ⏳ Installationsanleitung
-- ⏳ Paketlisten
-- ⏳ Bootstrap-Dokumentation
-- ⏳ Windows-VM Dokumentation
+- ✅ ROADMAP.md
 
-Empfohlene Repository-Struktur:
+#### Gaming
 
-```text
-dotfiles/
-├── .config/
-├── docs/
-│   ├── ROADMAP.md
-│   ├── CHANGELOG.md
-│   └── INSTALL.md
-├── packages/
-├── scripts/
-├── wallpapers/
-├── windows-vm/
-└── bootstrap.sh
-```
+- ⏳ Steam
+- ⏳ Battle.net
+- ⏳ Witcher 3
+- ⏳ Diablo III
+
+#### Troubleshooting
+
+- ⏳ PipeWire
+- ⏳ Battle.net
+- ⏳ Diablo III
+- ⏳ Hyprland
+
+---
+
+# 📊 Gesamtfortschritt
+
+| Bereich            |  Status  |
+| ------------------ | :------: |
+| Fundament          | ✅ 100 % |
+| Gaming             | 🟢 75 %  |
+| Produktivität      | 🟡 55 %  |
+| Reproduzierbarkeit | 🔴 15 %  |
+
+---
+
+# 📝 Bekannte Einschränkungen
+
+## Diablo III
+
+- ✅ Läuft stabil im Borderless Window
+- Exklusiver Maus-/Tastatur-Grab bleibt nach Verlassen des Fullscreens bestehen.
+- Soulstone Survivors ist nicht betroffen.
+- Vermutlich Wine-/Diablo-III-spezifisch.
+- Vorerst zurückgestellt.
 
 ---
 
 # 💡 Ideen-Parkplatz
 
-- 💡 OLED-Profil Desktop/Gaming
-- 💡 Einheitliches OSD
-- 💡 Automatische Wallpaper-Updates
-- 💡 Spielespezifische Proton-Profile
-- 💡 Weitere Desktop-Polish-Ideen
+- OLED Profile
+- HDR Workflow
+- Performance Profile
+- Gaming Dashboard
+- Wallpaper Automation
+- Einheitliches OSD
+- Proton Profile pro Spiel
 
 ---
 
 # 🎯 Vision
 
-Eine Workstation, die:
+Eine Linux-Workstation, die:
 
-- 🎮 mindestens so gut spielt wie Windows.
-- 💻 eine vollständige Entwicklungsumgebung bietet.
-- 🏢 den kompletten Homeoffice-Alltag abbildet.
-- 🍎 sich gut ins Apple-Ökosystem integriert.
-- 🔄 sich jederzeit vollständig aus Git + Nix + Bootstrap reproduzieren lässt.
-
----
-
-# weiteres
+- 🎮 Windows beim Gaming ersetzt.
+- 💻 macOS beim Entwickeln ersetzt.
+- 🏢 den kompletten Homeoffice-Alltag übernimmt.
+- 🍎 sich sinnvoll in das Apple-Ökosystem integriert.
+- 🔄 jederzeit vollständig reproduzierbar ist.
