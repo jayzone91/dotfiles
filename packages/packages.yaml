@@ -94,10 +94,6 @@ packages:
       source: aur
       reason: AUR helper
       required: true
-    - package: paru-debug
-      source: aur
-      reason: Debug symbols for paru
-      required: true
     - package: rtkit
       source: pacman
       reason: Realtime priority service for audio processes
