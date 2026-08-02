@@ -1,0 +1,440 @@
+packages:
+  bootstrap:
+    - package: yq
+      source: pacman
+      reason: YAML processor for configuration files
+      required: true
+
+  audio:
+    - package: alsa-utils
+      source: pacman
+      reason: ALSA audio utilities
+      required: true
+    - package: pavucontrol
+      source: pacman
+      reason: Audio volume and device control
+      required: true
+    - package: pipewire-alsa
+      source: pacman
+      reason: ALSA compatibility for PipeWire
+      required: true
+    - package: pipewire-jack
+      source: pacman
+      reason: JACK compatibility for PipeWire
+      required: true
+    - package: pipewire-pulse
+      source: pacman
+      reason: PulseAudio compatibility for PipeWire
+      required: true
+    - package: playerctl
+      source: pacman
+      reason: Media player control utility
+      required: true
+
+  bluetooth:
+    - package: blueman
+      source: pacman
+      reason: Bluetooth management tool
+      required: true
+    - package: bluez
+      source: pacman
+      reason: Bluetooth stack
+      required: true
+    - package: bluez-utils
+      source: pacman
+      reason: Bluetooth utilities and services
+      required: true
+
+  core:
+    - package: 7zip
+      source: pacman
+      reason: Archive utility
+      required: true
+    - package: base
+      source: pacman
+      reason: Arch Linux base package group
+      required: true
+    - package: base-devel
+      source: pacman
+      reason: Base tools for building packages
+      required: true
+    - package: btrfs-progs
+      source: pacman
+      reason: Btrfs filesystem utilities
+      required: true
+    - package: efibootmgr
+      source: pacman
+      reason: EFI boot entry management
+      required: true
+    - package: intel-ucode
+      source: pacman
+      reason: Intel CPU microcode updates
+      required: true
+    - package: linux
+      source: pacman
+      reason: Linux kernel
+      required: true
+    - package: linux-firmware
+      source: pacman
+      reason: Firmware for hardware devices
+      required: true
+    - package: mkinitcpio
+      source: pacman
+      reason: Initramfs generation tool
+      required: true
+    - package: network-manager-applet
+      source: pacman
+      reason: Network tray applet
+      required: true
+    - package: networkmanager
+      source: pacman
+      reason: Network management service
+      required: true
+    - package: paru
+      source: aur
+      reason: AUR helper
+      required: true
+    - package: paru-debug
+      source: aur
+      reason: Debug symbols for paru
+      required: true
+    - package: rtkit
+      source: pacman
+      reason: Realtime priority service for audio processes
+      required: true
+    - package: smartmontools
+      source: pacman
+      reason: Drive health monitoring tools
+      required: true
+    - package: snap-pac
+      source: pacman
+      reason: Automatic snapshots for pacman transactions
+      required: true
+    - package: snapper
+      source: pacman
+      reason: Snapshot management
+      required: true
+    - package: socat
+      source: pacman
+      reason: Universal socket and network utility
+      required: true
+    - package: sudo
+      source: pacman
+      reason: Run commands with administrative privileges
+      required: true
+    - package: wpa_supplicant
+      source: pacman
+      reason: Wi-Fi authentication service
+      required: true
+    - package: zram-generator
+      source: pacman
+      reason: Compressed RAM swap configuration
+      required: true
+
+  desktop:
+    - package: ghostty
+      source: pacman
+      reason: Terminal emulator
+      required: true
+    - package: hypridle
+      source: pacman
+      reason: Idle management for Hyprland
+      required: true
+    - package: hyprland
+      source: pacman
+      reason: Wayland compositor
+      required: true
+    - package: hyprlock
+      source: pacman
+      reason: Screen locker for Hyprland
+      required: true
+    - package: hyprpaper
+      source: pacman
+      reason: Wallpaper manager for Hyprland
+      required: true
+    - package: otf-font-awesome
+      source: pacman
+      reason: Icon font
+      required: true
+    - package: polkit-kde-agent
+      source: pacman
+      reason: PolicyKit authentication agent
+      required: true
+    - package: qt5-wayland
+      source: pacman
+      reason: Wayland support for Qt5
+      required: true
+    - package: qt6-wayland
+      source: pacman
+      reason: Wayland support for Qt6
+      required: true
+    - package: qt6ct
+      source: pacman
+      reason: Qt6 configuration tool
+      required: true
+    - package: sddm
+      source: pacman
+      reason: Display manager
+      required: true
+    - package: swaync
+      source: pacman
+      reason: Notification center for Wayland
+      required: true
+    - package: ttf-jetbrains-mono-nerd
+      source: pacman
+      reason: Monospace font with Nerd Font symbols
+      required: true
+    - package: ttf-nerd-fonts-symbols
+      source: pacman
+      reason: Nerd Font symbols
+      required: true
+    - package: ttf-nerd-fonts-symbols-mono
+      source: pacman
+      reason: Monospace Nerd Font symbols
+      required: true
+    - package: uwsm
+      source: pacman
+      reason: Session manager for Wayland compositors
+      required: true
+    - package: walker-bin
+      source: aur
+      reason: Application launcher
+      required: true
+    - package: waybar
+      source: pacman
+      reason: Status bar for Wayland
+      required: true
+    - package: wlogout
+      source: aur
+      reason: Logout menu for Wayland
+      required: true
+    - package: woff2-font-awesome
+      source: pacman
+      reason: Webfont version of Font Awesome
+      required: true
+    - package: xdg-desktop-portal-hyprland
+      source: pacman
+      reason: Desktop portal for Hyprland
+      required: true
+    - package: xdg-utils
+      source: pacman
+      reason: XDG utility tools
+      required: true
+
+  development:
+    - package: bun
+      source: pacman
+      reason: JavaScript runtime and package manager
+      required: true
+    - package: git
+      source: pacman
+      reason: Version control system
+      required: true
+    - package: git-delta
+      source: pacman
+      reason: Improved Git diff viewer
+      required: true
+    - package: github-cli
+      source: pacman
+      reason: GitHub command-line tool
+      required: true
+    - package: lazygit
+      source: pacman
+      reason: Terminal UI for Git
+      required: true
+    - package: nano
+      source: pacman
+      reason: Simple terminal text editor
+      required: true
+    - package: neovim
+      source: pacman
+      reason: Modern terminal text editor
+      required: true
+    - package: nvm
+      source: pacman
+      reason: Node.js version manager
+      required: true
+    - package: tree-sitter-cli
+      source: pacman
+      reason: Tree-sitter command-line tool
+      required: true
+    - package: visual-studio-code-bin
+      source: aur
+      reason: Code editor
+      required: true
+    - package: vim
+      source: pacman
+      reason: Classic terminal text editor
+      required: true
+
+  gaming:
+    - package: gamemode
+      source: pacman
+      reason: Performance optimization for games
+      required: true
+    - package: heroic-games-launcher-bin
+      source: aur
+      reason: Launcher for Epic, GOG, and Amazon games
+      required: true
+    - package: lib32-libpulse
+      source: pacman
+      reason: 32-bit PulseAudio library for games
+      required: true
+    - package: lutris
+      source: pacman
+      reason: Game management platform
+      required: true
+    - package: mangohud
+      source: pacman
+      reason: Performance overlay for games
+      required: true
+    - package: protonup-qt
+      source: aur
+      reason: Proton-GE and Wine-GE manager
+      required: true
+    - package: steam
+      source: pacman
+      reason: Gaming platform
+      required: true
+
+  nvidia:
+    - package: lib32-nvidia-utils
+      source: pacman
+      reason: 32-bit NVIDIA libraries
+      required: true
+    - package: lib32-vulkan-icd-loader
+      source: pacman
+      reason: 32-bit Vulkan loader
+      required: true
+    - package: libva-nvidia-driver
+      source: pacman
+      reason: VA-API driver for NVIDIA
+      required: true
+    - package: nvidia-open
+      source: pacman
+      reason: NVIDIA driver
+      required: true
+    - package: vulkan-tools
+      source: pacman
+      reason: Vulkan diagnostic tools
+      required: true
+
+  shell:
+    - package: bat
+      source: pacman
+      reason: Improved cat alternative
+      required: true
+    - package: eza
+      source: pacman
+      reason: Modern ls alternative
+      required: true
+    - package: fish
+      source: pacman
+      reason: Default shell
+      required: true
+    - package: fisher
+      source: pacman
+      reason: Plugin manager for Fish
+      required: true
+    - package: fzf
+      source: pacman
+      reason: Fuzzy finder
+      required: true
+    - package: less
+      source: pacman
+      reason: Pager for text output
+      required: true
+    - package: starship
+      source: pacman
+      reason: Shell prompt
+      required: true
+    - package: wget
+      source: pacman
+      reason: Download utility
+      required: true
+    - package: zoxide
+      source: pacman
+      reason: Smarter cd alternative
+      required: true
+
+  software:
+    - package: btop
+      source: pacman
+      reason: Modern resource monitor
+      required: true
+    - package: dolphin
+      source: pacman
+      reason: File manager
+      required: true
+    - package: elephant-all-bin
+      source: aur
+      reason: Personal AUR application
+      required: true
+    - package: fastfetch
+      source: pacman
+      reason: System information display tool
+      required: true
+    - package: firefox
+      source: pacman
+      reason: Web browser
+      required: true
+    - package: flatpak
+      source: pacman
+      reason: Flatpak support
+      required: true
+    - package: htop
+      source: pacman
+      reason: Interactive process viewer
+      required: true
+
+  themes:
+    - package: kvantum
+      source: pacman
+      reason: Qt theme engine
+      required: true
+    - package: kvantum-theme-catppuccin-git
+      source: aur
+      reason: Kvantum theme
+      required: true
+    - package: papirus-icon-theme
+      source: pacman
+      reason: Icon theme
+      required: true
+    - package: catppuccin-cursors-mocha
+      source: aur
+      reason: Cursor theme
+      required: true
+    - package: catppuccin-gtk-theme-mocha
+      source: aur
+      reason: GTK theme
+      required: true
+    - package: catppuccin-sddm-theme-mocha
+      source: aur
+      reason: SDDM theme
+      required: true
+
+  wayland:
+    - package: brightnessctl
+      source: pacman
+      reason: Brightness control utility
+      required: true
+    - package: grim
+      source: pacman
+      reason: Screenshot tool for Wayland
+      required: true
+    - package: satty
+      source: pacman
+      reason: Screenshot annotation tool
+      required: true
+    - package: slurp
+      source: pacman
+      reason: Region selector for Wayland
+      required: true
+    - package: swappy
+      source: pacman
+      reason: Screenshot editing tool
+      required: true
+    - package: wl-clipboard
+      source: pacman
+      reason: Clipboard utilities for Wayland
+      required: true
