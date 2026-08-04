@@ -253,9 +253,6 @@ Eine Linux-Workstation, die:
 
 # TODO
 - System tray integration!
-- Keepasscx kann nicht mehr geschlossen werden, wenn minimieren beim beenden aktiv ist.
-  - Programme können nicht minimiert werden!
-  - ggf per bottom bar für minimierte Anwendungen??
 - Standard Programme in dolphin hinterlegen, damit dort Dateien direkt geöffnet werden können.
-- Der Hover Kalender von Waybar gefällt mir nicht, der ist viel zu klein.
 - Anmeldebildschirm überarbeiten, der sieht nicht aus!
+- Maus RGB läuft noch nicht korrekt

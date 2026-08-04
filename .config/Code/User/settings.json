@@ -15,7 +15,7 @@
     "https://raw.githubusercontent.com/devcontainers/spec/": true,
     "https://raw.githubusercontent.com/microsoft/vscode/": true,
     "https://schemastore.azurewebsites.net/": true,
-    "https://www.schemastore.org/": true,
+    "https://www.schemastore.org/": true
   },
   "todo-tree.ripgrep.ripgrep": "/usr/bin/rg",
   "python.analysis.typeCheckingMode": "standard",
@@ -25,4 +25,7 @@
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "cSpell.language": "en,de",
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
 }

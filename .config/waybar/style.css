@@ -137,14 +137,23 @@ window#waybar {
 }
 
 tooltip {
-  background: @mantle;
+  background: alpha(@mantle, 0.98);
   color: @text;
-  border: 1px solid @surface1;
-  border-radius: 8px;
+
+  border: 1px solid alpha(@mauve, 0.45);
+  border-radius: 14px;
+
+  padding: 16px;
+  font-size: 18px;
 }
 
 tooltip label {
   color: @text;
+
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 18px;
+
+  padding: 4px;
 }
 
 #custom-logitech-battery {
@@ -170,4 +179,56 @@ tooltip label {
 
 #custom-logitech-battery.unavailable {
   color: @overlay0;
+}
+
+/* ------------------------------
+ * Waybar Calendar
+ * ------------------------------ */
+
+tooltip label {
+  font-size: 16px;
+}
+
+tooltip calendar {
+  background: transparent;
+  color: @text;
+
+  font-size: 20px;
+
+  padding: 12px;
+  margin: 6px;
+}
+
+tooltip calendar.header {
+  color: @mauve;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+tooltip calendar.button {
+  color: @blue;
+}
+
+tooltip calendar.highlight {
+  color: @sky;
+  font-weight: bold;
+}
+
+tooltip calendar:selected {
+  background: @surface1;
+  color: @text;
+  border-radius: 6px;
+}
+
+tooltip calendar:indeterminate {
+  color: @overlay0;
+}
+
+#clock tooltip {
+  background: alpha(@mantle, 0.98);
+}
+
+#clock tooltip label {
+  min-width: 360px;
+  font-size: 18px;
 }

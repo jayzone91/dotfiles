@@ -6,7 +6,6 @@
   "margin-top": 8,
   "margin-left": 12,
   "margin-right": 12,
-
   "modules-left": [
     "custom/launcher",
     "custom/ws1",
@@ -16,11 +15,9 @@
     "custom/ws5",
     "hyprland/window"
   ],
-
   "modules-center": [
     "clock"
   ],
-
   "modules-right": [
     "tray",
     "cpu",
@@ -33,7 +30,6 @@
     "custom/notifications",
     "custom/power"
   ],
-
   "custom/logitech-battery": {
     "exec": "~/.local/bin/logitech-battery waybar",
     "return-type": "json",
@@ -42,84 +38,90 @@
     "on-click": "solaar",
     "on-click-right": "ghostty -e fish -c 'solaar show; read -P \"Enter zum Schließen...\"'"
   },
-
   "custom/launcher": {
     "format": "",
     "tooltip": false,
     "on-click": "walker"
   },
-	
   "custom/ws1": {
     "exec": "~/.config/waybar/scripts/workspace-watch 1",
     "return-type": "json",
     "format": "{}",
     "on-click": "~/.local/bin/workspace-cycle 1"
-},
-
-"custom/ws2": {
+  },
+  "custom/ws2": {
     "exec": "~/.config/waybar/scripts/workspace-watch 2",
     "return-type": "json",
     "format": "{}",
     "on-click": "~/.local/bin/workspace-cycle 2"
-},
-
-
-"custom/ws3": {
+  },
+  "custom/ws3": {
     "exec": "~/.config/waybar/scripts/workspace-watch 3",
     "return-type": "json",
     "format": "{}",
     "on-click": "~/.local/bin/workspace-cycle 3"
-},
-
-"custom/ws4": {
+  },
+  "custom/ws4": {
     "exec": "~/.config/waybar/scripts/workspace-watch 4",
     "return-type": "json",
     "format": "{}",
     "on-click": "~/.local/bin/workspace-cycle 4"
-},
-
-"custom/ws5": {
+  },
+  "custom/ws5": {
     "exec": "~/.config/waybar/scripts/workspace-watch 5",
     "return-type": "json",
     "format": "{}",
     "on-click": "~/.local/bin/workspace-cycle 5"
-},
-
-
+  },
   "hyprland/window": {
     "format": "{}",
     "max-length": 55,
     "separate-outputs": true
   },
-
   "clock": {
+    "interval": 1,
     "format": "󰥔  {:%H:%M}",
     "format-alt": "󰃭  {:%A, %d. %B %Y}",
-    "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>"
+    "locale": "de_DE.UTF-8",
+    "tooltip-format": "<span size='large' weight='bold' foreground='#cba6f7'>{:%A, %d. %B %Y}</span>\n\n<tt>{calendar}</tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "left",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span foreground='#cba6f7' weight='bold'>{}</span>",
+        "days": "<span foreground='#cdd6f4'>{}</span>",
+        "weekdays": "<span foreground='#89b4fa' weight='bold'>{}</span>",
+        "weeks": "<span foreground='#6c7086'>KW {}</span>",
+        "today": "<span foreground='#1e1e2e' background='#cba6f7' weight='bold'> {} </span>"
+      }
+    },
+    "actions": {
+      "on-click": "mode",
+      "on-click-right": "shift_reset",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
   },
-
   "tray": {
     "icon-size": 17,
     "spacing": 8
   },
-
   "cpu": {
     "interval": 2,
     "format": "  {usage}%",
     "tooltip": true
   },
-
   "memory": {
     "interval": 2,
     "format": "  {percentage}%"
   },
-
   "temperature": {
     "critical-threshold": 85,
     "format": "  {temperatureC}°C",
     "format-critical": "  {temperatureC}°C"
   },
-
   "network": {
     "format-wifi": "󰤨  {signalStrength}%",
     "format-ethernet": "󰈀  {ipaddr}",
@@ -127,14 +129,12 @@
     "tooltip-format": "{ifname}\n{ipaddr}/{cidr}\n{bandwidthDownBytes} ↓  {bandwidthUpBytes} ↑",
     "on-click": "nm-connection-editor"
   },
-
   "bluetooth": {
     "format": "󰂯",
     "format-connected": "󰂱 {num_connections}",
     "format-disabled": "󰂲",
     "on-click": "blueman-manager"
   },
-
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-muted": "󰝟",
@@ -149,14 +149,12 @@
     "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "scroll-step": 5
   },
-
   "custom/notifications": {
     "format": "󰂚",
     "tooltip": false,
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw"
   },
-
   "custom/power": {
     "format": "",
     "tooltip": false,
