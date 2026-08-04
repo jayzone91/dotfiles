@@ -20,6 +20,9 @@ bind(mainMod .. " + B", "Open Browser", hl.dsp.exec_cmd(programs.browser))
 -- Open File Manager
 bind(mainMod .. " + E", "Open File Manager", hl.dsp.exec_cmd(programs.fileManager))
 
+-- Clipse UI (Clipboard Manager)
+bind(mainMod .. " + SHIFT + V", "Open Clipse UI (Clipboard Manager)", hl.dsp.exec_cmd("clipse-gui"))
+
 -- Close Window (graceful close)
 local closeWindowBind = bind(mainMod .. " + Q", "Close Window (graceful close)", hl.dsp.window.close())
 -- Kill window (force close)
