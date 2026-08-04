@@ -132,6 +132,22 @@ packages:
       required: true
 
   desktop:
+    - package: fuzzel
+      source: pacman
+      reason: Application launcher for Wayland
+      required: true
+    - package: rofimoji
+      source: pacman
+      reason: Emoji picker for Wayland
+      required: true
+    - package: wtype
+      source: pacman
+      reason: Simulate keyboard input for Wayland
+      required: true
+    - package: noto-fonts-emoji
+      source: pacman
+      reason: Emoji font
+      required: true
     - package: clipse
       source: aur
       reason: Clipboard manager for Wayland

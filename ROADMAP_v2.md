@@ -251,3 +251,9 @@ Eine Linux-Workstation, die:
 - 🍎 sich sinnvoll in das Apple-Ökosystem integriert.
 - 🔄 jederzeit vollständig reproduzierbar ist.
 
+# TODO
+- System tray integration!
+- Keepasscx kann nicht mehr geschlossen werden, wenn minimieren beim beenden aktiv ist.
+  - Programme können nicht minimiert werden!
+  - ggf per bottom bar für minimierte anwendungen??
+

@@ -31,3 +31,7 @@ for path in "$SOURCE"/*; do
   ln -s "$path" "$target"
   log "Linked $name"
 done
+
+# Link german emoji
+mkdir -p "$HOME/.local/share/rofimoji"
+ln -s "$ROOT/emoji-additional.csv" "$HOME/.local/share/rofimoji/emoji-additional.csv"
