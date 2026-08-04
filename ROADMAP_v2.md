@@ -35,14 +35,14 @@ Eine stabile Linux-Basis.
 - ✅ Bun
 - ✅ Node
 - ✅ NVM
-- ✅ Nix
+- ⏳ Nix
 
 ### Desktop
 
 - ✅ Walker
 - ✅ ALT+F4
 - ✅ Fullscreen Rescue
-- ✅ Steam Floating
+- ⏳ Steam Floating
 
 ---
 
@@ -56,10 +56,10 @@ Ziel:
 
 - ✅ Steam
 - ✅ Battle.net
-- ⏳ Heroic
-- ⏳ Ubisoft Connect
-- ⏳ EA App
-- ⏳ GOG
+- ✅ Heroic
+- ✅ Ubisoft Connect
+- ✅ EA App
+- ✅ GOG
 
 ---
 
@@ -112,7 +112,7 @@ Ziel:
 
 ### Komfort
 
-- ⏳ Passwortmanager
+- ✅ Passwortmanager
 - ⏳ Clipboard History
 - ⏳ Emoji Picker
 - ⏳ OCR
@@ -192,17 +192,17 @@ Ziel:
 
 #### Gaming
 
-- ⏳ Steam
-- ⏳ Battle.net
-- ⏳ Witcher 3
-- ⏳ Diablo III
+- ✅ Steam
+- ✅ Battle.net
+- ✅ Witcher 3
+- ✅ Diablo III
 
 #### Troubleshooting
 
-- ⏳ PipeWire
-- ⏳ Battle.net
-- ⏳ Diablo III
-- ⏳ Hyprland
+- ✅ PipeWire
+- ✅ Battle.net
+- ✅ Diablo III
+- ✅ Hyprland
 
 ---
 
@@ -251,10 +251,3 @@ Eine Linux-Workstation, die:
 - 🍎 sich sinnvoll in das Apple-Ökosystem integriert.
 - 🔄 jederzeit vollständig reproduzierbar ist.
 
-
-
-# Wenn ich abends was machen will:
-
-- Clipboard History
-- Emoji Picker mit auto insert
-- maus config

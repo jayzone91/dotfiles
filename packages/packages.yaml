@@ -132,6 +132,14 @@ packages:
       required: true
 
   desktop:
+    - package: clipse
+      source: aur
+      reason: Clipboard manager for Wayland
+      required: true
+    - package: clipse-gui
+      source: aur
+      reason: GUI for Clipse clipboard manager
+      required: true
     - package: swayosd
       source: pacman
       reason: On-screen display for Hyprland
