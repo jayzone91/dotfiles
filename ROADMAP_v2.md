@@ -209,8 +209,8 @@ Ziel:
 
 # 📊 Gesamtfortschritt
 
-| Bereich            |  Status  |
-| ------------------ | :------: |
+| Bereich            | Status  |
+| ------------------ | :-----: |
 | Fundament          | ✅ 100 % |
 | Gaming             | 🟢 75 %  |
 | Produktivität      | 🟡 55 %  |
@@ -255,3 +255,5 @@ Eine Linux-Workstation, die:
 # TODO
 - Standard Programme in dolphin hinterlegen, damit dort Dateien direkt geöffnet werden können.
 - Anmeldebildschirm überarbeiten, der sieht nicht aus!
+- Rechtsklick Menü (Context Menü) für den Desktop!
+  - Funktionen: Nächtes Hintergrundbild, mehr weiß ich noch nicht.
