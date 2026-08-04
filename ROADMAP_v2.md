@@ -118,7 +118,8 @@ Ziel:
 - ⏳ OCR
 - ⏳ QR Scanner
 - ⏳ Screen Recording
-- ✅ Logitech G502 X Plus
+- 🟡 Logitech G502 X Plus
+  - Maus RGB läuft noch nicht korrekt
 - ⏳ Controller Auto Sleep
 - ⏳ Keybind Cheatsheet
 
@@ -252,7 +253,5 @@ Eine Linux-Workstation, die:
 - 🔄 jederzeit vollständig reproduzierbar ist.
 
 # TODO
-- System tray integration!
 - Standard Programme in dolphin hinterlegen, damit dort Dateien direkt geöffnet werden können.
 - Anmeldebildschirm überarbeiten, der sieht nicht aus!
-- Maus RGB läuft noch nicht korrekt
