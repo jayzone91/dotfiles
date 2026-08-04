@@ -19,7 +19,7 @@ bind(mainMod .. " + B", "Open Browser", hl.dsp.exec_cmd(programs.browser))
 
 -- Emoji Picker
 bind(mainMod .. " + period", "Open Emoji Picker", hl.dsp.exec_cmd(
-    [[rofimoji --selector fuzzel --selector-args="--width=65 --lines=14 --prompt='Emoji  '" --action type --typer wtype --clipboarder wl-copy --prompt "Emoji"]]))
+    [[rofimoji --files emojis emoji-additional --selector fuzzel --selector-args="--width=65 --lines=14 --prompt='Emoji  '" --action type --typer wtype --clipboarder wl-copy --prompt "Emoji"]]))
 
 -- Open File Manager
 bind(mainMod .. " + E", "Open File Manager", hl.dsp.exec_cmd(programs.fileManager))

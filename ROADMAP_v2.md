@@ -113,8 +113,8 @@ Ziel:
 ### Komfort
 
 - ✅ Passwortmanager
-- ⏳ Clipboard History
-- ⏳ Emoji Picker
+- ✅ Clipboard History
+- ✅ Emoji Picker
 - ⏳ OCR
 - ⏳ QR Scanner
 - ⏳ Screen Recording
@@ -256,4 +256,4 @@ Eine Linux-Workstation, die:
 - Keepasscx kann nicht mehr geschlossen werden, wenn minimieren beim beenden aktiv ist.
   - Programme können nicht minimiert werden!
   - ggf per bottom bar für minimierte anwendungen??
-
+- Standard Programme in dolphin hinterlegen, damit dort dateien direkt geöffnet werden können.

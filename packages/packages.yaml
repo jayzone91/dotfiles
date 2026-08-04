@@ -232,10 +232,6 @@ packages:
       source: pacman
       reason: Session manager for Wayland compositors
       required: true
-    - package: walker-bin
-      source: aur
-      reason: Application launcher
-      required: true
     - package: waybar
       source: pacman
       reason: Status bar for Wayland
