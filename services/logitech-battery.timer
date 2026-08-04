@@ -1,0 +1,12 @@
+[Unit]
+Description=Periodically check Logitech device battery level
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+Persistent=true
+AccuracySec=30s
+Unit=logitech-battery.service
+
+[Install]
+WantedBy=timers.target

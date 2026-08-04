@@ -1,0 +1,450 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import json
+import os
+import re
+import subprocess
+import sys
+import time
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
+DEVICE_NAME = os.environ.get("LOGITECH_DEVICE", "G502 X PLUS")
+CHECK_INTERVAL_SECONDS = int(os.environ.get("LOGITECH_BATTERY_INTERVAL", "300"))
+NOTIFICATION_THRESHOLDS = (20, 10, 5)
+
+STATE_HOME = Path(
+    os.environ.get(
+        "XDG_STATE_HOME",
+        Path.home() / ".local" / "state",
+    )
+)
+STATE_FILE = STATE_HOME / "logitech-battery" / "state.json"
+
+
+@dataclass(frozen=True)
+class MouseStatus:
+    percentage: int
+    battery_status: str
+    dpi: int | None
+    polling_hz: int | None
+    profile: str | None
+
+    @property
+    def is_charging(self) -> bool:
+        return self.battery_status in {
+            "charging",
+            "recharging",
+            "full",
+        }
+
+
+def run_command(
+    arguments: list[str],
+    *,
+    timeout: int = 15,
+) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        arguments,
+        check=False,
+        capture_output=True,
+        text=True,
+        timeout=timeout,
+    )
+
+
+def get_solaar_output() -> str:
+    result = run_command(["solaar", "show"])
+
+    if result.returncode != 0:
+        message = result.stderr.strip() or "solaar show failed"
+        raise RuntimeError(message)
+
+    return result.stdout
+
+
+def normalize_status(status: str) -> str:
+    return status.strip().lower().rstrip(".")
+
+
+def last_match(
+    pattern: re.Pattern[str],
+    text: str,
+) -> re.Match[str] | None:
+    matches = list(pattern.finditer(text))
+
+    if not matches:
+        return None
+
+    return matches[-1]
+
+
+def parse_mouse_status(output: str) -> MouseStatus:
+    if DEVICE_NAME.casefold() not in output.casefold():
+        raise RuntimeError(f"Device not found: {DEVICE_NAME}")
+
+    battery_pattern = re.compile(
+        r"Battery:\s*(?P<percentage>\d+)%\s*,\s*"
+        r"(?:BatteryStatus\.)?"
+        r"(?P<status>[A-Za-z_-]+)",
+        re.IGNORECASE,
+    )
+
+    dpi_pattern = re.compile(
+        r"Empfindlichkeit\s+\(DPI\)" r"(?:\s+\(saved\))?" r"\s*:\s*(?P<dpi>\d+)",
+        re.IGNORECASE,
+    )
+
+    report_rate_pattern = re.compile(
+        r"Report Rate" r"(?:\s+\(saved\))?" r"\s*:\s*(?P<milliseconds>\d+)\s*ms",
+        re.IGNORECASE,
+    )
+
+    profile_pattern = re.compile(
+        r"Onboard-Profile" r"(?:\s+\(saved\))?" r"\s*:\s*Profile\s*(?P<profile>\d+)",
+        re.IGNORECASE,
+    )
+
+    battery_match = last_match(battery_pattern, output)
+
+    if battery_match is None:
+        raise RuntimeError("Battery status unavailable")
+
+    percentage = int(battery_match.group("percentage"))
+    percentage = max(0, min(100, percentage))
+
+    dpi_match = last_match(dpi_pattern, output)
+    report_rate_match = last_match(report_rate_pattern, output)
+    profile_match = last_match(profile_pattern, output)
+
+    dpi = int(dpi_match.group("dpi")) if dpi_match is not None else None
+
+    polling_hz: int | None = None
+
+    if report_rate_match is not None:
+        milliseconds = int(report_rate_match.group("milliseconds"))
+
+        if milliseconds > 0:
+            polling_hz = round(1000 / milliseconds)
+
+    profile = profile_match.group("profile") if profile_match is not None else None
+
+    return MouseStatus(
+        percentage=percentage,
+        battery_status=normalize_status(battery_match.group("status")),
+        dpi=dpi,
+        polling_hz=polling_hz,
+        profile=profile,
+    )
+
+
+def read_mouse_status() -> MouseStatus:
+    return parse_mouse_status(get_solaar_output())
+
+
+def status_label(status: str) -> str:
+    labels = {
+        "discharging": "Entlädt",
+        "charging": "Wird geladen",
+        "recharging": "Wird geladen",
+        "full": "Vollständig geladen",
+        "slow_recharge": "Wird langsam geladen",
+        "almost_full": "Fast vollständig geladen",
+        "unknown": "Unbekannt",
+    }
+
+    return labels.get(status, status)
+
+
+def waybar_class(mouse: MouseStatus) -> str:
+    if mouse.is_charging:
+        return "charging"
+
+    if mouse.percentage <= 10:
+        return "critical"
+
+    if mouse.percentage <= 20:
+        return "warning"
+
+    return "normal"
+
+
+def waybar_icon(mouse: MouseStatus) -> str:
+    if mouse.is_charging:
+        return "󰍽 ⚡"
+
+    return "󰍽"
+
+
+def optional_value(
+    value: int | str | None,
+    *,
+    suffix: str = "",
+) -> str:
+    if value is None:
+        return "Nicht verfügbar"
+
+    return f"{value}{suffix}"
+
+
+def build_tooltip(mouse: MouseStatus) -> str:
+    return "\n".join(
+        [
+            f"󰍽  {DEVICE_NAME}",
+            "",
+            f"󰁹  Akku       {mouse.percentage} %",
+            ("󱐋  Status     " f"{status_label(mouse.battery_status)}"),
+            "",
+            ("󰍽  DPI        " f"{optional_value(mouse.dpi)}"),
+            ("󱎸  Polling    " f"{optional_value(mouse.polling_hz, suffix=' Hz')}"),
+            ("󰘶  Profil     " f"{optional_value(mouse.profile)}"),
+            "",
+            "Empfänger: Logitech Lightspeed",
+        ]
+    )
+
+
+def waybar_payload(
+    mouse: MouseStatus,
+) -> dict[str, Any]:
+    return {
+        "text": (f"{waybar_icon(mouse)} " f"{mouse.percentage}%"),
+        "tooltip": build_tooltip(mouse),
+        "class": waybar_class(mouse),
+        "percentage": mouse.percentage,
+    }
+
+
+def print_waybar() -> None:
+    try:
+        mouse = read_mouse_status()
+        payload = waybar_payload(mouse)
+    except (
+        OSError,
+        RuntimeError,
+        subprocess.TimeoutExpired,
+    ) as error:
+        payload = {
+            "text": "󰍽 ?",
+            "tooltip": f"{DEVICE_NAME}\n{error}",
+            "class": "unavailable",
+        }
+
+    print(
+        json.dumps(
+            payload,
+            ensure_ascii=False,
+        )
+    )
+
+
+def print_status() -> None:
+    mouse = read_mouse_status()
+
+    details = [
+        f"{DEVICE_NAME}: "
+        f"{mouse.percentage}% "
+        f"({status_label(mouse.battery_status)})",
+        f"DPI: {optional_value(mouse.dpi)}",
+        ("Polling: " f"{optional_value(mouse.polling_hz, suffix=' Hz')}"),
+        f"Profil: {optional_value(mouse.profile)}",
+    ]
+
+    print("\n".join(details))
+
+
+def default_state() -> dict[str, int | None]:
+    return {
+        "last_threshold": None,
+    }
+
+
+def load_state() -> dict[str, int | None]:
+    try:
+        content = STATE_FILE.read_text(encoding="utf-8")
+        data = json.loads(content)
+    except (OSError, json.JSONDecodeError):
+        return default_state()
+
+    threshold = data.get("last_threshold")
+
+    if threshold is not None and not isinstance(threshold, int):
+        return default_state()
+
+    return {
+        "last_threshold": threshold,
+    }
+
+
+def save_state(
+    state: dict[str, int | None],
+) -> None:
+    STATE_FILE.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    STATE_FILE.write_text(
+        json.dumps(
+            state,
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+
+def active_threshold(
+    percentage: int,
+) -> int | None:
+    reached = [
+        threshold for threshold in NOTIFICATION_THRESHOLDS if percentage <= threshold
+    ]
+
+    if not reached:
+        return None
+
+    return min(reached)
+
+
+def send_notification(
+    mouse: MouseStatus,
+    threshold: int,
+) -> None:
+    urgency = "critical" if threshold <= 10 else "normal"
+
+    result = run_command(
+        [
+            "notify-send",
+            "--app-name=Logitech Battery",
+            f"--urgency={urgency}",
+            "--icon=input-mouse",
+            f"{DEVICE_NAME}: Akku niedrig",
+            ("Der Akkustand beträgt nur noch " f"{mouse.percentage}%."),
+        ]
+    )
+
+    if result.returncode != 0:
+        message = result.stderr.strip() or "notify-send failed"
+        raise RuntimeError(message)
+
+
+def should_notify(
+    threshold: int,
+    last_threshold: int | None,
+) -> bool:
+    if last_threshold is None:
+        return True
+
+    return threshold < last_threshold
+
+
+def check_notification() -> None:
+    mouse = read_mouse_status()
+    state = load_state()
+    last_threshold = state["last_threshold"]
+
+    if mouse.is_charging:
+        if last_threshold is not None:
+            save_state(default_state())
+        return
+
+    threshold = active_threshold(mouse.percentage)
+
+    if threshold is None:
+        if last_threshold is not None:
+            save_state(default_state())
+        return
+
+    if should_notify(
+        threshold,
+        last_threshold,
+    ):
+        send_notification(
+            mouse,
+            threshold,
+        )
+        save_state(
+            {
+                "last_threshold": threshold,
+            }
+        )
+
+
+def watch() -> None:
+    while True:
+        try:
+            check_notification()
+        except (
+            OSError,
+            RuntimeError,
+            subprocess.TimeoutExpired,
+        ) as error:
+            print(
+                f"logitech-battery: {error}",
+                file=sys.stderr,
+            )
+
+        time.sleep(CHECK_INTERVAL_SECONDS)
+
+
+def print_usage() -> None:
+    print("""Usage:
+  logitech-battery status
+  logitech-battery waybar
+  logitech-battery check
+  logitech-battery watch
+""")
+
+
+def main() -> int:
+    command = sys.argv[1] if len(sys.argv) > 1 else "status"
+
+    try:
+        match command:
+            case "status":
+                print_status()
+
+            case "waybar":
+                print_waybar()
+
+            case "check":
+                check_notification()
+
+            case "watch":
+                watch()
+
+            case "--help" | "-h" | "help":
+                print_usage()
+
+            case _:
+                print(
+                    f"Unknown command: {command}",
+                    file=sys.stderr,
+                )
+                print_usage()
+                return 2
+
+    except KeyboardInterrupt:
+        return 130
+
+    except (
+        OSError,
+        RuntimeError,
+        subprocess.TimeoutExpired,
+    ) as error:
+        print(
+            f"logitech-battery: {error}",
+            file=sys.stderr,
+        )
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

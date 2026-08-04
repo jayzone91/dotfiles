@@ -20,4 +20,9 @@
   "todo-tree.ripgrep.ripgrep": "/usr/bin/rg",
   "python.analysis.typeCheckingMode": "standard",
   "git.confirmSync": false,
+  "workbench.colorCustomizations": {},
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "cSpell.language": "en,de",
 }

@@ -29,9 +29,19 @@
     "network",
     "bluetooth",
     "pulseaudio",
+    "custom/logitech-battery",
     "custom/notifications",
     "custom/power"
   ],
+
+  "custom/logitech-battery": {
+    "exec": "~/.local/bin/logitech-battery waybar",
+    "return-type": "json",
+    "interval": 60,
+    "tooltip": true,
+    "on-click": "solaar",
+    "on-click-right": "ghostty -e fish -c 'solaar show; read -P \"Enter zum Schließen...\"'"
+  },
 
   "custom/launcher": {
     "format": "",

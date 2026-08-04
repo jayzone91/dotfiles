@@ -146,3 +146,28 @@ tooltip {
 tooltip label {
   color: @text;
 }
+
+#custom-logitech-battery {
+  color: @text;
+  padding: 0 10px;
+}
+
+#custom-logitech-battery.normal {
+  color: @text;
+}
+
+#custom-logitech-battery.warning {
+  color: @yellow;
+}
+
+#custom-logitech-battery.critical {
+  color: @red;
+}
+
+#custom-logitech-battery.charging {
+  color: @green;
+}
+
+#custom-logitech-battery.unavailable {
+  color: @overlay0;
+}

@@ -35,3 +35,15 @@ done
 # Link german emoji
 mkdir -p "$HOME/.local/share/rofimoji"
 ln -s "$ROOT/emoji-additional.csv" "$HOME/.local/share/rofimoji/emoji-additional.csv"
+
+# Link logitech-battery script
+ln -s "$ROOT/scripts/logitech-battery" "$HOME/.local/bin/logitech-battery"
+
+ln -s "$ROOT/services/logitech-battery.service" "$HOME/.config/systemd/user/logitech-battery.service"
+ln -s "$ROOT/services/logitech-battery.timer" "$HOME/.config/systemd/user/logitech-battery.timer"
+
+# Start logitech-battery service
+systemctl --user daemon-reload
+if command -v systemctl &> /dev/null; then
+  systemctl --user enable --now logitech-battery.timer || warn "Failed to enable logitech-battery.timer"
+fi

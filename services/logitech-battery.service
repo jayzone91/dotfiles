@@ -1,0 +1,7 @@
+[Unit]
+Description=Check Logitech device battery level
+Documentation=https://pwr-solaar.github.io/Solaar/
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/logitech-battery check

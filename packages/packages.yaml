@@ -132,6 +132,14 @@ packages:
       required: true
 
   desktop:
+    - package: piper
+      source: aur
+      reason: Configure gaming mice and keyboards
+      required: true
+    - package: solaar
+      source: aur
+      reason: Logitech device manager
+      required: true
     - package: fuzzel
       source: pacman
       reason: Application launcher for Wayland
