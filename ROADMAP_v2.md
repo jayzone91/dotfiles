@@ -144,6 +144,13 @@ Ziel:
 - ✅ iCloud Drive
 - ⏳ Debloat
 - ⏳ Install Script für die komplette windows software!
+- 🚀 VirtIO-FS (gemeinsamer Ordner ohne Samba)
+- 🎮 Gaming-/Feierabend-Modus verfeinern
+- 📊 Waybar-Widget für den VM-Status
+- 🪟 Hyprland-Integration (Workspace/Fensterposition)
+- 📸 Snapshot-Verwaltung
+- 🧹 Eigenes Windows-Optimierungsskript
+Ich würde außerdem die komplette Virtualisierung in deinem Dotfiles-Repository etwas modularisieren, damit sie denselben Qualitätsstandard hat wie der Rest deiner Konfiguration. Ziel ist, dass du nach einem frischen Arch-Setup mit einem einzigen Bootstrap-Skript wieder exakt dieselbe Homeoffice-Umgebung bekommst.
 
 ---
 
