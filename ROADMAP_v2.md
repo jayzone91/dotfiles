@@ -131,17 +131,19 @@ Ziel:
 
 #### Windows VM
 
-- ⏳ libvirt
-- ⏳ virt-manager
-- ⏳ Windows 11
-- ⏳ VirtIO
-- ⏳ TPM
-- ⏳ Secure Boot
-- ⏳ Snapshot
-- ⏳ Windows Hello
-- ⏳ Remote Desktop Manager
-- ⏳ FileZilla
-- ⏳ iCloud Drive
+- ✅ libvirt
+- ✅ virt-manager
+- ✅ Windows 11
+- ✅ VirtIO
+- ✅ TPM
+- ✅ Secure Boot
+- ✅ Snapshot
+- ✅ Windows Hello
+- ✅ Remote Desktop Manager
+- ✅ FileZilla
+- ✅ iCloud Drive
+- ⏳ Debloat
+- ⏳ Install Script für die komplette windows software!
 
 ---
 
@@ -257,3 +259,4 @@ Eine Linux-Workstation, die:
 - Anmeldebildschirm überarbeiten, der sieht nicht aus!
 - Rechtsklick Menü (Context Menü) für den Desktop!
   - Funktionen: Nächtes Hintergrundbild, mehr weiß ich noch nicht.
+- Aktuellen freien Speicher beider SSDs in Waybar anzeigen  

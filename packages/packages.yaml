@@ -266,7 +266,7 @@ packages:
       source: pacman
       reason: Command runner for HyprHUD development tasks
       required: true
-    - pacakge: rust
+    - package: rust
       source: pacman
       reason: Rust compiler and Cargo toolchain
       required: true
@@ -489,4 +489,54 @@ packages:
     - package: wl-clipboard
       source: pacman
       reason: Clipboard utilities for Wayland
+      required: true
+
+  homeoffice:
+    - package: qemu-full
+      source: pacman
+      reason: Full QEMU package for virtualization
+      required: true
+    - package: libvirt
+      source: pacman
+      reason: Virtualization management tools
+      required: true
+    - package: virt-manager
+      source: pacman
+      reason: Virtual machine manager
+      required: true
+    - package: virt-viewer
+      source: pacman
+      reason: Virtual machine viewer
+      required: true
+    - package: edk2-ovmf
+      source: pacman
+      reason: UEFI firmware for virtual machines
+      required: true
+    - package: swtpm
+      source: pacman
+      reason: TPM emulator for virtual machines
+      required: true
+    - package: dnsmasq
+      source: pacman
+      reason: Lightweight DNS and DHCP server for virtual networks
+      required: true
+    - package: iptables-nft
+      source: pacman
+      reason: Firewall and NAT for virtual networks
+      required: true
+    - package: libguestfs
+      source: pacman
+      reason: Tools for accessing and modifying virtual machine disk images
+      required: true
+    - package: guestfs-tools
+      source: pacman
+      reason: Command-line tools for libguestfs
+      required: true
+    - package: dmidecode
+      source: pacman
+      reason: Tool for dumping DMI/SMBIOS data for virtual machines
+      required: true
+    - package: virt-firmware
+      source: pacman
+      reason: Firmware files for virtual machines
       required: true

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Feierabend
+GenericName=Homeoffice beenden
+Comment=Windows-11-VM sauber herunterfahren
+Icon=feierabend
+Exec=/home/jay/.local/bin/feierabend
+Terminal=false
+Categories=System;Utility;
+Keywords=Windows;VM;Feierabend;Gaming;Ausschalten;
+StartupNotify=false

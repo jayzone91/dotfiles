@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Homeoffice starten
+GenericName=Windows-Arbeitsumgebung
+Comment=Windows-11-VM starten und Viewer öffnen
+Icon=homeoffice-start
+Exec=/home/jay/.local/bin/work-start
+Terminal=false
+Categories=System;Utility;
+Keywords=Windows;VM;Homeoffice;Arbeit;Work;
+StartupNotify=true

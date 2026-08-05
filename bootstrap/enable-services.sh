@@ -26,3 +26,22 @@ log "Enabling user services"
 for service in "${user_services[@]}"; do
   systemctl --user enable "$service" 2>/dev/null || warn "Could not enable $service yet"
 done
+
+log "Enabling virtualization services"
+sudo systemctl enable --now libvirtd.service
+systemctl status libvirtd --no-pager
+sudo virsh net-start default
+sudo virsh net-autostart default
+mkdir -p /data/VMs/libvirt/images
+mkdir -p /data/VMs/iso
+sudo chattr +C /data/VMs/libvirt/images
+lsattr -d /data/VMs/libvirt/images
+sudo virsh pool-define-as \
+  --name data-vms \
+  --type dir \
+  --target /data/VMs/libvirt/images
+
+sudo virsh pool-build data-vms
+sudo virsh pool-start data-vms
+sudo virsh pool-autostart data-vms
+
