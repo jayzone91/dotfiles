@@ -1,0 +1,29 @@
+{
+  programs.ghostty = {
+    enable = true;
+
+    settings = {
+      theme = "Catppuccin Mocha";
+
+      font-family = "JetBrainsMono Nerd Font";
+      font-size = 12;
+
+      background-opacity = 0.90;
+
+      window-padding-x = 12;
+      window-padding-y = 12;
+
+      cursor-style-blink = true;
+      mouse-hide-while-typing = true;
+      copy-on-select = "clipboard";
+      confirm-close-surface = false;
+      shell-integration = "fish";
+      gtk-titlebar = false;
+
+      keybind = [
+        "ctrl+shift+v=unbind"
+        "ctrl+v=paste_from_clipboard"
+      ];
+    };
+  };
+}
