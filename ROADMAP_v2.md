@@ -97,6 +97,7 @@ Ziel:
 
 ### Desktop
 
+- ⏳ Generall ALT+TAB (War früher Walker, wird jedoch nicht mehr genutzt, durch Fuzzel für Applauncher ersetzt)
 - ⏳ Windows ähnliches ALT+TAB
 - ⏳ Fenstervorschau
 - ⏳ Animationen
@@ -108,16 +109,13 @@ Ziel:
 - ✅ Copy on Select
 - ✅ Ctrl+V
 - ⏳ Shell Integration
-- ⏳ Quick Terminal
+
 
 ### Komfort
 
 - ✅ Passwortmanager
 - ✅ Clipboard History
 - ✅ Emoji Picker
-- ⏳ OCR
-- ⏳ QR Scanner
-- ⏳ Screen Recording
 - 🟡 Logitech G502 X Plus
   - Maus RGB läuft noch nicht korrekt
 - ⏳ Controller Auto Sleep
@@ -264,6 +262,5 @@ Eine Linux-Workstation, die:
 # TODO
 - Standard Programme in dolphin hinterlegen, damit dort Dateien direkt geöffnet werden können.
 - Anmeldebildschirm überarbeiten, der sieht nicht aus!
-- Rechtsklick Menü (Context Menü) für den Desktop!
-  - Funktionen: Nächtes Hintergrundbild, mehr weiß ich noch nicht.
 - Aktuellen freien Speicher beider SSDs in Waybar anzeigen  
+- Ich hätte gerne eine Favoriten Leiste zum starten von Anwendungen, ähnlich macos
