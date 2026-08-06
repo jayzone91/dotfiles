@@ -35,7 +35,7 @@ Eine stabile Linux-Basis.
 - ✅ Bun
 - ✅ Node
 - ✅ NVM
-- ⏳ Nix
+- ✅ Nix
 
 ### Desktop
 
@@ -97,8 +97,8 @@ Ziel:
 
 ### Desktop
 
-- ⏳ Generall ALT+TAB (War früher Walker, wird jedoch nicht mehr genutzt, durch Fuzzel für Applauncher ersetzt)
-- ⏳ Windows ähnliches ALT+TAB
+- ⏳ Generelles ALT+TAB (Walker wird nicht mehr als App-Launcher genutzt; dafür kommt Fuzzel zum Einsatz)
+- ⏳ Windows-ähnliches ALT+TAB
 - ⏳ Fenstervorschau
 - ⏳ Animationen
 - ✅ Einheitliches OSD
@@ -141,14 +141,14 @@ Ziel:
 - ✅ FileZilla
 - ✅ iCloud Drive
 - ⏳ Debloat
-- ⏳ Install Script für die komplette windows software!
+- ⏳ Installationsskript für die komplette Windows-Software
 - 🚀 VirtIO-FS (gemeinsamer Ordner ohne Samba)
 - 🎮 Gaming-/Feierabend-Modus verfeinern
 - 📊 Waybar-Widget für den VM-Status
 - 🪟 Hyprland-Integration (Workspace/Fensterposition)
 - 📸 Snapshot-Verwaltung
 - 🧹 Eigenes Windows-Optimierungsskript
-Ich würde außerdem die komplette Virtualisierung in deinem Dotfiles-Repository etwas modularisieren, damit sie denselben Qualitätsstandard hat wie der Rest deiner Konfiguration. Ziel ist, dass du nach einem frischen Arch-Setup mit einem einzigen Bootstrap-Skript wieder exakt dieselbe Homeoffice-Umgebung bekommst.
+Die Virtualisierung soll im Dotfiles-Repository modularisiert werden, damit sie denselben Qualitätsstandard wie der Rest der Konfiguration erreicht. Nach einem frischen Arch-Setup soll sich die komplette Homeoffice-Umgebung mit einem einzigen Bootstrap-Skript wiederherstellen lassen.
 
 ---
 
@@ -172,10 +172,39 @@ Ziel:
 
 ### Bootstrap
 
+- ✅ Nix (Multi-User)
+- ✅ Flakes
+- ✅ Home Manager
+- ✅ Modulstruktur (`common`, `shell`, `desktop`)
+- ✅ Formatter mit `nix fmt`
+- ✅ Flake-Checks
+- ✅ `just`-Workflow
+- 🟡 Desktop-Migration
+- ⏳ Development-Migration
 - ⏳ bootstrap.sh
 - ⏳ Paketlisten
-- ⏳ Home Manager
-- ⏳ Flakes
+
+### Bereits über Home Manager verwaltet
+
+#### Common
+
+- ✅ Git
+- ✅ Delta
+- ✅ CLI-Tools
+- ✅ Session-Umgebung
+- ✅ PATH-Bereinigung
+
+#### Shell
+
+- ✅ Fish
+- ✅ Starship
+- ✅ FZF
+- ✅ Zoxide
+- ✅ Aliases und Abbreviations
+
+#### Desktop
+
+- ✅ Ghostty
 
 ---
 
@@ -221,7 +250,7 @@ Ziel:
 | Fundament          | ✅ 100 % |
 | Gaming             | 🟢 75 %  |
 | Produktivität      | 🟡 55 %  |
-| Reproduzierbarkeit | 🔴 15 %  |
+| Reproduzierbarkeit | 🟡 35 %  |
 
 ---
 
@@ -249,6 +278,102 @@ Ziel:
 
 ---
 
+# 🧩 Nix-Migration
+
+Ziel:
+
+> Eine vollständig deklarative Benutzerumgebung auf Arch Linux, ohne Wechsel zu NixOS.
+
+## Architektur
+
+- ✅ Arch Linux bleibt das Basissystem.
+- ✅ Systemnahe Pakete und Dienste bleiben zunächst bei Pacman und systemd.
+- ✅ Benutzerpakete und Konfigurationen werden schrittweise durch Nix und Home Manager verwaltet.
+- ✅ Die Flake ist modular in `common`, `shell` und `desktop` aufgebaut.
+- ✅ Windows bleibt eine schlanke Homeoffice-VM und wird weiterhin über Winget, Scoop und PowerShell automatisiert.
+
+## Bereits migriert
+
+### Common
+
+- ✅ Git
+- ✅ Delta
+- ✅ CLI-Pakete
+- ✅ Session-Variablen
+- ✅ PATH-Verwaltung
+
+### Shell
+
+- ✅ Fish
+- ✅ Starship
+- ✅ FZF
+- ✅ Zoxide
+- ✅ Shell-Abbreviations
+
+### Desktop
+
+- ✅ Ghostty
+
+### Infrastruktur
+
+- ✅ `flake.nix`
+- ✅ `flake.lock`
+- ✅ Home-Manager-Host für `jay`
+- ✅ `nix fmt`
+- ✅ `nix flake check`
+- ✅ `justfile`
+- ✅ Home-Manager-Generationen und Rollbacks
+
+## Nächste Schritte
+
+### Theme
+
+- ⏳ Zentrales Catppuccin-Modul
+- ⏳ Gemeinsame Farben
+- ⏳ Gemeinsame Fonts
+- ⏳ Gemeinsame Größen und Abstände
+
+### Desktop
+
+- ⏳ Fastfetch
+- ⏳ Btop
+- ⏳ Hyprland
+- ⏳ Waybar
+- ⏳ Hyprlock
+- ⏳ Hypridle
+- ⏳ Hyprpaper
+- ⏳ SwayNC
+- ⏳ Fuzzel
+- ⏳ Wlogout
+
+### Development
+
+- ⏳ Neovim
+- ⏳ Direnv
+- ⏳ Node
+- ⏳ Bun
+- ⏳ Go
+- ⏳ Rust
+- ⏳ Python
+
+### Services
+
+- ⏳ Logitech-Battery-Service
+- ⏳ Wallpaper-Automation
+- ⏳ Desktop-Dateien
+- ⏳ Homeoffice-Skripte
+- ⏳ Weitere User-Services
+
+### Langfristig
+
+- ⏳ Vollständiger Bootstrap
+- ⏳ Bereinigung der Pacman-/AUR-Paketlisten
+- ⏳ Restore-Test auf einem frischen Arch-System
+- ⏳ Dokumentation der Migration
+- ⏳ Gemeinsame Automatisierung für Arch und Windows-VM
+
+---
+
 # 🎯 Vision
 
 Eine Linux-Workstation, die:
@@ -260,7 +385,7 @@ Eine Linux-Workstation, die:
 - 🔄 jederzeit vollständig reproduzierbar ist.
 
 # TODO
-- Standard Programme in dolphin hinterlegen, damit dort Dateien direkt geöffnet werden können.
+- Standardprogramme in Dolphin hinterlegen, damit dort Dateien direkt geöffnet werden können.
 - Anmeldebildschirm überarbeiten, der sieht nicht aus!
 - Aktuellen freien Speicher beider SSDs in Waybar anzeigen  
-- Ich hätte gerne eine Favoriten Leiste zum starten von Anwendungen, ähnlich macos
+- Favoritenleiste zum Starten von Anwendungen, ähnlich wie unter macOS
